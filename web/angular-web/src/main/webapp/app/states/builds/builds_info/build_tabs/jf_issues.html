@@ -1,0 +1,10 @@
+<div class="grid-container"
+     ng-if="!jfIssues.noData">
+    <div ui-grid="jfIssues.gridOptions"
+         ui-grid-selection
+         class="grid"></div>
+</div>
+
+<div class="alert alert-warning" ng-if="jfIssues.noData">
+    No issues were recorded during this build.
+</div>

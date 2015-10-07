@@ -1,0 +1,20 @@
+<div class="content-layout-container">
+    <h1>Licenses Configuration</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.licenses.new">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+                <a ng-click="AdminConfigurationLicenses.exportLicenses()">
+                    <i class="grid-button-icon icon icon-export"></i>Export
+                </a>
+            </div>
+            <jf-grid grid-options="AdminConfigurationLicenses.gridOption"
+                     filter-field="name"
+                     auto-focus="true"
+                     object-name="License"></jf-grid>
+        </div>
+    </div>
+</div>

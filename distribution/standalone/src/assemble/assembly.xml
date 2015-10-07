@@ -1,0 +1,221 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>standalone</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <baseDirectory>artifactory-oss-${project.version}</baseDirectory>
+    <fileSets>
+        <!-- Removing the default annoying permissions of 777 -->
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>./</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>./</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/misc</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <includes>
+                <include>./</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/webapps</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <includes>
+                <include>./</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/logs</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <includes>
+                <include>./</include>
+            </includes>
+        </fileSet>
+        <!-- add the root install directory excluding directories with special treatment below -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/install</directory>
+            <outputDirectory>/</outputDirectory>
+            <excludes>
+                <exclude>bin/**</exclude>
+                <exclude>misc/**</exclude>
+                <exclude>tomcat/**</exclude>
+            </excludes>
+            <directoryMode>755</directoryMode>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>**/*.bat</include>
+            </includes>
+            <lineEnding>dos</lineEnding>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+                <include>artifactoryctl</include>
+                <include>artifactory.default</include>
+            </includes>
+            <lineEnding>unix</lineEnding>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>**/*.conf</include>
+                <include>**/*.exe</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/misc</directory>
+            <outputDirectory>misc</outputDirectory>
+            <filtered>true</filtered>
+            <directoryMode>755</directoryMode>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/../../base/config/src/main/resources/META-INF/default</directory>
+            <outputDirectory>etc</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <fileMode>644</fileMode>
+            <excludes>
+                <!-- default derby.properties is copied in runtime -->
+                <exclude>db/**</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/target/tomcat-extract/apache-tomcat-${tomcat.version}</directory>
+            <outputDirectory>tomcat</outputDirectory>
+            <excludes>
+                <exclude>bin/*.sh</exclude>
+                <exclude>conf/server.xml</exclude>
+                <exclude>conf/logging.properties</exclude>
+                <exclude>conf/web.xml</exclude>
+                <exclude>conf/tomcat-users.xsd</exclude>
+                <exclude>logs</exclude>
+                <exclude>temp/safeToDelete.tmp</exclude>
+                <exclude>webapps/**</exclude>
+
+                <!--minimal tomcat-->
+                <exclude>conf/tomcat-users.xml</exclude>
+                <exclude>conf/context.xml</exclude>
+                <exclude>lib/catalina-ant.jar</exclude>
+                <exclude>lib/catalina-ha.jar</exclude>
+                <exclude>lib/catalina-storeconfig.jar</exclude>
+                <exclude>lib/catalina-tribes.jar</exclude>
+                <exclude>lib/ecj-*.jar</exclude>
+                <exclude>lib/jsp-api.jar</exclude>
+                <exclude>lib/jasper-el.jar</exclude>
+                <exclude>lib/jasper.jar</exclude>
+                <exclude>lib/jsp-api.jar</exclude>
+                <exclude>lib/tomcat-dbcp.jar</exclude>
+                <exclude>lib/tomcat-i18n-es.jar</exclude>
+                <exclude>lib/tomcat-i18n-fr.jar</exclude>
+                <exclude>lib/tomcat-i18n-ja.jar</exclude>
+                <exclude>lib/tomcat-jdbc.jar</exclude>
+                <exclude>lib/tomcat-websocket.jar</exclude>
+                <exclude>lib/websocket-api.jar</exclude>
+            </excludes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/target/tomcat-extract/apache-tomcat-${tomcat.version}</directory>
+            <outputDirectory>tomcat</outputDirectory>
+            <includes>
+                <include>bin/*.sh</include>
+            </includes>
+            <lineEnding>unix</lineEnding>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/misc/tomcat</directory>
+            <outputDirectory>tomcat/conf</outputDirectory>
+            <includes>
+                <include>server.xml</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/misc/tomcat</directory>
+            <outputDirectory>tomcat/conf</outputDirectory>
+            <includes>
+                <include>logging.properties</include>
+                <include>web.xml</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/misc/tomcat</directory>
+            <outputDirectory>tomcat/conf/Catalina/localhost</outputDirectory>
+            <includes>
+                <include>artifactory.xml</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/install/misc/tomcat</directory>
+            <outputDirectory>tomcat/webapps/ROOT/</outputDirectory>
+            <includes>
+                <include>index.html</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+        <!-- Always leave this at the end since the assembly set 777 on it for all kind of bad reasons :(-->
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>./</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <!-- add the artifactory war file to the webapp dir -->
+        <dependencySet>
+            <outputDirectory>webapps</outputDirectory>
+            <outputFileNameMapping>artifactory.war</outputFileNameMapping>
+            <useStrictFiltering>true</useStrictFiltering>
+            <includes>
+                <include>org.artifactory:artifactory-web-war</include>
+            </includes>
+            <directoryMode>755</directoryMode>
+        </dependencySet>
+    </dependencySets>
+</assembly>

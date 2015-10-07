@@ -1,0 +1,35 @@
+<wicket:head>
+    <style type="text/css">
+        .dryRunResult {
+            margin-top: 5px;
+        }
+
+        .dryRunResult .title {
+            font-weight: bold;
+        }
+    </style>
+</wicket:head>
+
+<wicket:panel>
+    <form wicket:id="form">
+        Target Repository:
+        <select wicket:id="targetRepos"/>
+        <span wicket:id="targetRepos.help"/>
+        <input wicket:id="enableCustomTargetPathCheckBox" type="checkbox" style="margin-top: 10px;"/>
+        <span wicket:id="enableCustomTargetPathCheckBox.help"/>
+        <wicket:enclosure child="targetPathPanel">
+            <div wicket:id="targetPathPanel"/>
+        </wicket:enclosure>
+        <wicket:enclosure>
+            <div class="textbox dryRunResult" id="dryRunResult">
+                <pre wicket:id="dryRunResult" class="code"/>
+            </div>
+        </wicket:enclosure>
+
+        <div style="margin-top: 10px;">
+            <button type="submit" wicket:id="action" class="green-button"/>
+            <button type="submit" wicket:id="dryRun" class="green-button"/>
+            <button type="button" wicket:id="cancel"/>
+        </div>
+    </form>
+</wicket:panel>

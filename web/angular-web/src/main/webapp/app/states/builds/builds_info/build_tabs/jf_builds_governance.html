@@ -1,0 +1,83 @@
+<div class="governance-tab container-fluid" ng-if="jfBuildsGovernance.gotData">
+
+    <jf-panel jf-panel-heading="Code Center Application" ng-if="jfBuildsGovernance.hasAppInfo()">
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfBuildsGovernance.codeCenterApp" ng-if="jfBuildsGovernance.DICTIONARY[key]">
+                <td>{{jfBuildsGovernance.DICTIONARY[key]}}:</td>
+                <td>
+                    <span ng-if="key!=='name'">{{value}}</span>
+                    <a ng-if="key==='name'" ng-href="{{jfBuildsGovernance.codeCenterApp['link']}}" target="_blank">{{value}}</a>
+                </td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Includes">
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox class="display-block" text="Include Published Artifacts">
+                    <input id="includePublished"
+                           type="checkbox"
+                           ng-model="jfBuildsGovernance.includePublished"
+                           name="includePublished">
+                </jf-checkbox>
+            </div></div>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell">
+                <jf-checkbox class="display-block" text="Include dependencies of the following scopes:">
+                    <input id="includeByScopes"
+                           type="checkbox"
+                           ng-model="jfBuildsGovernance.includeByScopes"
+                           ng-click="jfBuildsGovernance.onIncludeByScopes()"
+                           name="includeByScopes">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell double">
+                <div class="scopes-options">
+                    <jf-checkbox ng-repeat="(key,value) in jfBuildsGovernance.scopesOptions"
+                                 text="{{key}}">
+                        <input id="{{key}}"
+                               type="checkbox"
+                               ng-model="jfBuildsGovernance.scopesOptions[key]"
+                               ng-disabled="!jfBuildsGovernance.includeByScopes"
+                               ng-click="jfBuildsGovernance.onScopeOptionChange()"
+                               name="{{key}}">
+                    </jf-checkbox>
+                </div>
+            </div>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Components">
+        <div class="general-summary governance-summary">
+            <i class="icon"
+               ng-class="{'icon-notif-success': jfBuildsGovernance.componentsSummary.ok,'icon-notif-warning': !jfBuildsGovernance.componentsSummary.ok}"></i>
+            <span ng-class="{'summary-ok': jfBuildsGovernance.componentsSummary.ok,'summary-warn': !jfBuildsGovernance.componentsSummary.ok}">Summary:</span>
+                    <span ng-repeat="(key,val) in jfBuildsGovernance.componentsSummary">
+                        {{key}}:
+                        <span ng-class="{'status-pending': key==='Pending','status-approved': key==='Approved'}"> {{val}}
+                        </span>
+                    </span>
+        </div>
+        <div class="clearfix"></div>
+        <jf-grid grid-options="jfBuildsGovernance.componentsGridOptions"></jf-grid>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Vulnerabilities">
+        <div class="general-summary governance-summary">
+            <i class="icon"
+               ng-class="{'icon-notif-success': jfBuildsGovernance.vulnerabilitiesSummary.ok,'icon-notif-warning': !jfBuildsGovernance.vulnerabilitiesSummary.ok}"></i>
+            <span ng-class="{'summary-ok': jfBuildsGovernance.vulnerabilitiesSummary.ok,'summary-warn': !jfBuildsGovernance.vulnerabilitiesSummary.ok}">Summary:</span>
+            <span ng-repeat="(key,val) in jfBuildsGovernance.vulnerabilitiesSummary">
+                {{key}}: {{val}}
+            </span>
+        </div>
+        <div class="clearfix"></div>
+        <jf-grid grid-options="jfBuildsGovernance.vulnerabilitiesGridOptions"></jf-grid>
+    </jf-panel>
+</div>
+<div class="alert alert-warning" ng-if="!jfBuildsGovernance.gotData && jfBuildsGovernance.noData">
+    Governance integration is not enabled. Check the configuration on the Admin section to enable.
+</div>

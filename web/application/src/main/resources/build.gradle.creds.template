@@ -1,0 +1,3 @@
+credentials {
+${gradle.build.4tabs}username = "${artifactory_user}"${creds.line.break}${gradle.build.1tab}password = "${artifactory_password}"
+${gradle.build.3tabs}}

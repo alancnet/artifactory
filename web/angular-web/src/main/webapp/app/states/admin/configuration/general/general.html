@@ -1,0 +1,267 @@
+<div class="content-layout-container general-conf">
+    <h1>General Configuration</h1>
+
+    <div class="content-wrapper">
+        <form class="form" ng-submit="AdminConfiguration.save()" name="formGeneral" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="General Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminGeneral" autofocus="true">
+                                    <label for="serverName">Server Name</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.serverName"></jf-help-tooltip>
+                                    <input type="text"
+                                           class="input-text"
+                                           jf-validator-name
+                                           jf-validator-xml-name
+                                           ng-model-options="{debounce: { 'default': 500 } }"
+                                           name="serverName"
+                                           id="serverName"
+                                           ng-model="AdminConfiguration.generalConfigData.serverName"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+
+                                <jf-field validations="adminGeneral">
+                                    <label for="customUrl">Custom URL Base</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.customURLBase"></jf-help-tooltip>
+                                    <input type="url"
+                                           class="input-text"
+                                           name="customUrl"
+                                           id="customUrl"
+                                           ng-model="AdminConfiguration.generalConfigData.customUrlBase"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminGeneral">
+                                    <label class="mandatory" for="maxSize">File Upload Max Size</label>
+                                    <jf-help-tooltip
+                                           html="AdminConfiguration.TOOLTIP.fileUploadMaxSize"></jf-help-tooltip>
+                                    <input type="number"
+                                           required
+                                           min="0" max="2147483647"
+                                           class="input-text"
+                                           name="maxSize"
+                                           id="maxSize"
+                                           ng-model="AdminConfiguration.generalConfigData.fileUploadMaxSize"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label class="mandatory" for="bintrayFilesUploadLimit">Bintray Max Files Upload</label>
+                                    <input type="number"
+                                           class="input-text"
+                                           min="0"
+                                           name="bintrayFilesUploadLimit"
+                                           id="bintrayFilesUploadLimit"
+                                           ng-model="AdminConfiguration.generalConfigData.bintrayFilesUploadLimit"
+                                           jf-validator-int-value>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminGeneral">
+                                    <label class="mandatory" for="dateFormat">Date Format</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.dateFormat">
+                                    </jf-help-tooltip>
+                                    <input type="text"
+                                           jf-validator-date-format
+                                           class="input-text"
+                                           name="dateFormat"
+                                           id="dateFormat"
+                                           required
+                                           ng-model-options="{debounce: { 'default': 500 } }"
+                                           ng-model="AdminConfiguration.generalConfigData.dateFormat"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Global Offline Mode">
+                                    <input id="offlineMode"
+                                           type="checkbox"
+                                           ng-model="AdminConfiguration.generalConfigData.globalOfflineMode"
+                                           name="offlineMode">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="AdminConfiguration.TOOLTIP.globalOfflineMode"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable Help Component">
+                                    <input id="disableHelp"
+                                           type="checkbox"
+                                           ng-model="AdminConfiguration.generalConfigData.helpLinksEnabled"
+                                           name="disableHelp">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                    </jf-panel>
+                    <jf-panel jf-panel-heading="Folder Download Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable Folder Download">
+                                    <input id="enableFolderDownload"
+                                           type="checkbox"
+                                           ng-model="AdminConfiguration.generalConfigData.folderDownloadEnabled"
+                                           name="enableFolderDownload">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminGeneral">
+                                    <label for="maxFolderSize">Max Size</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.folderDownloadMaxSize"></jf-help-tooltip>
+                                    <input type="number"
+                                           min = "0"
+                                           class="input-text"
+                                           name="maxFolderSize"
+                                           id="maxFolderSize"
+                                           ng-model="AdminConfiguration.generalConfigData.folderDownloadMaxSizeMb"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminGeneral">
+                                    <label for="maxFolderFiles">Max Number of Files</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.folderDownloadMaxFiles"></jf-help-tooltip>
+                                    <input type="number"
+                                           min = "0"
+                                           class="input-text"
+                                           name="maxFolderFiles"
+                                           id="maxFolderFiles"
+                                           ng-model="AdminConfiguration.generalConfigData.maxFolderDownloadFilesLimit"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="folderDownload">
+                                    <label for="maxConcurrent">Max Parallel Folder Downloads</label>
+                                    <jf-help-tooltip html="AdminConfiguration.TOOLTIP.folderDownloadMaxParallel"></jf-help-tooltip>
+                                    <input type="number"
+                                           min = "1"
+                                           class="input-text"
+                                           name="maxConcurrent"
+                                           id="maxConcurrent"
+                                           ng-model="AdminConfiguration.generalConfigData.folderDownloadMaxConcurrentRequests"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Look & Feel Settings">
+                        <jf-switch jf-switch-title="Upload From:" ng-model="AdminConfiguration.logoType" options="['File', 'URL']" class="no-margin-top"></jf-switch>
+
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <div ng-switch="AdminConfiguration.logoType">
+                                    <div ng-switch-when="File">
+                                        <jf-field validations="adminGeneral">
+                                            <label>Logo File</label>
+                                            <jf-file-drop jf-file-uploader="AdminConfiguration.uploader"
+                                                          jf-adding-file-callback="AdminConfiguration.onAfterAddingFile(fileItem)"></jf-file-drop>
+                                        </jf-field>
+                                    </div>
+                                    <div ng-switch-when="URL">
+                                        <jf-field validations="adminGeneral">
+                                            <label for="logoUrlInput">Logo URL</label>
+                                            <input type="url"
+                                                   class="input-text"
+                                                   name="logoUrlInput"
+                                                   id="logoUrlInput"
+                                                   ng-change="AdminConfiguration.onChangeLogoUrl()"
+                                                   ng-model="AdminConfiguration.logoUrlInput"/>
+                                        </jf-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <button class="btn btn-secondary"
+                                        type="button"
+                                        ng-click="AdminConfiguration.clear()">Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <div class="artifactory-logo"><img ng-src="{{AdminConfiguration.generalConfigData.logoUrl}}"></div>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Custom Message">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enabled">
+                                    <input type="checkbox"
+                                           ng-model="AdminConfiguration.generalConfigData.systemMessageEnabled"
+                                           name="modEnabled">
+                                </jf-checkbox>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Show Only in Home Page">
+                                    <input id="modAllPages"
+                                           type="checkbox"
+                                           ng-model="AdminConfiguration.generalConfigData.showSystemMessageOnAllPages"
+                                           ng-true-value="false"
+                                           ng-false-value="true"
+                                           name="modAllPages">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label for="modTitle">Title</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           name="modTitle"
+                                           id="modTitle"
+                                           ng-model="AdminConfiguration.generalConfigData.systemMessageTitle"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <label>Title Color</label>
+                                <color-picker ng-model="AdminConfiguration.generalConfigData.systemMessageTitleColor"
+                                              color-picker-format="'hex'"
+                                              color-picker-alpha="false"></color-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <jf-field validations="common">
+                                    <label for="modMessage">Message</label>
+                                    <textarea name="modMessage"
+                                              id="modMessage"
+                                              class="input-text monospaced"
+                                              rows="11"
+                                              cols="18"
+                                              ng-model="AdminConfiguration.generalConfigData.systemMessage"></textarea>
+                                </jf-field>
+                                <div class="field-bottom-remark"><i class="icon icon-info"></i>To embed a link inside the message use : [http://example.com, text]</div>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button" ng-click="AdminConfiguration.cancel()">Reset</button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="!formGeneral.$valid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

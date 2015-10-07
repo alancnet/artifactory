@@ -1,0 +1,18 @@
+<div class="content-layout-container">
+    <h1>Repository Layouts</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.repo_layouts.new" ng-if="RepositoriesLayoutController.enableNew">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+
+            <jf-grid grid-options="RepositoriesLayoutController.gridOptions"
+                     filter-field="name"
+                     object-name="repository layout"
+                     auto-focus="true"></jf-grid>
+        </div>
+    </div>
+</div>

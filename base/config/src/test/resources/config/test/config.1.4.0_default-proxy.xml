@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns="http://artifactory.jfrog.org/xsd/1.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.4.0 http://www.jfrog.org/xsd/artifactory-v1_4_0.xsd">
+
+    <security>
+        <anonAccessEnabled>true</anonAccessEnabled>
+    </security>
+    <backups>
+        <backup>
+            <key>backup1</key>
+            <enabled>false</enabled>
+            <cronExp>0 0 /12 * * ?</cronExp>
+            <retentionPeriodHours>0</retentionPeriodHours>
+            <excludedRepositories>
+                <repositoryRef>remote-repo</repositoryRef>
+            </excludedRepositories>
+        </backup>
+    </backups>
+    <!-- The interval at which to activate the m2eclipse indexer. -->
+    <!--
+    <indexer>
+        <indexingIntervalHours>24</indexingIntervalHours>
+    </indexer>
+    -->
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases-local</key>
+            <description>Local repository for in-house libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>libs-snapshots-local</key>
+            <description>Local repository for in-house snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-releases-local</key>
+            <description>Local repository for plugins</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-snapshots-local</key>
+            <description>Local repository for plugins snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>ext-releases-local</key>
+            <description>Local repository for third party libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>ext-snapshots-local</key>
+            <description>Local repository for third party snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>UNIQUE</key>
+            <blackedOut>false</blackedOut>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <maxUniqueSnapshots>5</maxUniqueSnapshots>
+            <includesPattern>**/*</includesPattern>
+            <snapshotVersionBehavior>unique</snapshotVersionBehavior>
+        </localRepository>
+        <localRepository>
+            <key>NONUNIQUE</key>
+            <blackedOut>false</blackedOut>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <maxUniqueSnapshots>0</maxUniqueSnapshots>
+            <includesPattern>**/*</includesPattern>
+            <snapshotVersionBehavior>non-unique</snapshotVersionBehavior>
+        </localRepository>
+        <localRepository>
+            <key>DEPLOYER</key>
+            <blackedOut>false</blackedOut>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <maxUniqueSnapshots>5</maxUniqueSnapshots>
+            <includesPattern>**/*</includesPattern>
+            <snapshotVersionBehavior>deployer</snapshotVersionBehavior>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>remote-repo</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://repo.jfrog.org/artifactory/remote-repos</url>
+            <proxyRef>proxy1</proxyRef>
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+        </remoteRepository>
+        <remoteRepository>
+            <key>remote-repo2</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://repo.jfrog.org/artifactory/remote-repos</url>
+            <proxyRef>proxy1</proxyRef>
+            <!--<url>http://repo1.maven.org/maven2</url>-->
+        </remoteRepository>
+    </remoteRepositories>
+
+    <virtualRepositories>
+        <!-- This repositoy will be available at the url:
+        http://<host>:<port>/artifactory/snapshots-only/
+        (note the trailing slash!)
+        -->
+        <virtualRepository>
+            <key>remote-repos</key>
+            <artifactoryRequestsCanRetrieveRemoteArtifacts>true</artifactoryRequestsCanRetrieveRemoteArtifacts>
+            <repositories>
+                <repositoryRef>remote-repo</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>libs-releases</key>
+            <repositories>
+                <repositoryRef>libs-releases-local</repositoryRef>
+                <repositoryRef>ext-releases-local</repositoryRef>
+                <repositoryRef>UNIQUE</repositoryRef>
+                <repositoryRef>NONUNIQUE</repositoryRef>
+                <repositoryRef>DEPLOYER</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>plugins-releases</key>
+            <repositories>
+                <repositoryRef>plugins-releases-local</repositoryRef>
+                <repositoryRef>ext-releases-local</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>libs-snapshots</key>
+            <repositories>
+                <repositoryRef>libs-snapshots-local</repositoryRef>
+                <repositoryRef>ext-snapshots-local</repositoryRef>
+                <repositoryRef>UNIQUE</repositoryRef>
+                <repositoryRef>NONUNIQUE</repositoryRef>
+                <repositoryRef>DEPLOYER</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>plugins-snapshots</key>
+            <repositories>
+                <repositoryRef>plugins-snapshots-local</repositoryRef>
+                <repositoryRef>ext-snapshots-local</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+    </virtualRepositories>
+
+    <proxies>
+        <proxy>
+            <key>proxy1</key>
+            <host>www.jfrog.org</host>
+            <port>80</port>
+        </proxy>
+        <proxy>
+            <key>proxy2</key>
+            <host>www.artifactoryonline.com</host>
+            <port>80</port>
+        </proxy>
+    </proxies>
+
+</config>

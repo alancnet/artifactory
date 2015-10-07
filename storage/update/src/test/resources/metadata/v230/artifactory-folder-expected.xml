@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-folder>
+    <repoPath>
+        <repoKey>libs-release-local</repoKey>
+        <path>aspectjweaver/aspectjweaver/1.5.3</path>
+    </repoPath>
+    <name>1.5.3</name>
+    <created>1316590989115</created>
+    <lastModified>1316590989120</lastModified>
+    <additionalInfo>
+        <createdBy>admin</createdBy>
+        <modifiedBy>admin</modifiedBy>
+        <lastUpdated>1316590989120</lastUpdated>
+    </additionalInfo>
+</artifactory-folder>

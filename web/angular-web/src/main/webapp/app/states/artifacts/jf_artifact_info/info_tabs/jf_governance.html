@@ -1,0 +1,72 @@
+<div id="jf_governance">
+    <div class="alert alert-warning" ng-if="jfGovernance.governanceData.feedbackMsg.warn">
+        {{jfGovernance.governanceData.feedbackMsg.warn}}
+    </div>
+
+    <jf-panel jf-panel-heading="Info"
+              ng-click="jfGovernance.cancelEditMode($event)"
+              ng-if="jfGovernance.governanceData.info">
+
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfGovernance.governanceData.info track by key" ng-if="jfGovernance.DICTIONARY[key]">
+                <td>{{jfGovernance.DICTIONARY[key]}}:</td>
+                <td>
+                    <span ng-switch="key">
+                        <span ng-switch-when="name">
+                            <a ng-href="{{jfGovernance.governanceData.info.componentLink}}" target="_blank">{{value}}</a>
+                        </span>
+                        <span ng-switch-when="homepage">
+                            <a ng-href="{{value}}" target="_blank">{{value}}</a>
+                        </span>
+                        <span ng-switch-when="description">
+                            {{value}}
+                        </span>
+                        <span ng-switch-when="extComponentId" class="clearfix">
+                            <span ng-if="!jfGovernance.editMode">
+                                {{value}} <span ng-click="jfGovernance.editMode = true" class="fa fa-edit"></span>
+                            </span>
+                            <span ng-if="jfGovernance.editMode">
+                                <input type="text"
+                                       class="input-text input-small"
+                                       ng-model="value">
+                                <button type="button"
+                                        class="btn btn-small"
+                                        ng-click="jfGovernance.updateComponentId(value)">Update
+                                </button>
+                            </span>
+                        </span>
+                        <span ng-switch-default>
+                            {{value}}
+                            <!--<jf-tooltip ng-if="jfGovernance.TOOLTIP[key]"-->
+                            <!--text="{{jfGovernance.TOOLTIP[key]}}"></jf-tooltip>-->
+                        </span>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="License"
+              ng-if="jfGovernance.governanceData.license">
+        <span ng-repeat="license in jfGovernance.governanceData.license track by $index">
+            <a href="{{license.licenseUrl}}" target="_blank">{{license.licenseName}}</a><span ng-if="$index < jfGovernance.governanceData.license.length-1">, </span>
+        </span>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Vulnerabilities"
+              ng-if="jfGovernance.governanceData.vulnerabilities">
+
+        <jf-grid grid-options="jfGovernance.governanceGridOptions"
+                 filter-field="name"
+                 filter-field2="number"
+                 filter-on-change="true">
+        </jf-grid>
+
+        <div class="grid-container clearfix no-margin-top">
+            <div ui-grid="jfGovernance.governanceGridOptions"
+                 ui-grid-grouping
+                 class="grid"></div>
+
+        </div>
+    </jf-panel>
+</div>

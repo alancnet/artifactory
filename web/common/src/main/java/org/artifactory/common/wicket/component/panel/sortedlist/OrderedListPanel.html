@@ -1,0 +1,33 @@
+<wicket:extend>
+    <div class="list-panel-buttons">
+        <div class="buttons-top">
+            <div class="buttons-bottom">
+                <button class="new-link" wicket:id="newItemLink" type="button"></button>
+                <button class="import-link" wicket:id="importItemLink" type="button"></button>
+                <button class="save-link" wicket:id="saveOrderLink" type="button"></button>
+                <button class="gray-link cancel-link" wicket:id="cancelOrderLink" type="button"></button>
+
+                <button disabled="disabled" class="up-link-disabled" wicket:id="moveUpLink" type="button"></button>
+                <button disabled="disabled" class="down-link-disabled" wicket:id="moveDownLink" type="button"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ordered-list">
+        <ul wicket:id="items">
+            <li wicket:id="item">
+                <span wicket:id="actions" class="LinksColumn"></span>
+                <span wicket:id="name"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <wicket:message key="OrderedListPanel.hint"/>
+    </div>
+
+    <input wicket:id="listIndices" type="hidden"/>
+    <script wicket:id="initScript" type="text/javascript">
+        new OrderedListPanel('${listId}', '${textFieldId}', '${upLinkId}', '${downLinkId}');
+    </script>
+</wicket:extend>

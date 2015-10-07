@@ -1,0 +1,32 @@
+<wicket:panel>
+
+    <div wicket:id="searchBorder">
+        <form wicket:id="form">
+
+            <div class="jcenterBintrayIcon"></div>
+            <!--<div class="jcenterBintrayIconSmall"></div>-->
+            <div class="field" style="display:inline-block">
+                <label>Search in Bintray <a href="https://bintray.com/bintray/jcenter" target="_blank">JCenter </a>
+                </label><span wicket:id="searchHelp" style="margin-left: 2px"></span>
+
+                <label style="font-size: 1em;  display: block;  font-weight: normal; color: #999; margin-bottom: 10px">
+                    Bintray's JCenter Maven repository offers the biggest collection around for open source java
+                    libraries.<br/>
+                    Find all your jar dependencies under a single, reliable source and auto-resolve them from the fast
+                    JCenter remote repository.</label>
+            </div>
+            <div class="search-form">
+                <input wicket:id="query" name="query" type="text" align="right" style="margin-left: 51px"/>
+                <button wicket:id="submit" class="archive-button"></button>
+                <div wicket:id="test" class="jCenter link">
+                     <span class="warn">
+                          <a wicket:id="jCenterLink" class="warn"></a>
+                     </span>
+                </div>
+            </div>
+        </form>
+        <div class="clear">
+            <table wicket:id="results"/>
+        </div>
+    </div>
+</wicket:panel>

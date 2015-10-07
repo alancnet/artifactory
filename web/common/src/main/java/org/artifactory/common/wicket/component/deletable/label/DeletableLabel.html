@@ -1,0 +1,39 @@
+<wicket:head>
+    <script type="text/javascript">
+        var DeletableLabel = {};
+        DeletableLabel.setClass = function(label, cssClass) {
+            label.parentNode.parentNode.parentNode.className = cssClass;
+        }
+    </script>
+</wicket:head>
+
+<wicket:panel>
+    <table cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td class="corner"/>
+            <td class="border label-border"/>
+            <td class="border sep-border"/>
+            <td class="border link-border"/>
+            <td class="corner"/>
+        </tr>
+        <tr>
+            <td class="border label-border"/>
+            <td wicket:id="label" class="border deletable-label">
+            </td>
+            <td class="sep"/>
+            <td wicket:id="link" class="border delete-link">
+                <span>X</span>
+            </td>
+            <td class="border link-border"/>
+        </tr>
+        <tr>
+            <td class="corner"/>
+            <td class="border label-border"/>
+            <td class="border sep-border"/>
+            <td class="border link-border"/>
+            <td class="corner"/>
+        </tr>
+        </tbody>
+    </table>
+</wicket:panel>

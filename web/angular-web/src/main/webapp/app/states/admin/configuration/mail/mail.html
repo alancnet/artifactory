@@ -1,0 +1,167 @@
+<div class="content-layout-container">
+    <h1>Configure Mail</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <jf-panel jf-panel-heading="Mail Server Settings">
+                    <form class="form" name="AdminConfigurationMail.mailSettingsForm" novalidate>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable">
+                                    <input type="checkbox" id="enabled" ng-model="AdminConfigurationMail.mail.enabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail" autofocus="true">
+                                    <label class="mandatory" for="host">Host</label>
+                                    <input type="text" class="input-text"
+                                           id="host"
+                                           name="host"
+                                           required
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.host"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label class="mandatory" for="port">Port</label>
+                                    <input type="number" class="input-text"
+                                           min="1"
+                                           max="65535"
+                                           id="port"
+                                           name="port"
+                                           required
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.port"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="input-text"
+                                           id="username"
+                                           name="username"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.username"/>
+                                </jf-field>
+                            </div>
+                            <!-- prevent auto complete -->
+                            <input type="text" class="hidden"/>
+                            <input type="password" class="hidden"/>
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="input-text"
+                                           id="password"
+                                           name="password"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.password"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label for="from">From</label>
+                                    <jf-help-tooltip
+                                            html="AdminConfigurationMail.TOOLTIP.from"></jf-help-tooltip>
+                                    <input type="email" class="input-text"
+                                           id="from"
+                                           name="from"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.from"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label for="subjectPrefix">Subject Prefix</label>
+                                    <jf-help-tooltip
+                                            html="AdminConfigurationMail.TOOLTIP.subjectPrefix"></jf-help-tooltip>
+                                    <input type="text" class="input-text"
+                                           id="subjectPrefix"
+                                           name="subjectPrefix"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.subjectPrefix"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail">
+                                    <label for="artifactoryUrl">Artifactory URL</label>
+                                    <jf-help-tooltip
+                                            html="AdminConfigurationMail.TOOLTIP.artifactoryURL"></jf-help-tooltip>
+                                    <input type="url" class="input-text"
+                                           id="artifactoryUrl"
+                                           name="artifactoryUrl"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.artifactoryUrl"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Use TLS">
+                                    <input type="checkbox" id="tls"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.tls">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Use SSL">
+                                    <input type="checkbox" id="ssl"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.ssl">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                    </form>
+                    <form name="AdminConfigurationMail.testReceiptForm" novalidate>
+                        <div class="form-group margin-top-25">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminMail" invalidate-on-submit="true">
+                                    <label for="testReceipt">Test Message Recipient</label>
+                                    <input type="email"
+                                           class="input-text"
+                                           id="testReceipt"
+                                           name="testReceipt"
+                                           ng-disabled="!AdminConfigurationMail.mail.enabled"
+                                           ng-model="AdminConfigurationMail.mail.testReceipt"
+                                           required/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <button class="btn btn-secondary" type="button"
+                                        ng-disabled="!AdminConfigurationMail.mail.enabled ||
+                                        !AdminConfigurationMail.mailSettingsForm.$valid ||
+                                        !AdminConfigurationMail.testReceiptForm.$valid"
+                                        ng-click="AdminConfigurationMail.testReceipt(AdminConfigurationMail.testReceiptForm)">
+                                    Send Test Mail
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </jf-panel>
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="pull-right">
+                <button class="btn btn-default" type="button"
+                        ng-click="AdminConfigurationMail.getMailData()">Reset
+                </button>
+                <button class="btn btn-primary" type="button"
+                        ng-disabled="!AdminConfigurationMail.mailSettingsForm.$valid"
+                        ng-click="AdminConfigurationMail.save(AdminConfigurationMail.mailSettingsForm)">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

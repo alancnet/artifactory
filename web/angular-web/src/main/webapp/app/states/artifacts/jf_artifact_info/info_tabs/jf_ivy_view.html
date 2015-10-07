@@ -1,0 +1,11 @@
+<jf-panel jf-panel-heading="Ivy Content"
+          ng-if="jfIvyView.ivyViewData.fileContent">
+
+    <jf-clip-copy text-to-copy="jfIvyView.ivyViewData.fileContent"
+                  class="code-mirror-copy"
+                  object-name="Content"></jf-clip-copy>
+
+    <jf-code-mirror mime-type="text/xml"
+                    model="jfIvyView.ivyViewData.fileContent">
+    </jf-code-mirror>
+</jf-panel>

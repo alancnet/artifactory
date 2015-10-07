@@ -1,0 +1,48 @@
+<wicket:extend>
+    <form wicket:id="uploadForm" class="import-export-form">
+        <p class="info">
+            Upload a zipped Maven 2 repository. The extracted repository content will be deployed
+            into the target repository.
+        </p>
+
+        <div class="field field-sep">
+            <input wicket:id="verbose" type="checkbox"/>
+            <span wicket:id="verboseHelp"/>
+        </div>
+        <div class="field field-sep zip-file">
+            <label>
+                Repository Zip File
+                <span wicket:id="uploadHelp"></span>
+            </label>
+
+            <div class="value">
+                <input wicket:id="fileInput" type="file" class="text"/>
+            </div>
+        </div>
+
+        <button type="submit" class="button default-button">
+            <span class="button-center">
+                <span class="button-left">
+                    <span class="button-right">Upload</span>
+                </span>
+                </span>
+        </button>
+
+        <span wicket:id="progress">[[ajax upload progressbar]]</span>
+    </form>
+    <form wicket:id="importForm" class="importForm">
+        <div class="field">
+            <div class="label-sep">
+                <label>Target Local Repository</label>
+                <span wicket:id="repoSelectHelp"></span>
+            </div>
+            <div class="value">
+                <select wicket:id="targetRepo"></select>
+            </div>
+        </div>
+
+        <div class="buttons float-left clear field-sep">
+            <button wicket:id="import"></button>
+        </div>
+    </form>
+</wicket:extend>

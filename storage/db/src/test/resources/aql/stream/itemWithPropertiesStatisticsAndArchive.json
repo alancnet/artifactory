@@ -1,0 +1,77 @@
+
+{
+  "results" : [ {
+    "repo" : "repo1",
+    "path" : "ant/ant/1.5",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00",
+    "archives" : [ {
+      "entry.name" : "LICENSE.txt",
+      "entry.path" : "META-INF"
+    }, {
+      "entry.name" : "MailMessage.class",
+      "entry.path" : "org/apache/tools/mail"
+    }, {
+      "entry.name" : "BaseFilterReader.class",
+      "entry.path" : "org/apache/tools/ant/filters"
+    }, {
+      "entry.name" : "BaseParamFilterReader.class",
+      "entry.path" : "org/apache/tools/ant/filters"
+    }, {
+      "entry.name" : "MANIFEST.MF",
+      "entry.path" : "META-INF"
+    } ],
+    "properties" : [ {
+      "key" : "string",
+      "value" : "this is string"
+    } ]
+  },{
+    "repo" : "repo1",
+    "path" : "org/yossis/tools",
+    "name" : "test.bin",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00",
+    "archives" : [ {
+      "entry.name" : "file.file",
+      "entry.path" : "path"
+    } ],
+    "properties" : [ {
+      "key" : "yossis",
+      "value" : "pdf"
+    } ]
+  },{
+    "repo" : "repo2",
+    "path" : "aa/b",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00",
+    "archives" : [ {
+      "entry.name" : "Test",
+      "entry.path" : "."
+    }, {
+      "entry.name" : "test.me",
+      "entry.path" : "another"
+    } ]
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 3,
+    "total" : 3
+  }
+}

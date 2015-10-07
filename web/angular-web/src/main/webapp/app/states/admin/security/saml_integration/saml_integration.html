@@ -1,0 +1,103 @@
+<div class="content-layout-container">
+    <h1>SAML SSO Configuration</h1>
+
+    <div class="content-wrapper">
+        <form class="form" name="AdminSecuritySamlIntegration.samlForm" ng-submit="AdminSecuritySamlIntegration.save()" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="SAML SSO Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable SAML Integration">
+                                    <input type="checkbox"
+                                           id="enabled"
+                                           ng-model="AdminSecuritySamlIntegration.saml.enableIntegration">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field autofocus="true" validations="common">
+                                    <label for="host" class="mandatory">SAML Login URL</label>
+                                    <jf-help-tooltip html="AdminSecuritySamlIntegration.TOOLTIP.SAMLLoginURL"></jf-help-tooltip>
+                                    <input type="url"
+                                           class="input-text"
+                                           id="host"
+                                           name="loginUrl"
+                                           required
+                                           ng-model="AdminSecuritySamlIntegration.saml.loginUrl"
+                                           ng-disabled="!AdminSecuritySamlIntegration.saml.enableIntegration">
+                                </jf-field>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label for="username" class="mandatory">SAML Logout URL</label>
+                                    <jf-help-tooltip html="AdminSecuritySamlIntegration.TOOLTIP.SAMLLogoutURL"></jf-help-tooltip>
+                                    <input type="url"
+                                           class="input-text"
+                                           id="username"
+                                           name="logoutUrl"
+                                           required
+                                           ng-disabled="!AdminSecuritySamlIntegration.saml.enableIntegration"
+                                           ng-model="AdminSecuritySamlIntegration.saml.logoutUrl">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label for="provider" class="mandatory">SAML Service Provider Name</label>
+                                    <jf-help-tooltip html="AdminSecuritySamlIntegration.TOOLTIP.SAMLServiceProviderName"></jf-help-tooltip>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="provider"
+                                           name="provider"
+                                           required
+                                           ng-disabled="!AdminSecuritySamlIntegration.saml.enableIntegration"
+                                           ng-model="AdminSecuritySamlIntegration.saml.serviceProviderName">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="key">SAML Certificate:</label>
+                                    <jf-help-tooltip html="AdminSecuritySamlIntegration.TOOLTIP.SAMLCertificate"></jf-help-tooltip>
+                                    <textarea class="input-text"
+                                              id="key"
+                                              rows="4"
+                                              cols="4"
+                                              ng-disabled="!AdminSecuritySamlIntegration.saml.enableIntegration"
+                                              ng-model="AdminSecuritySamlIntegration.saml.certificate">
+                                    </textarea>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Auto Create Artifactory Users">
+                                    <input type="checkbox"
+                                           ng-disabled="!AdminSecuritySamlIntegration.saml.enableIntegration"
+                                           id="createArtifactory"
+                                           ng-model="AdminSecuritySamlIntegration.saml.noAutoUserCreation">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="AdminSecuritySamlIntegration.TOOLTIP.autoCreateArtifactoryUsers"></jf-help-tooltip>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button" ng-click="AdminSecuritySamlIntegration.cancel()">
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" ng-disabled="!AdminSecuritySamlIntegration.canSave()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="search-wrapper">
+    <form novalidate>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field autofocus="true">
+                    <input type="text"
+                           class="input-text"
+                           id="groupId"
+                           name="groupID"
+                           ng-model="jfGavc.query.groupID"
+                           placeholder="Group ID">
+                </jf-field>
+            </div>
+            <div class="form-group-cell">
+                <jf-field>
+                    <input type="text"
+                           class="input-text"
+                           id="artifactId"
+                           name="artifactID"
+                           ng-model="jfGavc.query.artifactID"
+                           placeholder="Artifact ID">
+                </jf-field>
+            </div>
+        </div>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell">
+                <jf-field>
+                    <input type="text"
+                           class="input-text"
+                           id="version"
+                           name="version"
+                           ng-model="jfGavc.query.version"
+                           placeholder="Version">
+                </jf-field>
+                <div class="field-bottom-remark"><i class="icon icon-info"></i>Search is case sensitive &amp; supports *, ?</div>
+            </div>
+            <div class="form-group-cell">
+                <jf-field>
+                    <input type="text"
+                           class="input-text"
+                           id="Classifier"
+                           name="Classifier"
+                           ng-model="jfGavc.query.classifier"
+                           placeholder="Classifier">
+                </jf-field>
+            </div>
+            <div class="form-group-cell auto-width">
+                    <button type="button" class="btn btn-default"
+                            ng-click="jfGavc.clearFields()">Clear
+                    </button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            ng-disabled="!jfGavc.query.classifier && !jfGavc.query.version && !jfGavc.query.artifactID && !jfGavc.query.groupID"
+                            ng-click="jfGavc.search()">Search
+                    </button>
+            </div>
+        </div>
+    </form>
+</div>

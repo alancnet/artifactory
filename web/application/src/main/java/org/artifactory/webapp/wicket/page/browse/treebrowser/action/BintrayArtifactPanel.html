@@ -1,0 +1,50 @@
+<wicket:extend>
+    <div wicket:id="border">
+        <p class="info">
+            <span wicket:id="descriptionLabel"/>
+        </p>
+
+        <form wicket:id="form">
+            <div class="field required field-100">
+                <label>Bintray Repository</label>
+                <span wicket:id="repo.help"/>
+
+                <div class="value">
+                    <select wicket:id="repo" style="width: 98%;"></select>
+                </div>
+            </div>
+
+            <div class="field required field-100 field-sep">
+                <label>Bintray Package Name</label>
+                <span wicket:id="packageId.help"/>
+
+                <div class="value">
+                    <select wicket:id="packageId" style="width: 98%;"></select>
+                </div>
+            </div>
+
+            <div class="field required field-100 field-sep">
+                <label>Bintray Package Version</label>
+                <span wicket:id="version.help"/>
+
+                <div class="value">
+                    <select wicket:id="version" style="width: 98%;"></select>
+                </div>
+            </div>
+
+            <div class="field required field-100 field-sep">
+                <label>File Path</label>
+                <span wicket:id="path.help"/>
+
+                <div class="value">
+                    <input wicket:id="path" type="text" class="text"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="buttons">
+        <button type="submit" wicket:id="push"/>
+        <button type="button" wicket:id="cancel"/>
+    </div>
+</wicket:extend>

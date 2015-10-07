@@ -1,0 +1,41 @@
+<wicket:panel>
+    <wicket:child/>
+
+    <div class="field field-sep field-100">
+        <label>Public Description</label>
+        <span wicket:id="description.help"></span>
+
+        <div class="value">
+            <textarea wicket:id="description"></textarea>
+        </div>
+    </div>
+
+    <div class="field field-sep field-100 clear">
+        <label>Internal Notes</label>
+        <span wicket:id="notes.help"></span>
+
+        <div class="value">
+            <textarea wicket:id="notes"></textarea>
+        </div>
+    </div>
+
+    <div class="field-row field-sep">
+        <div class="field">
+            <label>Includes Pattern</label>
+            <span wicket:id="includesPattern.help"></span>
+
+            <div class="value">
+                <textarea wicket:id="includesPattern"></textarea>
+            </div>
+        </div>
+
+        <div class="field repo-field field-right">
+            <label>Excludes Pattern</label>
+            <span wicket:id="excludesPattern.help"></span>
+
+            <div class="value">
+                <textarea wicket:id="excludesPattern"></textarea>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

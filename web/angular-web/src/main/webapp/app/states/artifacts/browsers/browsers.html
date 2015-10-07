@@ -1,0 +1,42 @@
+<div class="tree-browser-header">
+    <div class="tree-browser-header-tabs">
+        <a class="tree-browser-tab" ng-class="{active: Browsers.stateParams.browser === 'tree'}"
+           ng-hide="Browsers.stateParams.browser === 'stash'"
+           ng-click="Browsers.switchBrowser('tree')">Tree</a>
+        <a class="tree-browser-tab" ng-class="{active: Browsers.stateParams.browser === 'simple'}"
+           ng-hide="Browsers.stateParams.browser === 'stash'"
+           ng-click="Browsers.switchBrowser('simple')">Simple</a>
+        <a class="icon icon-search" jf-tooltip="Search" ng-click="Browsers.showTreeSearch()"></a>
+    </div>
+    <div class="tree-browser-header-hide">
+        <div class="hide-empty-folders">
+            <jf-checkbox text="Compress Empty Folders">
+                <input type="checkbox"
+                       ng-change="Browsers.toggleCompactFolders()"
+                       ng-model="Browsers.compactFolders">
+            </jf-checkbox>
+        </div>
+    </div>
+</div>
+<div class="tree-browser-container" ng-class="{'expanded': Browsers.activeFilter}">
+    <div class="tree-head-expansion">
+        <div class="labeled-item"
+             ng-if="Browsers.activeFilter">{{Browsers.searchText}}
+            <a href=""
+               class="remove"
+               tabindex="-1"
+               title="Remove"
+               ng-click="Browsers.clearFilter()">×</a>
+        </div>
+    </div>
+    <jf-tree-search></jf-tree-search>
+    <div ng-if="Browsers.stateParams.browser === 'tree'">
+        <jf-tree-browser browser-controller="Browsers"></jf-tree-browser>
+    </div>
+    <div ng-if="Browsers.stateParams.browser === 'simple'">
+        <jf-simple-browser browser-controller="Browsers"></jf-simple-browser>
+    </div>
+    <div ng-if="Browsers.stateParams.browser === 'stash'">
+        <jf-stash-browser start-compact="Browsers.compactFolders"></jf-stash-browser>
+    </div>
+</div>

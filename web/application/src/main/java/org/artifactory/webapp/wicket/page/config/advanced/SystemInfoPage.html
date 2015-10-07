@@ -1,0 +1,61 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<wicket:head>
+    <style type="text/css">
+        .IE-7 .outer-border-wrapper {
+            float: left;
+        }
+
+        .outer-border-content {
+            overflow: visible !important;
+        }
+
+        .border-content {
+            display: inline-block;
+        }
+    </style>
+</wicket:head>
+<wicket:extend>
+    <div wicket:id="border">
+        <div wicket:id="sysInfo" id="sysInfo"></div>
+    </div>
+    <script type="text/javascript">
+        DomUtils.addOnLoad(function () {
+            var adjustV = 200;
+            var adjustH = 240;
+            if (dojo.isIE == 8) {
+                adjustV = 220;
+                adjustH = 260;
+            }
+            function fixSize() {
+                var doc = document.documentElement;
+                var node = dojo.query('.lines', dojo.byId('sysInfo'))[0];
+                if (!node) {
+                    setTimeout(fixSize, 300);
+                    return;
+                }
+                node.style.cssText = 'height: ' + Math.max(50, doc.offsetHeight - adjustV)
+                        + 'px !important; width:' + Math.max(50, doc.offsetWidth - adjustH) + 'px !important;'
+            }
+
+            setTimeout(fixSize, 100);
+            window.onresize = fixSize;
+        });
+    </script>
+</wicket:extend>

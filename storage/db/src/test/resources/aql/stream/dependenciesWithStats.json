@@ -1,0 +1,74 @@
+
+{
+  "results" : [ {
+    "dependency.name" : "bb1mod1-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  },{
+    "dependency.name" : "bb1mod2-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  },{
+    "dependency.name" : "ba1mod3-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloaded" : "2012-06-21T15:53:27.850+03:00",
+        "downloaded_by" : "yossis",
+        "downloads" : 9
+      } ]
+    } ]
+  },{
+    "dependency.name" : "ba2mod4-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  },{
+    "dependency.name" : "bb1mod3-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  },{
+    "dependency.name" : "bb1mod3-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  },{
+    "dependency.name" : "bb1mod3-art1",
+    "dependency.scope" : "compile",
+    "dependency.type" : "dll",
+    "items" : [ {
+      "stats" : [ {
+        "downloads" : 0
+      } ]
+    } ]
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 7,
+    "total" : 7
+  }
+}

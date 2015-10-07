@@ -1,0 +1,17 @@
+<div class="content-layout-container">
+    <h1>Configure High Availability</h1>
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+        	<div ng-if="AdminConfigurationHA.ha">
+                <jf-panel jf-panel-heading="All Artifactory Nodes" ng-if="AdminConfigurationHA.ha.length > 0">
+                    <jf-grid ng-if="AdminConfigurationHA.ha.length"
+                             grid-options="AdminConfigurationHA.gridOptions"></jf-grid>
+                </jf-panel>
+	            <div class="alert alert-info" ng-if="AdminConfigurationHA.ha.length === 0">
+					High Availability license is installed but HA feature is not configured.<br>
+					Visit <a target="_blank" href="{{ AdminConfigurationHA.installLink }}"> Artifactory High Availability Installation and Setup</a> page in <a target="_blank" href="{{ AdminConfigurationHA.wikiLink }}">JFrog's wiki</a> for detailed instructions.
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>

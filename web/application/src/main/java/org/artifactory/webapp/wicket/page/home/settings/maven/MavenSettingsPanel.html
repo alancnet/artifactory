@@ -1,0 +1,65 @@
+<wicket:panel>
+    <div wicket:id="mavenSettingsBorder" class="settings-border">
+        <form wicket:id="form">
+            <div class="border-content">
+                <div class="settings-field-group">
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Releases</label>
+                            <span wicket:id="releases.help"></span>
+
+                            <div class="value">
+                                <select wicket:id="releases"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Plugin Releases</label>
+                            <span wicket:id="pluginReleases.help"></span>
+
+                            <div class="value">
+                                <select wicket:id="pluginReleases"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-field-group">
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Snapshots</label>
+                            <span wicket:id="snapshots.help"></span>
+
+                            <div class="value">
+                                <select wicket:id="snapshots"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label>Plugin Snapshots</label>
+                            <span wicket:id="pluginSnapshots.help"></span>
+
+                            <div class="value">
+                                <select wicket:id="pluginSnapshots"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <input wicket:id="mirrorAny" type="checkbox" class="settings-checkbox"/>
+                        <span wicket:id="mirrorAnySelection.help"></span>
+
+                        <div class="value">
+                            <select wicket:id="mirrorAnySelection"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="buttons">
+        <button type="submit" wicket:id="generate"></button>
+    </div>
+</wicket:panel>

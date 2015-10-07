@@ -1,0 +1,22 @@
+<div class="builds-release-history">
+    <jf-panel ng-repeat="history in jfReleaseHistory.historyData"
+              jf-panel-heading="{{history.status}}">
+
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in history" ng-if="jfReleaseHistory.DICTIONARY[key]">
+                <td>{{jfReleaseHistory.DICTIONARY[key]}}:</td>
+                <td ng-if="key === 'url'">
+                    <a ng-href="{{value}}"
+                       target="_blank">{{value}}</a>
+                </td>
+                <td ng-if="key !== 'url'">
+                    <td>{{value}}</td>
+                </td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <div class="alert alert-warning" ng-if="jfReleaseHistory.historyData && !jfReleaseHistory.historyData.length">
+        This build has no release history.
+    </div>
+</div>

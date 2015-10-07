@@ -1,0 +1,49 @@
+
+{
+  "results" : [ {
+    "build.created" : "2012-10-12T02:00:00.000+02:00",
+    "build.created_by" : "me",
+    "build.modified" : "2012-10-12T02:00:00.001+02:00",
+    "build.modified_by" : "not-me",
+    "build.name" : "ba",
+    "build.number" : "1",
+    "modules" : [ {
+      "module.name" : "ba:moda1"
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:16:40.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "bb",
+    "build.number" : "1",
+    "build.url" : "http://myserver/jenkins/bb/1",
+    "modules" : [ {
+      "module.name" : "bb:modb1"
+    }, {
+      "module.name" : "bb:modb2"
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:33:20.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "ba",
+    "build.number" : "2",
+    "modules" : [ {
+      "module.name" : "ba:moda1"
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:50:00.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "bb",
+    "build.number" : "2",
+    "build.url" : "http://myserver/jenkins/bb/2"
+  },{
+    "build.created" : "2012-10-12T03:06:40.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "ba",
+    "build.number" : "3"
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 5,
+    "total" : 5
+  }
+}

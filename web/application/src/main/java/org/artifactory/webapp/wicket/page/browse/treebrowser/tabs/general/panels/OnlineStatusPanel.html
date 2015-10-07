@@ -1,0 +1,58 @@
+<wicket:panel>
+    <script type="text/javascript">
+        clearTimeout(refreshLabel);
+        function GetCount(connectionTime, id) {
+
+            dateNow = new Date();
+            amount = connectionTime - dateNow.getTime();
+            delete dateNow;
+
+            if (amount < 1000) {
+                document.getElementById(id).innerHTML = "<span style='color:red;'>Trying to reconnect ...</span>";
+            } else {
+                secs = 0;
+                out = "<span style='color:red;'>Connection retry in ";
+
+                amount = Math.floor(amount / 1000);
+                secs = Math.floor(amount);
+                days = Math.floor(secs / 86400);
+                secs -= days * 86400;
+
+                hours = Math.floor(secs / 3600);
+                secs -= hours * (3600);
+
+                minutes = Math.floor(secs / 60);
+                secs -= minutes * (60);
+
+                out += ((days > 0) ? days + " days " : "")
+                        + ((hours > 0) ? (LeadingZero(hours) + " hours ") : "")
+                        + ((minutes > 0) ? (LeadingZero(minutes) + " minutes " + (LeadingZero(secs))) : secs)
+                        + " secs"
+                        + "</span>";
+
+                document.getElementById(id).innerHTML = out;
+
+                refreshLabel = setTimeout(function () {
+                    GetCount(connectionTime, id)
+                }, 1000);
+            }
+        }
+
+        function LeadingZero(Time) {
+            return (Time < 10) ? "0" + Time : "" + Time;
+
+        }
+    </script>
+
+
+        <span class="field">
+        <div class="labeled-value">
+            <span wicket:id="status" class="label"/> <span id="statusLabel"/>
+            <span class="small-buttons">
+                <a wicket:id="resetButton"></a>
+                <!--<span wicket:id="putOnline.help"></span>-->
+            </span>
+        </div>
+    </span>
+
+</wicket:panel>

@@ -1,0 +1,160 @@
+<div class="content-layout-container">
+    <h1>{{ ProxyForm.formTitle }}</h1>
+
+    <div class="content-wrapper">
+        <form novalidate name="ProxyForm.proxyEditForm" ng-submit="ProxyForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Proxy Settings">
+                        <div class="form-group">
+                            <!-- PROXY KEY -->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies" autofocus="true">
+                                    <label for="key" class="mandatory">Proxy Key</label>
+                                    <input type="text"
+                                           name="key"
+                                           jf-validator-unique-id
+                                           jf-validator-xml-name
+                                           jf-validator-name
+                                           ng-model-options="{debounce: { 'default': 500 } }"
+                                           ng-disabled="!ProxyForm.isNew"
+                                           autofocus
+                                           class="input-text"
+                                           id="key"
+                                           required
+                                           ng-model="ProxyForm.proxy.key"/>
+                                </jf-field>
+                            </div>
+
+                            <!-- DEFAULT PROXY -->
+                            <div class="form-group-cell form-button">
+                                <jf-checkbox text="System Default">
+                                    <input type="checkbox"
+                                           id="defaultProxy"
+                                           name="defaultProxy"
+                                           ng-model="ProxyForm.proxy.defaultProxy"
+                                           ng-change="ProxyForm.onChangeDefault()">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="ProxyForm.TOOLTIP.systemDefault"></jf-help-tooltip>
+                            </div>
+                        </div>
+
+                        <!-- HOST -->
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="host" class="mandatory">Host</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           name="host"
+                                           required
+                                           id="host"
+                                           ng-model="ProxyForm.proxy.host">
+                                </jf-field>
+                            </div>
+
+                            <!-- PORT -->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="port" class="mandatory">Port</label>
+                                    <input type="number"
+                                           class="input-text"
+                                           required
+                                           id="port"
+                                           name="port"
+                                           min="1"
+                                           max="65535"
+                                           ng-model="ProxyForm.proxy.port">
+                                </jf-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- USER NAME-->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="username">User Name</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="username"
+                                           name="username"
+                                           ng-model="ProxyForm.proxy.username">
+                                </jf-field>
+                            </div>
+                            <!-- prevent auto complete -->
+                            <input type="text" class="hidden"/>
+                            <input type="password" class="hidden"/>
+                            <!-- PASSWORD -->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="password">Password</label>
+                                    <input type="password"
+                                           class="input-text"
+                                           id="password"
+                                           name="password"
+                                           ng-model="ProxyForm.proxy.password">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- NT HOST -->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="nt_host">NT Host</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="nt_host"
+                                           name="nt_host"
+                                           ng-model="ProxyForm.proxy.ntHost">
+                                </jf-field>
+                            </div>
+
+                            <!-- NT PORT -->
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="nt_domain">NT Domain</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="nt_domain"
+                                           name="nt_domain"
+                                           ng-model="ProxyForm.proxy.domain">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="proxies">
+                                    <label for="target_hosts">Redirecting Proxy Target Hosts</label>
+                                    <jf-help-tooltip html="ProxyForm.TOOLTIP.redirectingProxyTargetHosts"></jf-help-tooltip>
+                            <textarea class="input-text"
+                                      id="target_hosts"
+                                      name="target_hosts"
+                                      cols="4"
+                                      rows="4"
+                                      ng-model="ProxyForm.proxy.redirectedToHosts"></textarea>
+                                </jf-field>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="ProxyForm.cancel()">
+                        Cancel
+                    </button>
+                    <button
+                            type="submit"
+                            class="btn btn-primary"
+                            ng-disabled="!ProxyForm.proxyEditForm.$valid">
+                        {{ ProxyForm.isNew && 'Create' || 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

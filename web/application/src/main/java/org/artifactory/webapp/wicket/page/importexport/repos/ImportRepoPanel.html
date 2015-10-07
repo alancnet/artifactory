@@ -1,0 +1,35 @@
+<wicket:extend>
+    <form wicket:id="importForm" class="import-export-form">
+
+        <div class="field field-sep">
+            <label>Target Local Repository</label>
+
+            <div class="value">
+                <select wicket:id="targetRepo"/>
+                <span wicket:id="repoSelectHelp"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <label>Import From Path</label>
+
+            <div class="value">
+                <input wicket:id="importFromPath" type="text" class="path-field text"/>
+                <span wicket:id="browseButton"></span>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <input wicket:id="excludeMetadata" type="checkbox"/>
+            <span wicket:id="excludeMetadataHelp"/>
+        </div>
+        <div class="field field-sep">
+            <input wicket:id="verbose" type="checkbox"/>
+            <span wicket:id="verboseHelp"/>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="import"/>
+        </div>
+    </form>
+</wicket:extend>

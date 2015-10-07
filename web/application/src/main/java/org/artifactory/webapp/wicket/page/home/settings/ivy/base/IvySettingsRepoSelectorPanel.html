@@ -1,0 +1,76 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<wicket:panel>
+    <div class="settings-field-group">
+        <div class="field-row">
+            <div class="field required">
+                <span wicket:id="repositoryLabel"></span>
+                <span wicket:id="repository.help"></span>
+
+                <div class="value">
+                    <select wicket:id="repository"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="settings-field-group">
+        <div class="field-row">
+            <div class="field required">
+                <span wicket:id="layoutLabel"></span>
+                <span wicket:id="layout.help"></span>
+
+                <div class="value">
+                    <select wicket:id="layout"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="settings-field-group">
+        <div class="field-row">
+            <div class="field">
+                <span wicket:id="resolverNameLabel"></span>
+                <span wicket:id="resolverName.help"></span>
+
+                <div class="value top-settings-text-field">
+                    <input wicket:id="resolverName" name="resolverName" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="settings-field-group">
+        <div class="field-row">
+            <div class="field required">
+                <div class="settings-checkbox">
+                    <input wicket:id="useIbiblioResolver" type="checkbox"/>
+                    <span wicket:id="useIbiblioResolver.help"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="settings-field-group">
+        <div class="field-row">
+            <div class="field required">
+                <div class="settings-checkbox">
+                    <input wicket:id="m2Compatible" type="checkbox"/>
+                    <span wicket:id="m2Compatible.help"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

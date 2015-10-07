@@ -1,0 +1,48 @@
+<wicket:extend>
+
+    <p class="info">
+        The Maven Indexer can be used by IDE plugins for local class searches. It does <i>not</i> affect
+        Artifactory's built-in search and indexing behavior.<br/>
+    </p>
+
+    <div class="cron-fields">
+        <div class="field sep">
+            <input wicket:id="enabled" type="checkbox"/>
+            <span wicket:id="enabled.help"/>
+        </div>
+
+        <div class="field required field-sep">
+            <label>
+                <wicket:message key="cronExp"/>
+                <span wicket:id="cronExp.help"/>
+            </label>
+
+            <div class="value">
+                <input wicket:id="cronExp" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <label>Next Indexing Time</label>
+
+            <div class="value">
+                <span wicket:id="cronNextDatePanel"/>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="run"/>
+        </div>
+    </div>
+
+    <div class="field field-sep">
+        <label>
+            Repositories
+            <span wicket:id="excludedRepositories.help"/>
+        </label>
+
+        <div class="value">
+            <div wicket:id="excludedRepositories" class="list"/>
+        </div>
+    </div>
+</wicket:extend>

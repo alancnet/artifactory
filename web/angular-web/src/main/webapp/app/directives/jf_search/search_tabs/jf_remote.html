@@ -1,0 +1,39 @@
+<div class="search-wrapper">
+    <div class="form-group">
+        <h2>Search in Bintray <a href="https://bintray.com/bintray/jcenter" target="_blank">JCenter</a></h2>
+        <p>
+            Bintray's JCenter Maven repository offers the biggest collection around for open source java libraries.<br>
+            Find all your jar dependencies under a single, reliable source and auto-resolve them from the fast JCenter remote repository.
+        </p>
+        <div class="alert alert-warning" ng-if="!jfRemote.isJcenterExists">
+            <p>A remote JCenter repository is not configured in artifactory, you will not be able to perform remote searches.</p>
+            <p ng-if="jfRemote.user.isAdmin()">Would you like Artifactory to automatically <a href="" ng-click="jfRemote.createJcenter()">create it?</a></p>
+        </div>
+    </div>
+
+    <form novalidate>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell">
+                <jf-field autofocus="true">
+                    <input type="text"
+                           class="input-text"
+                           id="remote"
+                           name="searchKey"
+                           min-length="3"
+                           ng-disabled="!jfRemote.isJcenterExists"
+                           required
+                           ng-model="jfRemote.query.searchKey"
+                           placeholder="Search for"/>
+                </jf-field>
+                <div class="field-bottom-remark"><i class="icon icon-info"></i>Search is case sensitive &amp; supports *, ?</div>
+            </div>
+            <div class="form-group-cell">
+                <button type="submit"
+                        class="btn btn-primary"
+                        ng-disabled="!jfRemote.query.searchKey"
+                        ng-click="jfRemote.search()">Search
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

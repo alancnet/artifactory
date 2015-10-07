@@ -1,0 +1,22 @@
+<wicket:extend>
+    <form wicket:id="form">
+        <div wicket:id="repoConfigBorder">
+            <div class="field required field-100">
+                <label>Repository Key</label>
+                <span wicket:id="key.help"></span>
+
+                <div class="value">
+                    <input wicket:id="key" type="text" class="text"/>
+                </div>
+            </div>
+            <br>
+
+            <div wicket:id="repoConfigTabbedPanel"></div>
+        </div>
+        <div class="buttons">
+            <button type="submit" wicket:id="submit"></button>
+            <button type="button" wicket:id="test"></button>
+            <button type="button" wicket:id="cancel"></button>
+        </div>
+    </form>
+</wicket:extend>

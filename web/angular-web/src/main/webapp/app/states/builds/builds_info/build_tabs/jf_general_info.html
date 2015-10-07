@@ -1,0 +1,19 @@
+<div class="builds-general-info">
+    <jf-panel jf-panel-heading="General Info">
+        <a ng-if="jfGeneralInfo.userCanPushToBintray"
+           class="push-to-bintray-btn"
+           ng-click="jfGeneralInfo.pushToBintray()"><span class="icon icon-bintray"></span>Push to Bintray
+        </a>
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfGeneralInfo.generalData" ng-if="jfGeneralInfo.DICTIONARY[key]">
+                <td>{{jfGeneralInfo.DICTIONARY[key]}}:</td>
+                <td ng-if="key === 'url'">
+                    <a ng-href="{{value}}" target="_blank">{{value}}</a>
+                </td>
+                <td ng-if="key !== 'url'">{{value}}</td>
+            </tr>
+        </table>
+    </jf-panel>
+</div>
+
+

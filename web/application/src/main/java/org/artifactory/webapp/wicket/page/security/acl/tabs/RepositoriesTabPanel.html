@@ -1,0 +1,63 @@
+<wicket:extend>
+    <div class="permissions-tab-panel">
+        <div class="include-pattern-fields">
+            <div class="field">
+                <label>Include Patterns</label>
+                <span wicket:id="includesHelp"></span>
+
+                <div class="value">
+                    <select wicket:id="includesSuggest" style="height: 22px;"></select>
+                </div>
+            </div>
+
+            <div class="field field-sep perrmision-target-field">
+                <div class="value">
+                    <textarea wicket:id="includesPattern" rows="4">[input]</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="exclude-pattern-fields">
+            <div class="field">
+                <label>Exclude Patterns</label>
+                <span wicket:id="excludesHelp"></span>
+
+                <div class="value">
+                    <select wicket:id="excludesSuggest" style="height: 22px;"></select>
+                </div>
+            </div>
+
+            <div class="field field-sep perrmision-target-field">
+                <div class="value">
+                    <textarea wicket:id="excludesPattern" rows="4">[input]</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="name-repository-fields">
+
+            <div class="field any-repo-field">
+                <div class="value">
+                    <input wicket:id="anyLocalRepository" type="checkbox"/>
+                    <input wicket:id="anyRemoteRepository" type="checkbox"/>
+                </div>
+            </div>
+
+            <div class="field field-sep list-field">
+                <div class="label-sep">
+                    <label>Repositories</label>
+                </div>
+                <div class="value">
+                    <div wicket:id="repoKeys" class="list"></div>
+                </div>
+            </div>
+
+            <div class="field any-repo-field">
+                <div class="value">
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</wicket:extend>

@@ -1,0 +1,11 @@
+<div class="jf-switch">
+    <span ng-if="jfSwitch.jfSwitchTitle" class="jf-switch-title">{{jfSwitch.jfSwitchTitle}}</span>
+    <ul class="jf-switch-options">
+        <li ng-repeat="option in jfSwitch.optionObjects">
+            <a class="jf-switch-option"
+               href=""
+               ng-click="jfSwitch.selectOption(option)"
+               ng-class="{active: jfSwitch.isSelected(option)}">{{option.text}}</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2014 JFrog Ltd. All rights reserved.
+  ~ JFROG PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0          http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>artifactory-storage-parent</artifactId>
+        <groupId>org.artifactory</groupId>
+        <version>4.1.3</version>
+    </parent>
+
+    <artifactId>artifactory-storage-config</artifactId>
+    <packaging>jar</packaging>
+    <name>Artifactory Storage Config</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.artifactory</groupId>
+            <artifactId>artifactory-config</artifactId>
+            <type>test-jar</type>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,22 @@
+<wicket:head>
+    <style type="text/css">
+        .checksum-buttons {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+    </style>
+</wicket:head>
+<wicket:panel wicket:id="checksumPanel">
+    <div wicket:id="border">
+        <div class="code">
+            <div wicket:id="md5"></div>
+            <div wicket:id="sha1"></div>
+        </div>
+        <div wicket:id="mismatch">
+            <div wicket:id="mismatchMessage" class="warn small"></div>
+            <div class="small-buttons checksum-buttons">
+                <a wicket:id="fix"></a>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

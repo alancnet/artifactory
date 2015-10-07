@@ -1,0 +1,98 @@
+<div class="search-wrapper">
+    <jf-switch jf-switch-title="Add:" ng-model="jfProperty.propertyType" options="['Property', 'Property Set']"></jf-switch>
+    <form name="propertyForm">
+        <div ng-switch="jfProperty.propertyType">
+            <div ng-switch-when="Property">
+                <div class="form-group">
+                    <div class="form-group-cell">
+                        <jf-field validations="properties" autofocus="true">
+                            <input type="text" class="input-text" placeholder="Name *"
+                                   name="selectedProperty"
+                                   ng-model="jfProperty.selectedProperty"
+                                   jf-special-chars/>
+                        </jf-field>
+                        <div class="field-bottom-remark"><i class="icon icon-info"></i>Search is case sensitive &amp; supports *, ?</div>
+                    </div>
+                    <div class="form-group-cell">
+                        <input type="text" class="input-text" placeholder="Value"
+                               ng-model="jfProperty.selectedPropertyValue"/>
+                    </div>
+                    <div class="form-group-cell auto-width">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="jfProperty.clearFields()">Clear
+                            </button>
+                            <button class="btn btn-primary" ng-click="jfProperty.addProperty()"
+                                    ng-disabled="!jfProperty.selectedProperty">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="Property Set">
+                <div class="form-group">
+                    <div class="form-group-cell">
+                        <ui-select ng-model="jfProperty.selectedPropertySet"
+                                   ng-change="jfProperty.setPropertySetValues()">
+                            <ui-select-match placeholder="Property Name">{{$select.selected.key}}</ui-select-match>
+                            <ui-select-choices
+                                    repeat="property in jfProperty.propertiesOptions | filter: $select.search track by property.key">
+                                <div ng-bind-html="property.key| highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group-cell">
+                        <selectize placeholder='Select Value... '
+                                   config="jfProperty.propertySetMultiValuesConfig"
+                                   options="jfProperty.propertyValuesOptions"
+                                   ng-model="jfProperty.selectedPropertySetValue"
+                                   ng-if="jfProperty.isCurrentPropertyType('MULTI_SELECT')"
+                                   class="multi-selectize">
+                        </selectize>
+                        <selectize placeholder='Select Value...'
+                                   config="jfProperty.propertySetSingleValueConfig"
+                                   options="jfProperty.propertyValuesOptions"
+                                   ng-model="jfProperty.selectedPropertySetValue"
+                                   ng-if="jfProperty.isCurrentPropertyType('SINGLE_SELECT')">
+                        </selectize>
+                        <input type="text"
+                               ng-model="jfProperty.selectedPropertySetValue"
+                               typeahead="state.text for state in jfProperty.propertyValuesOptions | filter:$viewValue | limitTo:8"
+                               class="input-text any-property"
+                               placeholder='Select Value...'
+                               ng-if="jfProperty.isCurrentPropertyType('ANY_VALUE')">
+                    </div>
+                    <div class="form-group-cell auto-width">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="jfProperty.clearFields()">Clear
+                            </button>
+                            <button class="btn btn-primary" ng-click="jfProperty.addPropertySet()"
+                                    ng-disabled="!jfProperty.selectedPropertySet">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group no-margin-bottom">
+        <div class="form-group-cell double">
+            <div class="grid-container">
+                <div ui-grid="jfProperty.propertyGridOption"
+                     ui-grid-selection
+                     class="grid"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group no-margin-bottom">
+        <div class="form-group-cell double">
+            <div class="pull-right">
+                <button type="submit"
+                        class="btn btn-primary"
+                        ng-disabled="jfProperty.gridItems.length===0"
+                        ng-click="jfProperty.search()">Search
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

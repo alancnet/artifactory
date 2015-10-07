@@ -1,0 +1,39 @@
+<div ng-if="jfNuget.nugetData">
+    <jf-panel jf-panel-heading="Package Info"
+              ng-if="jfNuget.nugetData.nugetGeneralInfo">
+
+        <div ng-repeat="(key,value) in jfNuget.nugetData.nugetGeneralInfo"
+             class="artifact-file-icon"
+             ng-if="key == 'iconUrl'">
+            <img ng-src="{{value}}" alt="logo"/>
+        </div>
+
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfNuget.nugetData.nugetGeneralInfo" ng-if="key != 'description' && key != 'iconUrl'">
+                <td>{{jfNuget.DICTIONARY[key]}}:</td>
+                <td>
+                    <span ng-if="key != 'id' && key != 'description' && key != 'iconUrl' && key != 'licenseUrl' && key != 'projectUrl'">{{value}}</span>
+                    <span ng-if="key === 'licenseUrl' || key === 'projectUrl'"><a ng-href="{{value}}" target="_blank">{{value}}</a></span>
+                    <span ng-if="key === 'id'"><a ng-href="{{jfNuget.nugetData.nugetGeneralInfo.projectUrl}}" target="_blank">{{value}}</a></span>
+                </td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Description"
+              ng-if="jfNuget.nugetData.nugetDescription">
+        <p>{{jfNuget.nugetData.nugetDescription.description}}</p>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Dependencies"
+              ng-if="jfNuget.nugetData.dependencies">
+        <jf-grid grid-options="jfNuget.gridDependenciesOptions"
+                 no-pagination="true"></jf-grid>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Framework Assemblies"
+              ng-if="jfNuget.nugetData.frameworkAssemblies">
+        <jf-grid grid-options="jfNuget.gridFrameworkAssembliesOptions"
+                 no-pagination="true"></jf-grid>
+    </jf-panel>
+</div>

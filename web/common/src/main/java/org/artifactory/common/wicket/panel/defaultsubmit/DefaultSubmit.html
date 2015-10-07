@@ -1,0 +1,19 @@
+<wicket:head>
+    <style type="text/css">
+        .hidden-submit {
+            overflow: hidden;
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: -100px;
+            top: -100px;
+        }
+    </style>
+</wicket:head>
+
+<wicket:panel>
+    <div class="hidden-submit">
+        <input type="text"/>
+        <input wicket:id="delegateSubmit" type="submit"/>
+    </div>
+</wicket:panel>

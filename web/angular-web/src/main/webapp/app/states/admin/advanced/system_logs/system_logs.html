@@ -1,0 +1,34 @@
+<div class="content-layout-container">
+    <h1>System Logs</h1>
+
+    <div class="content-wrapper system-logs">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <label>View System Logs</label>
+                    <selectize ng-model="SystemLogsController.selectedLog"
+                               ng-change="SystemLogsController.onChangeLog()"
+                               config="{maxItems:1, create: true, labelField: 'logName', valueField: 'logName'}"
+                               options="SystemLogsController.logs"></selectize>
+                </div>
+                <div class="form-group-cell form-button form-link">
+                    <div ng-if="SystemLogsController.timeCount >= 0">Refreshing logs in {{SystemLogsController.timeCount}} seconds</div>
+                    <div ng-if="SystemLogsController.timeCount < 0" class="icon-hourglass"></div>
+                </div>
+            </div>
+
+            <div>
+                <span>File last modified: {{SystemLogsController.data.lastUpdateModified | date:'EEE MMM dd HH:mm:ss IDT yyyy'}}</span>
+                <span>View last updated: {{SystemLogsController.data.lastUpdateLabel | date:'EEE MMM dd HH:mm:ss IDT yyyy'}}</span>
+            </div>
+            <span ng-click="SystemLogsController.download()"><a href="">Download</a> ({{SystemLogsController.data.fileSize | filesize}})</span>
+
+            <div class="fill-screen">
+                <textarea disabled
+                          spellcheck="false"
+                          id="textarea"
+                          class="input-text monospaced">{{SystemLogsController.data.logContent}}</textarea>
+            </div>
+        </div>
+    </div>
+</div>

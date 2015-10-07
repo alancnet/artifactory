@@ -1,0 +1,345 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<security>
+    <users>
+        <org.artifactory.security.SimpleUser>
+            <updatableProfile>true</updatableProfile>
+            <password>5f4dcc3b5aa765d61d8327deb882cf99</password>
+            <username>admin</username>
+            <authorities>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>ADMIN</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>USER</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <updatableProfile>true</updatableProfile>
+            <password>06c56a89949d617def52f371c357b6db</password>
+            <username>momo</username>
+            <authorities>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>USER</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <updatableProfile>true</updatableProfile>
+            <password>06c56a89949d617def52f371c357b6db</password>
+            <username>momo1</username>
+            <authorities>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>USER</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <updatableProfile>true</updatableProfile>
+            <password>f71dbe52628a3f83a77ab494817525c6</password>
+            <username>toto</username>
+            <authorities>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>USER</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <updatableProfile>true</updatableProfile>
+            <password>9891b71c5812781d61403a03a101a854</password>
+            <username>yossis</username>
+            <authorities>
+                <org.acegisecurity.GrantedAuthorityImpl>
+                    <role>USER</role>
+                </org.acegisecurity.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+        </org.artifactory.security.SimpleUser>
+    </users>
+    <repoPaths>
+        <org.artifactory.security.RepoPath>
+            <repoKey>ANY</repoKey>
+            <path>ANY</path>
+        </org.artifactory.security.RepoPath>
+        <org.artifactory.security.RepoPath>
+            <repoKey>libs-releases</repoKey>
+            <path>org.apache</path>
+        </org.artifactory.security.RepoPath>
+        <org.artifactory.security.RepoPath>
+            <repoKey>ext-snapshots</repoKey>
+            <path>ANY</path>
+        </org.artifactory.security.RepoPath>
+        <org.artifactory.security.RepoPath>
+            <repoKey>repo1-cache</repoKey>
+            <path>blabla</path>
+        </org.artifactory.security.RepoPath>
+        <org.artifactory.security.RepoPath>
+            <repoKey>libs-releases</repoKey>
+            <path>ANY</path>
+        </org.artifactory.security.RepoPath>
+    </repoPaths>
+    <acls>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath">
+                <repoKey>ANY</repoKey>
+                <path>ANY</path>
+            </aclObjectIdentity>
+            <recipient class="string">___INHERITENCE_MARKER_ONLY___</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>0</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath">
+                <repoKey>libs-releases</repoKey>
+                <path>org.apache</path>
+            </aclObjectIdentity>
+            <recipient class="string">momo</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[2]/aclObjectIdentity"/>
+            <recipient class="string">yossis</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>6</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath">
+                <repoKey>ext-snapshots</repoKey>
+                <path>ANY</path>
+            </aclObjectIdentity>
+            <recipient class="string">momo</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[4]/aclObjectIdentity"/>
+            <recipient class="string">yossis</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>2</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath">
+                <repoKey>repo1-cache</repoKey>
+                <path>blabla</path>
+            </aclObjectIdentity>
+            <recipient class="string">toto</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>4</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[6]/aclObjectIdentity"/>
+            <recipient class="string">momo</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[6]/aclObjectIdentity"/>
+            <recipient class="string">yossis</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[6]/aclObjectIdentity"/>
+            <recipient class="string">momo1</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>6</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath">
+                <repoKey>libs-releases</repoKey>
+                <path>ANY</path>
+            </aclObjectIdentity>
+            <recipient class="string">momo</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[10]/aclObjectIdentity"/>
+            <recipient class="string">yossis</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+        <org.acegisecurity.acl.basic.SimpleAclEntry>
+            <aclObjectIdentity class="org.artifactory.security.RepoPath"
+                               reference="../../org.acegisecurity.acl.basic.SimpleAclEntry[10]/aclObjectIdentity"/>
+            <recipient class="string">momo1</recipient>
+            <validPermissions>
+                <int>0</int>
+                <int>1</int>
+                <int>2</int>
+                <int>4</int>
+                <int>6</int>
+                <int>8</int>
+                <int>14</int>
+                <int>16</int>
+                <int>22</int>
+                <int>30</int>
+            </validPermissions>
+            <mask>7</mask>
+        </org.acegisecurity.acl.basic.SimpleAclEntry>
+    </acls>
+</security>

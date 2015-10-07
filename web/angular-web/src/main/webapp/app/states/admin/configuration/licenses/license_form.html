@@ -1,0 +1,109 @@
+<div class="content-layout-container">
+    <h1 ng-if="!AdminLicenseForm.isNew">Edit {{AdminLicenseForm.license.name}} License</h1>
+
+    <h1 ng-if="AdminLicenseForm.isNew">New License</h1>
+
+    <div class="content-wrapper">
+        <form name="newLicenseForm" ng-submit="AdminLicenseForm.save(license)" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Artifactory License Details">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="licenses" autofocus="true">
+                                        <label class="mandatory" for="licenseName">License Key</label>
+                                        <input type="text"
+                                               class="input-text"
+                                               name="licenseName"
+                                               ng-disabled="!AdminLicenseForm.isNew"
+                                               ui-validate="{validateLicense:'AdminLicenseForm.testRegex($value)'}"
+                                               ng-model="AdminLicenseForm.license.name"
+                                               id="licenseName"
+                                               required/>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="licenses">
+                                        <label for="longName">Long Name</label>
+                                        <input name="longName"
+                                               type="text"
+                                               ng-model="AdminLicenseForm.license.longName"
+                                               class="input-text"
+                                               id="longName">
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="licenses">
+                                        <label for="urls">URLs</label>
+                                        <jf-help-tooltip
+                                                html="AdminLicenseForm.TOOLTIP.URLs"></jf-help-tooltip>
+                                    <textarea name="urls"
+                                              type="text"
+                                              ng-model="AdminLicenseForm.license.url"
+                                              class="input-text"
+                                              id="urls"
+                                              rows="2"
+                                              cols="2"></textarea>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="licenses">
+                                        <label for="notes">Notes</label>
+                                        <textarea name="notes"
+                                                  type="text"
+                                                  ng-model="AdminLicenseForm.license.comments"
+                                                  class="input-text"
+                                                  id="notes"
+                                                  rows="2"
+                                                  cols="2"></textarea>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="licenses">
+                                        <label for="regexp">RegExp</label>
+                                        <jf-help-tooltip html="AdminLicenseForm.TOOLTIP.regExp"></jf-help-tooltip>
+                                        <textarea name="regexp"
+                                                  type="text"
+                                                  ng-model="AdminLicenseForm.license.regexp"
+                                                  class="input-text"
+                                                  id="regexp"
+                                                  rows="2"
+                                                  cols="2"></textarea>
+                                    </jf-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Approved">
+                                    <input id=""
+                                           type="checkbox"
+                                           ng-model="AdminLicenseForm.license.approved"
+                                           name="">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ng-click="AdminLicenseForm.cancel()">Cancel
+                    </button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="newLicenseForm.$invalid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

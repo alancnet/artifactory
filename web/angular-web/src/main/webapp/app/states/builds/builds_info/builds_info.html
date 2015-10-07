@@ -1,0 +1,38 @@
+<div class="build-info">
+    <h2>{{ BuildsInfo.buildTitle }}</h2>
+    <jf-tabs tabs="BuildsInfo.tabs"
+             dictionary="BuildsInfo.DICTIONARY"
+             tab-width="165"
+             container-margin="35">
+
+        <div class="main-view">
+            <jf-tab name="general">
+                <jf-general-info></jf-general-info>
+            </jf-tab>
+            <jf-tab name="published">
+                <jf-published-modules></jf-published-modules>
+            </jf-tab>
+            <jf-tab name="environment">
+                <jf-environment></jf-environment>
+            </jf-tab>
+            <jf-tab name="json">
+                <jf-build_info_json></jf-build_info_json>
+            </jf-tab>
+            <jf-tab name="issues">
+                <jf-issues></jf-issues>
+            </jf-tab>
+            <jf-tab name="diff">
+                <jf-diff></jf-diff>
+            </jf-tab>
+            <jf-tab name="history">
+                <jf-release-history></jf-release-history>
+            </jf-tab>
+            <jf-tab name="licenses">
+                <jf-licenses></jf-licenses>
+            </jf-tab>
+            <jf-tab name="governance">
+                <jf-builds-governance></jf-builds-governance>
+            </jf-tab>
+        </div>
+    </jf-tabs>
+</div>

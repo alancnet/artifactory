@@ -1,0 +1,206 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1 ng-if="LdapSettingForm.isNew">New LDAP Settings</h1>
+    <h1 ng-if="!LdapSettingForm.isNew">Edit LDAP Settings</h1>
+
+    <div class="content-wrapper">
+        <form name="LdapSettingForm.ldapEditForm" ng-submit="LdapSettingForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="LDAP Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enabled">
+                                    <input id="ldapEnabled"
+                                           type="checkbox"
+                                           ng-model="LdapSettingForm.ldap.enabled"
+                                           name="ldapEnabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field autofocus="true" validations="ldapSetting">
+                                    <label class="mandatory" for="settingsName">Settings Name</label>
+                                    <input id="settingsName"
+                                           name="settingsName"
+                                           type="text"
+                                           required
+                                           jf-validator-xml-name
+                                           jf-validator-unique-id
+                                           ng-model-options="{debounce: { 'default': 500 } }"
+                                           ng-disabled="!LdapSettingForm.isNew"
+                                           ng-model="LdapSettingForm.ldap.key"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSettings">
+                                    <label class="mandatory" for="ldapURL">LDAP URL</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.LDAPURL"></jf-help-tooltip>
+                                    <input jf-validator-ldap-url
+                                           ng-model-options="{debounce: { 'default': 500 } }"
+                                           id="ldapURL"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.ldapUrl"
+                                           name="ldapURL"
+                                           class="input-text"
+                                           placeholder="e.g. ldap://myserver:myport/dc=sampledomain,dc=com"
+                                           required>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Auto Create Artifactory Users">
+                                    <input id="autoCreateUser"
+                                           type="checkbox"
+                                           ng-model="LdapSettingForm.ldap.autoCreateUser"
+                                           name="autoCreateUser">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="LdapSettingForm.TOOLTIP.autoCreateArtifactoryUsers"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>User DN Pattern</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.userDNPattern"></jf-help-tooltip>
+                                    <input id="dnPattern"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.userDnPattern"
+                                           name="dnPattern"
+                                           class="input-text"
+                                            placeholder="e.g. uid={0},ou=People">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Email Attribute</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.emailAttribute"></jf-help-tooltip>
+                                    <input id="emailAttribute"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.emailAttribute"
+                                           name="emailAttribute"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Search Filter</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.searchFilter"></jf-help-tooltip>
+                                    <input id="searchFilter"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.search.searchFilter"
+                                           name="searchFilter"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Search Base</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.searchBase"></jf-help-tooltip>
+                                    <input id="searchBase"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.search.searchBase"
+                                           name="searchBase"
+                                           class="input-text"
+                                           placeholder="e.g. ou=internalUsers,ou=hq|ou=externalUsers">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Manager DN</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.manageDN"></jf-help-tooltip>
+                                    <input id="managerDn"
+                                           type="text"
+                                           ng-model="LdapSettingForm.ldap.search.managerDn"
+                                           name="managerDn"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                            <!-- prevent auto complete -->
+                            <input type="text" class="hidden"/>
+                            <input type="password" class="hidden"/>
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Manager Password</label>
+                                    <jf-help-tooltip html="LdapSettingForm.TOOLTIP.managerPassword"></jf-help-tooltip>
+                                    <input id="managerPassword"
+                                           type="password"
+                                           ng-model="LdapSettingForm.ldap.search.managerPassword"
+                                           name="managerPassword"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Sub-tree Search">
+                                    <input id="subTreeSearch"
+                                           type="checkbox"
+                                           ng-model="LdapSettingForm.ldap.search.searchSubTree"
+                                           name="subTreeSearch">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="LdapSettingForm.TOOLTIP.subTreeSearch"></jf-help-tooltip>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Test LDAP Connection">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Test User Name</label>
+                                    <input id="testUsername"
+                                           type="text"
+                                           ng-model="LdapSettingForm.testConnection.testUsername"
+                                           name="testUsername"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+
+                            <div class="form-group-cell">
+                                <jf-field validations="ldapSetting">
+                                    <label>Test Password</label>
+                                    <input id="testPassword"
+                                           type="password"
+                                           ng-model="LdapSettingForm.testConnection.testPassword"
+                                           name="testPassword"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <button class="btn btn-secondary"
+                                        type="button"
+                                        ng-disabled="LdapSettingForm.ldapEditForm.$invalid || !LdapSettingForm.testConnection.testUsername || !LdapSettingForm.testConnection.testPassword"
+                                        ng-click="LdapSettingForm.doTestConnection()">Test Connection
+                                </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" ng-click="LdapSettingForm.cancel()">Cancel</button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      ng-disabled="!LdapSettingForm.ldapEditForm.$valid">
+                      {{ LdapSettingForm.isNew && 'Create' || 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

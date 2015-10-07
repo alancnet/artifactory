@@ -1,0 +1,88 @@
+<div class="rpm">
+    <jf-panel jf-panel-heading="Package Info"
+              ng-if="jfRpm.rpmData.generalRpmMetadata">
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfRpm.rpmData.generalRpmMetadata">
+                <td>{{jfRpm.DICTIONARY[key]}}:</td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Miscellaneous"
+              ng-if="jfRpm.rpmData.miscRpmMetadata">
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfRpm.rpmData.miscRpmMetadata">
+                <td ng-if="key === 'url'">{{jfRpm.DICTIONARY[key]}}:</td>
+                <td ng-if="key === 'url'"><a ng-href="{{value}}" target="_blank">{{value}}</a></td>
+
+                <td ng-if="key !== 'url'">{{jfRpm.DICTIONARY[key]}}:</td>
+                <td ng-if="key !== 'url'">{{value}}</td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Description">
+        <div class="panel-body general-info" ng-if="jfRpm.rpmData.description">
+            <p class="preserve-lb">{{jfRpm.rpmData.description}}</p>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Provides"
+              ng-if="jfRpm.rpmData.provide.length">
+        <div class="grid-container clearfix">
+            <jf-grid-pagination grid-api="jfRpm.gridProvideOptions.api"></jf-grid-pagination>
+            <div ui-grid="jfRpm.gridProvideOptions"
+                 ui-grid-pagination
+                 class="grid"></div>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Requires"
+              ng-if="jfRpm.rpmData.require.length">
+        <div class="grid-container clearfix">
+            <jf-grid-pagination grid-api="jfRpm.gridRequireOptions.api"></jf-grid-pagination>
+            <div ui-grid="jfRpm.gridRequireOptions"
+                 ui-grid-pagination
+                 class="grid"></div>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Obsoletes"
+              ng-if="jfRpm.rpmData.obsolete.length">
+        <div class="grid-container clearfix">
+            <jf-grid-pagination grid-api="jfRpm.gridObsoleteOptions.api"></jf-grid-pagination>
+            <div ui-grid="jfRpm.gridObsoleteOptions"
+                 ui-grid-pagination
+                 class="grid"></div>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Conflicts"
+              ng-if="jfRpm.rpmData.conflict.length">
+        <div class="grid-container clearfix">
+            <jf-grid-pagination grid-api="jfRpm.gridConflictOptions.api"></jf-grid-pagination>
+            <div ui-grid="jfRpm.gridConflictOptions"
+                 ui-grid-pagination
+                 class="grid"></div>
+        </div>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Change Log"
+              jf-panel-classes="event-container changelogs"
+              ng-if="jfRpm.rpmData.changeLogs">
+        <div ng-repeat="item in jfRpm.rpmData.changeLogs track by $index"
+             class="padded-row-1x">
+
+            <jf-panel jf-panel-heading="{{item.date}}">
+                <!--<div class="pull-right">
+                            <a clip-copy="item.text"
+                               tooltip="Copy" class="copy-to-clip icon icon-copy-to-clipboard"></a>
+                        </div> -->
+                <div class="event-author">{{item.author}}</div>
+                <div class="preserve-lb">{{item.text}}</div>
+            </jf-panel>
+
+        </div>
+    </jf-panel>
+</div>

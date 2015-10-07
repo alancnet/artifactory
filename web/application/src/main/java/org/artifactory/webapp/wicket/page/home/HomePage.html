@@ -1,0 +1,62 @@
+<wicket:extend>
+    <div wicket:id="welcomeBorder" class="welcome-border">
+
+        <wicket:enclosure>
+            <div class="artifacts-count">
+                <span>Artifactory is happily serving</span>
+                <span class="value" wicket:id="artifactsCount"/>
+                <span>artifacts.</span>
+            </div>
+        </wicket:enclosure>
+        <div class="welcome-space"></div>
+        <wicket:enclosure child="logoutLink">
+            <div class="infoStatusLine aLoginName">
+                <div>
+                    <span class="icon"></span>
+                    <span>You are logged-in as</span>
+                    <a wicket:id="profileLink"/>
+                    (<a wicket:id="logoutLink"/>).
+
+                    <wicket:enclosure child="lastLogin">
+                        <div class="status-label">
+                            <span wicket:id="lastLogin"></span>
+                        </div>
+                    </wicket:enclosure>
+                </div>
+            </div>
+        </wicket:enclosure>
+
+        <wicket:enclosure child="loginLink">
+            <div class="notice">
+                You are currently not logged-in.<br/>
+                You may <a wicket:id="browseLink">browse</a> Artifactory anonymously.<br/>
+                Please <a wicket:id="loginLink">log in</a> for more options.
+            </div>
+        </wicket:enclosure>
+
+        <wicket:enclosure>
+            <div class="infoStatusLine aUptime">
+                <span class="icon"></span>
+                <span class="text">Uptime is </span><span class="text" wicket:id="uptime"/>.
+            </div>
+        </wicket:enclosure>
+
+        <span wicket:id="versioningInfo">
+            <div class="infoStatusLine aVersion">
+                <span class="icon"></span>
+                <span class="text">You are running Artifactory version <span class="value" wicket:id="currentLabel"/>
+                    <span wicket:id="latestLabel"/>
+                </span>
+            </div>
+            <div class="infoStatusLine aUptodateInfo">
+                <span class="icon"></span>
+                For up-to-date information, please visit the online <a wicket:id="wikiLink" target="_blank">
+                Artifactory User Guide</a>.
+            </div>
+        </span>
+
+        <div wicket:id="news"></div>
+    </div>
+
+    <div wicket:id="addonsInfoPanel"></div>
+</wicket:extend>

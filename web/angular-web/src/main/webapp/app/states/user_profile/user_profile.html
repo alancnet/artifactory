@@ -1,0 +1,191 @@
+<div class="content-layout-container">
+    <h1>User Profile: {{ UserProfile.currentUser.name}}</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <form name="UserProfile.unlockform" ng-submit="UserProfile.unlock()">
+                    <div class="form-group current-password">
+                        <div class="form-group-cell">
+                            <jf-field validations="users" autofocus="true">
+                                <label>Current Password</label>
+                                <input type="password"
+                                       class="input-text"
+                                       ng-model="UserProfile.currentPassword"
+                                       name="password"
+                                       required />
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell margin-top-25">
+                            <button
+                                type="submit"
+                                ng-disabled="UserProfile.unlockForm.$invalid"
+                                class="btn btn-primary">
+                                Unlock
+                            </button>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">Insert the password and press the Unlock button to edit the
+                        profile.
+                    </div>
+                </form>
+                <jf-panel jf-panel-heading="Personal Settings">
+                    <div ng-class="{disabled: UserProfile.profileLocked}">
+                        <form name="UserProfile.userForm" ng-submit="UserProfile.save()">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field>
+                                        <label>API Key</label>
+                                        <input type="password"
+                                               class="input-text"
+                                               ng-model="UserProfile.userInfo.user.password"
+                                               ng-class="{'not-disabled-style': !UserProfile.profileLocked}"
+                                               disabled
+                                               id="password"
+                                               name="password"
+                                                />
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell auto-width form-button form-link">
+                                    <span jf-reveal-input="password"></span>
+                                </div>
+                                <div class="form-group-cell auto-width form-button form-link">
+                                    <jf-clip-copy text-to-copy="UserProfile.userInfo.user.password"
+                                                  object-name="Key"></jf-clip-copy>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="UserProfile.userInfo.user.profileUpdatable">
+                                <div class="form-group-cell">
+                                    <jf-field>
+                                        <label>New Password</label>
+                                        <input type="password"
+                                               class="input-text"
+                                               ng-model="UserProfile.userInfo.user.newPassword"
+                                               ng-disabled="UserProfile.profileLocked"
+                                               name="newPassword"
+                                                />
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell margin-top-25">
+                                    <div>Password Strength</div>
+                                    <div ng-password-strength="UserProfile.userInfo.user.newPassword" strength="passStrength" mode="bootstrap"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="UserProfile.userInfo.user.profileUpdatable">
+                                <div class="form-group-cell">
+                                    <jf-field validations="users">
+                                        <label>Retype Password</label>
+                                        <input type="password"
+                                               class="input-text"
+                                               ui-validate="'$value==UserProfile.userInfo.user.newPassword'"
+                                               ui-validate-watch="'UserProfile.userInfo.user.newPassword'"
+                                               ng-model="UserProfile.userInfo.user.retypePassword"
+                                               ng-disabled="UserProfile.profileLocked"
+                                               name="retypePassword"
+                                                />
+                                    </jf-field>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="UserProfile.userInfo.user.profileUpdatable">
+                                <div class="form-group-cell">
+                                    <jf-field validations="users">
+                                        <label class="mandatory">Email Address</label>
+                                        <input type="email"
+                                               class="input-text"
+                                               ng-model="UserProfile.userInfo.user.email"
+                                               ng-disabled="UserProfile.profileLocked"
+                                               name="email"
+                                               required/>
+                                    </jf-field>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </jf-panel>
+
+                <jf-panel jf-panel-heading="Bintray Settings">
+                    <div ng-class="{disabled: UserProfile.profileLocked}">
+                        <form name="UserProfile.bintrayForm" ng-submit="UserProfile.testBintray()">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="bintray" always-show-errors="true">
+                                        <label>Bintray Username</label>
+                                        <input type="text"
+                                               class="input-text"
+                                               ng-model="UserProfile.userInfo.bintray.userName"
+                                               ng-disabled="UserProfile.profileLocked || !UserProfile.userInfo.user.profileUpdatable"
+                                               ng-required="UserProfile.userInfo.bintray.apiKey"
+                                               name="userName"
+                                                />
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <!-- prevent auto complete -->
+                            <input type="text" class="hidden"/>
+                            <input type="password" class="hidden"/>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="bintray" always-show-errors="true">
+                                        <label>Bintray API Key</label>
+                                        <input type="password"
+                                               id="apiKey"
+                                               class="input-text"
+                                               ng-model="UserProfile.userInfo.bintray.apiKey"
+                                               ng-disabled="UserProfile.profileLocked || !UserProfile.userInfo.user.profileUpdatable"
+                                               ng-required="UserProfile.userInfo.bintray.userName"
+                                               name="apiKey"
+                                                />
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell auto-width form-button form-link">
+                                  <span jf-reveal-input="apiKey"></span>
+                                </div>
+                                <div class="form-group-cell auto-width form-button form-link">
+                                    <jf-clip-copy text-to-copy="UserProfile.userInfo.bintray.apiKey"
+                                                  object-name="Key"></jf-clip-copy>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="!UserProfile.userInfo.bintray.userName">
+                                <div class="form-group-cell">
+                                    <a href="https://bintray.com/?source=artifactory:356d529ef09f486b75e16e0237a7c4336cecfe0d2" target="_blank">Register to Bintray...</a>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="UserProfile.userInfo.user.profileUpdatable">
+                                <div class="form-group-cell margin-top-25">
+                                    <button type="submit" class="btn btn-primary"
+                                            ng-disabled="UserProfile.profileLocked || UserProfile.bintrayForm.$invalid">Test
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </jf-panel>
+                <div ng-if="UserProfile.oauthProviderLink">
+                    <a ui-sref="login_request" ng-if="!UserProfile.profileLocked">OAuth2 Login</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="pull-right admin-actions">
+                <button type="button"
+                        class="btn btn-default"
+                        ui-sref="home">Cancel
+                </button>
+                <button type="button"
+                        class="btn btn-primary"
+                        ng-disabled="(!UserProfile.userForm.$valid && UserProfile.currentUser.name !== 'admin') || !UserProfile.bintrayForm.$valid"
+                        ng-click="UserProfile.save()"
+                        ng-if="UserProfile.userInfo.user.profileUpdatable">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,174 @@
+<div class="content-layout-container">
+    <h1>System Import & Export</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <form class="form" name="SystemController.exportForm" novalidate>
+                <jf-panel jf-panel-heading="Export System">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="common" autofocus="true">
+                                <label for="export-path">Export Path on Server*</label>
+                                <input type="text"
+                                       class="input-text"
+                                       required
+                                       id="export-path"
+                                       name="path"
+                                       ng-model="SystemController.exportOptions.path"
+                                       ng-focus="SystemController.clearValidations()"/>
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell form-button">
+                            <jf-browse-files browser-resource="SystemController.browseFilesDao"
+                                             browser-update-folder="SystemController.updateExportFolderPath(directory)"
+                                             start-folder="SystemController.exportOptions.path"
+                                             browser-options="SystemController.exportFileBrowserOptions">
+                            </jf-browse-files>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Content">
+                                <input type="checkbox"
+                                       id="exportExcludeContent"
+                                       ng-model="SystemController.exportOptions.excludeContent"
+                                       name="excludeContent">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Metadata">
+                                <input type="checkbox"
+                                       id="exportExcludeMetadata"
+                                       ng-model="SystemController.exportOptions.excludeMetadata"
+                                       name="excludeMetadata">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Builds">
+                                <input type="checkbox"
+                                       id="exportExcludeBuilds"
+                                       ng-model="SystemController.exportOptions.excludeBuilds"
+                                       name="createZipArchive">
+                            </jf-checkbox>
+
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Create .m2 Compatible Export">
+                                <input type="checkbox"
+                                       id="exportCreateM2CompatibleExport"
+                                       ng-model="SystemController.exportOptions.m2"
+                                       name="createM2CompatibleExport">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="SystemController.TOOLTIP.createM2CompatibleExport"></jf-help-tooltip>
+
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Create a Zip Archive (Slow and CPU Intensive!)">
+                                <input
+                                        type="checkbox"
+                                        id="exportCreateZipArchive"
+                                        ng-model="SystemController.exportOptions.createArchive">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Output Verbose Log">
+                                <input
+                                        type="checkbox"
+                                        id="exportOutputVerboseLog"
+                                        ng-model="SystemController.exportOptions.verbose"
+                                        name="outputVerboseLog">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="SystemController.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+
+                        </div>
+                    </div>
+
+                    <div class="pull-right admin-actions">
+                        <button class="btn btn-primary" type="button"
+                                ng-disabled="!SystemController.exportOptions.path"
+                                ng-click="SystemController.export(exportForm)">
+                            Export
+                        </button>
+                    </div>
+                </jf-panel>
+            </form>
+
+            <form class="form margin-top-20" name="SystemController.importForm" novalidate>
+                <jf-panel jf-panel-heading="Import System">
+                    <div class="alert alert-warning">
+                        This action will wipe all Artifactory content - make sure to back up before completing this action!
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="common">
+                                <label for="import-path">Import Zip or Path on Server*</label>
+                                <input type="text"
+                                       class="input-text"
+                                       required
+                                       id="import-path"
+                                       name="path"
+                                       ng-model="SystemController.importOptions.path"
+                                       ng-focus="SystemController.clearValidations()"/>
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell form-button">
+                            <jf-browse-files browser-resource="SystemController.browseFilesDao"
+                                             browser-update-folder="SystemController.updateImportFolderPath(directory)"
+                                             start-folder="SystemController.importOptions.path"
+                                             browser-options="SystemController.importFileBrowserOptions">
+                            </jf-browse-files>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Content">
+                                <input
+                                        type="checkbox"
+                                        id="importExcludeContent"
+                                        ng-model="SystemController.importOptions.excludeContent">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Metadata">
+                                <input
+                                        type="checkbox"
+                                        id="importExcludeMetadata"
+                                        ng-model="SystemController.importOptions.excludeMetadata">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Output Verbose Log">
+                                <input
+                                        type="checkbox"
+                                        id="importOutputVerboseLog"
+                                        ng-model="SystemController.importOptions.verbose">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="SystemController.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+                        </div>
+                    </div>
+                    <div class="pull-right admin-actions">
+                        <button class="btn btn-primary" type="button"
+                                ng-disabled="!SystemController.importOptions.path"
+                                ng-click="SystemController.import(importForm)">
+                            Import
+                        </button>
+                    </div>
+                </jf-panel>
+            </form>
+        </div>
+    </div>
+</div>

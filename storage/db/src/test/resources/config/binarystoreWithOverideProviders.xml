@@ -1,0 +1,12 @@
+<config version="2">
+    <chain template="double"/>
+    <provider id="dynamic1" type="dynamic">
+        <dir>test1</dir>
+        <period>1</period>
+    </provider>
+
+    <provider id="dynamic2" type="dynamic">
+        <dir>test2</dir>
+        <period>2</period>
+    </provider>
+</config>

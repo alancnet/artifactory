@@ -1,0 +1,18 @@
+<wicket:panel>
+    <div class="field">
+        <label>Select A Build To Compare Against:</label>
+        <select wicket:id="buildToCompareAgainst"/>
+        <span wicket:id="buildToCompareAgainst.help"></span>
+
+        <input wicket:id="excludeInternalDependencies" type="checkbox" class="text"/>
+        <span wicket:id="excludeInternalDependencies.help"></span>
+    </div>
+
+    <div wicket:id="artifactsDiffPanel"></div>
+    <br/>
+
+    <div wicket:id="dependenciesDiffPanel"></div>
+    <br/>
+
+    <div wicket:id="envDiffPanel"></div>
+</wicket:panel>

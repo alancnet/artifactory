@@ -1,0 +1,39 @@
+<wicket:head>
+    <style type="text/css">
+        .groupIdField input, .artifactIdField input {
+            width: 200px;
+        }
+    </style>
+</wicket:head>
+<wicket:extend>
+    <div class="field">
+        <label>Path</label>
+        <span wicket:id="path.help"></span>
+        <span class="value">
+            <input wicket:id="path" name="search" class="text expandingTextField" align="right"
+                   value="*" type="text" style="width: 40px;" onfocus="this.style.width='160px';" onblur="this.style.width='40px'"/>
+        </span>
+
+        <label>Name</label>
+        <span wicket:id="name.help"></span>
+
+        <span class="value">
+            <input wicket:id="name" name="search" class="text" type="text" align="right"/>
+        </span>
+    </div>
+
+    <div class="field field-sep search-box-checkbox">
+        <input wicket:id="searchClassResourcesOnly" type="checkbox"/>
+        <span wicket:id="searchClassResourcesOnly.help"></span>
+
+        <input wicket:id="excludeInnerClasses" type="checkbox"/>
+        <span wicket:id="excludeInnerClassesHelp"></span>
+    </div>
+
+    <div wicket:id="advancedPanel"></div>
+
+    <div class="field-sep search-button">
+        <button wicket:id="submit" type="submit"></button>
+    </div>
+
+</wicket:extend>

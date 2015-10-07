@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        ${maven.repo}
+        ${ivy.repo}
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:+"
+    }
+}
+
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = '${libs.publisher.repoKey}'
+            ${publish.creds}maven = ${libs.publisher.maven}
+            ${ivy.publisher}
+        }
+    }
+    resolve {
+        repository {
+            repoKey = '${libs.resolver.repoKey}'
+            ${resolve.creds}maven = ${libs.resolver.maven}
+            ${ivy.resolver}
+        }
+    }
+}

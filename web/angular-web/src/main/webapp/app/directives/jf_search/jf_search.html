@@ -1,0 +1,12 @@
+<div>
+    <ul class="quick-search-tabs">
+        <li class="quick-search-tab search-title">
+            Search type:
+        </li>
+        <li class="quick-search-tab"
+            ng-repeat="tab in jfSearch.searchTabs"
+            ng-class="{active:jfSearch.isActiveTab(tab.key)}"
+            jf-disable-feature="{{ tab.feature }}"
+            ng-click="jfSearch.onClick(tab)"><a href="">{{tab.value}}</a></li>
+    </ul>
+</div>

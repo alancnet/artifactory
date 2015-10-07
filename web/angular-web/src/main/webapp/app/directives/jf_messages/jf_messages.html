@@ -1,0 +1,19 @@
+<div class="constant-messages-container" ng-if="jfMessages.getConstantMessages().length || jfMessages.getSystemMessage()">
+    <div class="constant-message system"
+         ng-if="jfMessages.systemMessage">
+        <div class="message-container">
+            <div class="message-title"
+                 ng-style="{color: jfMessages.systemMessage.color}"
+                 ng-bind-html="jfMessages.systemMessage.title + ': '"></div>
+            <div class="message-text">
+                <span ng-bind-html="jfMessages.systemMessage.message | parseLinks"></span>
+            </div>
+        </div>
+    </div>
+    <div class="constant-message default"
+         ng-class="{error: message.type==='error',warning: message.type==='warning',info: message.type==='info'}"
+         ng-repeat="message in jfMessages.getConstantMessages()">
+
+        <span ng-bind-html="message.message"></span>
+    </div>
+</div>

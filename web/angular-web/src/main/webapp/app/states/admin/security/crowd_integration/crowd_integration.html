@@ -1,0 +1,160 @@
+<div class="content-layout-container">
+    <h1>Crowd Configuration</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <form class="form" name="crowdForm" novalidate>
+                    <jf-panel jf-panel-heading="Crowd Server Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable Atlassian Crowd Integration">
+                                    <input type="checkbox"
+                                           id="enabled"
+                                           ng-model="Crowd.crowd.enableIntegration"
+                                           ng-change="Crowd.loadFromServer(true)">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="crowd" autofocus="true">
+                                    <label for="serverUrl" class="mandatory">Crowd Server URL</label>
+                                    <input type="url"
+                                           class="input-text"
+                                           id="serverUrl"
+                                           name="serverUrl"
+                                           required
+                                           ng-model="Crowd.crowd.serverUrl"
+                                           ng-disabled="!Crowd.crowd.enableIntegration"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="crowd">
+                                    <label for="applicationName" class="mandatory">Crowd Application Name</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="applicationName"
+                                           name="applicationName"
+                                           required
+                                           ng-model="Crowd.crowd.applicationName"
+                                           ng-disabled="!Crowd.crowd.enableIntegration"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="crowd">
+                                    <label for="password" class="mandatory">Crowd Application Password</label>
+                                    <input type="password"
+                                           class="input-text"
+                                           id="password"
+                                           name="password"
+                                           required
+                                           ng-model="Crowd.crowd.password"
+                                           ng-disabled="!Crowd.crowd.enableIntegration"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="crowd">
+                                    <label for="sessionValidationInterval" class="mandatory">Session Validation Interval (Minutes)</label>
+                                    <jf-help-tooltip html="Crowd.TOOLTIP.sessionValidationInterval"></jf-help-tooltip>
+                                    <input type="number"
+                                           min="0"
+                                           max="9999999999999"
+                                           class="input-text"
+                                           id="sessionValidationInterval"
+                                           name="sessionValidationInterval"
+                                           required
+                                           ng-model="Crowd.crowd.sessionValidationInterval"
+                                           ng-disabled="!Crowd.crowd.enableIntegration"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Use JIRA User Server">
+                                    <input
+                                            type="checkbox"
+                                            id="directAuthentication"
+                                            ng-model="Crowd.crowd.directAuthentication"
+                                            ng-disabled="!Crowd.crowd.enableIntegration">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="Crowd.TOOLTIP.useJIRAUserServer"></jf-help-tooltip>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Use Default Proxy Configuration">
+                                    <input
+                                            type="checkbox"
+                                            id="useDefaultProxy"
+                                            ng-model="Crowd.crowd.useDefaultProxy"
+                                            ng-disabled="!Crowd.crowd.enableIntegration">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="Crowd.TOOLTIP.useDefaultProxyConfiguration"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Auto Create Artifactory Users">
+                                    <input type="checkbox"
+                                           id="noAutoUserCreation"
+                                           ng-model="Crowd.crowd.noAutoUserCreation"
+                                           ng-disabled="!Crowd.crowd.enableIntegration">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="Crowd.TOOLTIP.autoCreateArtifactoryUsers"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-secondary"
+                                    type="button"
+                                    ng-click="Crowd.testCrowd()"
+                                    ng-disabled="!Crowd.crowd.enableIntegration || crowdForm.$invalid">
+                                Test
+                            </button>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Synchronize Crowd Groups">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <input type="text"
+                                       class="input-text"
+                                       jf-validator-max-text-length="1024"
+                                       name="usernameFilter"
+                                       ng-model="Crowd.usernameFilter"
+                                       placeholder="Search Group by Username (leave blank for *)"/>
+                            </div>
+                            <div class="form-group-cell form-link">
+                                <a href="" class="form-search"
+                                   ng-click="Crowd.getCrowdGroups()">
+                                    <i class="icon icon-search-specific"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <jf-grid grid-options="Crowd.crowdGroupsOptions"
+                                 filter-field="groupName"
+                                 filter-on-change="true"
+                                 object-name="Group">
+                        </jf-grid>
+                    </jf-panel>
+                </form>
+            </div>
+        </div>
+        <div class="content-footer">
+            <div class="pull-right">
+                <button class="btn btn-default"
+                        type="button"
+                        ng-click="Crowd.initCrowd()">Reset
+                </button>
+                <button class="btn btn-primary"
+                        type="button"
+                        ng-click="Crowd.saveCrowd()"
+                        ng-disabled="crowdForm.$invalid">
+                    Save
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{
+    "name":"moo :: moo",
+    "type":"GRADLE",
+    "number":15,
+    "version":"1.7.0",
+    "started":"2009-11-25T10:25:16.381+0200",
+    "agent":{
+        "name":"pop",
+        "version":"1.6"
+    },
+    "buildAgent":{
+        "name":"pop",
+        "version":"1.6"
+    },
+    "durationMillis":6,
+    "principal":"bob",
+    "artifactoryPrincipal":"too",
+    "url":"mitz",
+    "parentBuildId":"pooh",
+    "modules":[
+        {
+            "id":"moo",
+            "artifacts":[
+                {
+                    "name":"blob",
+                    "type":"glob",
+                    "sha1":"shlob",
+                    "md5":"mob",
+                    "properties":{
+                    }
+                }
+            ],
+            "dependencies":[
+                {
+                    "id":"moo",
+                    "scopes":[ "mitzi" ],
+                    "requiredBy":[ "pitzi" ],
+                    "type":"bob",
+                    "sha1":"pop",
+                    "md5":"shmop",
+                    "properties":{
+                    }
+                }
+            ],
+            "properties":{
+            }
+        }
+    ],
+    "properties":{
+        "goo":"koo"
+    }
+}

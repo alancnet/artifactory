@@ -1,0 +1,107 @@
+<div class="content-layout-container">
+    <h1>Black Duck Configuration</h1>
+
+    <div class="content-wrapper">
+        <form class="form" ng-submit="BlackDuck.save(BlackDuck.blackDuck)"
+              name="formBlackDuck" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Black Duck Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enable Black Duck Code Center Integration">
+                                    <input type="checkbox"
+                                           id="enabled"
+                                           ng-model="BlackDuck.blackDuck.enableIntegration">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="blackDuck" autofocus="true">
+                                    <label for="host" class="mandatory">Server URI</label>
+                                    <input type="url"
+                                           required
+                                           class="input-text"
+                                           name="host"
+                                           id="host"
+                                           ng-disabled="!BlackDuck.blackDuck.enableIntegration"
+                                           ng-model="BlackDuck.blackDuck.serverUri">
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="blackDuck">
+                                    <label for="username" class="mandatory">User Name</label>
+                                    <input type="text"
+                                           class="input-text"
+                                           id="username"
+                                           name="username"
+                                           required
+                                           ng-disabled="!BlackDuck.blackDuck.enableIntegration"
+                                           ng-model="BlackDuck.blackDuck.username">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <!-- prevent auto complete -->
+                        <input type="text" class="hidden"/>
+                        <input type="password" class="hidden"/>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="blackDuck">
+                                    <label for="pwd" class="mandatory">Password</label>
+                                    <input type="password"
+                                           class="input-text"
+                                           id="pwd"
+                                           name="pwd"
+                                           required
+                                           ng-disabled="!BlackDuck.blackDuck.enableIntegration"
+                                           ng-model="BlackDuck.blackDuck.password">
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="blackDuck">
+                                    <label for="connectionTimeoutMillis" class="mandatory">Connection Timeout</label>
+                                    <jf-help-tooltip html="BlackDuck.TOOLTIP.connectionTimeout"></jf-help-tooltip>
+                                    <input type="number"
+                                           min="0"
+                                           required
+                                           class="input-text"
+                                           id="connectionTimeoutMillis"
+                                           name="connectionTimeoutMillis"
+                                           ng-disabled="!BlackDuck.blackDuck.enableIntegration"
+                                           ng-model="BlackDuck.blackDuck.connectionTimeoutMillis">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="blackDuck">
+                                    <label>Proxies</label>
+                                    <jf-ui-select jf-select-model="BlackDuck.blackDuck.proxyRef"
+                                                  jf-select-options="BlackDuck.proxies"
+                                                  jf-select-display-attr="key"
+                                                  jf-select-disabled="!BlackDuck.blackDuck.enableIntegration"></jf-ui-select>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-primary" type="button"
+                                    ng-disabled="!formBlackDuck.$valid || !BlackDuck.blackDuck.enableIntegration"
+                                    ng-click="BlackDuck.testBlackDuck(BlackDuck.blackDuck)">Test
+                            </button>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ng-click="BlackDuck.reset()">Reset</button>
+                    <button class="btn btn-primary" type="submit"
+                            ng-disabled="!formBlackDuck.$valid">Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

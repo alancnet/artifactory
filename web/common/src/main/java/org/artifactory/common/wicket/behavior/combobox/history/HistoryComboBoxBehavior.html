@@ -1,0 +1,8 @@
+<span id="${component.markupId}-widget">
+<wicket:body/>
+<script type="text/javascript">
+    DomUtils.addOnRender(function() {
+        DojoUtils.instantiate('${component.markupId}');
+    });
+</script>
+</span>

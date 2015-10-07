@@ -1,0 +1,14 @@
+[
+    {
+        "name": "package1",
+        "linked": true
+    },
+    {
+        "name": "package2",
+        "linked": false
+    },
+    {
+        "name": "package3",
+        "linked": false
+    }
+]

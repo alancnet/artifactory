@@ -1,0 +1,40 @@
+<div class="builds-diff">
+    <div class="form-group">
+        <div class="form-group-cell">
+            <label>Select A Build To Compare Against:</label>
+            <ui-select ng-model="jfDiff.selectedBuildNumber"
+                       ng-change="jfDiff.getDiffData()">
+                <ui-select-match>
+                    {{$select.selected.buildNumber}}
+                </ui-select-match>
+                <ui-select-choices repeat="data in jfDiff.comparableBuildNumbers">
+                    <div ng-bind-html="data.buildNumber | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group-cell">
+            <jf-checkbox text="Exclude Internal Dependencies">
+                <input id="excludeInternalDeps"
+                       type="checkbox"
+                       ng-model="jfDiff.excludeInternalDeps"
+                       name="excludeInternalDeps">
+            </jf-checkbox>
+        </div>
+    </div>
+
+    <div ng-if="jfDiff.selectedBuildNumber">
+        <jf-panel jf-panel-heading="Artifacts ({{jfDiff.artifactsLength}} Results)">
+            <jf-grid grid-options="jfDiff.artifactsGridOptions" filter-field="name" no-count></jf-grid>
+        </jf-panel>
+
+        <jf-panel jf-panel-heading="Dependencies ({{jfDiff.dependenciesLength}} Results)">
+            <jf-grid grid-options="jfDiff.dependenciesGridOptions" filter-field="name" no-count></jf-grid>
+        </jf-panel>
+
+        <jf-panel jf-panel-heading="Environment Variables ({{jfDiff.variablesLength}} Results)">
+            <jf-grid grid-options="jfDiff.envVarsGridOptions" filter-field="key" no-count></jf-grid>
+        </jf-panel>
+    </div>
+</div>

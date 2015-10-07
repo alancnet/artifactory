@@ -1,0 +1,5 @@
+ivy {
+${gradle.build.4tabs}ivyLayout = '${libs.publisher.ivy.pattern}'
+${gradle.build.4tabs}artifactLayout = '${libs.publisher.artifact.pattern}'
+${gradle.build.4tabs}mavenCompatible = ${libs.publisher.maven.compatible}
+${gradle.build.3tabs}}

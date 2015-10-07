@@ -1,0 +1,7 @@
+<Context path="/artifactory" docBase="${artifactory.home}/webapps/artifactory.war">
+    <Manager pathname=""/>
+    <!--  disable TLD scanning -->
+    <JarScanner>
+        <JarScanFilter defaultTldScan="false"/>
+    </JarScanner>
+</Context>

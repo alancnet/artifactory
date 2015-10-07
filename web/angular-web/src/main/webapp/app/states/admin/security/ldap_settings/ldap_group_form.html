@@ -1,0 +1,159 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1>{{ LdapGroupForm.isNew && 'New' || 'Edit' }} LDAP Group Setting</h1>
+
+    <div class="content-wrapper">
+        <form name="LdapGroupForm.ldapGroupsEditForm">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="LDAP Group Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field autofocus="true" validations="common">
+                                    <label class="mandatory" for="settingsName">Settings Name</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.settingsName"></jf-help-tooltip>
+                                    <input id="settingsName"
+                                           ng-disabled="!LdapGroupForm.isNew"
+                                           type="text"
+                                           ng-model="LdapGroupForm.ldapGroup.name"
+                                           name="settingsName"
+                                           class="input-text"
+                                           required>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label>LDAP Setting</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.LDAPSetting"></jf-help-tooltip>
+                                    <selectize ng-if="LdapGroupForm.selectizeConfig"
+                                               config='LdapGroupForm.selectizeConfig'
+                                               options='LdapGroupForm.selectizeOptions'
+                                               ng-model='LdapGroupForm.ldapGroup.enabledLdap'>
+                                    </selectize>
+                                </jf-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <jf-switch
+                                    jf-switch-title="Mapping Strategy:"
+                                    ng-model="LdapGroupForm.ldapGroup.strategy"
+                                    ng-change="LdapGroupForm.onStrategyChange()"
+                                    options="LdapGroupForm.strategyOptions">
+                            </jf-switch>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label class="mandatory" for="groupMemberAttribute">{{LdapGroupForm.labels.groupKeyMember}}</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.groupMemberAttribute"></jf-help-tooltip>
+                                    <input id="groupMemberAttribute"
+                                           type="text"
+                                           ng-model="LdapGroupForm.ldapGroup.groupMemberAttribute"
+                                           name="groupMemberAttribute"
+                                           class="input-text"
+                                           required>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label class="mandatory" for="groupNameAttribute">Group Name Attribute</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.groupNameAttribute"></jf-help-tooltip>
+                                    <input id="groupNameAttribute"
+                                           type="text"
+                                           ng-model="LdapGroupForm.ldapGroup.groupNameAttribute"
+                                           name="groupNameAttribute"
+                                           class="input-text"
+                                           required>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label class="mandatory" for="descriptionAttribute">Description Attribute</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.descriptionAttribute"></jf-help-tooltip>
+                                    <input id="descriptionAttribute"
+                                           type="text"
+                                           ng-model="LdapGroupForm.ldapGroup.descriptionAttribute"
+                                           name="descriptionAttribute"
+                                           class="input-text"
+                                           required>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label class="mandatory" for="filter">Filter</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.filter"></jf-help-tooltip>
+                                    <input type="text"
+                                           id="filter"
+                                           name="filter"
+                                           class="input-text"
+                                           ng-model='LdapGroupForm.ldapGroup.filter' required>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label for="searchBase">Search Base</label>
+                                    <jf-help-tooltip html="LdapGroupForm.TOOLTIP.searchBase"></jf-help-tooltip>
+                                    <input id="searchBase"
+                                           type="text"
+                                           ng-model="LdapGroupForm.ldapGroup.groupBaseDn"
+                                           ng-disabled="LdapGroupForm.ldapGroup.strategy == 'HIERARCHICAL'"
+                                           name="searchBase"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell form-button"
+                                 ng-if="LdapGroupForm.ldapGroup.strategy != 'HIERARCHICAL'">
+                                <jf-checkbox text="Sub-tree Search">
+                                    <input id="subTreeSearch"
+                                           type="checkbox"
+                                           ng-model="LdapGroupForm.ldapGroup.subTree"
+                                           name="subTreeSearch">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Synchronize LDAP Groups">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <input id="usernameFilter"
+                                       type="text"
+                                       ng-model="LdapGroupForm.ldapGroup.usernameFilter"
+                                       name="usernameFilter"
+                                       class="input-text"
+                                       placeholder="Search Group by Username (leave blank for *)" />
+                                </div>
+                            <div class="form-group-cell form-link">
+                                <a href="" class="form-search"
+                                   ng-click="LdapGroupForm.refreshSyncGroups(LdapGroupForm.ldapGroup.usernameFilter)">
+                                    <i class="icon icon-search-specific"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                            <jf-grid grid-options="LdapGroupForm.syncGroupsGridOptions"
+                                     filter-field="groupName"
+                                     filter-on-change="true">
+                            </jf-grid>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" ng-click="LdapGroupForm.cancel()">Cancel</button>
+                    <button type="button"
+                            ng-click="LdapGroupForm.save()"
+                            class="btn btn-primary"
+                            ng-disabled="LdapGroupForm.ldapGroupsEditForm.$invalid">{{ LdapGroupForm.isNew && 'Create'
+                        || 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

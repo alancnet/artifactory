@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="PropertyForm.cancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" class="panel-heading">{{ PropertyForm.isNew && 'New' || 'Edit'}} Property</h4>
+</div>
+<form name="propertyForm" ng-submit="PropertyForm.save()">
+    <div class="modal-body clearfix">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="propertySet" autofocus="PropertyForm.isNew">
+                    <label for="propertyName" class="mandatory">Property Name</label>
+                    <input class="input-text"
+                           type="text"
+                           required
+                           jf-validator-name
+                           jf-validator-xml-name
+                           ng-model-options="{updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                           ui-validate="{unique:'PropertyForm.isPropertyUnique($value)'}"
+                           id="propertyName"
+                           name="name"
+                           ng-model="PropertyForm.property.name">
+                </jf-field>
+            </div>
+        </div>
+        <jf-switch
+                jf-switch-title="Type:"
+                ng-model="PropertyForm.property.propertyType"
+                options="PropertyForm.propertyTypes"
+                name="propertyType"
+                ng-change="PropertyForm.invalidateType()"
+                ui-validate="{
+				defaultValues: 'PropertyForm.isDefaultValuesValid($value)'
+			}"
+                ui-validate-watch="'PropertyForm.propertyTypeWatch'"
+                ></jf-switch>
+        </jf-field>
+
+
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="properties" autofocus="!PropertyForm.isNew">
+                    <input
+                            type="text"
+                            class="input-text"
+                            ng-model="PropertyForm.newValue"
+                            placeholder="New Value (enter to add)"
+                            id="newPredefinedValueName"
+                            name="newPredefinedValueName"
+                            ng-model-options="{updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                            jf-validator-name
+                            ui-validate="{predefinedValues: 'PropertyForm.isPredefinedValuesValid()'}"
+                            ui-validate-watch="'PropertyForm.propertyTypeWatch'"
+                            jf-enter-press="PropertyForm.addValue()"
+                            ng-blur="PropertyForm.errorMessage = null"
+                            ng-change="PropertyForm.errorMessage = null">
+                </jf-field>
+            </div>
+            <div class="form-group-cell auto-width">
+                <button type="button" class="btn btn-secondary" ng-click="PropertyForm.addValue()">Add</button>
+            </div>
+            <div class="jf-validation" ng-if="propertyForm.propertyType.$error.defaultValues">
+                Cannot select multiple default values for the selected type
+            </div>
+            <div class="jf-validation">{{PropertyForm.errorMessage}}</div>
+        </div>
+
+        <div id="property-set-list" ng-if="PropertyForm.property.predefinedValues.length">
+            <div class="property-set-row" ng-repeat="value in PropertyForm.property.predefinedValues">
+                <div>{{value.value}}</div>
+                <div>
+                    <a href="" class="icon icon-clear" ng-click="PropertyForm.removeValue(value)"></a>
+                    <jf-checkbox text="Default">
+                        <input id="default_{{$index}}"
+                               type="checkbox"
+                               value="default"
+                               ng-change="PropertyForm.invalidateType()"
+                               ng-model="value.defaultValue"/>
+                    </jf-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" jf-clear-errors ng-click="PropertyForm.cancel()">Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="!propertyForm.$valid">Save</button>
+    </div>
+</form>

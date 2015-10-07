@@ -1,0 +1,59 @@
+<wicket:extend>
+    <div wicket:id="generalBorder">
+        <form wicket:id="form">
+            <div class="field">
+                <div class="value security-general">
+                    <input wicket:id="anonAccessEnabled" type="checkbox" class="text"/>
+                    <span wicket:id="anonAccessEnabled.help"/>
+                    <span style="margin-left: 85px;">
+                        <input wicket:id="anonAccessToBuildInfosDisabled" type="checkbox" class="text"/>
+                        <span wicket:id="anonAccessToBuildInfosDisabled.help"/>
+                    </span>
+                </div>
+            </div>
+            <div class="field field-sep">
+                <div class="value security-general">
+                    <input wicket:id="hideUnauthorizedResources" type="checkbox" class="text"/>
+                    <span wicket:id="hideUnauthorizedResources.help"/>
+                </div>
+            </div>
+            <div class="field field-sep">
+                <label>Password Encryption Policy</label>
+                <span wicket:id="passwordSettings.encryptionPolicy.help"/>
+
+                <span class="value">
+                    <select wicket:id="passwordSettings.encryptionPolicy"/>
+                </span>
+            </div>
+        </form>
+    </div>
+
+    <div wicket:id="encryptBorder">
+        <div class="field-row">
+            <p class="info-bold">
+                <span wicket:id="encryptLabel"/>
+            </p>
+        </div>
+        <div class="buttons">
+            <button wicket:id="encrypt"></button>
+            <span wicket:id="encryptHelp"></span>
+        </div>
+    </div>
+
+    <div wicket:id="decryptBorder">
+        <div class="field-row">
+            <p class="approved">
+                <span wicket:id="decryptLabel"/>
+            </p>
+        </div>
+        <div class="buttons">
+            <button wicket:id="decrypt"></button>
+            <span wicket:id="decryptHelp"></span>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="default-button" wicket:id="saveButton"></button>
+        <button wicket:id="cancel"></button>
+    </div>
+</wicket:extend>

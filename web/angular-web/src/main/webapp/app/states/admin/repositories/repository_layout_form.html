@@ -1,0 +1,206 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1>{{RepositoryLayoutForm.title}}</h1>
+
+    <div class="content-wrapper">
+        <form name="RepositoryLayoutForm.layoutForm" ng-submit="RepositoryLayoutForm.save()" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <div class="repo-layout-form"
+                         ng-if="(RepositoryLayoutForm.mode==='edit' && RepositoryLayoutForm.layoutData) || RepositoryLayoutForm.mode==='create'">
+
+                        <jf-panel jf-panel-heading="Repository Layout Settings">
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-field validations="common">
+                                        <label for="layoutName" class="mandatory">Layout Name</label>
+                                        <input name="layoutName"
+                                               jf-validator-name
+                                               jf-validator-unique-id
+                                               jf-validator-xml-name
+                                               type="text"
+                                               ng-model-options="{debounce: { 'default': 500 } }"
+                                               ng-model="RepositoryLayoutForm.layoutData.name"
+                                               class="input-text"
+                                               ng-disabled="RepositoryLayoutForm.mode!=='create'"
+                                               id="layoutName" required>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-field validations="repoLayouts">
+                                        <label for="artifactPathPattern" class="mandatory">Artifact Path Pattern</label>
+                                        <jf-help-tooltip html="RepositoryLayoutForm.TOOLTIP.artifactPathPattern"></jf-help-tooltip>
+                                        <input name="artifactPathPattern"
+                                               type="text"
+                                               jf-validator-path-pattern
+                                               ng-model="RepositoryLayoutForm.layoutData.artifactPathPattern"
+                                               class="input-text"
+                                               ng-disabled="RepositoryLayoutForm.viewOnly"
+                                               id="artifactPathPattern"
+                                               required>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-checkbox text="Distinctive Descriptor Path Pattern">
+                                        <input type="checkbox"
+                                               ng-disabled="RepositoryLayoutForm.viewOnly"
+                                               ng-model="RepositoryLayoutForm.layoutData.distinctiveDescriptorPathPattern">
+                                    </jf-checkbox>
+                                    <jf-help-tooltip html="RepositoryLayoutForm.TOOLTIP.distinctiveDescriptorPathPattern"></jf-help-tooltip>
+                                </div>
+                                <div class="form-group-cell double" ng-if="RepositoryLayoutForm.layoutData.distinctiveDescriptorPathPattern">
+                                    <jf-field validations="repoLayouts">
+                                        <input name="descriptorPathPattern"
+                                               type="text"
+                                               ng-disabled="RepositoryLayoutForm.viewOnly"
+                                               jf-validator-path-pattern
+                                               ng-model="RepositoryLayoutForm.layoutData.descriptorPathPattern"
+                                               class="input-text"
+                                               id="descriptorPathPattern">
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-field validations="common">
+                                        <label for="folderIntegrationRevisionRegExp" class="mandatory">Folder Integration Revision RegExp</label>
+                                        <jf-help-tooltip html="RepositoryLayoutForm.TOOLTIP.folderIntegrationRevisionRegExp"></jf-help-tooltip>
+                                        <input name="folderIntegrationRevisionRegExp"
+                                               type="text"
+                                               ng-model="RepositoryLayoutForm.layoutData.folderIntegrationRevisionRegExp"
+                                               ng-disabled="RepositoryLayoutForm.viewOnly"
+                                               class="input-text"
+                                               id="folderIntegrationRevisionRegExp"
+                                               required>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-field validations="common">
+                                        <label for="fileIntegrationRevisionRegExp" class="mandatory">File Integration Revision RegExp</label>
+                                        <jf-help-tooltip html="RepositoryLayoutForm.TOOLTIP.fileIntegrationRevisionRegExp"></jf-help-tooltip>
+                                        <input name="fileIntegrationRevisionRegExp"
+                                               type="text"
+                                               ng-model="RepositoryLayoutForm.layoutData.fileIntegrationRevisionRegExp"
+                                               ng-disabled="RepositoryLayoutForm.viewOnly"
+                                               class="input-text"
+                                               id="fileIntegrationRevisionRegExp"
+                                               required>
+                                    </jf-field>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="Test Artifact Path Resolution">
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-field>
+                                        <label for="testPath">Test Path</label>
+                                        <input name="testPath"
+                                               type="text"
+                                               ng-model="RepositoryLayoutForm.input.testPath"
+                                               class="input-text"
+                                               id="testPath">
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell form-button">
+                                    <button class="btn btn-secondary"
+                                            type="button"
+                                            ng-click="RepositoryLayoutForm.test()">Test</button>
+                                </div>
+                                <jf-panel ng-if="RepositoryLayoutForm.testReply"
+                                          jf-panel-heading="Result">
+                                    <div>
+                                        <table class="jf-data-table">
+                                            <tr ng-repeat="(key,value) in RepositoryLayoutForm.testReplyDictionary">
+                                                <td>{{value}}:</td>
+                                                <td>{{RepositoryLayoutForm.testReply[key]}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </jf-panel>
+                            </div>
+                        </jf-panel>
+
+                        <jf-panel jf-panel-heading="Regular Expression View">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <button class="btn btn-secondary"
+                                            type="button"
+                                            ng-click="RepositoryLayoutForm.resolveRegex()">Resolve</button>
+                                </div>
+                            </div>
+                            <div ng-if="RepositoryLayoutForm.regexViewData">
+                                <div class="form-group">
+                                    <div class="form-group-cell double">
+                                        <label for="artifactPath">Artifact Path</label>
+                                        <textarea disabled
+                                                  rows="4"
+                                                  id="artifactPath"
+                                                  class="input-text"
+                                                  ng-model="RepositoryLayoutForm.regexViewData.artifactRegEx">
+
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group-cell double">
+                                        <label for="descriptorPath">Descriptor Path</label>
+                                        <textarea disabled
+                                                  rows="4"
+                                                  id="descriptorPath"
+                                                  class="input-text"
+                                                  ng-model="RepositoryLayoutForm.regexViewData.descriptorRegEx">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </jf-panel>
+
+                        <jf-panel ng-if="RepositoryLayoutForm.mode==='edit' && RepositoryLayoutForm.hasAnyAssoc()" jf-panel-heading="Repository Associations">
+                            <jf-panel ng-if="RepositoryLayoutForm.layoutData.repositoryAssociations.localRepositories.length"
+                                      jf-panel-heading="Local Repositories">
+                                <span class="repo-association"
+                                      ng-repeat="repo in RepositoryLayoutForm.layoutData.repositoryAssociations.localRepositories">
+                                    <a href="" ng-click="RepositoryLayoutForm.gotoEditRepo('local',repo)"><i class="icon icon-local-repo"></i>{{repo}}</a>
+                                </span>
+                            </jf-panel>
+                            <jf-panel ng-if="RepositoryLayoutForm.layoutData.repositoryAssociations.remoteRepositories.length"
+                                      jf-panel-heading="Remote Repositories">
+                                <span class="repo-association"
+                                      ng-repeat="repo in RepositoryLayoutForm.layoutData.repositoryAssociations.remoteRepositories">
+                                    <a href="" ng-click="RepositoryLayoutForm.gotoEditRepo('remote',repo)"><i class="icon icon-cached-repo"></i>{{repo}}</a>
+                                </span>
+                            </jf-panel>
+                            <jf-panel ng-if="RepositoryLayoutForm.layoutData.repositoryAssociations.virtualRepositories.length"
+                                      jf-panel-heading="Virtual Repositories">
+                                <span class="repo-association"
+                                      ng-repeat="repo in RepositoryLayoutForm.layoutData.repositoryAssociations.virtualRepositories">
+                                    <a href="" ng-click="RepositoryLayoutForm.gotoEditRepo('local',repo)"><i class="icon icon-virtual-repo"></i>{{repo}}</a>
+                                </span>
+                            </jf-panel>
+                        </jf-panel>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ng-click="RepositoryLayoutForm.cancel()">Cancel</button>
+                    <div ng-switch="mode" class="btn-group">
+                        <button ng-if="!RepositoryLayoutForm.viewOnly"
+                                class="btn btn-primary"
+                                type="submit"
+                                ng-disabled="RepositoryLayoutForm.isSaveDisabled()">Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

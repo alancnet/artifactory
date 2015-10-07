@@ -1,0 +1,69 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<wicket:head>
+    <style type="text/css">
+        .IE-7 .clean-cache-help {
+            position: relative;
+            top: -8px;
+        }
+    </style>
+</wicket:head>
+
+<wicket:panel>
+
+    <div class="field">
+        <label>Repository Layout</label>
+        <span wicket:id="repoLayout.help"></span>
+
+        <div class="value">
+            <select wicket:id="repoLayout"/>
+        </div>
+    </div>
+
+    <div class="field field-sep">
+        <input wicket:id="artifactoryRequestsCanRetrieveRemoteArtifacts" type="checkbox" class="text"/>
+        <span wicket:id="artifactoryRequestsCanRetrieveRemoteArtifacts.help"></span>
+    </div>
+
+    <div class="field field-sep field-100">
+        <label>Cleanup Repository References in POMs</label>
+        <span wicket:id="pomRepositoryReferencesCleanupPolicy.help"></span>
+
+        <div class="value">
+            <select wicket:id="pomRepositoryReferencesCleanupPolicy"></select>
+        </div>
+    </div>
+
+    <div class="line-sep" wicket:id="keyPairContainer">
+        <div class="field field-sep field-100">
+            <label>Key-Pair</label>
+            <span wicket:id="keyPair.help"></span>
+
+            <div wicket:id="keyPairMessage"></div>
+
+            <div class="value">
+                <select wicket:id="keyPair"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button type="button" wicket:id="cleanCache">Clean Cache</button>
+        <span class="clean-cache-help" wicket:id="cleanCache.help"></span>
+    </div>
+</wicket:panel>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.2.0"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.2.0
+        http://www.jfrog.org/xsd/artifactory-v1_2_0.xsd">
+    <serverName>Dev Server</serverName>
+    <anonDownloadsAllowed>true</anonDownloadsAllowed>
+    <fileUploadMaxSizeMb>10</fileUploadMaxSizeMb>
+    <security>
+        <ldapSettings>
+            <authenticationMethod>bind-anonymous</authenticationMethod>
+            <ldapUrl>ldap://mydomain:389/dc=mycompany,dc=com</ldapUrl>
+            <userDnPattern>uid={0},ou=People</userDnPattern>
+            <managerDn></managerDn>
+            <managerPassword></managerPassword>
+            <searchAuthPasswordAttributeName>userPassword</searchAuthPasswordAttributeName>
+        </ldapSettings>
+    </security>
+    <backup>
+        <!--<dir></dir>-->
+        <!--Backup every 12 hours -->
+        <!--<cronExp>0 0 /12 * * ?</cronExp>-->
+        <!--Backup every 1 minute -->
+        <!--<cronExp>0 /1 * * * ?</cronExp>-->
+        <!--<retentionPeriodHours>168</retentionPeriodHours>-->
+        <excludedRepositories>
+            <repositoryRef>repo1</repositoryRef>
+            <repositoryRef>ext-snapshots</repositoryRef>
+            <repositoryRef>codehaus-snapshots</repositoryRef>
+        </excludedRepositories>
+    </backup>
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases</key>
+            <description>Local Repository for Applications Releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>libs-snapshots</key>
+            <description>Local Repository for Applications Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <maxUniqueSnapshots>3</maxUniqueSnapshots>
+            <snapshotVersionBehavior>unique</snapshotVersionBehavior>
+        </localRepository>
+        <localRepository>
+            <key>libs-snapshots-deployer</key>
+            <description>Local Repository for Applications Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <snapshotVersionBehavior>deployer</snapshotVersionBehavior>
+        </localRepository>
+        <localRepository>
+            <key>plugins-releases</key>
+            <description>Local Repository for Plugins Releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-snapshots</key>
+            <description>Local Repository for Plugins Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-snapshots-unique</key>
+            <description>Local Repository for Plugins Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <snapshotVersionBehavior>unique</snapshotVersionBehavior>
+        </localRepository>
+        <localRepository>
+            <key>ext-releases</key>
+            <description>Local Repository for Third party libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>ext-snapshots</key>
+            <description>Local Repository for Third party snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>repo1</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://repo1.maven.org/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>codehaus-snapshots</key>
+            <blackedOut>true</blackedOut>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://snapshots.repository.codehaus.org</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net.m2</key>
+            <description>java.net repo</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://download.java.net/maven/2</url>
+            <!--<offline>true</offline>-->
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net.m1</key>
+            <description>java.net</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <type>maven1</type>
+            <url>http://download.java.net/maven/1</url>
+        </remoteRepository>
+
+        <!--<remoteRepository>
+            <key>codehaus</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <url>http://dist.codehaus.org</url>
+        </remoteRepository>-->
+        <!--<remoteRepository>
+            <key>ibiblio</key>
+            <excludesPattern>org/artifactory/**</excludesPattern>
+            <url>http://www.ibiblio.org/maven2</url>
+        </remoteRepository>-->
+        <!--<remoteRepository>
+            <key>apache-m2-snapshots</key>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+        </remoteRepository>-->
+
+        <!--<remoteRepository>
+            <key>java.net</key>
+            <description>java.net repo</description>
+            <blackedOut>true</blackedOut>
+            <includesPattern>*/**</includesPattern>
+            <excludesPattern></excludesPattern>
+            <url>https://maven-repository.dev.java.net/nonav/repository</url>
+            <hardFail>true</hardFail>
+            <storeArtifactsLocally>true</storeArtifactsLocally>
+            <cacheRetrievalFailures>true</cacheRetrievalFailures>
+            <cacheRetrievalMisses>true</cacheRetrievalMisses>
+            <username>un</username>
+            <password>pw</password>
+            <socketTimeoutMillis>2000</socketTimeoutMillis>
+            <proxyRef>proxy1</proxyRef>
+        </remoteRepository>-->
+    </remoteRepositories>
+
+    <virtualRepositories>
+        <virtualRepository>
+            <key>development</key>
+            <repositories>
+                <repositoryRef>libs-snapshots</repositoryRef>
+                <repositoryRef>plugins-releases</repositoryRef>
+                <repositoryRef>plugins-snapshots</repositoryRef>
+                <repositoryRef>java.net.m2</repositoryRef>
+                <repositoryRef>repo1</repositoryRef>
+            </repositories>
+        </virtualRepository>
+    </virtualRepositories>
+
+</config>

@@ -1,0 +1,177 @@
+<wicket:panel>
+    <form wicket:id="form">
+        <div wicket:id="dockerSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="dockerRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableDockerSupport" type="checkbox"/>
+                    <span wicket:id="enableDockerSupport.help"></span>
+                </div>
+                <div class="field">
+                    <input wicket:id="enableTokenAuthentication" type="checkbox"/>
+                    <span wicket:id="enableTokenAuthentication.help"></span>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="gemsSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="gemsRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableGemsSupport" type="checkbox"/>
+                    <span wicket:id="enableGemsSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="recalculateIndex"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="npmSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="npmRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableNpmSupport" type="checkbox"/>
+                    <span wicket:id="enableNpmSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="recalculateIndex"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="bowerSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="bowerRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableBowerSupport" type="checkbox"/>
+                    <span wicket:id="enableBowerSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="reindexPackages"></button>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field required">
+                    <label>Bower Registry URL</label>
+                    <span wicket:id="bowerRegistryUrl.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="bowerRegistryUrl" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="nuGetBorder">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="nuGetRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableNuGetSupport" type="checkbox"/>
+                    <span wicket:id="enableNuGetSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="reindexPackages"></button>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label>NuGet Feed Context Path</label>
+                    <span wicket:id="feedContextPath.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="feedContextPath" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field required">
+                    <label>NuGet Download Context Path</label>
+                    <span wicket:id="downloadContextPath.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="downloadContextPath" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="debianSupportSection">
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableDebianSupport" type="checkbox"/>
+                    <span wicket:id="enableDebianSupport.help"></span>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="vcsSupportSection">
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableVcsSupport" type="checkbox"/>
+                    <span wicket:id="enableVcsSupport.help"></span>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field required">
+                    <label>Git Provider</label>
+                    <span wicket:id="provider.help"></span>
+
+                    <div class="value">
+                        <select wicket:id="provider" type="text" class="text"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row" wicket:id="downloadUrlField">
+                <div class="field required">
+                    <label>Git Download URL</label>
+                    <span wicket:id="downloadUrl.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="downloadUrl" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="pypiSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="pypiRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enablePypiSupport" type="checkbox"/>
+                    <span wicket:id="enablePypiSupport.help"></span>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="p2Border">
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="p2Support" type="checkbox"/>
+                    <span wicket:id="p2Support.help"></span>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="labeled-value">
+                    <span wicket:id="p2OriginalUrl" class="label"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</wicket:panel>

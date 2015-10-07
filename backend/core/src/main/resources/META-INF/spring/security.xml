@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- password decrypting authentication manager for passwords decryption if feature is active -->
+    <bean id="passwordDecryptingManager" class="org.artifactory.security.PasswordDecryptingManager">
+        <property name="delegate" ref="authenticationManager"/>
+    </bean>
+
+    <!-- register artifactory authentication filters -->
+    <bean class="org.artifactory.webapp.servlet.authentication.MissionControlAuthenticationFilter"/>
+    <bean class="org.artifactory.webapp.servlet.authentication.ArtifactoryBasicAuthenticationFilter"/>
+    <bean class="org.artifactory.webapp.servlet.authentication.ArtifactoryRememberMeFilter"/>
+
+    <!-- register artifactory authentication interceptors -->
+    <bean class="org.artifactory.webapp.servlet.authentication.interceptor.anonymous.AnonymousLoginInterceptor"/>
+
+    <!-- create the spring basic authentication filter (will be used as a delegate) -->
+    <bean id="basicAuthenticationFilter"
+          class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
+        <property name="authenticationManager" ref="passwordDecryptingManager"/>
+        <property name="authenticationEntryPoint" ref="basicAuthenticationEntryPoint"/>
+        <property name="authenticationDetailsSource">
+            <bean class="org.artifactory.security.HttpAuthenticationDetailsSource"/>
+        </property>
+    </bean>
+
+    <bean id="basicAuthenticationEntryPoint"
+          class="org.artifactory.webapp.servlet.authentication.ArtifactoryBasicAuthenticationEntryPoint">
+    </bean>
+
+    <!-- create authentication providers -->
+    <bean class="org.artifactory.security.mission.control.MissionControlAuthenticationProviderImpl"/>
+    <bean id="ldapAuthenticationProvider" class="org.artifactory.security.ldap.ArtifactoryLdapAuthenticationProvider"/>
+    <bean id="crowdAuthenticationProviderAdapter"
+          class="org.artifactory.security.crowd.CrowdAuthenticationProviderAdapter"/>
+    <bean id="dbAuthenticationProvider" class="org.artifactory.security.db.DbAuthenticationProvider">
+        <property name="userDetailsService" ref="dbUserDetailsService"/>
+        <property name="saltSource" ref="dbUserDetailsService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+    </bean>
+
+    <!-- authentication providers order is important. keep internal provider after ldap and sso -->
+    <bean id="authenticationManager" class="org.artifactory.security.RealmAwareAuthenticationManager">
+        <property name="eraseCredentialsAfterAuthentication" value="false"/>
+        <constructor-arg>
+            <list>
+                <ref bean="ldapAuthenticationProvider"/>
+                <ref bean="crowdAuthenticationProviderAdapter"/>
+                <ref bean="dbAuthenticationProvider"/>
+                <ref bean="rememberMeAuthenticationProvider"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="passwordEncoder"
+          class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+
+    <bean id="rememberMeProcessingFilter"
+          class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+        <property name="rememberMeServices" ref="rememberMeServices"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+    </bean>
+
+    <bean id="rememberMeServices"
+          class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <property name="userDetailsService" ref="dbUserDetailsService"/>
+        <property name="key" value="artifactory"/>
+        <property name="tokenValiditySeconds" value="604800"/>
+    </bean>
+
+    <bean id="rememberMeAuthenticationProvider"
+          class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <property name="key" value="artifactory"/>
+        <!--<security:custom-authentication-provider/>-->
+    </bean>
+
+</beans>

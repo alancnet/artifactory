@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="$dismiss()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Delete Versions</h4>
+</div>
+<div class="modal-body">
+    <div class="alert alert-warning" ng-if="noData">
+        No versions found.
+    </div>
+
+    <jf-grid ng-if="versions && !noData"
+             grid-options="versionsGridOptions"
+             filter-field="groupId" filter-field2="version"></jf-grid>
+<!--
+    <div class="grid-container">
+        <div ng-if="versions" ui-grid-auto-resize ui-grid="versionsGridOptions" ui-grid-selection class="grid"></div>
+    </div>
+-->
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+    <button class="btn btn-primary" ng-disabled="selectedVersions().length === 0" ng-click="close(selectedVersions())">Delete Selected</button>
+</div>

@@ -1,0 +1,303 @@
+<div ng-controller="VirtualRepositoryFormController as VirtualRepository">
+    <div class="wizard-content">
+        <div ng-show="RepositoryForm.isCurrentTab('basic')">
+            <div class="form-group">
+                <label class="input-label-weight label-type-box mandatory">Package Type</label>
+                <ul class="list-unstyled">
+                    <li class="inline-block package-type"
+                        ng-class="{typeValidation: !RepositoryForm.repoInfo.typeSpecific.repoType, 'not-clickable': !RepositoryForm.newRepository}"
+                        ng-click="!RepositoryForm.newRepository || RepositoryForm.openRepoTypeModal()"
+                        id="repository-package-type-button">
+                        <span ng-if="!RepositoryForm.repoInfo.typeSpecific.repoType">No Type</span>
+
+                        <div ng-if="RepositoryForm.repoInfo.typeSpecific.repoType"
+                             class="repotype iconrepo iconrepo-{{RepositoryForm.repoInfo.typeSpecific.repoType.toLowerCase()}}">
+                        </div>
+                        <div class="repotitle" ng-if="RepositoryForm.repoInfo.typeSpecific.repoType">{{RepositoryForm.repoInfo.typeSpecific.repoType }}</div>
+                    </li>
+                </ul>
+                <input class="hidden"
+                       ng-model="RepositoryForm.repoInfo.typeSpecific.repoType"
+                       name="repoType"
+                       required
+                       ng-change="RepositoryForm.setRepoLayout()"/>
+                <span ng-if="!RepositoryForm.repoInfo.typeSpecific.repoType && !RepositoryForm.isTypeModalOpen" class="repository-error" id="repository-package-type-validator">You must specify a package type</span>
+            </div>
+            <div class="form-group">
+                <div class="form-group-cell"
+                     ng-if="RepositoryForm.newRepository">
+                    <jf-field validations="repositores"
+                              autofocus="(RepositoryForm.isCurrentTab('basic') && RepositoryForm.repoInfo.typeSpecific.repoType)">
+                        <label for="repoKey-new" class="mandatory">Repository Key</label>
+                        <input type="text" class="input-text"
+                               id="repoKey-new"
+                               name="repoKey"
+                               ng-required="repositoriesForm.repoType.$valid || (!repositoriesForm.repoType.$valid && !RepositoryForm.isTypeModalOpen)"
+                               jf-repokey-validator="RepositoryForm"
+                               ng-model="RepositoryForm.repoInfo.general.repoKey"
+                               ng-model-options="{debounce: { 'default': 500 } }"
+                                />
+                    </jf-field>
+                    <ng-messages for="repositoriesForm.repoKey.$error" class="jf-validation">
+                        <div ng-message-exp="'repoKeyValidator'" id="repository-key-validator">{{ RepositoryForm.repoKeyValidatorMessage }}</div>
+                    </ng-messages>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <jf-panel jf-panel-heading="General">
+                        <div class="form-group">
+                            <div class="form-group-cell"
+                                 ng-if="!RepositoryForm.newRepository">
+                                <jf-field validations="repositores">
+                                    <label for="repoKey-edit" class="mandatory">Repository Key</label>
+                                    <input type="text" class="input-text"
+                                           id="repoKey-edit"
+                                           name="repoKey"
+                                           ng-model="RepositoryForm.repoInfo.general.repoKey"
+                                           ng-disabled="!RepositoryForm.newRepository"/>
+                                </jf-field>
+                                <ng-messages for="repositoriesForm.repoKey.$error" class="jf-validation">
+                                    <div ng-message-exp="'repoKeyValidator'" id="repository-key-validator">{{ RepositoryForm.repoKeyValidatorMessage }}</div>
+                                </ng-messages>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label>Repository Layout</label>
+                                    <ui-select ng-model="RepositoryForm.repoInfo.basic.layout">
+                                        <ui-select-match
+                                                placeholder="Select Repository Layout"
+                                                allow-clear="true"
+                                                id="virtual-repository-layout-dropdown">
+                                            {{$select.selected}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="item in RepositoryForm.repositoryLayouts | filter: $select.search track by $index">
+                                            <div ng-bind-html="item | highlight: $select.search"
+                                                    id="virtual-repository-layout-item"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="publicDescription">Public Description</label>
+                        <textarea type="text"
+                                  class="input-text"
+                                  id="publicDescription"
+                                  name="publicDescription"
+                                  cols="5"
+                                  ng-model="RepositoryForm.repoInfo.basic.publicDescription">
+                        </textarea>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="internalDescription">Internal Description</label>
+                        <textarea type="text"
+                                  class="input-text"
+                                  id="internalDescription"
+                                  name="internalDescription"
+                                  ng-model="RepositoryForm.repoInfo.basic.internalDescription"
+                                  cols="5"></textarea>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="includesPattern">Include Patterns</label>
+                                    <jf-help-tooltip html="RepositoryForm.TOOLTIP.virtualForm.includesPattern"></jf-help-tooltip>
+                        <textarea type="text"
+                                  class="input-text"
+                                  id="includesPattern"
+                                  name="includesPattern"
+                                  ng-model="RepositoryForm.repoInfo.basic.includesPattern"
+                                  cols="5"></textarea>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="excludesPattern">Exclude Patterns</label>
+                                    <jf-help-tooltip html="RepositoryForm.TOOLTIP.virtualForm.excludedPattern"></jf-help-tooltip>
+                        <textarea type="text" class="input-text"
+                                  id="excludesPattern"
+                                  name="excludesPattern"
+                                  ng-model="RepositoryForm.repoInfo.basic.excludesPattern"
+                                  cols="5"></textarea>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <jf-panel jf-panel-heading="{{RepositoryForm.repoInfo.typeSpecific.repoType}} Settings"
+                                  ng-if="RepositoryForm.repoInfo.isType('docker')">
+                            <div class="form-group no-margin-bottom">
+                                <div class="form-group-cell">
+                                    <jf-checkbox text="Force Authentication">
+                                        <input type="checkbox"
+                                               id="forceDockerAuth"
+                                               ng-model="RepositoryForm.repoInfo.typeSpecific.forceDockerAuthentication">
+                                    </jf-checkbox>
+                                    <jf-help-tooltip
+                                            html="RepositoryForm.TOOLTIP.localForm.forceDockerAuth"></jf-help-tooltip>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="{{RepositoryForm.repoInfo.typeSpecific.repoType}} Settings"
+                                  ng-if="RepositoryForm.repoInfo.isType('nuget')">
+                            <div class="form-group no-margin-bottom">
+                                <div class="form-group-cell">
+                                    <jf-checkbox text="Force Authentication">
+                                        <input type="checkbox"
+                                               id="forceNuGetAuth"
+                                               ng-model="RepositoryForm.repoInfo.typeSpecific.forceNugetAuthentication">
+                                    </jf-checkbox>
+                                    <jf-help-tooltip
+                                            html="RepositoryForm.TOOLTIP.localForm.forceNugetAuth"></jf-help-tooltip>
+                                </div>
+                            </div>
+                        </jf-panel>
+                    </jf-panel>
+                </div>
+                <div class="col-lg-6">
+                    <div class="property-set-advanced"
+                         ng-if="!RepositoryForm.repoInfo.isType('p2')">
+                        <jf-panel jf-panel-heading="Repositories"
+                                  ng-if="RepositoryForm.repositoriesList">
+                            <jf-drag-drop include-list="RepositoryForm.repoInfo.basic.selectedRepositories"
+                                          exclude-list="RepositoryForm.repositoriesList"
+                                          include-display-field="repoName"
+                                          exclude-display-field="repoName"
+                                          objects-name="Repositories"
+                                          ng-if="RepositoryForm.repositoriesList && RepositoryForm.repoInfo.basic.selectedRepositories"
+                                          on-change="VirtualRepository.onchangeRepo()"
+                                          headers="{leftTitle:'Available Repositories', rightTitle:'Selected Repositories'}"></jf-drag-drop>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="Included Repositories"
+                                  ng-if="RepositoryForm.repoInfo.basic.resolvedRepositories.length">
+                            <div class="group-list-wrapper">
+                                <ul class="group-list">
+                                    <li ng-repeat="item in RepositoryForm.repoInfo.basic.resolvedRepositories"
+                                        class="group-list-item"
+                                        ng-disabled="true">{{item}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </jf-panel>
+                    </div>
+
+                    <div ng-if="RepositoryForm.repoInfo.isType('p2')">
+                        <jf-panel jf-panel-heading="Local P2 Repositories">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field>
+                                        <label>Local Repository</label>
+                                        <jf-ui-select jf-select-model="VirtualRepository.virtualRepo.localRepoKey"
+                                                      jf-select-options="RepositoryForm.fields.availableLocalRepos"
+                                                      id="localRepository"></jf-ui-select>
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="common">
+                                        <label id="pathSuffix">Path Suffix</label>
+                                        <jf-help-tooltip html="RepositoryForm.TOOLTIP.virtualForm.pathSuffix"></jf-help-tooltip>
+                                        <input type="text"
+                                               id="pathSuffixTxt"
+                                               ng-model="VirtualRepository.virtualRepo.pathSuffix"
+                                               class="input-text">
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell form-button">
+                                    <button class="btn btn-secondary"
+                                            type="button"
+                                            ng-click="VirtualRepository.addP2Local()"
+                                            ng-disabled="!VirtualRepository.virtualRepo.localRepoKey">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="Remote P2 Repositories">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="common">
+                                        <label for="p2RepositoryURL">P2 Repository URL</label>
+                                        <input type="url"
+                                               id="p2RepositoryURL"
+                                               ng-model="VirtualRepository.virtualRepo.remoteUrl"
+                                               class="input-text">
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell form-button">
+                                    <button class="btn btn-secondary"
+                                            type="button"
+                                            ng-click="VirtualRepository.addP2Remote()"
+                                            ng-disabled="!VirtualRepository.virtualRepo.remoteUrl">Add
+                                    </button>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-grid grid-options="VirtualRepository.gridP2Option"
+                                 filter-field="repoKey"
+                                 filter-on-change="true"></jf-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="RepositoryForm.isCurrentTab('advanced')">
+            <div class="form-group form-checkbox">
+                <div class="form-group-cell">
+                    <jf-checkbox text="Artifactory Requests Can Retrieve Remote Artifacts">
+                        <input type="checkbox"
+                               id="requestsCanRetrieveRemoteArtifacts"
+                               ng-model="RepositoryForm.repoInfo.advanced.retrieveRemoteArtifacts">
+                    </jf-checkbox>
+                    <jf-help-tooltip html="RepositoryForm.TOOLTIP.virtualForm.artifactoryRequestCanRetrieveRemoteArtifacts"></jf-help-tooltip>
+                </div>
+            </div>
+            <div ng-if="RepositoryForm.repoInfo.isType('maven', 'gradle', 'ivy', 'sbt')">
+                <div class="form-group">
+                    <div class="form-group-cell">
+                        <jf-field>
+                            <label>Cleanup Repository References in POMs</label>
+                            <jf-help-tooltip
+                                    html="RepositoryForm.TOOLTIP.virtualForm.cleanupRepositoryReferencesinPOM"></jf-help-tooltip>
+                            <ui-select ng-model="RepositoryForm.repoInfo.typeSpecific.pomCleanupPolicy">
+                                <ui-select-match>
+                                    {{RepositoryForm.pomCleanupPolicies[$select.selected] }}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="item in RepositoryForm.pomCleanupPoliciesKeys | filter: $select.search">
+                                    <div ng-bind-html="RepositoryForm.pomCleanupPolicies[item] | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </jf-field>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group-cell" ng-if="!VirtualRepository.isSigningKeysDisable()">
+                        <jf-field>
+                            <label>Key-Pair</label>
+                            <ui-select ng-model="RepositoryForm.repoInfo.typeSpecific.keyPair"
+                                       ng-if="RepositoryForm.fields.webStartKeyPairs.length">
+                                <ui-select-match>
+                                    {{$select.selected}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="item in RepositoryForm.fields.webStartKeyPairs | filter: $select.search">
+                                    <div ng-bind-html="item | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <div ng-if="!RepositoryForm.fields.webStartKeyPairs.length">No key-pairs are currently
+                                configured. You can add new key-pairs <a ui-sref="admin.security.signing_keys" target="_blank">here.</a>
+                            </div>
+                        </jf-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<jf-panel jf-panel-heading="Tag Info"
+          ng-if="jfDockerV2.dockerV2Data.tagInfo">
+
+    <table class="jf-data-table">
+        <tr ng-repeat="(key,value) in jfDockerV2.dockerV2Data.tagInfo" ng-if="jfDockerV2.DICTIONARY[key] && jfDockerV2.isNotEmptyValue(value)">
+            <td>{{jfDockerV2.DICTIONARY[key]}}:</td>
+            <td>{{jfDockerV2.formatValue(value)}}</td>
+        </tr>
+    </table>
+
+</jf-panel>
+
+<jf-panel jf-panel-heading="Layers"
+          class="docker-layers-panel"
+          ng-if="jfDockerV2.dockerV2Data.blobsInfo">
+    <jf-docker-v2-layers controller="jfDockerV2"
+                         data="jfDockerV2.dockerV2Data.blobsInfo"
+                         current-path="{{jfDockerV2.currentNode.data.path}}"></jf-docker-v2-layers>
+</jf-panel>

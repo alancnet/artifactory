@@ -1,0 +1,30 @@
+<div class="accordion-style">
+    <accordion close-others="true">                         
+        <accordion-group ng-repeat="item in jfAccordion.items"
+                         ng-if="!item.isHidden"
+                         heading="{{ item.label | replaceStringForAol }}"
+                         is-open="item.isOpen"
+                         class="accordion-header"
+                         ng-class="{disabled: item.isDisabled}"
+                         is-disabled="item.isDisabled"
+                         ui-sref-active="selected">
+            <div ng-repeat="subitem in item.subItems"
+                 ng-class="{disabled: subitem.isDisabled}"
+                 jf-disable-feature="{{ subitem.feature }}"
+                 class="accordion-subitem">
+                <div ng-if="subitem.isDisabled"
+                     class="subitem-style">
+                    <div>{{subitem.label}}</div>
+                </div>
+                <div ng-if="!subitem.isDisabled"
+                     ui-sref="{{ subitem.state }} ({{ subitem.stateParams }})"
+                     ng-class="{selected: jfAccordion.isItemActive(subitem)}"
+                     ng-click="jfAccordion.saveState()"
+                     jf-clear-errors
+                     class="subitem-style">
+                    <div>{{subitem.label}}</div>
+                </div>
+            </div>
+        </accordion-group>
+    </accordion>
+</div>

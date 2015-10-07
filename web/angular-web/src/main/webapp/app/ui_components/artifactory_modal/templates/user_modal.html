@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{formUserTitle}}</h3>
+</div>
+<div class="modal-body">
+
+
+    <form name="newUserForm" class="">
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label for="user">Username:</label>
+
+                <input name="username"
+                       type="text"
+                       ng-model="user.name"
+                       class="form-control"
+                       id="user" required>
+
+                <label for="email">Email Address</label>
+                <input name="email"
+                       type="email"
+                       ng-model="user.email"
+                       class="form-control"
+                       id="email" required>
+            </div>
+
+            <div class="form-group col-lg-6">
+
+                <label for="password">Password:</label>
+                <input type="password"
+                       ng-model="user.password"
+                       class="form-control"
+                       id="password"
+                       required>
+
+                <label for="retypePassword">Retype Password:</label>
+                <input type="password"
+                       ng-model="user.retypePassword"
+                       class="form-control"
+                       id="retypePassword"
+                       required>
+
+            </div>
+        </div>
+
+        <div class="checkbox">
+            <label><input type="checkbox"
+                          ng-model="user.profileUpdatable"> Can Update Profile</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"
+                          ng-model="user.admin"> Admin</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"
+                          g-model="user.internalPasswordDisable"> Disable Internal
+                Password</label>
+        </div>
+
+        <div>
+            <div ng-switch="mode" class="btn-group">
+                <button class=" btn btn-primary" ng-switch-when="edit" ng-click="updateUser(user)">Save</button>
+                <button class=" btn btn-primary" ng-switch-default ng-click="createNewUser(user)">Save</button>
+
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default"  ng-click="closeModal()">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+

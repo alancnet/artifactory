@@ -1,0 +1,13 @@
+<wicket:body/>
+
+<span id="${component.markupId}_bubble" dojoType="artifactory.Tooltip"
+      connectId="${component.markupId}" showDelay="0" toggle="fade"
+      toggleDuration="200" style="display: none;">
+    ${message}
+</span>
+
+<script type="text/javascript">
+    DomUtils.addOnRender(function () {
+        DojoUtils.instantiate('${component.markupId}_bubble');
+    });
+</script>

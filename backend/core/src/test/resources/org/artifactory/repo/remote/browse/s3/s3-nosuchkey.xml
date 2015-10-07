@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+    <Code>NoSuchKey</Code>
+    <Message>The specified key does not exist.</Message>
+    <Key>org/artifactory/repo/remote/browse/s3/s3-nosuchkey.xml</Key>
+    <RequestId>E69C77E280506925</RequestId>
+    <HostId>AfNsMbcTZ0kw77y06lcsMEb6oxENUr80Xa0yR2P3kRs9fajMBHr0i1NYNRtjd8mV</HostId>
+</Error>

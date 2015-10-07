@@ -1,0 +1,49 @@
+<div class="content-layout-container with-head-bar" id="jf-artifacts">
+    <jf-search></jf-search>
+
+    <div ui-view="search" class="ui-view-search"></div>
+
+    <div class="pull-right text-right deploy-btn disabled"
+         jf-tooltip="{{Artifact.tooltips.artifacts.deploy.disabled}}"
+         ng-if="!Artifact.user.getCanDeploy()">
+        <span class="icon icon-deploy"></span> Deploy
+    </div>
+    <div class="pull-right text-right deploy-btn"
+         ng-click="Artifact.openDeploy()"
+         ng-if="Artifact.user.getCanDeploy() && Artifact.$state.params.browser !== 'stash'">
+        <span class="icon icon-deploy"></span> Deploy
+    </div>
+    <div class="pull-right set-me-up"
+         ng-if="Artifact.$state.params.browser !== 'stash'"
+         ng-click="Artifact.openSetMeUp()">
+        <span class="icon icon-set-me-up"></span> Set Me Up
+    </div>
+
+    <h1 ng-if="Artifact.$state.params.browser !== 'stash'">Artifact Repository Browser</h1>
+    <h1 ng-if="Artifact.$state.params.browser === 'stash'">Stash Browser <a class="back-to-repository-browser" href="" ng-click="Artifact.exitStashState()"><span class="back-link-icon">&lsaquo;</span>Back to Repository Browser</a></h1>
+
+    <div class="content-wrapper" ng-if="!Artifact.isSearchShown">
+        <div ui-layout>
+            <div ui-layout-container class="artifacts-outer-layout-container">
+                <div ui-layout="{flow : 'column', dividerSize : '15'}">
+                    <div ui-layout-container class="artifacts-list card" size="30%" min-size = "15%">
+                        <ui-view></ui-view>
+                    </div>
+
+                    <div ui-layout-container class="artifact-details card" size="70.5%" min-size="30%">
+                        <div class="row artifact-details-header">
+                            <div class="col-md-7">
+                                <i class="jstree-icon jstree-themeicon jstree-themeicon-custom" ng-class="Artifact.getNodeIcon()" role="presentation"></i>
+                                <h2 class="artifact-name-heading" jf-tooltip-on-overflow>{{Artifact.node.data.text}}<span class="not-cached">{{(Artifact.node.data.cached===false?' (not cached)':'')}}</span></h2>
+                            </div>
+                            <div class="col-md-5 pull-right text-right">
+                                <jf-actions></jf-actions>
+                            </div>
+                        </div>
+                        <jf-artifact-info></jf-artifact-info>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="search-panel-container">
+    <div collapse="Search.collapseSearchPanel">
+        <div class="search-panel" ng-style="Search.collapseStyle()">
+            <div class="pull-right back-to-browse">
+                <a href=""
+                   ng-click="Search.backToBrowse()"><span class="back-link-icon">&lsaquo;</span>Back To Browse
+                </a>
+            </div>
+            <form>
+                <div ng-switch="Search.currentSearch">
+                    <div ng-switch-when="quick">
+                        <jf-quick query="Search.query"></jf-quick>
+                    </div>
+                    <div ng-switch-when="class">
+                        <jf-class query="Search.query"></jf-class>
+                    </div>
+                    <div ng-switch-when="gavc">
+                        <jf-gavc query="Search.query"></jf-gavc>
+                    </div>
+                    <div ng-switch-when="property">
+                        <jf-property query="Search.query"></jf-property>
+                    </div>
+                    <div ng-switch-when="checksum">
+                        <jf-checksum query="Search.query"></jf-checksum>
+                    </div>
+                    <div ng-switch-when="remote">
+                        <jf-remote query="Search.query"></jf-remote>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="repo-list-dropdown"
+                     ng-if="Search.showRepoList()">
+                    <div ng-click="Search.openRepoList()"
+                         class="repo-dnd-title">
+                        <span class="icon icon-search"></span>
+                        <span ng-if="!Search.query.selectedRepositories.length">Limit to Specific Repositories</span>
+                        <span ng-if="Search.query.selectedRepositories.length==1">Searching 1 Repository</span>
+                        <span ng-if="Search.query.selectedRepositories.length>1">Searching {{Search.query.selectedRepositories.length}} Repositories</span>
+                    </div>
+                </div>
+                <div class="form-group" collapse="Search.isOpenRepoList">
+                    <div class="form-group-cell double">
+                        <jf-drag-drop
+                                ng-if="Search.repoList"
+                                exclude-list="Search.repoList"
+                                include-list="Search.query.selectedRepositories"
+                                objects-name="Repositories"
+                                include-display-field="repoKey"
+                                exclude-display-field="repoKey"
+                                headers="{leftTitle:'Available Repositories', rightTitle:'Selected Repositories'}">
+                        </jf-drag-drop>
+                    </div>
+                </div>
+            </form>
+            <div id="stash-container" ng-if="Search.hasStashPerms() && Search.currentSearch !== 'remote'">
+                <i id="stash-animation" class="icon icon-copy"></i>
+                <div id="stash-menu" ng-if="Search.stashedItemsCount">
+                    <div id="calc-actions">
+                        <div><span class="icon-stash-add"
+                                   ng-click="Search.addToStash()"
+                                   jf-tooltip="Add"></span></div>
+                        <div><span class="icon-stash-subtract"
+                                   ng-click="Search.subtractFromStash()"
+                                   jf-tooltip="Subtract"></span></div>
+                        <div><span class="icon-stash-intersect"
+                                   ng-click="Search.intersectWithStash()"
+                                   jf-tooltip="Intersect"></span></div>
+                    </div>
+                    <div id="general-actions">
+                        <a ng-click="Search.gotoStash()"><i class="icon icon-show-in-tree"></i>View</a>
+                        <a ng-click="Search.clearStash()"><i class="icon icon-clear"></i>Clear</a>
+                    </div>
+                </div>
+                <div id="stash-box">
+                    <span ng-class="{'icon-stash-stash-empty': Search.stashedItemsCount === 0, 'icon-stash-stash-full': Search.stashedItemsCount}"></span>
+                    <br>{{Search.stashedItemsCount}} Items
+                </div>
+            </div>
+            <div class="search-results-title">
+                {{Search.resultsMsg}}
+                <span ng-if="Search.gridOptions.data.length && !Search.gridOptions.data[0]._emptyRow && Search.hasStashPerms() && Search.stashedItemsCount === 0 && Search.currentSearch !== 'remote' && !Search.duringStashAnimation">
+                    <span>|</span><a href="" id="stash-results-button" ng-click="Search.saveToStash()">Stash Results</a><jf-help-tooltip html="Search.TOOLTIP.stash"></jf-help-tooltip>
+                </span>
+            </div>
+
+            <jf-grid
+                    grid-options="Search.gridOptions"
+                    filter-field="name"
+                    no-count>
+            </jf-grid>
+        </div>
+    </div>
+</div>

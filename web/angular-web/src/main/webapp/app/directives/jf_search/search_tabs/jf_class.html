@@ -1,0 +1,50 @@
+<div class="search-wrapper">
+    <form novalidate>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field>
+                    <input type="text"
+                           class="input-text"
+                           id="path"
+                           name="path"
+                           ng-model="jfClass.query.path"
+                           placeholder="Path (leave blank for *)">
+                </jf-field>
+                <div class="field-bottom-remark"><i class="icon icon-info"></i>Search is case sensitive &amp; supports *, ?</div>
+            </div>
+            <div class="form-group-cell">
+                <jf-field autofocus="true">
+                    <input type="text"
+                           class="input-text"
+                           id="name"
+                           name="name"
+                           ng-model="jfClass.query.name"
+                           placeholder="Name">
+                </jf-field>
+            </div>
+        </div>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell double">
+                <jf-checkbox text="Search Class Resources Only" class="checkbox-search">
+                    <input type="checkbox"
+                           ng-model="jfClass.query.searchClassOnly"
+                           id="classOnly">
+                </jf-checkbox>
+                <jf-checkbox text="Exclude Inner Classes">
+                    <input type="checkbox" ng-model="jfClass.query.excludeInnerClasses" id="excludeInner">
+                </jf-checkbox>
+
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default"
+                            ng-click="jfClass.query={}">Clear
+                    </button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            ng-disabled="!jfClass.query.name && !jfClass.query.path"
+                            ng-click="jfClass.search()">Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

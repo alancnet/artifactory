@@ -1,0 +1,75 @@
+<div class="licenses-tab container-fluid">
+    <div class="general-summary licenses-summary">
+        <i class="icon"
+           ng-class="{'icon-notif-success': jfLicenses.summary.ok,'icon-notif-warning': !jfLicenses.summary.ok}"></i>
+        <span>Summary:</span>
+        <span class="license-unapproved">Unapproved: {{jfLicenses.summary.notApproved}}</span>
+        <span class="license-notfound">Not Found: {{jfLicenses.summary.notFound}}</span>
+        <span>Unknown: {{jfLicenses.summary.unknown}}</span>
+        <span class="license-neutral">Neutral: {{jfLicenses.summary.neutral}}</span>
+        <span class="license-approved">Approved: {{jfLicenses.summary.approved}}</span>
+    </div>
+
+    <jf-panel jf-panel-heading="Includes">
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox text="Include Published Artifacts">
+                    <input id="includePublished"
+                           type="checkbox"
+                           ng-model="jfLicenses.includePublished"
+                           ng-click="jfLicenses.onIncludePublish()"
+                           name="includePublished">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div ng-if="jfLicenses.hasScopesOptions()" class="form-group no-margin-bottom">
+            <div class="form-group-cell">
+                <jf-checkbox text="Include Dependencies of the Following Scopes:">
+                    <input id="includeByScopes"
+                           type="checkbox"
+                           ng-model="jfLicenses.includeByScopes"
+                           ng-click="jfLicenses.onIncludeByScopes()"
+                           name="includeByScopes">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div class="form-group no-margin-bottom"
+             ng-if="jfLicenses.hasScopesOptions()">
+            <div class="form-group-cell double">
+                <div class="scopes-options">
+                    <jf-checkbox ng-repeat="(key,value) in jfLicenses.scopesOptions"
+                                 text="{{key}}">
+                        <input id="{{key}}"
+                               type="checkbox"
+                               ng-model="jfLicenses.scopesOptions[key]"
+                               ng-disabled="!jfLicenses.includeByScopes"
+                               ng-click="jfLicenses.onScopeOptionChange()"
+                               name="{{key}}">
+                    </jf-checkbox>
+                </div>
+            </div>
+        </div>
+    </jf-panel>
+
+    <div class="btn-group">
+        <form method="post" action="../ui/builds/exportLicenses/">
+            <input name="data" type="hidden" ng-value="jfLicenses.getFilteredData()">
+            <button class="btn btn-secondary" ng-disabled="!jfLicenses.filteredData.length">Export to CSV</button>
+        </form>
+    </div>
+
+    <button class="btn btn-secondary" ng-click="jfLicenses.autoLink()" ng-disabled="!jfLicenses.filteredData.length">Auto Find Licenses</button>
+
+    <div ng-if="jfLicenses.showExtendedGrid && jfLicenses.canOverride" class="pull-right">
+        <button class="btn btn-primary" ng-click="jfLicenses.overrideSelected()">Override Selected Licenses</button>
+        <button class="btn btn-secondary" ng-click="jfLicenses.cancel()">Cancel</button>
+    </div>
+
+    <jf-grid ng-if="!jfLicenses.showExtendedGrid"
+             grid-options="jfLicenses.gridOptions"
+             filter-field="id"></jf-grid>
+    <jf-grid ng-if="jfLicenses.showExtendedGrid"
+             grid-options="jfLicenses.extendedGridOptions"
+             filter-field="id"></jf-grid>
+
+</div>

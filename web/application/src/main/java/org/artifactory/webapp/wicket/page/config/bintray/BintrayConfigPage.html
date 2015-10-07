@@ -1,0 +1,18 @@
+<wicket:extend>
+    <form wicket:id="form">
+        <div wicket:id="globalBintrayPanel"/>
+        <div class="field" style="margin-left: 20px">
+            <label>File Upload Limit</label>
+            <span wicket:id="fileUploadLimit.help"></span>
+
+            <div class="value">
+                <input wicket:id="fileUploadLimit" type="text" class="text"/>
+            </div>
+        </div>
+    </form>
+
+    <div class="buttons">
+        <button wicket:id="save" type="submit"/>
+        <button wicket:id="cancel"/>
+    </div>
+</wicket:extend>

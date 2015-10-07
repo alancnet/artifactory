@@ -1,0 +1,52 @@
+<wicket:extend>
+
+
+    <div class="update-profile-form">
+        <div wicket:id="encryptedPasswordContainer" class="field">
+            <label>
+                Encrypted Password
+                <span wicket:id="encryptedPassword.help"></span>
+            </label>
+
+            <div class="value">
+                <span wicket:id="encryptedPassword" class="textbox textbox-disabled"/>
+            </div>
+        </div>
+
+        <div wicket:id="updateFieldsContainer">
+            <div wicket:id="passwordFieldsContainer">
+                <div class="field field-sep">
+                    <label>
+                        <wicket:message key="newPassword"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="newPassword" type="password" class="text password" autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div wicket:id="strengthPanel" class="profile-password"></div>
+
+                <div class="field field-sep">
+                    <label>
+                        <wicket:message key="retypedPassword"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="retypedPassword" type="password" class="text password" autocomplete="off"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field required field-sep">
+                <label>
+                    <wicket:message key="email"/>
+                </label>
+
+                <div class="value">
+                    <input wicket:id="email" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</wicket:extend>

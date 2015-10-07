@@ -1,0 +1,95 @@
+<div class="content-layout-container">
+    <h1>Configure Default Bintray Credentials</h1>
+
+    <div class="content-wrapper">
+        <form name="bintrayForm" class="form"
+              ng-submit="AdminConfigurationBintray.save(AdminConfigurationBintray.bintray)"
+              novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Default Bintray Credentials Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="bintray" always-show-errors="true" autofocus="true">
+                                    <label for="username">Bintray Username</label>
+                                    <jf-help-tooltip html="AdminConfigurationBintray.TOOLTIP.bintrayUsername"></jf-help-tooltip>
+
+                                    <input type="text"
+                                           class="input-text"
+                                           name="username"
+                                           id="username"
+                                           ng-required="AdminConfigurationBintray.bintray.apiKey"
+                                           ng-model="AdminConfigurationBintray.bintray.userName">
+                                </jf-field>
+                            </div>
+                            <!-- prevent auto complete -->
+                            <input type="text" class="hidden"/>
+                            <input type="password" class="hidden"/>
+                            <div class="form-group-cell">
+                                <jf-field validations="bintray" always-show-errors="true">
+                                    <label for="apiKey">Bintray API Key</label>
+                                    <jf-help-tooltip html="AdminConfigurationBintray.TOOLTIP.bintrayAPIKey"></jf-help-tooltip>
+
+                                    <input type="password"
+                                           class="input-text"
+                                           name="apiKey"
+                                           id="apiKey"
+                                           ng-required="AdminConfigurationBintray.bintray.userName"
+                                           ng-model="AdminConfigurationBintray.bintray.apiKey">
+
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell auto-width form-button form-link">
+                                <span jf-reveal-input="apiKey"></span>
+                            </div>
+                            <div class="form-group-cell auto-width form-button form-link">
+                                <jf-clip-copy text-to-copy="AdminConfigurationBintray.bintray.apiKey"
+                                              object-name="Key"></jf-clip-copy>
+
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <buton class="btn btn-secondary"
+                                       ng-click="AdminConfigurationBintray.testBintray()"
+                                       ng-disabled="!AdminConfigurationBintray.fullCredentials()">Test
+                                </buton>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a ng-hide="AdminConfigurationBintray.bintray.userName || AdminConfigurationBintray.bintray.apiKey"
+                               ng-href="{{AdminConfigurationBintray.bintray.bintrayConfigUrl}}" ;
+                               target="url">Register to Bintray...
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="common">
+                                    <label class="mandatory" for="fileUploadLimit">File Upload Limit</label>
+                                    <input type="number"
+                                           class="input-text"
+                                           required
+                                           min="0"
+                                           name="fileUploadLimit"
+                                           id="fileUploadLimit"
+                                           ng-model="AdminConfigurationBintray.bintray.fileUploadLimit"
+                                           jf-validator-int-value>
+                                </jf-field>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ng-click="AdminConfigurationBintray.cancel()">Reset
+                    </button>
+                    <button class="btn btn-primary" type="submit"
+                            ng-disabled="!bintrayForm.$valid">Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

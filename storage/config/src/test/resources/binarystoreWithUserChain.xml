@@ -1,0 +1,15 @@
+<config version="2">
+    <chain>
+        <provider id="cache-fs" type="cache-fs">
+            <provider id="eventual" type="eventual">
+                <provider id="retry" type="retry">
+                    <provider id="file-system" type="file-system"/>
+                </provider>
+            </provider>
+        </provider>
+    </chain>
+
+    <provider id="file-system" type="file-system">
+        <dir>test123</dir>
+    </provider>
+</config>

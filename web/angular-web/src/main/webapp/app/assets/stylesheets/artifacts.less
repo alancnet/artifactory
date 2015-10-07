@@ -1,0 +1,1065 @@
+/**
+  OLD CSS
+**/
+.artifacts-list,
+.artifact-details {
+  border: 1px solid #EEEEEE;
+
+}
+
+.js-back {
+  width: 300px;
+  height: 8000px;
+  background: red;
+}
+
+.ui-fix {
+  position: relative;
+  min-height: 600px;
+  overflow: auto;
+}
+
+.jstree-contextmenu {
+  z-index: 10000;
+  margin-top: 15px;
+  margin-left: 5px;
+  // The Tchupchik:
+  & li:first-child::after, .vakata-context li:first-child::after {
+    display: none;
+  }
+}
+
+.jf-tree-search-container {
+  position: absolute;
+  z-index: 10000;
+  top: -9999px;
+  left: 12px;
+  width: 200px;
+
+  &.jf-tree-search-active {
+    top: 32px;
+  }
+
+  .jf-tree-search {
+    height: 30px;
+    background: #fff;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, .15);
+    width: 100%;
+    color: @grayFontDarker;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 0 10px;
+  }
+}
+
+/**
+  END OF OLD CSS
+**/
+
+#jf-artifacts {
+  .set-me-up, .deploy-btn {
+    color: @blueFontDark;
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 13px;
+
+    &:hover {
+      color: #013c6b;
+    }
+
+    span {
+      font-size: 19px;
+      float: left;
+      margin: 1px 6px 0 0;
+    }
+  }
+
+  .set-me-up {
+    margin-right: 20px;
+    letter-spacing: -0.5px;
+
+    span {
+      margin-right: 8px;
+      font-size: 20px;
+    }
+  }
+
+  .deploy-btn {
+    margin-right: 32px;
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .artifact-details {
+    padding: 15px 0;
+
+    .repository-type {
+      float: right;
+      margin: 0;
+      background-position: center top;
+      text-align: center;
+
+      .repotype {
+        display: inline-block;
+      }
+      .icon-logo-circle {
+        display: inline-block;
+        width: 18px;
+        height: 22px;
+        background-size: 100%;
+        position: relative;
+        top: 7px;
+        margin-right: 4px;
+      }
+    }
+
+    .artifact-details-header {
+      margin: 4px 0 20px 15px;
+
+      .jstree-icon {
+        float: left;
+        font-size: 26px;
+        color: @blueFontDark;
+        line-height: 48px;
+        margin: 0 15px 0 10px;
+      }
+    }
+
+    .artifact-name-heading {
+      color: @blueFontDark;
+      font-size: 22px;
+      font-weight: 400;
+      margin-top: 0px;
+      line-height: 40px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .inner-buttons {
+      margin-left: 20px;
+
+      a {
+        cursor: pointer;
+        color: @greenFontHeader;
+
+        &:hover {
+          text-decoration: none;
+          color: #327535;
+
+          &:not(.no-separator)::before {
+            color: @greenFontHeader;
+          }
+        }
+        &:not(.no-separator)::before {
+          content: "|";
+          cursor: default;
+          margin: 0 6px 0 4px;
+          position: relative;
+          top: -1px;
+        }
+      }
+    }
+
+    .jf-data-table {
+      td:first-child {
+        min-width: 200px
+      }
+    }
+
+    #jf-general {
+      > .panel-default, > .panel {
+        border: none;
+      }
+
+      .licenses {
+
+        .buttons {
+          margin: 0 20px;
+
+          button {
+            margin: 0 5px;
+          }
+        }
+
+        input[type="checkbox"] {
+          display: inline-block;
+        }
+      }
+    }
+
+    .blackduck_logo {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+    }
+  }
+
+  .tree-head-expansion {
+    display: none;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  #tree-element {
+    bottom: 0;
+    overflow-y: auto;
+    padding: 12px 0 10px;
+    top: 41px;
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    [class^="icon-"]:before,
+    [class*=" icon-"]:before {
+      line-height: 2.2em;
+    }
+  }
+  .expanded {
+    #tree-element {
+      top: 80px;
+    }
+
+    .tree-head-expansion {
+      display: block;
+      background-color: #fafafa;
+
+      .labeled-item {
+        background: #fff;
+      }
+    }
+  }
+
+  .tree-browser-header {
+    padding: 8px 10px 8px 4px;
+    border-bottom: 1px solid @grayBorderLighter;
+    overflow: auto;
+    display: table;
+    width: 100%;
+
+    .tree-browser-header-tabs {
+      padding: 0px 15px;
+      margin-bottom: 8px;
+      display: table-cell;
+      width: 230px;
+
+      .tree-browser-tab {
+        color: @grayFontGeneral;
+        font-size: 15px;
+        padding: 3px 9px 0 0;
+        display: inline-block;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:hover, &.active {
+          color: @greenFontHeader;
+        }
+      }
+    }
+
+    .icon {
+      font-size: 15px;
+      top: 2px;
+      position: relative;
+      color: @grayFontGeneral;
+      cursor: pointer;
+
+      &:hover {
+        color: @greenFontHeader;
+      }
+    }
+
+    .tree-browser-header-hide {
+      display: table-cell;
+      vertical-align: top;
+      padding: 4px 10px 0 0;
+    }
+
+    .hide-empty-folders {
+      text-align: right;
+      height: 20px;
+      overflow: hidden;
+
+      label {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .jstree-icon {
+    color: @grayFontLight;
+    background-repeat: no-repeat !important;
+    font-size: 14px;
+  }
+
+  .jstree-wholerow-hovered {
+    background: @grayBGMediumLight;
+  }
+
+  .jstree-hovered .jstree-icon {
+    color: @blueFontDark;
+  }
+
+  .jstree-wholerow-clicked {
+
+    background: @blueBGLight;
+  }
+
+  .jstree-default .jstree-node,
+  .jstree-default .jstree-icon,
+  .jstree-default .jstree-childern {
+    background-image: url('../images/32px.png');
+    background-repeat: repeat-y;
+  }
+
+  .jstree-default .jstree-node,
+  .jstree-default .jstree-icon,
+  .jstree-default .jstree-anchor,
+  .jstree-default .jstree-wholerow {
+    min-height: 30px;
+    line-height: 30px;
+  }
+
+  .jstree-default {
+    .jstree-icon:empty {
+      width: 41px;
+    }
+
+    .jstree-anchor, .jstree-icon {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .jstree-anchor {
+      padding-right: 20px;
+      transition: none !important;
+
+      &.jstree-clicked, &.jstree-hovered {
+        background: transparent;
+        box-shadow: none;
+
+        &:before {
+          content: "";
+          position: absolute;
+          height: 30px;
+          width: 100%;
+          left: 0;
+          opacity: 0.1;
+        }
+      }
+
+      &.jstree-hovered:before {
+        background: #919191;
+      }
+      &.jstree-clicked:before {
+        background: #2291B2;
+      }
+
+      .jstree-icon {
+        background: transparent;
+      }
+
+      &:hover, &.jstree-clicked {
+        &, .jstree-icon:before {
+          color: @blueMain;
+        }
+      }
+    }
+
+    .jstree-node {
+      margin-left: 15px;
+      background-position: -292px -2px;
+
+      &.jstree-last {
+        background: transparent;
+      }
+
+      &.jstree-closed > .jstree-icon {
+        background-position: -106px -2px;
+      }
+
+      &.jstree-open > .jstree-icon {
+        background-position: -148px -2px;
+      }
+
+      &.jstree-open {
+        &.jstree-last > .jstree-icon {
+          background-position: -241px -73px !important;
+        }
+
+      }
+
+      &.jstree-closed {
+        &.jstree-last > .jstree-icon {
+          background-position: -190px -73px !important;
+        }
+
+      }
+    }
+
+    .jstree-leaf {
+      //background: transparent;
+
+      > .jstree-ocl {
+        background-position: -68px -2px !important;
+        width: 41px;
+      }
+
+      &.jstree-last {
+        background: transparent;
+        .jstree-icon {
+          background-position: -138px -73px !important;
+          width: 39px;
+          margin-right: 2px;
+        }
+
+      }
+    }
+
+    .jstree-anchor {
+      font-size: 14px;
+      padding-right: 10px;
+      margin-left: 10px;
+    }
+
+    .jstree-ocl {
+      position: relative;
+      z-index: 100;
+    }
+
+    .jstree-themeicon {
+      margin-left: 0;
+      width: 30px !important;
+    }
+
+    .jstree-children {
+      padding-left: 10px;
+    }
+
+    .jstree-search {
+      color: inherit;
+      font-weight: inherit;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+  }
+
+  .jstree-node[aria-level="1"] {
+
+    background: transparent;
+    margin-left: -20px;
+
+    &.jstree-closed > .jstree-icon.jstree-ocl {
+      background-position: 30px -2px;
+    }
+
+    &.jstree-closed.jstree-last > .jstree-icon,
+    > .jstree-icon.jstree-ocl {
+      background-position: 30px -2px;
+      margin-left: 0;
+    }
+
+    &.jstree-leaf {
+      > .jstree-icon.jstree-ocl {
+        background: transparent;
+        margin-left: 0;
+        width: 41px;
+      }
+    }
+
+    &.jstree-open {
+      > .jstree-icon.jstree-ocl {
+        background-position: -12px -2px;
+      }
+    }
+
+  }
+
+  .jstree-loading .jstree-node,
+  .jstree-loading > .jstree-icon {
+
+    &.jstree-ocl {
+      .icon-hourglass();
+      .spinning();
+
+      background-size: 16px 16px;
+      width: 16px !important;
+      height: 16px !important;
+      min-height: 0 !important;
+      background-position: 0 0 !important;
+      top: 7px;
+      left: 29px;
+      margin-right: 25px;
+    }
+
+    width: 16px;
+    height: 16px;
+    position: relative;
+  }
+
+  .ui-layout-container {
+    //background: @white;
+    border: none;
+  }
+
+  .artifacts-outer-layout-container, .ui-layout-column, .ui-layout-row {
+    overflow: visible; // Otherwise can't see card shadow
+  }
+
+  .ui-layout-column > .ui-splitbar {
+    background: transparent;
+
+    a {
+      display: none;
+    }
+  }
+
+  .list-declaration {
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  .build-tool-btn {
+    min-width: 70px;
+    max-width: 120px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    background: @grayBGMedium;
+    cursor: pointer;
+
+    &.active {
+      background: @greenBGSmallActive;
+      border-top: 2px solid @buildToolBtnBorder;
+      border-bottom: 2px solid @buildToolBtnBorder;
+      color: @white;
+      box-sizing: content-box;
+    }
+  }
+
+  .virtual-repo-item {
+    display: inline-block;
+    margin-right: 40px;
+    line-height: 28px;
+
+    a {
+      &:hover .icon:before {
+        color: @blueLinkBasic;
+      }
+    }
+
+    .icon {
+      float: left;
+      margin: 2px 8px 0 0;
+    }
+  }
+
+  .buttons button {
+    margin: 0 5px;
+  }
+
+  .main-view {
+    padding: 20px 35px 0;
+    position: absolute;
+    top: 120px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow-y: auto;
+  }
+
+  .ui-view-search {
+    //transition: 1s height cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+
+  .back-to-repository-browser {
+    font-size: 14px;
+    margin-left: 15px;
+    position: absolute;
+    right: 30px;
+    margin-top: 8px;
+  }
+}
+
+//-----------deploy modal-------------------------//
+.file-name-deploy, .file-name-deploy-multi {
+  width: 90%;
+  font-size: 14px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.file-name-deploy {
+  padding-top: 5px;
+  max-height: 25px;
+}
+
+.deploy-steps {
+  width: 48%;
+  font-size: 19px;
+  border: 1px solid @grayBorderDark;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 10px;
+  padding-left: 30px !important;
+  background: white;
+  cursor: pointer;
+
+  &.active,
+  &.visited {
+    background: @greenBGPrimary;
+    color: white;
+  }
+  &.step-two {
+    position: absolute;
+    margin-left: -30px;
+    border-left: none;
+  }
+  &.step-one {
+    z-index: 2;
+    position: relative;
+
+  }
+}
+
+.file-upload-name {
+  max-width: 25px;
+  word-wrap: break-word;
+}
+
+.input-form {
+  width: auto;
+  display: inline-block !important;
+  margin-left: 60px;
+}
+
+.deploy-label {
+  width: 30%;
+}
+
+.fileupload-name {
+  color: @grayFontLight;
+}
+
+.deploy {
+  .deploy-title {
+    color: @grayFontDarker;
+  }
+
+  .deploy-mode {
+    color: @grayFontLighter;
+    padding: 0 10px;
+
+    &.active {
+      color: @greenBGDark;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .jf-switch li a {
+    font-weight: 700;
+  }
+
+  .alert {
+    margin-top: 15px;
+  }
+
+  .progress {
+    width: 82%;
+    margin: 0 10px 0 20px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .progress-deploy {
+    text-align: center;
+    padding-top: 15px;
+    height: 70px;
+    background-color: @grayBGLight;
+
+    .progress {
+      border-radius: 0;
+      box-shadow: none;
+      background-color: @greenBGSecondary;
+    }
+    .progress-bar {
+      background: @greenFontHeader;
+      box-shadow: none;
+    }
+  }
+}
+
+//-------------repo tabs----------------//
+.artifact-file-icon {
+  position: absolute;
+  right: 20px;
+  top: 35px;
+
+  img {
+    width: 40px;
+  }
+}
+
+.info-key {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+
+  &.half {
+    width: 50%;
+  }
+}
+
+//---------------rpm tab-------------------//
+.rpm {
+  .event-author {
+    color: @grayFontMediumDark;
+  }
+  .event-container {
+    overflow-y: auto;
+    max-height: 350px;
+  }
+
+  .changelogs {
+    .panel-heading {
+      color: @blackFontDark !important;
+    }
+    .panel-container {
+      margin-top: 0;
+    }
+
+  }
+}
+
+//---------------docker ancestry tab------------//
+.labeled-value a {
+  color: #87B343;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.builds-tab {
+  .builds-tab-tabs-row {
+    margin: 25px 0;
+    font-size: 15px;
+    font-weight: 100;
+    .builds-mode {
+      color: @grayFontLighter;
+      padding: 0 10px;
+      &.active {
+        color: @greenBGDark;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+//---------------governance tab------------//
+
+#jf_governance {
+
+  .panel-container {
+    position: relative;
+  }
+
+  .info-key {
+    width: 30%;
+  }
+
+  .description-panel {
+    margin-left: 94px;
+  }
+}
+
+//------------------Set me up-----------------------//
+.set-me-up-modal {
+  min-height: 500px;
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  &.modal-body .form-group-cell {
+    width: 240px !important;
+  }
+
+  .generate-title-label {
+    font-weight: 700;
+  }
+
+  .set-me-up-actions {
+    margin: 20px 0;
+    font-size: 16px;
+  }
+
+  .CodeMirror {
+    margin-bottom: 15px;
+  }
+
+  .settings-view {
+    position: relative;
+    margin-bottom: 20px;
+
+    p {
+      margin-bottom: 5px;
+      line-height: 22px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+    }
+
+    .copy-to-clip {
+      right: 4px;
+    }
+  }
+
+  a:not(.copy-to-clip) {
+    color: @greenFontHeader;
+  }
+}
+
+//------------------simple browser-----------------------//
+
+.simple-browser {
+  .view-in-simple-mode {
+    visibility: hidden;
+    position: absolute;
+    margin-left: 20px;
+    width: 20px;
+    text-align: center;
+  }
+  .no-simple-browsing {
+    padding-right: 30px;
+  }
+  .jstree-anchor:hover {
+    padding-right: 40px !important;
+
+    & > .view-in-simple-mode {
+      visibility: visible;
+    }
+  }
+  &.has-parent { // When viewing simple browser with parent folder
+    > .jstree-children > .jstree-node:first-child { // The go up node (..)
+      & > .jstree-icon {
+        width: 16px !important;
+        background: none !important;
+      }
+      & > .jstree-anchor {      
+        width: 180px;
+        & > .jstree-icon {
+          width: 16px !important;
+          background: none !important;
+        }
+      }
+    }
+    > .jstree-children > .jstree-node:nth-child(2) { // parent folder
+      & > .jstree-anchor .view-in-simple-mode {
+        display: inline-block;
+      }
+      & > .jstree-wholerow { // row background
+        background: #e0f3fb;
+      }
+      & > .jstree-icon { // expand icon
+        width: 16px !important;
+        background: none !important;
+      }
+      & > .jstree-anchor { // row text
+        color: @blueFontDark;
+        & > .jstree-icon { // row icon
+          width: 32px;
+        }
+      }
+    }
+  }
+}
+
+.not-cached {
+  color: @grayFontGeneral;
+}
+
+.settings-view.preline {
+  white-space: pre-line;
+}
+
+.docker-v2-layers-visualization {
+  position: relative;
+
+  .docker-v2-layer-container {
+    position: relative;
+    width: 280px;
+    height: 100px;
+
+    .left-view {
+      height: 100%;
+      width: 50%;
+      border-right: 1px @grayDocker solid;
+    }
+
+    .layer-id {
+      position: absolute;
+      color: @grayFontGeneral;
+      top: 40px;
+      width: 130px;
+      text-align: center;
+
+      .layer-id-display {
+        cursor: pointer;
+      }
+
+      &.selected {
+        color: @blueMain;
+      }
+
+      .current-node-name {
+        display: inline-block;
+        font-size: 12px;
+        color: @grayFontGeneral;
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        padding: 0px 6px;
+      }
+    }
+
+    .cmd {
+      position: absolute;
+      top: 35px;
+      left: 165px;
+
+      width: 120px;
+      height: 30px;
+
+      padding-top: 5px;
+      text-align: center;
+      color: @white;
+      background-color: @grayDocker;
+      cursor: pointer;
+
+      .cmd-color-bar {
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        top: 0;
+      }
+    }
+
+    .timestamp {
+      position: absolute;
+      font-size: 12px;
+      width: 200px;
+      color: @grayFontGeneral;
+      top: 70px;
+      left: 165px;
+    }
+
+    .hider {
+      position: absolute;
+      background-color: white;
+      width: 20px;
+      height: 50px;
+      top: 50px;
+      left: 129px;
+    }
+
+    .up-arrow {
+      position: absolute;
+      color: @grayDocker;
+      font-size: 24px;
+      top: -15px;
+      left: 127px;
+      &:before {
+        content: '\25B2';
+      }
+    }
+
+    .dot {
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid @blueFontDark;
+      background-color: #fff;
+      cursor: pointer;
+
+      left: 134px;
+      top: 45px;
+
+      &.dot-full {
+        background-color: @blueFontDark;
+      }
+    }
+
+    .layer-id, .dot {
+      transition: 0.3s all;
+    }
+
+    &.first-layer {
+      .hider {
+        top: 0;
+      }
+
+      .dot {
+        width: 13px;
+        height: 13px;
+        top: 44px;
+        left: 133px;
+      }
+    }
+  }
+
+  .layer-details {
+    width: 50%;
+    position: absolute;
+    right: 20px;
+    margin: 30px 0;
+    float: right;
+
+    h3 {
+      font-size: 22px;
+      margin: 0 0 18px;
+    }
+
+    td {
+      height: 50px;
+      border: 1px @grayDocker solid;
+      padding: 15px 15px;
+      vertical-align: top;
+      word-break: break-all;
+    }
+
+    .icon-cell {
+      min-width: 50px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    @media screen and (max-width: 1679px) {
+      width: 40%;
+    }
+  }
+}

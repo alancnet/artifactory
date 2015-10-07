@@ -1,0 +1,60 @@
+<wicket:panel>
+    <div wicket:id="infoBorder">
+        <div style="display:table" class="infoTable">
+            <div style="display: table-row">
+                <div class='info_leftpane' style="display: table-cell">
+                    <div wicket:id="blackListed" class="black-listed-label"/>
+                    <div class="labeled-value">
+                        <span wicket:id="name" class="label"/>
+                        <a wicket:id="nameLink" target="_blank"></a>
+                        <span wicket:id="nameLink.help"/>
+                    </div>
+                    <div wicket:id="description"/>
+                    <div wicket:id="size"/>
+                    <div wicket:id="deployed-by"/>
+                    <div class="labeled-value">
+                        <span wicket:id="created" class="label"/>
+                        <span wicket:id="created.help"/>
+                    </div>
+                    <div class="labeled-value">
+                        <span wicket:id="lastModified" class="label"/>
+                        <span wicket:id="lastModified.help"/>
+                    </div>
+                    <div wicket:id="moduleId"/>
+                    <div class="labeled-value">
+                        <span wicket:id="urlLabel" class="label"/>
+                        <a wicket:id="url" target="_blank"></a>
+                    </div>
+
+                    <div wicket:id="onlineStatusPanel"/>
+
+                    <div class="labeled-value">
+                        <span wicket:id="artifactCountLabel" class="label"/><span wicket:id="artifactCountValue"/>
+                        <a wicket:id="link">Show...</a>
+                    </div>
+                    <div wicket:id="watchingSince"/>
+                    <div wicket:id="watchedPath"/>
+                    <div class="labeled-value">
+                        <span wicket:id="repoPath" class="label"/>
+                        <a wicket:id="repoPathLink" target="_blank"></a>
+                        <span wicket:id="repoPathLink.help"/>
+                    </div>
+                    <div wicket:id="localLayout"/>
+                    <div wicket:id="remoteLayout"/>
+                    <div wicket:id="lastReplication"/>
+                    <div wicket:id="licensesPanel"/>
+                    <div wicket:id="filteredResourceContainer">
+                        Filtered: <input wicket:id="filteredResourceCheckbox" type="checkbox" class="text"/>
+                        <span wicket:id="filteredResource.help" class="filtered-resource-checkbox-help"/>
+                    </div>
+
+                    <div wicket:id="statistics"/>
+
+                </div>
+                <div class="info_rightpane" style="display: table-cell">
+                    <div wicket:id="bintrayDynamicInfoPanel" class="bintray_info_panel"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

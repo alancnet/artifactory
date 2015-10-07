@@ -1,0 +1,168 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<wicket:head>
+    <style type="text/css">
+        .test-result .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .custom {
+            color: #00008b;
+        }
+    </style>
+</wicket:head>
+<wicket:extend>
+    <form wicket:id="form">
+        <div id="modalScroll">
+            <div wicket:id="formBorder">
+                <div class="field required field-100">
+                    <label>Layout Name</label>
+                    <span wicket:id="name.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="name" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required field-100 field-sep">
+                    <label>Artifact Path Pattern</label>
+                    <span wicket:id="artifactPathPattern.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="artifactPathPattern" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required field-100 field-sep">
+                    <input wicket:id="distinctiveDescriptorPathPattern" type="checkbox"/>
+                    <span wicket:id="distinctiveDescriptorPathPattern.help"></span>
+
+                    <div class="value" style="padding-top: 2px;">
+                        <input wicket:id="descriptorPathPattern" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required field-100 field-sep">
+                    <label>Folder Integration Revision RegExp</label>
+                    <span wicket:id="folderIntegrationRevisionRegExp.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="folderIntegrationRevisionRegExp" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required field-100 field-sep ">
+                    <label>File Integration Revision RegExp</label>
+                    <span wicket:id="fileIntegrationRevisionRegExp.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="fileIntegrationRevisionRegExp" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div wicket:id="testBorder">
+                <div class="field small-buttons">
+                    <label>Test Path</label>
+
+                    <div class="value">
+                        <input wicket:id="pathToTest" type="text" class="text" style="width: 490px;"/>
+                        <a wicket:id="testPatterns"></a>
+                    </div>
+                </div>
+
+                <wicket:enclosure child="organization">
+                    <div class="field field-sep test-result">
+                        <label>Result</label>
+
+                        <div class="textbox" style="padding: 7px;">
+                            <div>
+                                <span class="label">Organization:</span>
+                                <span wicket:id="organization"></span>
+                            </div>
+                            <div>
+                                <span class="label">Module:</span>
+                                <span wicket:id="module"></span>
+                            </div>
+                            <div>
+                                <span class="label">Base Revision:</span>
+                                <span wicket:id="baseRevision"></span>
+                            </div>
+                            <div>
+                                <span class="label">Folder Integration Revision:</span>
+                                <span wicket:id="folderIntegrationRevision"></span>
+                            </div>
+                            <div>
+                                <span class="label">File Integration Revision:</span>
+                                <span wicket:id="fileIntegrationRevision"></span>
+                            </div>
+                            <div>
+                                <span class="label">Classifier:</span>
+                                <span wicket:id="classifier"></span>
+                            </div>
+                            <div>
+                                <span class="label">Extension:</span>
+                                <span wicket:id="ext"></span>
+                            </div>
+                            <div>
+                                <span class="label">Type:</span>
+                                <span wicket:id="type"></span>
+                            </div>
+                            <div wicket:id="customFields">
+                                <span wicket:id="key" class="label custom"></span>
+                                <span wicket:id="value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </wicket:enclosure>
+            </div>
+
+            <div wicket:id="regExBorder">
+                <wicket:enclosure child="artifactRegExLabel">
+                    <div class="field test-result small-buttons">
+
+                        <div class="value">
+                            <a wicket:id="resolveRegEx"></a>
+                        </div>
+
+                        <div class="field-sep" style="padding: 7px;">
+                            <label>Artifact Path</label>
+
+                            <div class="textbox one-line" wicket:id="artifactRegExLabel"></div>
+                        </div>
+
+                        <div class="field-sep" style="padding: 7px;">
+                            <label>Descriptor Path</label>
+
+                            <div class="textbox one-line" wicket:id="descriptorRegExLabel"></div>
+                        </div>
+                    </div>
+                </wicket:enclosure>
+            </div>
+
+            <div wicket:id="repoList"></div>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="submit" type="submit"></button>
+            <button wicket:id="cancel" type="button"></button>
+        </div>
+    </form>
+</wicket:extend>

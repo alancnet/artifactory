@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.artifactory.oss.rpm</groupId>
+    <artifactId>jfrog-artifactory-oss</artifactId>
+    <packaging>pom</packaging>
+    <name>Artifactory OSS RPM</name>
+
+    <parent>
+        <groupId>org.artifactory.oss</groupId>
+        <artifactId>artifactory-distribution-parent</artifactId>
+        <version>4.1.3</version>
+    </parent>
+
+    <properties>
+        <rpmbuild.dir>${project.build.directory}/rpmbuild</rpmbuild.dir>
+        <!-- Should be overridden by the build server and release process -->
+        <buildNumber.prop>devel</buildNumber.prop>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>rpm</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.artifactory.oss</groupId>
+                    <artifactId>jfrog-artifactory-oss</artifactId>
+                    <version>${project.version}</version>
+                    <type>zip</type>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <exec dir="${project.basedir}" executable="mkdir">
+                                            <arg line="-p ${project.build.directory}/rpmbuild/BUILD            ${project.build.directory}/rpmbuild/BUILDROOT            ${project.build.directory}/rpmbuild/SOURCES            ${project.build.directory}/rpmbuild/SPECS            ${project.build.directory}/rpmbuild/SRPMS" />
+                                        </exec>
+                                        <exec dir="${project.basedir}" executable="cp">
+                                            <arg line="build.rpm.sh ${project.build.directory}/rpmbuild" />
+                                        </exec>
+                                        <exec dir="${project.basedir}" executable="cp">
+                                            <arg line="artifactory-oss.spec ${project.build.directory}/rpmbuild/SPECS" />
+                                        </exec>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-zip</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.artifactory.oss</groupId>
+                                            <artifactId>jfrog-artifactory-oss</artifactId>
+                                            <version>${project.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.build.directory}/SOURCES</outputDirectory>
+                                            <destFileName>standalone.zip</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>build-rpm</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>bash</executable>
+                            <workingDirectory>${rpmbuild.dir}</workingDirectory>
+                            <arguments>
+                                <argument>build.rpm.sh</argument>
+                                <argument>${project.artifactId}</argument>
+                                <argument>${project.version}</argument>
+                                <argument>${buildNumber.prop}</argument>
+                                <argument>${project.build.directory}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-rpm</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>
+                                                ${project.build.directory}/${project.artifactId}-${project.version}.rpm
+                                            </file>
+                                            <type>rpm</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

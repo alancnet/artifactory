@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Artifactory :: Starting Up...</title>
+    <meta http-equiv="refresh" content="30"/>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Myriad, Helvetica, clean, sans-serif;
+            font-size: 13px;
+            text-align: center;
+            background: #2b2b2b;
+        }
+
+        .wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            text-align: center;
+        }
+
+        .wrapper img {
+            height: 95%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <img src="artifactory-splash.gif"/>
+</div>
+
+<script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+    setInterval(function () {
+        xhr.open('GET', window.location, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                location.reload();
+            }
+        };
+        xhr.send();
+    }, 2000)
+</script>
+</body>
+</html>

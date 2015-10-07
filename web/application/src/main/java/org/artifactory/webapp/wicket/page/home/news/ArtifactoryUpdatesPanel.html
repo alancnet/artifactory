@@ -1,0 +1,16 @@
+<wicket:panel>
+    <div wicket:id="container">
+        <h6 class="news-title">
+            <span class="icon"></span>
+            <a href="#" onclick="return ArtifactoryUpdates.read(this, '${cookie}');">Artifactory Updates...</a>
+        </h6>
+
+        <div class="news-body">
+            <div>${body}</div>
+
+            <a id="show" href="#" class="hide-link" onclick="return ArtifactoryUpdates.toogle(this, '${cookie}');">
+                Don't show this update again.
+            </a>
+        </div>
+    </div>
+</wicket:panel>

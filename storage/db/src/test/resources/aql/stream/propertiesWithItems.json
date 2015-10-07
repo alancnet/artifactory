@@ -1,0 +1,96 @@
+
+{
+  "results" : [ {
+    "items" : [ {
+      "repo" : "repo1",
+      "path" : ".",
+      "name" : ".",
+      "type" : "folder",
+      "size" : 0,
+      "created" : "2012-06-21T15:53:24.448+03:00",
+      "created_by" : "yossis-1",
+      "modified" : "2012-06-21T15:53:24.448+03:00",
+      "modified_by" : "yossis-1",
+      "updated" : "2012-06-21T15:53:24.448+03:00",
+      "depth" : 0
+    } ],
+    "key" : "build.name",
+    "value" : "ant"
+  },{
+    "items" : [ {
+      "repo" : "repo1",
+      "path" : "ant/ant/1.5",
+      "name" : "ant-1.5.jar",
+      "type" : "file",
+      "size" : 716139,
+      "created" : "2012-06-21T15:53:24.448+03:00",
+      "created_by" : "yossis-2201",
+      "modified" : "2012-06-21T15:53:24.448+03:00",
+      "modified_by" : "yossis-3274",
+      "updated" : "2012-06-21T15:53:24.448+03:00",
+      "depth" : 4,
+      "actual_md5" : "902a360ecad98a34b59863c1e65bcf71",
+      "actual_sha1" : "dcab88fc2a043c2479a6de676a2f8179e9ea2167",
+      "original_md5" : "902a360ecad98a34b59863c1e65bcf71",
+      "original_sha1" : "dcab88fc2a043c2479a6de676a2f8179e9ea2167"
+    } ],
+    "key" : "string",
+    "value" : "this is string"
+  },{
+    "items" : [ {
+      "repo" : "repo1",
+      "path" : "org",
+      "name" : "yossis",
+      "type" : "folder",
+      "size" : 0,
+      "created" : "2012-06-21T15:53:24.448+03:00",
+      "created_by" : "yossis-1",
+      "modified" : "2012-06-21T15:53:24.448+03:00",
+      "modified_by" : "yossis-1",
+      "updated" : "2012-06-21T15:53:24.448+03:00",
+      "depth" : 2
+    } ],
+    "key" : "jungle",
+    "value" : "value2"
+  },{
+    "items" : [ {
+      "repo" : "repo1",
+      "path" : "org/yossis/tools",
+      "name" : "test.bin",
+      "type" : "file",
+      "size" : 43434,
+      "created" : "2012-06-21T15:53:24.448+03:00",
+      "created_by" : "yossis-1",
+      "modified" : "2012-06-21T15:53:24.448+03:00",
+      "modified_by" : "yossis-1",
+      "updated" : "2012-06-21T15:53:24.448+03:00",
+      "depth" : 4,
+      "actual_md5" : "302a360ecad98a34b59863c1e65bcf71",
+      "actual_sha1" : "acab88fc2a043c2479a6de676a2f8179e9ea2167",
+      "original_md5" : "302a360ecad98a34b59863c1e65bcf71",
+      "original_sha1" : "acab88fc2a043c2479a6de676a2f8179e9ea2167"
+    } ],
+    "key" : "yossis",
+    "value" : "pdf"
+  },{
+    "items" : [ {
+      "repo" : "repo1",
+      "path" : "org/yossis",
+      "name" : "empty",
+      "type" : "folder",
+      "size" : 0,
+      "created" : "2012-06-21T15:53:24.448+03:00",
+      "created_by" : "yossis-1",
+      "modified" : "2012-06-21T15:53:24.448+03:00",
+      "modified_by" : "yossis-1",
+      "updated" : "2012-06-21T15:53:24.448+03:00",
+      "depth" : 3
+    } ],
+    "key" : "null.val"
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 5,
+    "total" : 5
+  }
+}

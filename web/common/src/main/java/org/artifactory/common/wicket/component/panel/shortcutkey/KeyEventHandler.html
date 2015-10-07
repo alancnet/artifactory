@@ -1,0 +1,50 @@
+<wicket:panel>
+    <input wicket:id="keyCodeField" type="hidden"/>
+    <script wicket:id="initScript" type="text/javascript">
+        (function() {
+            var keys = [${keys}];
+            var input = dojo.byId('${keyCodeField}');
+
+            var keySet = {};
+            dojo.forEach(keys, function(keyCode) {
+                keySet[keyCode] = true;
+            });
+
+            // remember current modal
+            var currentModal = Wicket.Window.current;
+
+            // disconnect old onkeyup handler
+            if (window.KeyEventHandler) {
+                dojo.disconnect(window.KeyEventHandler);
+            }
+
+            // connect to onkeyup
+            window.KeyEventHandler = dojo.connect(document, 'onkeyup', function(e) {
+                if (currentModal != Wicket.Window.current) {
+                    return;
+                }
+
+                // cancel if ajax is running
+                if (AjaxIndicator.waiting) {
+                    return;
+                }
+
+                if (!e) {
+                    e = window.event;
+                }
+
+                var target = e.target ? e.target : e.srcElement;
+                var tagName = target.tagName.toLowerCase();
+                if (tagName == 'input' || tagName == 'button' || tagName == 'textarea' || tagName == 'select') {
+                    return;
+                }
+
+                var keyCode = e.keyCode;
+                if (keySet[keyCode]) {
+                    input.value = keyCode;
+                    input.onkeyup();
+                }
+            });
+        })();
+    </script>
+</wicket:panel>

@@ -1,0 +1,78 @@
+<div class="content-layout-container">
+    <h1>Security General Configuration</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <jf-panel jf-panel-heading="Security General Settings">
+                    <form class="form">
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Allow Anonymous Access">
+                                    <input id="inlineCheckbox1"
+                                           type="checkbox"
+                                           name="inlineCheckbox1"
+                                           ng-click="AdminSecurityGeneral.onClickAllowAnonymousAccess()"
+                                           ng-model="AdminSecurityGeneral.generalConfig.anonAccessEnabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Prevent Anonymous Access to Build Related Info">
+                                    <input id="inlineCheckbox2"
+                                           type="checkbox"
+                                           name="inlineCheckbox2"
+                                           ng-disabled="!AdminSecurityGeneral.generalConfig.anonAccessEnabled"
+                                           ng-model="AdminSecurityGeneral.generalConfig.anonAccessToBuildInfosDisabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Hide Existence of Unauthorized Resources">
+                                    <input type="checkbox"
+                                           id="inlineCheckbox3"
+                                           ng-model="AdminSecurityGeneral.generalConfig.hideUnauthorizedResources">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="AdminSecurityGeneral.TOOLTIP.hideExistenceOfUnauthorizedResources"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label class="control-label">Password Encryption Policy</label>
+                                    <jf-help-tooltip html="AdminSecurityGeneral.TOOLTIP.passwordEncryptionPolicy"></jf-help-tooltip>
+                                    <jf-ui-select jf-select-model="AdminSecurityGeneral.generalConfig.passwordSettings.encryptionPolicy"
+                                                  jf-select-options="AdminSecurityGeneral.options">
+                                    </jf-ui-select>
+                                </jf-field>
+                            </div>
+                        </div>
+                    </form>
+                </jf-panel>
+                <jf-panel jf-panel-heading="Passwords Encryption">
+                    <form class="form">
+                        <div class="alert alert-info">{{AdminSecurityGeneral.getEncryptionStatusText()}}</div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <button class="btn btn-secondary"
+                                        ng-click="AdminSecurityGeneral.toggleEncryption()">
+                                    {{ AdminSecurityGeneral.getEncryptionButtonText() }}
+                                </button>
+                                <jf-help-tooltip html="AdminSecurityGeneral.TOOLTIP.encrypt"></jf-help-tooltip>
+                            </div>
+                        </div>
+                    </form>
+                </jf-panel>
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="pull-right">
+                <button class="btn btn-default" type="button" ng-click="AdminSecurityGeneral.cancel()">Reset</button>
+                <button class="btn btn-primary" ng-click="AdminSecurityGeneral.save()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

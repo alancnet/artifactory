@@ -1,0 +1,12 @@
+<div class="docker">
+    <div
+            ng-if="jfDockerAncestry.dockerAncestryData">
+        <div ng-repeat="record in jfDockerAncestry.dockerAncestryData track by $index"
+             class="padded-row-1x">
+            <div>
+                <span class="labeled-value"><a href="" ng-click="jfDockerAncestry.gotoPath($index)">{{record.indent}}{{record.id}}</a></span>
+                <span> {{jfDockerAncestry.DICTIONARY["size"]}}: {{record.size}}</span>
+            </div>
+        </div>
+    </div>
+</div>

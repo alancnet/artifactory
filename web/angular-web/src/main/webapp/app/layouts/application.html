@@ -1,0 +1,25 @@
+<div id="jf-full-page" ng-if="Base.footerData">
+    <div class="jf-layout-row">
+        <jf-header class="jf-layout-cell"></jf-header>
+    </div>
+    <div class="jf-layout-row">
+        <div class="jf-layout-cell">
+            <jf-messages></jf-messages>
+        </div>
+    </div>
+
+    <div class="jf-layout-row">
+        <div id="jf-viewport" class="jf-layout-cell">
+            <div id="jf-relative-viewport">
+                <div id="jf-main-nav">
+                    <jf-sidebar></jf-sidebar>
+                </div>
+                <!-- Main Content Area-->
+                <div id="jf-content">
+                    <jf-spinner domain="content"></jf-spinner>
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

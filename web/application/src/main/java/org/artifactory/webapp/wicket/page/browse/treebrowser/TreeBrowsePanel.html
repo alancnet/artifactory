@@ -1,0 +1,108 @@
+<wicket:head xmlns:wicket="http://www.w3.org/1999/xhtml">
+    <script type="text/javascript">
+        dojo.require("dijit.layout.ContentPane");
+        dojo.require("dijit.layout.BorderContainer");
+
+        var Browser = {
+            // fix browser tree size
+            fixBrowseTree: function() {
+                // limit tree width
+                var treeContentPane = dijit.byId('treeContentPane');
+                if (treeContentPane) {
+                    var maxWidth = document.documentElement.clientWidth - 500;
+                    treeContentPane.maxSize = maxWidth;
+                    treeContentPane.domNode.style.maxWidth = maxWidth + 'px';
+                }
+
+                // set tree height
+                var browseTree = dojo.byId('browseTree');
+                if (!browseTree) {
+                    return;
+                }
+
+                DomUtils.bindHeight(browseTree, function(docHeight) {
+                    return Math.max(100, docHeight - 215);
+                });
+
+                if (Browser.fixTabPanel) {
+                    Browser.fixTabPanel();
+                }
+            },
+
+            // add splitter
+            initSplitter: function() {
+                // limit tree width
+                var maxWidth = document.documentElement.clientWidth - 500;
+                var treeContentPane = dojo.byId('treeContentPane');
+                treeContentPane.style.maxWidth = maxWidth + 'px';
+
+                var widgets = dojo.parser.instantiate([
+                    dojo.byId('browseTree'),
+                    treeContentPane,
+                    dojo.byId('tabsContentPane')
+                ]);
+
+                // limit tree width
+                widgets[1].maxSize = maxWidth;
+
+                // override tabsContentPane.resize
+                widgets[2].resize = function() {
+                    // call super
+                    this.inherited('resize', arguments);
+
+                    // call fixTabPanel()
+                    var tabsContainers = dojo.query('.tab-row');
+                    if (tabsContainers.length) {
+                        tabsContainers[0].resizeTabs();
+                    }
+                };
+            },
+
+            scrollToSelectedNode: function() {
+                var selectedNodes = dojo.query('#treeContentPane .row-selected');
+                if (selectedNodes.length) {
+                    DomUtils.scrollIntoView(selectedNodes[0]);
+                }
+            }
+        };
+
+        dojo.connect(window, 'onresize', Browser.fixBrowseTree);
+    </script>
+</wicket:head>
+
+<wicket:extend>
+    <div id="browseTree" dojoType="dijit.layout.BorderContainer"
+         liveSplitters="false"
+         orientation="horizontal"
+         sizerWidth="7"
+         persist="false"
+         activeSizing="false">
+
+        <div id="treeContentPane" dojoType="dijit.layout.ContentPane" region="left" splitter="true"
+             minSize="153">
+            <span wicket:id="tree" style="max-width: 10px;"></span>
+        </div>
+
+        <div id="tabsContentPane" dojoType="dijit.layout.ContentPane" region="center" >
+            <span wicket:id="nodePanelContainer">
+                <span wicket:id="nodePanel"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="compact-mode small-checkbox">
+        <input wicket:id="compactCheckbox" type="checkbox"/>
+    </div>
+
+    <div wicket:id="contextMenu"></div>
+
+    <script type="text/javascript">
+        Browser.fixBrowseTree();
+        DomUtils.addOnRender(function() {
+            Browser.initSplitter();
+        });
+    </script>
+    <span wicket:id="contentDialog"></span>
+
+    <div wicket:id="keyEventHandler"></div>
+</wicket:extend>

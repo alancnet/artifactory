@@ -1,0 +1,6771 @@
+/*
+ * Artifactory is a binaries repository manager.
+ * Copyright (C) 2012 JFrog Ltd.
+ *
+ * Artifactory is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Artifactory is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*-- Common --*/
+
+html, body {
+    height: 100%;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+}
+
+body, td, th, select, input, button, textarea {
+    font-family: Arial, Myriad, Helvetica, clean, sans-serif;
+    font-size: 13px;
+}
+
+form {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 7px 0;
+}
+
+h1 {
+    margin: 3px;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.IE-6 h2 {
+    margin: 0;
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 13px;
+    color: #333333;
+}
+
+h4 {
+    margin: 0;
+}
+
+h5, h6 {
+    font-size: 13px;
+}
+
+hr {
+    margin: 20px 0;
+    clear: both;
+}
+
+.IE hr {
+    margin: 10px 0;
+}
+
+em {
+    font-style: normal;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.IE-678 td.nowrap span {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+li.odd, tr.odd td {
+    background-color: #F5F9EB;
+}
+
+tr.even td {
+    background-color: white;
+}
+
+label {
+    color: #333333;
+}
+
+.text-field {
+    width: 222px;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+input.text, textarea, select,
+.text-field /* for AOL */,
+.list, div.textbox, span.textbox, div.textbox,
+.tundra .dijitComboBox {
+    background: white url("images/buttons/field-center.gif") top repeat-x;
+    border: solid 1px #666666;
+}
+
+.dijitComboBox .dijitInputInner {
+    height: 18px;
+}
+
+.dijitComboBox input.dijitArrowButtonInner {
+    height: 18px !important;
+}
+
+.IE .dijitComboBox input.dijitArrowButtonInner {
+    background-color: transparent;
+}
+
+input.text, textarea, span.textbox, div.textbox {
+    padding: 2px 2px 0 2px;
+}
+
+.IE-89 input.text, .Safari input.text {
+    margin-top: 1px;
+}
+
+.Safari textarea, .IE-89 textarea {
+    margin-top: 1px;
+}
+
+span.textbox {
+    display: inline-block;
+    height: 16px;
+}
+
+.list {
+    padding: 2px;
+}
+
+.list span {
+    padding: 0 3px;
+}
+
+.code, .log {
+    padding: 5px;
+
+    font-size: 10pt;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 13pt;
+}
+
+.log {
+    overflow: auto;
+    height: 400px;
+    background: white;
+    white-space: pre-wrap;
+}
+
+pre {
+    border: none;
+}
+
+.code {
+    background: transparent;
+}
+
+.field-row {
+    clear: left;
+}
+
+.field-row .field {
+    float: left;
+    padding: 0 15px 10px 0;
+}
+
+.field-row .repo-field {
+    float: left;
+    padding: 0 36px 10px 0;
+}
+
+.fieldset-border-wrapper .repo-field,
+.IE-67 .field-row .repo-field {
+    padding-right: 12px;
+}
+
+.field-row .field button.row-button {
+    position: relative;
+    top: -5px;
+}
+
+.field-row .field-right {
+    position: absolute;
+    right: 0;
+    padding-right: 19px;
+}
+
+.field-100 input.text, .field-100 textarea, .field-100 select {
+    width: 100%;
+}
+
+.field-sep {
+    margin-top: 10px;
+}
+
+.label-sep {
+    padding-bottom: 1px;
+}
+
+.Chrome .label-sep {
+    padding-bottom: 2px;
+}
+
+.Moz .label-sep {
+    padding-bottom: 0;
+}
+
+.perrmision-target-field {
+    width: 200px;
+}
+
+.Safari .perrmision-target-field {
+    width: 210px;
+}
+
+span.label, span.label-gray {
+    font-weight: normal;
+    font-family: arial, sans-serif;
+}
+
+span.label-gray {
+    color: #333333;
+}
+
+.list-info {
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+.info, .warn, .notice, .maven-pass-info {
+    padding-left: 20px;
+    margin: 5px 0px 5px 0px;
+}
+
+.infoStatusLine {
+    margin: 0 0 17px 31px;
+    color: #858585;
+}
+
+.infoStatusLine .icon {
+    margin-right: 5px;
+}
+
+.infoStatusLine a {
+    color: #87B343;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.infoStatusLine a:hover {
+    text-decoration: underline;
+}
+
+.welcome-border .infoStatusLine .value {
+    color: #87B343;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.aLoginName .icon {
+    background: url("images/buttons/artifactory3sprites.png") no-repeat;
+    width: 15px;
+    height: 16px;
+    background-position: -128px -10px;
+    padding-left: 20px;
+}
+
+.aUptime .icon {
+    background: url("images/buttons/artifactory3sprites.png") no-repeat;
+    width: 0px;
+    height: 18px;
+    background-position: -51px -11px;
+    padding-left: 20px;
+    display: inline-block;
+}
+
+.aUptime .text {
+    position: relative;
+    top: -4px;
+}
+
+.aVersion .icon {
+    background: url("images/buttons/artifactory3sprites.png") no-repeat;
+    width: 0px;
+    height: 16px;
+    background-position: -103px -10px;
+    padding-left: 20px;
+    display: inline-block;
+    margin-right: 0px;
+}
+
+.aVersion .text {
+    position: relative;
+    top: -4px;
+}
+
+.aUptodateInfo .icon {
+    background: url("images/buttons/artifactory3sprites.png") no-repeat;
+    height: 17px;
+    background-position: -78px -10px;
+    padding-left: 20px;
+}
+
+.info, .maven-pass-info {
+    background: url("images/icons/information.gif") left top no-repeat;
+    color: #4E4F52;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .notice {
+        background: url("images/icons/information_highres.gif") left top no-repeat;
+        background-size: 16px 16px;
+    }
+}
+
+.maven-pass-info div {
+    margin-top: 3px;
+}
+
+.notice {
+    background: url("images/icons/warning.gif") left top no-repeat;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .notice {
+        background: url("images/icons/warning_highres.gif") left top no-repeat;
+        background-size: 16px 16px;
+    }
+}
+
+.warn {
+    background: url("images/icons/warning.gif") left top no-repeat;
+    padding-bottom: 3px;
+    color: red;
+    font-weight: bold;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .warn {
+        background: url("images/icons/warning_highres.gif") left top no-repeat;
+        background-size: 16px 16px;
+        padding-bottom: 3px;
+        color: red;
+        font-weight: bold;
+    }
+}
+
+.approved {
+    background: url("images/icons/checkmark.gif") left top no-repeat;
+    padding-bottom: 3px;
+    font-weight: bold;
+    padding-left: 22px;
+}
+
+.info-bold {
+    background: url("images/icons/information.gif") left top no-repeat;
+    padding-bottom: 3px;
+    font-weight: bold;
+    padding-left: 22px;
+}
+
+.small {
+    font-size: 11px;
+    font-weight: normal;
+}
+
+input[disabled='disabled'][type='text'], input[disabled='disabled'][type='password'], span.textbox-disabled {
+    background-color: #f7f7f7;
+}
+
+.path-field {
+    width: 40em;
+}
+
+.item-link {
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.item-link:hover, .item-link:focus {
+    text-decoration: underline;
+}
+
+.none {
+    display: none;
+}
+
+.firebug {
+    position: fixed !important;
+    bottom: 0 !important;
+    height: 100px !important;
+    width: 100%;
+}
+
+.textbox.one-line {
+    min-height: 14px;
+    padding-bottom: 2px;
+}
+
+/*-- ActionsPanel --*/
+
+.actions ul {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.actions li {
+    list-style: none;
+    padding: 0 10px 0 0;
+    display: inline;
+    margin: 0;
+}
+
+.actions li a {
+    display: inline-block;
+    margin-top: 5px;
+    min-width: 110px;
+}
+
+/*-- LinksColumn --*/
+
+.actions a {
+    text-decoration: none;
+}
+
+.actions em {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+/*-- AutoCompleteTextField --*/
+
+.wicket-aa-container {
+    z-index: 30001 !important;
+}
+
+.wicket-aa {
+    border: solid 1px #DADADA;
+    border-bottom: none;
+    background-color: white;
+    font-size: 11px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.wicket-aa ul {
+    border-bottom: solid 1px #DADADA;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.wicket-aa li {
+    border-bottom: 1px solid #DADADA;
+    color: #636563;
+    cursor: pointer;
+    height: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0 3px;
+}
+
+.wicket-aa .selected {
+    background-color: #c4f8ff;
+    color: #000000;
+}
+
+/*-- ImportExportReposPage --*/
+
+.import-export-form label.float-left, .importForm label.float-left {
+    min-width: 160px;
+}
+
+.IE-6 .import-export-form label.float-left, .importForm label.float-left {
+    width: 160px;
+}
+
+.import-export-system label.float-left {
+    min-width: 180px;
+}
+
+.IE-6 .import-export-system label.float-left {
+    width: 180px;
+}
+
+.import-export-form .zip-file {
+    padding-top: 7px;
+    padding-bottom: 3px;
+}
+
+/*-- BackupCreateUpdatePanel --*/
+
+.backup-form label {
+    float: left;
+    width: 160px;
+}
+
+.backup-form .required label {
+    width: 148px;
+}
+
+.IE-67 .backup-form .field-path {
+    position: relative;
+    top: -4px;
+}
+
+.IE-678 .backup-form .field-path label {
+    position: relative;
+    top: 7px;
+}
+
+.IE-89 .backup-form .field-path {
+    position: relative;
+    top: -2px;
+}
+
+.backup-form .field-path label {
+    position: relative;
+    top: 2px;
+}
+
+.backup-form .excluded-repos-field label {
+    float: none;
+    width: auto;
+}
+
+/*-- DeployArtifactPanel --*/
+
+.upload-form .upload-field {
+    padding-top: 5px;
+    padding-right: 1px;
+}
+
+.IE .upload-form .button {
+    padding-left: 4px;
+    position: relative;
+    margin-top: -4px;
+}
+
+.Chrome .upload-form .button {
+    padding-left: 4px;
+}
+
+.artifact-form label {
+    min-width: 154px;
+    float: left;
+    padding-left: 12px;
+}
+
+.artifact-form select {
+    min-width: 306px;
+}
+
+.IE-7 .artifact-form select {
+    width: 306px;
+}
+
+.artifact-form input.text {
+    width: 300px;
+}
+
+.artifact-form .long input.text {
+    width: 570px;
+}
+
+.artifact-form .short input.text {
+    width: 60px;
+}
+
+.IE-6 .artifact-form label {
+    width: 150px;
+}
+
+.autoCalculatePath {
+    margin-top: 15px;
+}
+
+/*--DeployFromZipPanel--*/
+.upload-zip-form .button {
+    padding-left: 2px;
+    padding-top: 3px;
+}
+
+.IE-67 .upload-zip-form .button {
+    padding-top: 0;
+}
+
+/*-- Services Configuration --*/
+
+.services-configuration-form label.float-left {
+    min-width: 150px;
+}
+
+.IE-6 .services-configuration-form label.float-left {
+    width: 150px;
+}
+
+/*-- AbstractDefaultAjaxBehavior -------------------------------------------*/
+
+#wicketAjaxDebugWindow {
+    background-color: #ffffff;
+}
+
+#wicket-debug-link {
+    background-color: #ffffff;
+    padding: 3px;
+    position: fixed !important;
+}
+
+.IE-6 #wicket-debug-link {
+    position: absolute !important;
+}
+
+#wicketDebugLink {
+    border: solid 1px #666666 !important;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 10px;
+    padding: 2px 5px;
+    opacity: 0.6 !important;
+    filter: alpha(opacity=60) !important;
+}
+
+#wicketDebugLink:hover, #wicketDebugLink:focus {
+    background-color: lightyellow !important;
+    opacity: 0.9 !important;
+    filter: alpha(opacity=90) !important;
+}
+
+.clear {
+    clear: both;
+}
+
+.disabled {
+    cursor: default;
+}
+
+.disabled label, .disabled .fieldset-border-title {
+    color: #999999;
+}
+
+span.textbox-disabled {
+    color: #666666;
+}
+
+/*-- side-menu --*/
+
+.side-menu {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+    width: 170px;
+    background: #fff;
+    /*background: url("images/accordion-menu/menu_bg_center.gif") repeat-y right;*/
+    left: 0;
+}
+
+.IE-6 .side-menu {
+    margin-left: 5px;
+}
+
+.IE-67 .sub-menu-opened {
+    display: inline-block;
+}
+
+.side-menu .selected {
+    background: url("images/accordion-menu/menu_bg_arrow.gif") right no-repeat;
+    position: relative;
+    right: -10px;
+}
+
+.side-menu-top {
+    background: url("images/accordion-menu/menu_bg_top.gif") repeat-y top right;
+}
+
+.side-menu-bottom {
+    padding: 23px 10px 30px 0;
+    /*background: #fff;*/
+    /*background: url("images/accordion-menu/menu_bg_bottom.gif") repeat-y bottom right;*/
+    /*min-height: 270px;*/
+}
+
+.IE-6 .side-menu-bottom {
+    height: 270px;
+}
+
+.side-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.side-menu li {
+    list-style: none;
+    line-height: 35px;
+    position: relative;
+}
+
+.side-menu li.menu-group, .side-menu li.menu-item {
+    font-size: 14px;
+    border-top: 1px solid #BFBFBF;
+    font-weight: bold;
+}
+
+.side-menu .menu-items {
+    border-bottom: 1px solid #3F6b98;
+}
+
+.side-menu .menu-items .menu-items {
+    border-bottom: none;
+}
+
+.side-menu li.menu-group {
+    background: url("images/accordion-menu/arrow_closed.gif") left no-repeat;
+}
+
+.side-menu li.menu-group-selected, .side-menu li.menu-group-opened {
+    background: url("images/accordion-menu/arrow_open.gif") left no-repeat;
+}
+
+.side-menu li li.menu-item {
+    font-weight: normal;
+    border-top: 1px solid #DBEBEB;
+    font-size: 14px;
+    width: 160px;
+
+}
+
+.side-menu a {
+    text-decoration: none;
+    padding-left: 20px;
+    display: block;
+    color: #16487D;
+}
+
+.side-menu a.selected {
+    font-weight: bold;
+    color: #000000;
+    padding-left: 10px;
+    height: 35px;
+}
+
+.side-menu em {
+    padding-left: 20px;
+    display: block;
+    color: #666666;
+    cursor: default;
+    font-style: normal;
+}
+
+.sub-menu-closed {
+    display: none;
+}
+
+.side-menu .disabled .item-name {
+    color: #666666;
+}
+
+.buttons {
+    margin-top: 10px;
+    text-align: right;
+    clear: both;
+    margin-right: 17px;
+}
+
+.border-wrapper .buttons {
+    text-align: left;
+}
+
+.IE-67 .buttons {
+    margin-top: 7px;
+    height: 38px;
+}
+
+/*-- HelpBubble ---------------------------------------------------*/
+
+button.help-link {
+    background: url("images/buttons/BTN-help.gif") no-repeat;
+    width: 18px;
+    height: 19px;
+    cursor: help;
+    border: none;
+    margin: 0 0px;
+    vertical-align: middle;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    button.help-link {
+        background: url("images/buttons/BTN-help_highres.gif") no-repeat;
+        background-size: 18px 19px;
+        width: 18px;
+        height: 19px;
+        cursor: help;
+        border: none;
+        margin: 0 0px;
+        vertical-align: middle;
+    }
+}
+
+.Chrome button.help-link {
+    position: relative;
+    top: -1px;
+}
+
+.dijitTooltip {
+    z-index: 30001;
+}
+
+/*-- BaseSearchPage --*/
+
+.search-form .search-box {
+    background: url("images/table/search-pointer.gif") right 0 no-repeat;
+    padding-right: 6px;
+    display: inline-block;
+}
+
+.IE-7 .search-form .search-box {
+    position: relative;
+    top: -7px;
+}
+
+.search-form .search-box input {
+    background: white url("images/table/search-center.gif") top repeat-x;
+    width: 180px;
+    height: 18px;
+    padding: 2px 2px 0 2px;
+    border: #3A3E43 solid 1px;
+    border-right: none 0;
+}
+
+.IE-7 .search-form .search-box input,
+.Chrome .search-form .search-box input {
+    height: 18px;
+}
+
+.search-form div.field-sep {
+    margin-top: 5px;
+}
+
+.IE-7 .search-form .button {
+    position: relative;
+    left: 5px;
+}
+
+.search-tabs .tab-panel {
+    padding-top: 7px;
+    min-width: 772px;
+}
+
+.search-tabs .data-table {
+    margin-top: 10px;
+}
+
+.search-tabs.styled-tab-panel {
+    padding: 10px;
+    border: 1px solid #222;
+    margin: 4px 20px 20px 20px;
+}
+
+/* -- navigation ------------------------------------------------------*/
+
+.navigation td {
+    padding: 10px;
+}
+
+.IE-67 .navigation td {
+    width: 0;
+}
+
+.navigatorLabel {
+    color: #4F4F53;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+    padding-top: 3px;
+    white-space: nowrap;
+}
+
+.navigator {
+    float: right;
+}
+
+.navigatorInfo {
+    margin-top: 5px;
+}
+
+body button.prevPage span {
+    display: none;
+}
+
+body button.nextPage span {
+    display: none;
+}
+
+body button.prevPage {
+    width: 22px;
+    height: 19px;
+    background-image: url("images/buttons/table-buttons/back/BTN-back.gif");
+}
+
+body button.prevPage-disabled {
+    width: 22px;
+    height: 19px;
+    background-image: url("images/buttons/table-buttons/back/BTN-back-disabled.gif");
+}
+
+.nextPageEnabled {
+}
+
+body button.nextPage {
+    width: 22px;
+    height: 19px;
+    background-image: url("images/buttons/table-buttons/next/BTN-next.gif");
+}
+
+body button.nextPage-disabled {
+    width: 22px;
+    height: 19px;
+    background-image: url("images/buttons/table-buttons/next/BTN-next-disabled.gif");
+}
+
+body button.pageableDropDown span {
+    display: none;
+}
+
+body button.pageableDropDown {
+    width: 20px;
+    height: 19px;
+}
+
+.FF .navigator button {
+    position: relative;
+    top: 1px;
+}
+
+/*-- login in the header ---------------------------------*/
+
+.user-info {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    padding: 3px;
+    font-size: 12px;
+    color: black;
+}
+
+.user-info .button .button-right {
+    background-image: url("images/user-area/button-normal/BTN_user_normal_right.gif");
+    height: 20px;
+    padding-top: 0;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.user-info .button .button-center {
+    background-image: url("images/user-area/button-normal/BTN_user_normal_center.gif");
+}
+
+.user-info .button .button-left {
+    background-image: url("images/user-area/button-normal/BTN_user_normal_left.gif");
+}
+
+.user-info .button .button-right {
+    background-image: url("images/user-area/button-normal/BTN_user_normal_right.gif");
+}
+
+.user-info .button:hover .button-center, .user-info .button:focus .button-center {
+    background-image: url("images/user-area/button-mouseover/BTN_user_mo_center.gif");
+}
+
+.user-info .button:hover .button-left, .user-info .button:focus .button-left {
+    background-image: url("images/user-area/button-mouseover/BTN_user_mo_left.gif");
+}
+
+.user-info .button:hover .button-right, .user-info .button:focus .button-right {
+    background-image: url("images/user-area/button-mouseover/BTN_user_mo_right.gif");
+}
+
+/* ----- Ajax Indicator --------------------------------------- */
+
+.ajax-indicator {
+    z-index: 33333;
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.IE-6 .ajax-indicator {
+    position: absolute;
+}
+
+.ajax-indicator iframe {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    display: none;
+}
+
+.IE-6 .ajax-indicator iframe {
+    display: block;
+}
+
+.ajax-indicator div, .ajax-indicator iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ajax-indicator .ajax-indicator-bg {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    background-color: black;
+}
+
+.ajax-indicator .ajax-indicator-message {
+    position: relative;
+    background: url("images/timer.gif") no-repeat white 20px;
+    border: 1px black solid;
+    width: 200px;
+    height: 80px;
+}
+
+.ajax-indicator .ajax-indicator-message span {
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#ajaxIndicator {
+    visibility: hidden;
+}
+
+/*-- LinksColumnPanel --*/
+
+.links-icon {
+    width: 16px;
+    height: 16px;
+    background: #BCD873 url("images/buttons/BTN-action-mouseover.gif") no-repeat;
+    position: relative;
+    top: 3px;
+    visibility: hidden;
+    display: inline-block;
+}
+
+td.LinksColumn {
+    height: 22px;
+    padding: 0 2px !important;
+}
+
+td.LinksColumn, th.LinksColumn {
+    width: 18px;
+}
+
+span.LinksColumn {
+    display: inline-block;
+    width: 16px;
+}
+
+.Moz span.LinksColumn {
+    height: 16px;
+}
+
+.links-panel {
+    display: none;
+    position: absolute;
+    z-index: 30001 !important;
+}
+
+.IE-6 .links-panel {
+    width: 100px;
+}
+
+.links-border {
+    position: relative;
+    height: 100%;
+    background-color: #E5E6E7;
+    left: -21px;
+}
+
+.links-pointer {
+    position: absolute;
+    width: 22px;
+    height: 100%;
+    top: 0;
+    right: -5px;
+    background: url("images/toolbox/toolbox-pointer.gif") right center no-repeat;
+}
+
+.IE-89 .links-pointer {
+    top: 3px;
+}
+
+.IE-6 .links-pointer {
+    height: expression( this.parentNode.scrollHeight + 'px' );
+}
+
+.selected .links-icon {
+    background: url("images/buttons/BTN-action-selected.gif") no-repeat;
+}
+
+.links-top, .links-bottom {
+    position: absolute;
+    width: 100%;
+    height: 34px;
+}
+
+.IE-6 .links-panel .links-top, .IE-6 .links-panel .links-bottom {
+    width: expression( this.parentNode.scrollWidth + 'px' );
+}
+
+.IE-6 .tree-actions .links-top, .IE-6 .tree-actions .links-bottom {
+    width: 170px;
+}
+
+.links-top {
+    background: #E5E5E5 url("images/toolbox/toolbox-top-center.gif") repeat-x top;
+    top: -5px;
+}
+
+.links-bottom {
+    background: url("images/toolbox/toolbox-bottom-center.gif") repeat-x bottom;
+    bottom: -5px;
+}
+
+.links-left, .links-right {
+    position: absolute;
+    width: 8px;
+    height: 100%;
+}
+
+.IE-6 .links-left, .IE-6 .links-right {
+    height: expression( this.parentNode.scrollHeight + 'px' );
+}
+
+.IE-6 .tree-actions .links-left, .IE-6 .tree-actions .links-right {
+    height: expression( this.parentNode.scrollHeight + 'px' );
+}
+
+.links-left {
+    background: url("images/toolbox/toolbox-center-right.gif") repeat-y left;
+    left: -5px;
+}
+
+.links-right {
+    background: url("images/toolbox/toolbox-center-right.gif") repeat-y right;
+    right: -5px;
+}
+
+.links-top-left, .links-top-right {
+    position: absolute;
+    width: 11px;
+    height: 34px;
+}
+
+.links-top-left {
+    background: url("images/toolbox/toolbox-top-left.gif") no-repeat top left;
+    top: -5px;
+    left: -5px;
+}
+
+.links-top-right {
+    background: url("images/toolbox/toolbox-top-right.gif") no-repeat top right;
+    top: -5px;
+    right: -5px;
+}
+
+.links-bottom-left, .links-bottom-right {
+    position: absolute;
+    width: 11px;
+    height: 10px;
+}
+
+.links-bottom-left {
+    background: url("images/toolbox/toolbox-bottom-left.gif") no-repeat bottom left;
+    bottom: -5px;
+    left: -5px;
+}
+
+.links-bottom-right {
+    background: url("images/toolbox/toolbox-bottom-right.gif") no-repeat bottom right;
+    bottom: -5px;
+    right: -5px;
+}
+
+.icon-link {
+    padding-left: 22px;
+    background-repeat: no-repeat;
+    background-position: left;
+    display: block;
+    height: 18px;
+}
+
+.actions .icon-link, .links-panel .icon-link, .tree-actions .icon-link {
+    padding-left: 30px;
+    height: 25px;
+}
+
+.actions a, .links-panel a, .tree-actions a {
+    text-decoration: none;
+    color: #000000;
+    padding-top: 4px;
+}
+
+.tree-actions .links-body {
+    padding: 10px;
+}
+
+.actions :focus, .links-panel :focus,
+.tree-actions :focus,
+.top-menu a:focus,
+a.collapse-link:focus,
+.news-title a:focus {
+    -moz-outline-style: none;
+    outline: none !important;
+}
+
+.actions a:hover, .actions a:focus,
+.links-panel a:hover, .links-panel a:focus,
+.tree-actions a:hover, .tree-actions a:focus {
+    color: #777777;
+}
+
+/* fix RTFACT-2103 */
+.IE .links-panel a.normal {
+    color: black;
+}
+
+div.links-panel ul {
+    position: relative;
+    margin: 0;
+    padding: 15px 15px 5px 15px;
+    list-style: none;
+}
+
+div.links-panel li {
+    margin-bottom: 10px;
+}
+
+/*-- StyledTabbedPanel --*/
+
+div.styled-tab-panel div.tab-row {
+    line-height: normal;
+    margin: 0 5px -3px 1px;
+    height: 55px;
+    padding: 1px 0 0 0;
+    overflow: hidden;
+    position: relative;
+}
+
+div.styled-tab-panel div.tab-row ul {
+    list-style: none outside none;
+    margin: 0 0 0 1px;
+    padding: 0px 10px 0 0;
+}
+
+div.styled-tab-panel div.tab-row a {
+    display: block;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.styled-tab-panel div.tab-row span {
+    margin: 0;
+    display: block;
+    padding: 12px 10px 3px 10px;
+    height: 27px;
+    min-width: 105px;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.2em;
+}
+
+.IE-6 div.styled-tab-panel div.tab-row span {
+    width: 105px;
+}
+
+div.styled-tab-panel div.tab-row li.first-tab span {
+    min-width: 100px;
+    padding-left: 15px;
+}
+
+.IE-6 div.styled-tab-panel div.tab-row li.first-tab span {
+    width: 100px;
+}
+
+div.styled-tab-panel div.tab-row li.last-tab span {
+    min-width: 100px;
+    padding-right: 15px;
+}
+
+.IE-6 div.styled-tab-panel div.tab-row li.last-tab span {
+    width: 100px;
+}
+
+div.styled-tab-panel div.tab-row li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    height: 100px; /* needed for js */
+}
+
+.IE-67 div.styled-tab-panel div.tab-row li {
+    height: 95px;
+}
+
+div.styled-tab-panel div.tab-row li {
+    background: transparent url("images/tree-inspector/tree-tabs/normal/tab-normal-center.gif") repeat-x top;
+}
+
+div.styled-tab-panel div.tab-row a {
+    background: transparent url("images/tree-inspector/tree-tabs/normal/tab-normal-right.gif") no-repeat right top;
+    color: #776655;
+}
+
+div.styled-tab-panel div.tab-row span {
+    background: transparent url("images/tree-inspector/tree-tabs/normal/tab-normal-left.gif") no-repeat left top;
+}
+
+div.styled-tab-panel div.tab-row li.last-tab a {
+    background: transparent url("images/tree-inspector/tree-tabs/normal/tab-normal-rightmost.gif") no-repeat right top;
+    color: #776655;
+}
+
+div.styled-tab-panel div.tab-row li.first-tab span {
+    background: transparent url("images/tree-inspector/tree-tabs/normal/tab-normal-leftmost.gif") no-repeat left top;
+}
+
+div.styled-tab-panel div.tab-row a:focus {
+    position: relative;
+}
+
+div.styled-tab-panel div.tab-row li.hover, div.styled-tab-panel div.tab-row li.opened {
+    background: transparent url("images/tree-inspector/tree-tabs/mouseover/tab-mo-center.gif?3") repeat-x top;
+}
+
+div.styled-tab-panel div.tab-row li.hover a, div.styled-tab-panel div.tab-row li.opened a {
+    background: transparent url("images/tree-inspector/tree-tabs/mouseover/tab-mo-right.gif?3") no-repeat right top;
+    color: #776655;
+}
+
+div.styled-tab-panel div.tab-row li.hover span, div.styled-tab-panel div.tab-row li.opened span {
+    background: transparent url("images/tree-inspector/tree-tabs/mouseover/tab-mo-left.gif?3") no-repeat left top;
+}
+
+div.styled-tab-panel div.tab-row li.last-tab-hover a {
+    background: transparent url("images/tree-inspector/tree-tabs/mouseover/tab-mo-rightmost.gif?3") no-repeat right top;
+    color: #776655;
+}
+
+div.styled-tab-panel div.tab-row li.first-tab-hover span {
+    background: transparent url("images/tree-inspector/tree-tabs/mouseover/tab-mo-leftmost.gif?3") no-repeat left top;
+}
+
+div.styled-tab-panel div.tab-row li.selected a {
+    background-image: url("images/tree-inspector/tree-tabs/selected/tab-selected-right.gif");
+}
+
+div.styled-tab-panel div.tab-row li.selected {
+    background-image: url("images/tree-inspector/tree-tabs/selected/tab-selected-center.gif");
+}
+
+div.styled-tab-panel div.tab-row li.selected span {
+    background-image: url("images/tree-inspector/tree-tabs/selected/tab-selected-left.gif");
+    font-weight: bold;
+}
+
+div.styled-tab-panel div.tab-row li.selected-last-tab a {
+    background-image: url("images/tree-inspector/tree-tabs/selected/tab-selected-rightmost.gif");
+}
+
+div.styled-tab-panel div.tab-row li.selected-first-tab span {
+    background-image: url("images/tree-inspector/tree-tabs/selected/tab-selected-leftmost.gif");
+    font-weight: bold;
+}
+
+div.styled-tab-panel div.tab-row a.disabled {
+    cursor: default;
+    color: #a0a0a0 !important;
+}
+
+.tab-panel-top {
+    background: url("images/tree-inspector/frame/frame-top-center.gif") repeat-x top;
+    /*border-bottom: 2px solid red;*/
+
+}
+
+.tab-panel-left {
+    background: url("images/tree-inspector/frame/frame-center-left.gif") repeat-y left;
+}
+
+.tab-panel-right {
+    background: url("images/tree-inspector/frame/frame-center-right.gif") repeat-y right;
+}
+
+.tab-panel-bottom {
+    background: url("images/tree-inspector/frame/frame-bottom-center.gif") repeat-x bottom;
+}
+
+.tab-panel-top-left {
+    background: url("images/tree-inspector/frame/frame-top-left.gif") no-repeat top left;
+}
+
+.tab-panel-top-right {
+    background: url("images/tree-inspector/frame/frame-top-right.gif") no-repeat top right;
+}
+
+.tab-panel-bottom-left {
+    background: url("images/tree-inspector/frame/frame-bottom-left.gif") no-repeat bottom left;
+    padding: 0 10px 18px 10px;
+}
+
+.IE-6 .tab-panel-bottom-left {
+    padding: 0 10px 23px 10px;
+}
+
+.tab-panel-bottom-right {
+    background: url("images/tree-inspector/frame/frame-bottom-right.gif") no-repeat bottom right;
+}
+
+div.tab-panel {
+    border-top: none;
+    clear: left;
+    margin: 0px 5px 5px 5px;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.IE-678 div.tab-panel {
+    margin-bottom: 0;
+    position: relative;
+}
+
+.styled-tab-panel {
+    background-color: white;
+}
+
+.styled-tab-panel a.move-right, .styled-tab-panel a.move-left {
+    background-repeat: no-repeat;
+    width: 7px;
+    height: 10px;
+    display: block;
+    text-decoration: none;
+    margin-top: 15px;
+    visibility: hidden;
+}
+
+.styled-tab-panel a.move-right {
+    background-image: url("images/tree-inspector/tree-tabs/tab-arrow-right.gif");
+    float: right;
+    margin-right: 10px;
+}
+
+.styled-tab-panel a.move-left {
+    background-image: url("images/tree-inspector/tree-tabs/tab-arrow-left.gif");
+    float: left;
+    margin-left: 10px;
+}
+
+/*-- Tree --*/
+
+body div.wicket-tree span.minus {
+    background-image: url("images/tree-inspector/triangle-opened.gif");
+    background-position: center;
+}
+
+body div.wicket-tree span.plus {
+    background-image: url("images/tree-inspector/triangle-closed.gif");
+    background-position: center;
+}
+
+body div.wicket-tree span.indent-line,
+body div.wicket-tree span.junction,
+body div.wicket-tree span.junction-last,
+body div.wicket-tree span.corner {
+    background: none;
+}
+
+body div.wicket-tree a {
+    color: #333333;
+}
+
+/*-- Tree fixes --*/
+
+body div.wicket-tree {
+    border: none;
+    margin: 0 4px;
+    width: auto;
+    overflow: visible;
+    white-space: nowrap;
+    line-height: 17px;
+}
+
+body div.wicket-tree div.a_ {
+    width: auto;
+    padding: 0;
+}
+
+div.wicket-tree span.icon {
+    margin-right: 3px;
+}
+
+.IE-678 div.wicket-tree span.junction,
+.IE-678 div.wicket-tree span.junction-last,
+.IE-678 div.wicket-tree span.plus,
+.IE-678 div.wicket-tree span.minus,
+.IE-678 div.wicket-tree span.corner,
+.IE-678 div.wicket-tree span.indent-line,
+.IE-678 div.wicket-tree span.icon,
+.IE-678 div.wicket-tree span.indent,
+.IE-678 div.wicket-tree span.indent-blank {
+    float: none;
+    display: inline-block;
+}
+
+body div.wicket-tree a {
+    float: none;
+}
+
+body div.wicket-tree div.row, body div.wicket-tree div.row-selected {
+    overflow: visible;
+    font-weight: normal;
+}
+
+/*-- BrowseRepoPage --*/
+
+#browseTree {
+    width: 100%;
+    height: 100px;
+}
+
+#treeContentPane {
+    padding: 5px 0;
+    background-color: white;
+    border: solid 1px #DBDAEC;
+    margin-bottom: 18px;
+    min-width: 150px;
+    overflow: auto;
+}
+
+.IE-6 #treeContentPane {
+    width: 150px;
+}
+
+.compact-mode {
+    position: absolute;
+    margin-top: -14px;
+}
+
+.browseTd {
+    vertical-align: top;
+    width: 50%;
+}
+
+td.one-line span {
+    display: block;
+    overflow: hidden;
+    height: 17px;
+}
+
+.tundra div.dijitSplitterV {
+    background: none;
+    width: 12px;
+    cursor: col-resize;
+}
+
+.tundra .dijitSplitterV .dijitSplitterThumb {
+    left: 4px;
+}
+
+.tundra .dijitSplitterActive {
+    background-color: #E5E7E7 !important;
+}
+
+.tundra .dijitContentPane {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.tundra .dijitBorderContainer {
+    background: none;
+    padding: 0;
+}
+
+.IE-6 div.wicket-tree {
+    width: 100px;
+}
+
+.node-label {
+    padding-right: 7px;
+}
+
+.Moz div.wicket-tree .node-label {
+    display: inline-block;
+    height: 20px;
+}
+
+.IE-8 div.wicket-tree .node-label {
+    vertical-align: top;
+    margin-top: 3px;
+}
+
+.IE-6 .browse-repo-panel .tab-panel {
+    width: 98%;
+}
+
+.IE-7 .browse-repo-panel .syntaxhighlighter {
+    width: 10000% !important;
+}
+
+.browse-repo-panel .syntaxhighlighter .lines.no-wrap {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+/*-- ActionsMenuPanel --*/
+
+.tundra .tree-actions, .tundra .dijitMenuBar, .tree-actions .dijitMenu {
+    border: none;
+    background: none;
+}
+
+.dijitMenu {
+    position: relative;
+}
+
+.tree-actions .icon-link {
+    position: relative;
+    padding-top: 7px;
+}
+
+.tree-actions {
+    position: absolute;
+    left: -160px;
+    top: -40px;
+}
+
+.IE-6 .tree-actions {
+    width: 170px;
+}
+
+.tundra .dijitMenuTable .dijitMenuItem {
+    background: none;
+}
+
+.tundra .dijitMenuTable .dijitMenuItemHover {
+    background: none;
+    color: black;
+}
+
+.tundra .dijitMenuItemLabel {
+    white-space: nowrap;
+}
+
+.tundra .dijitMenuTable .dijitMenuItemIcon {
+    display: none;
+}
+
+/*-- TitledLink --*/
+
+.button, button.styled-checkbox {
+    white-space: nowrap;
+    border: none;
+    background: transparent no-repeat;
+    padding: 0;
+    cursor: pointer;
+    margin: 0 2px;
+    width: auto;
+    overflow: visible;
+}
+
+.Moz button.button {
+    margin: 0 -1px;
+}
+
+.Moz .wicket-modal .buttons button.button,
+.Chrome .wicket-modal .buttons button.button {
+    margin: 0 0 0 -2px;
+}
+
+.wicket-mask-dark {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.button span, button.styled-checkbox span {
+    display: block;
+}
+
+.button .button-center, button.styled-checkbox .button-center, .button .button-left, button.styled-checkbox .button-left {
+    display: inline-block;
+}
+
+.button .button-right {
+    padding: 6px 15px 0 15px;
+    height: 24px;
+    font-weight: bold;
+    color: #555555;
+}
+
+.Chrome .button .button-right {
+    padding-bottom: 1px;
+}
+
+a.styled {
+    text-decoration: none;
+}
+
+.Safari .button .button-right {
+    padding-top: 8px;
+    height: 22px;
+}
+
+.button .button-center {
+    background: url("images/buttons/gray-button/normal/BTN-gray-center.gif") repeat-x top;
+}
+
+.button .button-left {
+    background: url("images/buttons/gray-button/normal/BTN-gray-left.gif") no-repeat left top;
+}
+
+.button .button-right {
+    background: url("images/buttons/gray-button/normal/BTN-gray-right.gif") no-repeat right top;
+}
+
+.button:hover .button-center, .button:focus .button-center {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-center.gif") repeat-x top;
+}
+
+.button:hover .button-left, .button:focus .button-left {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-left.gif") no-repeat left top;
+}
+
+.button:hover .button-right, .button:focus .button-right {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-right.gif") no-repeat right top;
+}
+
+.button-disabled {
+    cursor: default;
+}
+
+.button-disabled .button-center, .button-disabled:hover .button-center {
+    background: url("images/buttons/gray-button/disabled/BTN-gray-disabled-center.gif") repeat-x top;
+}
+
+.button-disabled .button-left, .button-disabled:hover .button-left {
+    background: url("images/buttons/gray-button/disabled/BTN-gray-disabled-left.gif") no-repeat left top;
+}
+
+.button-disabled .button-right, .button-disabled:hover .button-right {
+    background: url("images/buttons/gray-button/disabled/BTN-gray-disabled-right.gif") no-repeat right top;
+    color: #999999;
+}
+
+/*-- DefaultButtonBehavior --*/
+
+.Safari button.default-button {
+    position: relative;
+    top: -2px;
+}
+
+.IE-678 button.default-button {
+    position: relative;
+    top: 2px;
+}
+
+button.default-button .button-center {
+    background-image: url("images/buttons/default-button/BTN-default-center.gif");
+}
+
+button.default-button .button-left {
+    background-image: url("images/buttons/default-button/BTN-default-left.gif");
+}
+
+button.default-button .button-right {
+    background-image: url("images/buttons/default-button/BTN-default-right.gif");
+    height: 26px;
+    color: white;
+    padding-top: 8px;
+}
+
+.Safari button.default-button .button-right {
+    padding-top: 10px;
+    height: 24px;
+}
+
+.Safari .border-wrapper button.default-button {
+    position: relative;
+    top: 1px;
+}
+
+button.default-button:hover .button-center, button.default-button:focus .button-center {
+    background-image: url("images/buttons/default-button/BTN-default-mouseover-center.gif");
+}
+
+button.default-button:hover .button-left, button.default-button:focus .button-left {
+    background-image: url("images/buttons/default-button/BTN-default-mouseover-left.gif");
+}
+
+button.default-button:hover .button-right, button.default-button:focus .button-right {
+    background-image: url("images/buttons/default-button/BTN-default-mouseover-right.gif");
+}
+
+.buttons button.default-button:hover .button-left, .buttons button.default-button:focus .button-left {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-mouseover-left.gif");
+}
+
+.buttons button.default-button:hover .button-right, .buttons button.default-button:focus .button-right {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-mouseover-right.gif");
+}
+
+.buttons button.default-button .button-left {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-left.gif");
+}
+
+.buttons button.default-button .button-right {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-right.gif");
+    height: 26px;
+    padding-top: 8px;
+}
+
+button.default-button-disabled .button-center, button.default-button-disabled:hover .button-center {
+    background-image: url("images/buttons/default-button/BTN-default-center-disabled.gif");
+}
+
+button.default-button-disabled .button-left, button.default-button-disabled:hover .button-left {
+    background-image: url("images/buttons/default-button/BTN-default-left-disabled.gif");
+}
+
+button.default-button-disabled .button-right, button.default-button-disabled:hover .button-right {
+    background-image: url("images/buttons/default-button/BTN-default-right-disabled.gif");
+    color: #cccccc;
+}
+
+.buttons button.default-button-disabled:hover .button-left, .buttons button.default-button-disabled .button-left {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-left-disabled.gif");
+}
+
+.buttons button.default-button-disabled:hover .button-right, .buttons button.default-button-disabled .button-right {
+    background-image: url("images/buttons/default-button/on-gray/BTN-default-right-disabled.gif");
+}
+
+/*-- BasePage --*/
+
+.page-content {
+    margin-left: 180px;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+td.main {
+    vertical-align: top;
+}
+
+.IE-7 div.main {
+    min-width: 960px;
+}
+
+td.footer {
+    vertical-align: bottom;
+}
+
+div.footer {
+    margin: 0;
+    border-top: solid 1px #999999;
+    text-align: center;
+    position: relative;
+    padding-bottom: 3px;
+    height: 17px;
+    overflow: hidden;
+}
+
+div.footer span {
+    margin: 0;
+    padding: 3px 3px 0 3px;
+    font-size: 10px;
+}
+
+div.footer, .copywrites, .version {
+    background-color: #D5EAA5;
+}
+
+.copywrites {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.version {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.license {
+    text-align: center;
+}
+
+.no-license {
+    background-color: #FF6241;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    text-align: center;
+}
+
+.floating-message {
+    width: 100%;
+    background-color: #FF6241;
+    border-bottom: 1px solid ghostwhite;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    z-index: 100000;
+}
+
+.storage-quota-limit {
+    background-color: #FF6241;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    text-align: center;
+}
+
+.storage-quota-warning {
+    background-color: #FFCB24;
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    text-align: center;
+}
+
+.no-license a {
+    color: white;
+    text-decoration: underline;
+}
+
+.no-license a:hover, .footer a:focus {
+    color: blue;
+    text-decoration: underline;
+}
+
+.copywrites a {
+    color: black;
+    text-decoration: none;
+}
+
+.header {
+    background: url("images/header/header_right.gif");
+    height: 81px;
+    vertical-align: top;
+    position: relative;
+    min-width: 950px;
+}
+
+.IE-6 .header .spacer {
+    width: 950px;
+    position: static;
+}
+
+.IE-7 .header .spacer {
+    position: relative;
+}
+
+.app-logo {
+    background: url("images/header/header_bg.gif");
+    width: 379px;
+    height: 81px;
+    overflow: hidden;
+}
+
+.artifactory-logo {
+    background: url("images/header/header_logo.gif") no-repeat 0 0;
+    width: 195px;
+    height: 81px;
+    display: block;
+}
+
+.company-logo {
+    width: 180px;
+    display: block;
+    text-align: center;
+    line-height: 81px;
+    font-size: 0;
+}
+
+.company-logo span {
+    font-size: 13px;
+}
+
+.company-logo img {
+    max-height: 81px;
+    max-width: 180px;
+}
+
+.IE-6 company-logo img {
+    width: 150px;
+}
+
+.preview-logo {
+    border: solid 1px #999999;
+    position: relative;
+}
+
+.preview-logo span {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    font-weight: bold;
+    color: #666666;
+    line-height: 1em;
+}
+
+.bintray_button {
+    background: url("images/buttons/bintray/BTN-bintray-normal.png");
+    position: absolute;
+    /*top: 85px;*/
+    /*right: 20px;*/
+    width: 212px;
+    height: 38px;
+    margin-top: 10px;
+}
+
+.w_content .permission-border .border-content {
+    padding: 0px;
+}
+
+.w_content .permission-border .name-field {
+    margin: 10px;
+}
+
+.border-wrapper .border-title {
+    padding-left: 13px;
+}
+
+.bintray_info_panel .bintray_button {
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.bintray_package_image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 30px;
+}
+
+.bintray_info_panel {
+    position: relative;
+    padding: 2px;
+    width: 220px;
+    border: 0px;
+    border-left: 2px dotted #3ac3ed;
+    display: inline-block;
+    background: #fff;
+    right: 0px;
+    top: 0px;
+    margin-left: 10px;
+    min-height: 208px;
+}
+
+.bintray_info_panel .blue-listed-label {
+    color: #25A5D3;
+}
+
+.bintray_info_panel .news .button {
+    white-space: normal;
+    width: 190px;
+    text-decoration: none;
+    display: block;
+}
+
+.bintray_info_panel .news {
+    padding: 10px;
+}
+
+.infoTable {
+    width: 100%;
+}
+
+.info_leftpane {
+    vertical-align: top;
+}
+
+.info_rightpane {
+    border: 0px;
+    text-align: right;
+}
+
+.z565 {
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.bintray_info_panel div {
+    position: relative;
+}
+
+.bintrayRightInfoPane {
+    margin-left: 58px;
+    margin-top: -63px;
+}
+
+.blue-listed-label_lbl {
+    color: #000;
+}
+
+.bintray_info_panel .fieldset-border-top {
+    margin: 0;
+    background: none;
+}
+
+.bintray_info_panel .fieldset-border-left {
+    margin: 0;
+    background: none;
+}
+
+.tab-panel .bintray_info_panel .fieldset-border-top-left {
+    margin: 0;
+    background: none;
+}
+
+.tab-panel .bintray_info_panel .fieldset-border-top-right {
+    margin: 0;
+    background: none;
+}
+
+.bintray_info_panel .fieldset-border-bottom {
+    margin: 0;
+    background: none;
+}
+
+.tab-panel .bintray_info_panel .fieldset-border-bottom-right {
+    margin: 0;
+    background: none;
+}
+
+.bintray_info_panel .fieldset-border-right {
+    margin: 0;
+    background: none;
+}
+
+.tab-panel .bintray_info_panel .fieldset-border-bottom-left {
+    margin: 0;
+    background: none;
+}
+
+.bintray_info_panel .fieldset-border-title {
+    left: 64px;
+    top: 6px;
+    color: #a3c82d;
+    font-weight: bold;
+}
+
+.bintrayRightInfoPane .news {
+    margin-left: 0px;
+    margin-top: -63px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    color: #a3c82d;
+    font-weight: bold;
+    width: 129px;
+    max-width: 129px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+
+.bintray_info_panel img {
+    width: 46px;
+    height: 46px;
+    -webkit-box-shadow: 0 0px 5px 0px #ddd;
+    -moz-box-shadow: 0 0px 5px 0px #ddd;
+    box-shadow: 0 0px 5px 0px #ddd;
+    border: 1px solid #fff;
+
+}
+
+.bintray_button:hover, .bintray_button:focus {
+    background: url("images/buttons/bintray/BTN-bintray-over.png");;
+}
+
+.quick-search-box {
+    position: absolute;
+    top: 36px;
+    right: 0;
+}
+
+.quick-search-box .search-box {
+    background: url("images/quick-search/searchbox/quick-search-box-tip.gif") right no-repeat;
+    float: left;
+    padding-right: 7px;
+    display: -moz-inline-block;
+    display: inline-block;
+    height: 22px;
+    margin-right: 5px;
+}
+
+.Moz .quick-search-box .search-box {
+    margin-right: 2px;
+}
+
+.quick-search-box .search-box input {
+    background: url("images/quick-search/searchbox/quick-search-box.gif") repeat-x;
+    border: 0;
+    border-left: #3A3E43 solid 1px;
+    height: 20px;
+    padding-top: 2px;
+}
+
+body div.quick-search-box .button {
+    float: left;
+    height: 24px;
+    margin: 0 15px 0 2px !important;
+}
+
+div.quick-search-box .button .button-center {
+    background-image: url("images/quick-search/button-normal/BTN-qs-normal-center.gif");
+}
+
+div.quick-search-box .button .button-left {
+    background-image: url("images/quick-search/button-normal/BTN-qs-normal-left.gif");
+}
+
+div.quick-search-box .button .button-right {
+    background-image: url("images/quick-search/button-normal/BTN-qs-normal-right.gif");
+    padding: 2px 7px 0 7px;
+}
+
+div.quick-search-box .button:hover .button-center, div.quick-search-box .button:focus .button-center {
+    background-image: url("images/quick-search/button-mouseover/BTN-qs-mo-center.gif");
+}
+
+div.quick-search-box .button:hover .button-left, div.quick-search-box .button:focus .button-left {
+    background-image: url("images/quick-search/button-mouseover/BTN-qs-mo-left.gif");
+}
+
+div.quick-search-box .button:hover .button-right, div.quick-search-box .button:focus .button-right {
+    background-image: url("images/quick-search/button-mouseover/BTN-qs-mo-right.gif");
+}
+
+.top-menu {
+    position: absolute;
+    left: 178px;
+    top: 27px;
+}
+
+.top-menu ul {
+    padding: 0;
+    margin: 0;
+}
+
+.top-menu li {
+    list-style: none;
+    float: left;
+    margin-right: -13px;
+}
+
+.top-menu a, .top-menu em {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    width: 138px;
+    height: 55px;
+    display: block;
+    background: url("images/header/top-tabs.png") -8px -38px no-repeat;
+}
+
+.top-menu a {
+    cursor: pointer;
+}
+
+.top-menu a:hover, .top-menu a:focus {
+    background-position: -171px -38px;
+}
+
+.top-menu a.selected, .top-menu a.opened {
+    background-position: -324px -38px;
+}
+
+.top-menu .item-name {
+    font-size: 14px;
+    color: #FFFFFF;
+    height: 25px;
+    position: absolute;
+    top: 24px;
+    left: 59px;
+}
+
+.top-menu a.selected .item-name, .top-menu .opened .item-name {
+    color: #000000;
+}
+
+.top-menu .menu-left {
+    position: absolute;
+    left: 24px;
+    top: 19px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url("images/header/top-tabs.png") no-repeat;
+}
+
+.top-menu .disabled .menu-left {
+    opacity: 0.25;
+    filter: alpha(opacity=25);
+}
+
+.top-menu .disabled .item-name {
+    color: #c0d0de;
+}
+
+.top-menu .HomePage .menu-left {
+    background-position: 0 0;
+}
+
+.top-menu .HomePage a:hover .menu-left, .top-menu .HomePage a:focus .menu-left {
+    background-position: -161px 0;
+}
+
+.top-menu .HomePage a.selected .menu-left, .top-menu .HomePage a.opened .menu-left {
+    background-position: -323px 0;
+}
+
+.top-menu .ArtifactsHomePage .menu-left {
+    background-position: -40px 0;
+}
+
+.top-menu .ArtifactsHomePage a:hover .menu-left, .top-menu .ArtifactsHomePage a:focus .menu-left {
+    background-position: -202px 0;
+}
+
+.top-menu .ArtifactsHomePage a.selected .menu-left, .top-menu .ArtifactsHomePage a.opened .menu-left {
+    background-position: -363px 0;
+}
+
+.top-menu .DeployArtifactPage .menu-left {
+    background-position: -81px 0;
+}
+
+.top-menu .DeployArtifactPage a:hover .menu-left, .top-menu .DeployArtifactPage a:focus .menu-left {
+    background-position: -242px 0;
+}
+
+.top-menu .DeployArtifactPage a.selected .menu-left, .top-menu .DeployArtifactPage a.opened .menu-left {
+    background-position: -404px 0;
+}
+
+.top-menu .AdminPage .menu-left {
+    background-position: -121px 0;
+}
+
+.top-menu .AdminPage a:hover .menu-left, .top-menu .AdminPage a:focus .menu-left {
+    background-position: -283px 0;
+}
+
+.top-menu .AdminPage a.selected .menu-left, .top-menu .AdminPage a.opened .menu-left {
+    background-position: -444px 0;
+}
+
+/*-- TitledPanel / TitledBorder --------------------------------------------------*/
+
+.border-wrapper {
+
+    margin: 3px 20px 20px 20px;
+}
+
+.IE-6 .border-wrapper {
+    zoom: 1;
+}
+
+.border-title {
+    padding: 2px 5px 0 25px;
+    color: #27356B;
+    font-size: 17px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 2px 10px 2px 5px;
+}
+
+.border-content {
+    padding: 10px 20px 10px 20px;
+    color: #858585;
+}
+
+.border-content .labeled-value a.license-unapproved {
+    color: red;
+}
+
+.border-content .labeled-value a {
+    color: #87B343;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.welcome-border .border-content {
+    padding: 0px;
+}
+
+.IE-67 .border-content {
+    zoom: 1;
+}
+
+.border-top {
+    background: #fff;
+    border: 1px solid #b3b3b3;
+}
+
+.border-bottom {
+    background: #fff;
+}
+
+.border-left {
+    background: #fff;
+}
+
+.border-right {
+    background: #fff;
+}
+
+.border-top-left {
+    background: #fff;
+}
+
+.border-top-right {
+    background: #fff;
+}
+
+.border-bottom-left {
+    background: #fff;
+}
+
+.border-bottom-right {
+    background: #fff;
+}
+
+/*-- FieldSetBorder --------------------------------------------------*/
+
+.fieldset-border-wrapper {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.IE-6 .fieldset-border-wrapper {
+    zoom: 1;
+}
+
+.IE-7 .tab-panel .fieldset-border-wrapper {
+    min-width: 95%;
+}
+
+.tab-panel .fieldset-border-wrapper,
+.w_content .fieldset-border-wrapper,
+.w_content .tab-panel .fieldset-border-wrapper {
+    min-width: 100%;
+}
+
+.w_content .border-wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 7px;
+}
+
+.w_content .w_content_scroll .border-wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+
+.w_content .border-title {
+    padding-left: 3px;
+}
+
+.w_content .border-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.w_content .buttons {
+    margin-right: 3px;
+}
+
+.tab-panel .fieldset-border-content {
+    overflow: visible;
+}
+
+.fieldset-border-title {
+    display: inline;
+    margin: 0;
+    padding: 0 7px;
+    color: #27356B;
+    background: url("images/fieldset/title-bg.gif") repeat-x center 9px;
+    font-size: 14px;
+    white-space: nowrap;
+    position: absolute;
+    top: 0px;
+    left: 34px;
+}
+
+.Safari .fieldset-border-title {
+    background-position: center 7px;
+}
+
+.fieldset-border-content {
+    padding: 13px 10px 10px 10px;
+    min-height: 20px;
+    overflow: auto;
+}
+
+.fieldset-border-top {
+    background: white url("images/fieldset/fieldset-top-center.gif") repeat-x top;
+    margin-top: 10px;
+}
+
+.fieldset-border-bottom {
+    background: url("images/fieldset/fieldset-bottom-center.gif") repeat-x bottom;
+}
+
+.fieldset-border-left {
+    background: url("images/fieldset/fieldset-middle-left.gif") repeat-y left;
+}
+
+.fieldset-border-right {
+    background: url("images/fieldset/fieldset-middle-right.gif") repeat-y right;
+}
+
+.fieldset-border-top-left {
+    background: url("images/fieldset/fieldset-top-left-gray.gif") no-repeat top left;
+}
+
+.fieldset-border-top-right {
+    background: url("images/fieldset/fieldset-top-right-gray.gif") no-repeat top right;
+}
+
+.fieldset-border-bottom-left {
+    background: url("images/fieldset/fieldset-bottom-left-gray.gif") no-repeat bottom left;
+}
+
+.fieldset-border-bottom-right {
+    background: url("images/fieldset/fieldset-bottom-right-gray.gif") no-repeat bottom right;
+}
+
+.tab-panel .fieldset-border-top-left {
+    background: url("images/fieldset/fieldset-top-left.gif") no-repeat top left;
+}
+
+.tab-panel .fieldset-border-top-right {
+    background: url("images/fieldset/fieldset-top-right.gif") no-repeat top right;
+}
+
+.tab-panel .fieldset-border-bottom-left {
+    background: url("images/fieldset/fieldset-bottom-left.gif") no-repeat bottom left;
+}
+
+.tab-panel .fieldset-border-bottom-right {
+    background: url("images/fieldset/fieldset-bottom-right.gif") no-repeat bottom right;
+}
+
+.gray-fieldset .fieldset-border-top-left {
+    background: url("images/fieldset/fieldset-top-left-gray.gif") no-repeat top left;
+}
+
+.gray-fieldset .fieldset-border-top-right {
+    background: url("images/fieldset/fieldset-top-right-gray.gif") no-repeat top right;
+}
+
+.gray-fieldset .fieldset-border-bottom-left {
+    background: url("images/fieldset/fieldset-bottom-left-gray.gif") no-repeat bottom left;
+}
+
+.gray-fieldset .fieldset-border-bottom-right {
+    background: url("images/fieldset/fieldset-bottom-right-gray.gif") no-repeat bottom right;
+}
+
+/*-- AuthenticatedPage --*/
+
+.outer-border-wrapper {
+    /*background-color: #A3C1D4;*/
+    margin: 10px;
+}
+
+.IE-6 .outer-border-wrapper {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.IE-7 .outer-border-wrapper {
+    position: relative;
+    min-width: 1px;
+}
+
+.outer-border-title {
+    margin: 0;
+    padding: 15px 5px 0px 29px;
+    color: #27356B;
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.IE-6 .outer-border-title {
+    position: relative;
+}
+
+.outer-border-content {
+    padding: 7px;
+    min-height: 50px;
+    overflow: auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.IE-67 .outer-border-content {
+    position: relative;
+}
+
+.outer-border-top {
+    background: #f7f7f7;
+    border: 1px solid #e1e7ea;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-bottom {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-left {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-right {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-top-left {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-top-right {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-bottom-left {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.outer-border-bottom-right {
+    background: #f7f7f7;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/*-- OrderedListPanel --*/
+
+div.list-panel .border-title {
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.ordered-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ordered-list {
+    border: solid 1px #41413F;
+    background: white url("images/buttons/field-center.gif") top repeat-x;
+    margin: 0 104px 5px 15px;
+    overflow: auto;
+}
+
+.Chrome .ordered-list {
+    margin-right: 0;
+}
+
+.Safari .ordered-list {
+    margin: 0 0 5px 15px;
+}
+
+.IE-678 .ordered-list {
+    position: relative;
+}
+
+.ordered-list li {
+    padding: 0 2px;
+}
+
+.IE-678 .ordered-list li {
+    padding: 1px 2px 3px 2px;
+    position: relative;
+}
+
+.IE-6 .ordered-list li {
+    padding: 0 2px 3px 2px;
+    position: relative;
+}
+
+.list-panel-buttons {
+    float: right;
+    width: 104px;
+    background: url("images/buttons/on-dark-bg/dark-bg/darkbg-wide-center.gif") repeat-y;
+    position: relative;
+}
+
+.IE-6 .list-panel-buttons {
+    left: -3px;
+}
+
+.list-panel-buttons .buttons-top {
+    background: url("images/buttons/on-dark-bg/dark-bg/darkbg-wide-top.gif") top no-repeat;
+}
+
+.list-panel-buttons .buttons-bottom {
+    background: url("images/buttons/on-dark-bg/dark-bg/darkbg-bottom.gif") bottom no-repeat;
+    position: relative;
+    top: 2px;
+}
+
+button.up-link, button.down-link, button.down-link-disabled, button.up-link-disabled {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    left: 18px;
+}
+
+button.down-link span, button.up-link span, button.down-link-disabled span, button.up-link-disabled span {
+    display: none;
+}
+
+button.up-link {
+    background: url("images/buttons/on-dark-bg/up-down/BTN-up.gif") no-repeat;
+    bottom: 40px;
+}
+
+button.down-link {
+    background: url("images/buttons/on-dark-bg/up-down/BTN-down.gif") no-repeat;
+    bottom: 7px;
+}
+
+button.up-link:hover, button.up-link:focus {
+    background: url("images/buttons/on-dark-bg/up-down/mouseover/BTN-up-mouseover.gif") no-repeat;
+    bottom: 40px;
+}
+
+button.down-link:hover, button.down-link:focus {
+    background: url("images/buttons/on-dark-bg/up-down/mouseover/BTN-down-mouseover.gif") no-repeat;
+    bottom: 7px;
+}
+
+button.up-link-disabled, button.up-link-disabled:hover {
+    background: url("images/buttons/on-dark-bg/up-down/disabled/BTN-up-disabled.gif") no-repeat;
+    bottom: 40px;
+    cursor: default;
+}
+
+button.down-link-disabled, button.down-link-disabled:hover {
+    background: url("images/buttons/on-dark-bg/up-down/disabled/BTN-down-disabled.gif") no-repeat;
+    bottom: 7px;
+    cursor: default;
+}
+
+button.new-link {
+    position: relative;
+    left: 15px;
+    top: 13px;
+}
+
+button.new-link .button-right, button.import-link .button-right {
+    width: 40px;
+}
+
+div.list-panel-buttons .button .button-center,
+.green-button .button-center {
+    background-image: url("images/buttons/green-button/normal/BTN-green-center.gif");
+}
+
+div.list-panel-buttons .button .button-left,
+.green-button .button-left {
+    background-image: url("images/buttons/green-button/normal/BTN-green-left.gif");
+}
+
+div.list-panel-buttons .button .button-right,
+.green-button .button-right {
+    background-image: url("images/buttons/green-button/normal/BTN-green-right.gif");
+    color: white;
+}
+
+div.list-panel-buttons .button:hover .button-center, div.list-panel-buttons .button:focus .button-center,
+.green-button:hover .button-center, .green-button:focus .button-center {
+    background-image: url("images/buttons/green-button/mouseover/BTN-green-mouseover-center.gif");
+}
+
+div.list-panel-buttons .button:hover .button-left, div.list-panel-buttons .button:focus .button-left,
+.green-button:hover .button-left, .green-button:focus .button-left {
+    background-image: url("images/buttons/green-button/mouseover/BTN-green-mouseover-left.gif");
+}
+
+div.list-panel-buttons .button:hover .button-right, div.list-panel-buttons .button:focus .button-right,
+.green-button:hover .button-right, .green-button:focus .button-right {
+    background-image: url("images/buttons/green-button/mouseover/BTN-green-mouseover-right.gif");
+}
+
+div.list-panel-buttons .button-disabled .button-center, div.list-panel-buttons .button-disabled:hover .button-center,
+.green-button.button-disabled .button-center, .green-button.button-disabled:hover .button-center {
+    background-image: url("images/buttons/gray-button/disabled/BTN-gray-disabled-center.gif");
+}
+
+div.list-panel-buttons .button-disabled .button-left, div.list-panel-buttons .button-disabled:hover .button-left,
+.green-button.button-disabled .button-left, .green-button.button-disabled:hover .button-left {
+    background-image: url("images/buttons/gray-button/disabled/BTN-gray-disabled-left.gif");
+}
+
+div.list-panel-buttons .button-disabled .button-right, div.list-panel-buttons .button-disabled:hover .button-right,
+.green-button.button-disabled .button-right, .green-button.button-disabled:hover .button-right {
+    background-image: url("images/buttons/gray-button/disabled/BTN-gray-disabled-right.gif");
+    color: #999999;
+}
+
+div.list-panel-buttons button.gray-link .button-center {
+    background: url("images/buttons/gray-button/normal/BTN-gray-center.gif") repeat-x top;
+}
+
+div.list-panel-buttons button.gray-link .button-left {
+    background: url("images/buttons/gray-button/normal/BTN-gray-left.gif") no-repeat left top;
+}
+
+div.list-panel-buttons button.gray-link .button-right {
+    background: url("images/buttons/gray-button/normal/BTN-gray-right.gif") no-repeat right top;
+}
+
+div.list-panel-buttons button.gray-link:hover .button-center, div.list-panel-buttons button.gray-link:focus .button-center {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-center.gif") repeat-x top;
+}
+
+div.list-panel-buttons button.gray-link:hover .button-left, div.list-panel-buttons button.gray-link:focus .button-left {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-left.gif") no-repeat left top;
+}
+
+div.list-panel-buttons button.gray-link:hover .button-right, div.list-panel-buttons button.gray-link:focus .button-right {
+    background: url("images/buttons/gray-button/mouseover/BTN-gray-mouseover-right.gif") no-repeat right top;
+}
+
+.list-panel li.dojoDndItem-opened {
+    background: #C3EC82;
+}
+
+tr.hover .links-icon,
+.list-panel li.dojoDndItem-opened .links-icon,
+tr.opened .links-icon {
+    visibility: visible;
+}
+
+.ordered-list-panel .info {
+    margin-left: 16px;
+}
+
+button.save-link {
+    position: relative;
+    left: 15px;
+    top: 20px;
+}
+
+.save-link .button-right {
+    width: 40px;
+}
+
+button.cancel-link {
+    position: relative;
+    top: 26px;
+    left: 15px;
+}
+
+.IE-7 .button.new-link {
+    left: 16px;
+}
+
+.IE-7 button.save-link {
+    top: 54px;
+    left: -58px;
+}
+
+.IE-7 button.cancel-link {
+    top: 92px;
+    left: -132px;
+}
+
+div.list-panel-buttons button.gray-link .button-right {
+    width: 40px;
+    color: gray;
+}
+
+/*-- BaseListPanel --*/
+
+a.export-link {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+}
+
+.IE-7 a.export-link {
+    right: 14px;
+}
+
+.Safari a.export-link {
+    right: 12px;
+}
+
+/*-- ModalWindow --*/
+
+div.wicket-modal div.w_modal div.w_top_1 {
+    position: absolute;
+    top: -3px;
+}
+
+div.wicket-modal div.w_modal div.w_left {
+    position: relative;
+}
+
+div.wicket-modal div.w_modal div.w_content, div.wicket-modal div.w_modal div.w_content_2 {
+    background: none;
+}
+
+div.wicket-modal div.w_modal div.w_caption {
+    background: none;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: move;
+}
+
+div.wicket-modal span.w_captionText {
+    height: auto;
+    color: #4C4E53;
+    font-size: 20px;
+    padding: 0 1px;
+    margin-right: 30px;
+    display: inline-block;
+    position: relative !important;
+}
+
+.Chrome div.wicket-modal span.w_captionText,
+.Safari div.wicket-modal span.w_captionText {
+    height: auto;
+}
+
+.IE-7 div.wicket-modal span.w_captionText {
+    height: auto;
+    line-height: 1.6em;
+}
+
+div.wicket-modal div.w_modal div.w_content_1 {
+    cursor: default;
+}
+
+div.wicket-modal div.w_modal div.w_content_3 {
+    border: none;
+}
+
+.w_modal {
+    background: #A3C1D4;
+}
+
+div.wicket-modal div.w_modal div.w_left {
+    background: url("images/outer-frame/outer-center-left.gif") repeat-y left;
+}
+
+div.wicket-modal div.w_modal div.w_right {
+    background: url("images/outer-frame/outer-center-left.gif") repeat-y right;
+}
+
+div.wicket-modal div.w_modal div.w_top {
+    background: url("images/outer-frame/outer-top-center.gif") repeat-x top;
+    height: 97px;
+}
+
+div.wicket-modal div.w_modal div.w_bottom {
+    background: url("images/outer-frame/outer-bottom-center.gif") repeat-x top;
+    height: 6px;
+}
+
+div.wicket-modal div.w_modal div.w_topLeft {
+    background: url("images/modal-frame/outer-top-left.gif") no-repeat top left;
+    width: 5px;
+    height: 97px;
+}
+
+div.wicket-modal div.w_modal div.w_topRight {
+    background: url("images/modal-frame/outer-top-right.gif") no-repeat top right;
+    width: 5px;
+    height: 97px;
+}
+
+div.wicket-modal div.w_modal div.w_bottomRight {
+    background: url("images/modal-frame/outer-bottom-right.gif") no-repeat top right;
+    width: 5px;
+    height: 6px;
+}
+
+div.wicket-modal div.w_modal div.w_bottomLeft {
+    background: url("images/modal-frame/outer-bottom-left.gif") no-repeat top left;
+    width: 6px;
+    height: 6px;
+}
+
+div.wicket-modal div.w_modal a.w_close {
+    background: url("images/buttons/on-blue-bg/close-button/BTN-x.gif") no-repeat;
+    width: 24px;
+    height: 27px;
+    z-index: 1;
+}
+
+div.wicket-modal div.w_modal a.w_close:hover, div.wicket-modal div.w_modal a.w_close:focus {
+    background: url("images/buttons/on-blue-bg/close-button/BTN-x-Rollover.gif") no-repeat;
+    width: 24px;
+    height: 27px;
+}
+
+div.w_content_scroll {
+    position: relative;
+}
+
+/*-- FileBrowserButton --*/
+
+.browseButton {
+    border: none;
+    height: 25px;
+    width: 25px;
+    background: #ffffff url("images/buttons/toolbox-buttons/BTN-browse.gif");
+    cursor: pointer;
+}
+
+.Safari .browseButton {
+    position: relative;
+    top: -5px;
+}
+
+.IE-678 .browseButton {
+    position: relative;
+    top: 2px;
+}
+
+.IE-8 .browseButton {
+    top: 6px;
+}
+
+.backup-form .field-path input.text
+.Moz .browseButton {
+    position: relative;
+    top: -1px;
+}
+
+.Chrome .browseButton {
+    position: relative;
+    top: 6px;
+}
+
+.browseButton:hover, .browseButton:focus {
+    border: none;
+    background: #ffffff url("images/buttons/toolbox-buttons/BTN-browse-mo.gif");
+    cursor: pointer;
+}
+
+.fileBrowser input.gotoParentButton {
+    border: none;
+    outline: none !important;
+    background: white url("images/buttons/BTN-uplevel.gif");
+    width: 28px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.fileBrowser input.gotoParentButton:hover, .fileBrowser input.gotoParentButton:focus {
+    background: white url("images/buttons/BTN-uplevel-mo.gif");
+}
+
+.fileBrowser .roots {
+    direction: ltr;
+    vertical-align: top;
+}
+
+.fileBrowser .breadcrumbs {
+    direction: ltr;
+    vertical-align: top;
+    width: 250px;
+}
+
+/*-- LdapCreateUpdatePanel --*/
+
+.ldap-dn-fields .field, .ldap-dn-fields input.text {
+    width: 200px;
+}
+
+.ldap-dn-fields .user-auto-create-checkbox {
+    padding-top: 10px;
+}
+
+.ldap-test-fields .field, .ldap-test-fields input.text {
+    width: 130px;
+}
+
+.ldap-test-fields .border-content {
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.ldap-test-fields .button {
+    position: absolute;
+    left: 300px;
+    top: 28px;
+}
+
+.password-field {
+    margin-left: 20px;
+    float: left;
+}
+
+/*-- PermissionsTabPanel --*/
+
+div.styled-tab-panel div.tab-row .permissions-tab span {
+    padding: 5px 10px 10px 10px;
+    white-space: normal;
+    width: 105px;
+}
+
+/*-- PermissionTargetCreateUpdatePanel --*/
+
+.name-repository-fields {
+    clear: both;
+    padding-top: 10px;
+}
+
+.include-pattern-fields, .exclude-pattern-fields, .name-repository-fields {
+    float: left
+}
+
+.Safari .include-pattern-fields .field span,
+.Safari .exclude-pattern-fields .field span {
+    position: relative;
+    top: -1px;
+}
+
+.exclude-pattern-fields {
+    margin-left: 20px;
+}
+
+.permissions-panel .styled-tab-panel {
+    margin-top: 10px;
+    clear: both;
+}
+
+.permissions-panel .name-field label {
+    float: left;
+    padding-right: 7px;
+}
+
+.permissions-panel div.tab-panel {
+    height: 580px;
+}
+
+.permissions-panel .list-field label {
+    font-weight: bold;
+}
+
+.permissions-panel .any-repo-field {
+    float: right;
+}
+
+.IE-7 .permission-border .border-content {
+    zoom: 0;
+}
+
+.IE-7 .permission-form .buttons {
+    height: 0;
+    margin-top: 0;
+}
+
+.permissions-tab-panel {
+    margin: 0 auto;
+    width: 500px;
+}
+
+/*-- UsersPage --*/
+
+.users-list .fieldset-border-top-left {
+    background: url("images/fieldset/fieldset-top-left-light.gif") no-repeat top left;
+}
+
+.users-list .fieldset-border-top-right {
+    background: url("images/fieldset/fieldset-top-right-light.gif") no-repeat top right;
+}
+
+.IE-89 .users-list .UserColumn .deletable {
+    position: relative;
+    top: -10px;
+}
+
+.group-field {
+    margin-left: 10px;
+    float: left;
+}
+
+.IE .group-field {
+    margin-top: 1px;
+}
+
+.submit-user-field {
+    float: left;
+    margin-left: 5px;
+    padding-top: 10px;
+}
+
+.float-left .field {
+    margin-bottom: 2px;
+}
+
+.Safari .submit-user-field {
+    padding-top: 9px;
+}
+
+.IE-678 .submit-user-field {
+    padding-top: 8px;
+}
+
+/*-- UserColumn --*/
+
+span.group, td.group span, span.user, td.user span, .UserColumn {
+    padding-left: 20px;
+}
+
+span.group, td.group span {
+    background: url("images/icons/users/group.png") no-repeat center left;
+}
+
+span.user, td.user span {
+    background: url("images/icons/users/user.png") no-repeat center left;
+}
+
+.UserColumn .deletable {
+    position: relative;
+    top: 2px;
+}
+
+.UserColumn {
+    background: url("images/icons/users/user.png") no-repeat center left;
+}
+
+/*-- StyledCheckbox --*/
+
+.styled-checkbox input {
+    display: none;
+}
+
+button.styled-checkbox .button-left {
+}
+
+.styled-checkbox .button-right {
+    font-weight: bold;
+}
+
+button.styled-checkbox .button-center {
+    height: 17px;
+    padding: 4px 0 0 22px;
+    font-weight: bold;
+    color: #333333;
+    text-align: left !important;
+}
+
+button.styled-checkbox-unchecked .button-center {
+    background: url("images/buttons/checkbox/checkbox-off.gif") no-repeat left top;
+}
+
+button.styled-checkbox-checked .button-center {
+    background: url("images/buttons/checkbox/checkbox-on.gif") no-repeat left top;
+}
+
+button.styled-checkbox-disabled-checked .button-center {
+    background: url("images/buttons/checkbox/checkbox-disabled-on.gif") no-repeat left top;
+    color: #999999;
+}
+
+button.styled-checkbox-disabled-unchecked .button-center {
+    background: url("images/buttons/checkbox/checkbox-disabled.gif") no-repeat left top;
+    color: #999999;
+}
+
+button.styled-checkbox-unchecked-hover .button-center, button.styled-checkbox-unchecked:focus .button-center {
+    background: url("images/buttons/checkbox/checkbox-over-off.gif") no-repeat left top;
+}
+
+button.styled-checkbox-checked-hover .button-center, button.styled-checkbox-checked:focus .button-center {
+    background: url("images/buttons/checkbox/checkbox-over-on.gif") no-repeat left top;
+}
+
+button.styled-checkbox-disabled-checked, button.styled-checkbox-disabled-unchecked {
+    cursor: default;
+}
+
+.Moz button.styled-checkbox {
+    margin: 0 -1px;
+}
+
+.small-checkbox button.styled-checkbox .button-center {
+    height: 14px;
+    padding: 2px 0 0 19px;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.small-checkbox .styled-checkbox .button-right {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.small-checkbox button.styled-checkbox-unchecked .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-off.gif") no-repeat left top;
+}
+
+.small-checkbox button.styled-checkbox-checked .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-on.gif") no-repeat left top;
+}
+
+.small-checkbox button.styled-checkbox-disabled-checked .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-disabled-on.gif") no-repeat left top;
+    color: #999999;
+}
+
+.small-checkbox button.styled-checkbox-disabled-unchecked .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-disabled.gif") no-repeat left top;
+    color: #999999;
+}
+
+.small-checkbox button.styled-checkbox-unchecked-hover .button-center, .small-checkbox button.styled-checkbox-unchecked:focus .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-over-off.gif") no-repeat left top;
+}
+
+.small-checkbox button.styled-checkbox-checked-hover .button-center, .small-checkbox button.styled-checkbox-checked:focus .button-center {
+    background: url("images/buttons/checkbox/checkbox-small-over-on.gif") no-repeat left top;
+}
+
+/*-- DragDropSelection --*/
+
+.dojoDndAvatar {
+    z-index: 30001 !important;
+}
+
+.dojoDndItem {
+    list-style: none;
+    white-space: nowrap;
+}
+
+.IE-7 .dojoDndItem, .IE-7 .dojoDndItem {
+    zoom: 1;
+}
+
+.dnd-selection {
+    width: 490px;
+}
+
+.dnd-selection .sep {
+    width: 37px;
+    float: left;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.dnd-selection .sep button {
+    width: 37px;
+    height: 35px;
+    margin: 1px auto;
+}
+
+.IE-6 .dnd-selection .sep button {
+    display: block;
+    overflow: hidden;
+}
+
+.IE-7 .dnd-selection .sep button {
+    display: block;
+}
+
+.remove-rep {
+    background: url("images/icons/close.jpg") center top no-repeat;
+    background-size: 18px 18px;
+}
+
+.dnd-selection button.add-link {
+    background: url("images/drag-drop/BTN-add.png") no-repeat;
+}
+
+.dnd-selection button.add-link-disabled {
+    background: url("images/drag-drop/BTN-add-disabled.png") no-repeat;
+}
+
+.dnd-selection button.add-link:hover, .dnd-selection button.add-link:focus {
+    background: url("images/drag-drop/BTN-add-ro.png") no-repeat;
+}
+
+.dnd-selection button.remove-link {
+    background: url("images/drag-drop/BTN-remove.png") no-repeat;
+}
+
+.dnd-selection button.remove-link-disabled {
+    background: url("images/drag-drop/BTN-remove-disabled.png") no-repeat;
+}
+
+.dnd-selection button.remove-link:hover, dnd-selection button.remove-link:focus {
+    background: url("images/drag-drop/BTN-remove-ro.png") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-link {
+    background: url("images/drag-drop/BTN-add.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-link-disabled {
+    background: url("images/drag-drop/BTN-add-disabled.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-link:hover, .IE-6 .dnd-selection button.add-link:focus {
+    background: url("images/drag-drop/BTN-add-ro.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-link {
+    background: url("images/drag-drop/BTN-remove.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-link-disabled {
+    background: url("images/drag-drop/BTN-remove-disabled.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-link:hover, .IE-6 dnd-selection button.remove-link:focus {
+    background: url("images/drag-drop/BTN-remove-ro.gif") no-repeat;
+}
+
+.dnd-selection button.add-all-link {
+    background: url("images/drag-drop/BTN-add-all.png") no-repeat;
+}
+
+.dnd-selection button.add-all-link-disabled {
+    background: url("images/drag-drop/BTN-add-all-disabled.png") no-repeat;
+}
+
+.dnd-selection button.add-all-link:hover, .dnd-selection button.add-all-link:focus {
+    background: url("images/drag-drop/BTN-add-all-ro.png") no-repeat;
+}
+
+.dnd-selection button.remove-all-link {
+    background: url("images/drag-drop/BTN-remove-all.png") no-repeat;
+}
+
+.dnd-selection button.remove-all-link-disabled {
+    background: url("images/drag-drop/BTN-remove-all-disabled.png") no-repeat;
+}
+
+.dnd-selection button.remove-all-link:hover, dnd-selection button.remove-all-link:focus {
+    background: url("images/drag-drop/BTN-remove-all-ro.png") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-all-link {
+    background: url("images/drag-drop/BTN-add-all.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-all-link-disabled {
+    background: url("images/drag-drop/BTN-add-all-disabled.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.add-all-link:hover, .IE-6 .dnd-selection button.add-all-link:focus {
+    background: url("images/drag-drop/BTN-add-all-ro.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-all-link {
+    background: url("images/drag-drop/BTN-remove-all.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-all-link-disabled {
+    background: url("images/drag-drop/BTN-remove-all-disabled.gif") no-repeat;
+}
+
+.IE-6 .dnd-selection button.remove-all-link:hover, .IE-6 dnd-selection button.remove-all-link:focus {
+    background: url("images/drag-drop/BTN-remove-all-ro.gif") no-repeat;
+}
+
+.dnd-selection .sep button span {
+    display: none;
+}
+
+.selection-list {
+    float: left;
+    margin: 5px;
+    width: 217px;
+}
+
+.selection-list ul {
+    padding: 0;
+    margin: 0;
+    border: solid 1px #cccccc;
+    height: 150px;
+    overflow: auto;
+    background-color: white;
+}
+
+.selection-list li.dojoDndItem {
+    margin: 1px;
+    padding: 0 3px;
+}
+
+.selection-list li.icon-link {
+    padding: 2px 3px 2px 22px;
+    background-position: 3px center;
+}
+
+.source-list li {
+    background-color: #F5F9EB;
+}
+
+.target-list li {
+    background-color: #DEEFC2;
+}
+
+.disabled .target-list ul li.dojoDndItem,
+.disabled .source-list ul li.dojoDndItem,
+.target-list ul li.disabled,
+.disabled .source-list ul li.disabled {
+    background-color: #cccccc;
+}
+
+.dnd-selection .info {
+    margin-left: 10px;
+    padding-bottom: 3px;
+}
+
+.target-list {
+    margin-right: 0;
+}
+
+.selection-list .title {
+    background-image: url("images/list-header.gif");
+    color: #747963;
+    height: 24px;
+    padding-top: 8px;
+    padding-left: 15px;
+    border: solid 1px #9e9e9c;
+    border-bottom: 0;
+}
+
+/*-- Sortable Table --*/
+
+table.data-table {
+    width: 100%;
+    margin: 10px 0;
+    cursor: default;
+}
+
+.wicket-modal table.data-table {
+    width: 99%;
+}
+
+table.data-table tr.headers th {
+    border-top: 1px solid #777777;
+    font-weight: bold;
+}
+
+table.data-table tr.headers th span {
+    white-space: nowrap;
+}
+
+table.data-table tr.headers a,
+table.data-table tr.headers em {
+    display: block;
+}
+
+table.data-table tr.headers span.label {
+    display: block;
+    height: 20px;
+    background: url("images/table/table-border.gif") left repeat-y;
+    padding: 2px 2px 2px 4px;
+    color: #777777;
+}
+
+table.data-table tbody td {
+    padding: 2px 2px 2px 4px;
+    background-image: url("images/table/table-border.gif");
+    background-position: left;
+    background-repeat: repeat-y;
+}
+
+table.data-table tbody td td {
+    background-image: none;
+}
+
+table.data-table td.first-cell, table.data-table tr.headers th.first-cell span.label {
+    background-image: none;
+}
+
+td.norecords-td {
+    padding: 2px 5px;
+    background-color: white;
+}
+
+table.data-table td.first-cell, table.data-table tr.headers th.first-cell, td.norecords-td {
+    border-left: 1px solid #777777;
+}
+
+table.data-table td.last-cell, table.data-table tr.headers th.last-cell, td.norecords-td {
+    border-right: 1px solid #777777;
+}
+
+table.data-table tr.headers th.last-cell {
+    padding-right: 1px;
+}
+
+table.data-table {
+    border-bottom: 1px solid #777777;
+}
+
+table.data-table tr.headers th a {
+    text-decoration: none;
+    color: navy;
+    display: block;
+    cursor: pointer;
+}
+
+table.data-table tr.headers th {
+    background: #E1EAB0 url("images/table/table-header.gif") top;
+}
+
+table.data-table tr th.wicket_orderDown,
+table.data-table tr th.wicket_orderUp,
+table.data-table tr th.group-by-asc,
+table.data-table tr th.group-by-desc {
+    background-color: #B7CF5D;
+    background-image: url("images/table/table-header-selected.gif");
+}
+
+table.data-table tr th.wicket_orderUp span.label,
+table.data-table tr th.wicket_orderDown span.label,
+table.data-table tr th.group-by-asc span.label,
+table.data-table tr th.group-by-desc span.label {
+    color: white;
+    padding-right: 14px;
+}
+
+table.data-table tr th.wicket_orderUp a,
+table.data-table tr th.wicket_orderDown a,
+table.data-table tr th.group-by-asc a,
+table.data-table tr th.group-by-desc a {
+    margin-right: 3px;
+}
+
+table.data-table tr th.wicket_orderUp a,
+table.data-table tr th.group-by-asc a {
+    background: url("images/table/table-header-triangle-up.gif") right no-repeat;
+}
+
+table.data-table tr th.wicket_orderDown a,
+table.data-table tr th.group-by-desc a {
+    background: url("images/table/table-header-triangle-down.gif") right no-repeat;
+}
+
+table.data-table td.CheckboxColumn span.styled-checkbox button.styled-checkbox,
+table.data-table td.CheckboxColumn span.styled-checkbox button.styled-checkbox-disabled-unchecked {
+    margin-top: -2px;
+    margin-bottom: 1px;
+}
+
+.IE-8 table.data-table td.CheckboxColumn span.styled-checkbox button.styled-checkbox {
+    margin-top: -3px;
+}
+
+/*-- GroupableTable --*/
+
+table.groupable-table tr.headers th {
+    background-image: url("images/group-by/header.gif");
+}
+
+table.groupable-table tr.headers th.group-by span.label {
+    padding-left: 30px;
+}
+
+table.groupable-table tr.headers span.label {
+    height: 31px;
+    line-height: 30px;
+}
+
+table.groupable-table tr.headers .first-cell span.label,
+table.groupable-table tr.headers .last-cell span.label {
+    display: none;
+}
+
+table.groupable-table .first-cell, table.groupable-table .last-cell {
+    width: 0;
+    padding: 0;
+    background-image: none;
+    border-collapse: collapse;
+    font-size: 1px;
+    color: white;
+}
+
+table.groupable-table td.LinksColumn, table.groupable-table tr.headers th.LinksColumn span.label {
+    background-image: none;
+}
+
+table.data-table td.last-cell, table.data-table tr.headers th.last-cell {
+    border-right: 1px solid #777777;
+}
+
+table.grouped tr.odd td {
+    background-color: #ECF6DC;
+}
+
+table.grouped tr.even td {
+    background-color: #D6EBB7;
+}
+
+table.grouped tr.odd td.first-cell,
+table.grouped tr.odd td.last-cell,
+table.grouped tr.even td.first-cell,
+table.grouped tr.even td.last-cell {
+    width: 10px;
+    background: white;
+}
+
+table.groupable-table tr th.wicket_orderDown,
+table.groupable-table tr th.wicket_orderUp,
+table.groupable-table tr th.group-by-desc,
+table.groupable-table tr th.group-by-asc {
+    background-image: url("images/group-by/header-selected.gif");
+}
+
+table.grouped tr th.wicket_orderDown,
+table.grouped tr th.wicket_orderUp {
+    background-image: url("images/group-by/header.gif");
+}
+
+table.grouped tr th.wicket_orderUp span.label,
+table.grouped tr th.wicket_orderDown span.label {
+    color: #777777;
+}
+
+table.data-table tr.headers a,
+table.data-table tr.headers em {
+    position: relative;
+}
+
+table.data-table tr.headers span.group-by-link {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+}
+
+table.data-table.one-column {
+    border-right: 1px solid #777777
+}
+
+table.data-table th.group-by-none span.group-by-text {
+    display: none;
+}
+
+table.data-table tr.headers span.group-by-link {
+    background: url("images/group-by/group-off.gif") no-repeat;
+}
+
+table.data-table tr.headers th.group-by-desc span.group-by-link,
+table.data-table tr.headers th.group-by-asc span.group-by-link {
+    background: url("images/group-by/group-on.gif") no-repeat;
+}
+
+.row-collapsed {
+    display: none;
+}
+
+.IE-678 table.data-table tr.group-header-row div {
+    zoom: 1;
+}
+
+table.data-table tr.group-header-row td {
+    background: white;
+    padding: 10px 10px 0 10px;
+}
+
+table.data-table tr.group-header-row div.group {
+    background: url("images/group-by/group-header.gif") top repeat-x;
+    line-height: 28px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333333;
+}
+
+table.data-table tr.group-header-row div.top-left {
+    background: url("images/group-by/group-header-TL.gif") top left no-repeat;
+}
+
+table.data-table tr.group-header-row div.top-right {
+    background: url("images/group-by/group-header-TR.gif") top right no-repeat;
+}
+
+table.data-table tr.group-header-row div.label {
+    background: 9px 9px no-repeat;
+    padding: 0 10px 0 30px;
+}
+
+table.data-table tr.group-collapsed div.bottom-right {
+    background: url("images/group-by/group-header-BR.gif") bottom right no-repeat;
+}
+
+table.data-table tr.group-collapsed div.bottom-left {
+    background: url("images/group-by/group-header-BL.gif") bottom left no-repeat;
+}
+
+table.data-table tr.group-collapsed div.label {
+    background-image: url("images/group-by/triangle-closed.gif");
+}
+
+table.grouped tr.group-expanded div.label {
+    background-image: url("images/group-by/triangle-open.gif");
+}
+
+table.grouped tr.space-row td {
+    height: 10px;
+    background: white;
+}
+
+/*-- SingleSelectionTable --*/
+
+table.selectable tbody tr {
+    cursor: pointer;
+}
+
+table.selectable tbody tr.selected td,
+li.dojoDndItemAnchor,
+li.dojoDndItemSelected,
+body div.wicket-tree div.row-selected,
+.Moz div.wicket-tree div.row-selected .node-label,
+body div.wicket-tree div.context-menu,
+.Moz div.wicket-tree div.context-menu .node-label {
+    background-color: #B2DB71;
+}
+
+table.selectable tbody tr.hover td, table.selectable tbody tr.opened td {
+    background-color: #BCD873;
+}
+
+/*-- ListPanel --*/
+
+.list-panel table.data-table {
+    margin: -1px 0 0 0;
+    width: 100%;
+}
+
+.list-panel table.data-table td.first-cell,
+.list-panel table.data-table tr.headers th.first-cell,
+.list-panel table.data-table td.last-cell,
+.list-panel table.data-table tr.headers th.last-cell,
+.list-panel td.norecords-td {
+    border-left: none;
+    border-right: none;
+}
+
+.list-panel .table-wrapper {
+    border: solid 1px #41413F;
+    background: white;
+    margin: 0 104px 0 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative; /*IE fix*/
+}
+
+.Chrome .list-panel .table-wrapper {
+    margin: 0;
+}
+
+.Safari .list-panel .table-wrapper {
+    margin: 0 0 20px 0;
+}
+
+.list-panel .table-wrapper, .list-panel .buttons-bottom {
+    height: 400px;
+}
+
+.ordered-list, .ordered-list-panel .buttons-bottom {
+    height: 200px;
+}
+
+/*-- GeneralSettingsPanel --*/
+
+.general-settings-panel {
+    margin-bottom: 10px;
+}
+
+.general-settings-panel input.text {
+    width: 200px;
+}
+
+.Safari .general-settings-panel .value {
+    margin-top: 1px;
+}
+
+.IE-8 .general-settings-panel .value {
+    margin-top: 1px;
+}
+
+div.general-settings-panel input.text-file {
+    width: auto;
+}
+
+.license-key-text-area {
+    font-family: monospace;
+    width: 650px
+}
+
+.certificate-text-area {
+    font-family: monospace;
+    width: 650px
+}
+
+.license-border {
+    margin-top: -3px;
+    margin-left: 8px;
+    width: 655px;
+}
+
+/*-- GeneralTabPanel --*/
+
+.messages .warn {
+    margin: 5px 0 15px 0;
+}
+
+.black-listed-label {
+    color: red;
+    font-weight: bold;
+}
+
+.blue-listed-label {
+    color: blue;
+}
+
+.bold-blue-listed-label {
+    color: blue;
+    font-weight: bold;
+}
+
+.dark-blue-listed-label {
+    color: #000088;
+}
+
+.green-listed-label {
+    color: green;
+}
+
+.orange-listed-label {
+    color: #FF6600;
+}
+
+.gray-listed-label {
+    color: gray;
+}
+
+.light-gray-listed-label {
+    color: #bcbcbc;
+}
+
+.bold-listed-label {
+    font-weight: bold;
+}
+
+/*-- icons --*/
+
+.DownloadAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-download.gif");
+}
+
+.DownloadAction:hover, .DownloadAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-download-mo.gif");
+}
+
+.ShowInBintrayAction, .ShowInBintrayAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-bintray.gif");
+}
+
+.ShowInBintrayAction:hover, .ShowInBintrayAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-bintray-hover.gif");
+}
+
+.DeleteAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-delete.gif");
+}
+
+.DeleteAction:hover, .DeleteAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-delete-mo.gif");
+}
+
+.DiscardResultsAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-discard.gif");
+}
+
+.DiscardResultsAction:hover, .DiscardResultsAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-discard-mo.gif");
+}
+
+.MoveAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-move.gif");
+}
+
+.MoveAction:hover, .MoveAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-move-mo.gif");
+}
+
+.CopyAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-copy.gif");
+}
+
+.CopyAction:hover, .CopyAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-copy-mo.gif");
+}
+
+.DeleteVersionsAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-delVer.gif");
+}
+
+.DeleteVersionsAction:hover, .DeleteVersionsAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-delVer-mo.gif");
+}
+
+.ZapAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-zap.gif");
+}
+
+.ZapAction:hover, .ZapAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-zap-mo.gif");
+}
+
+.ViewAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-view.gif");
+}
+
+.ViewAction:hover, .ViewAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-view-mo.gif");
+}
+
+.Watch {
+    background-image: url("images/buttons/toolbox-buttons/BTN-watch.gif");
+}
+
+.Watch:hover, .Watch:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-watch-mo.gif");
+}
+
+.Unwatch {
+    background-image: url("images/buttons/toolbox-buttons/BTN-unwatch.gif");
+}
+
+.Unwatch:hover, .Unwatch:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-unwatch-mo.gif");
+}
+
+.ShowInTreeAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gototree.gif");
+}
+
+.ShowInTreeAction:hover, .ShowInTreeAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gototree-mo.gif");
+}
+
+.UpdateAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-edit.gif");
+}
+
+.UpdateAction:hover, .UpdateAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-edit-mo.gif");
+}
+
+.ViewUserPermissionsAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-perm.gif");
+}
+
+.ViewUserPermissionsAction:hover, .ViewUserPermissionsAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-perm-mo.gif");
+}
+
+.GoToBuildAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-build.gif");
+}
+
+.GoToBuildAction:hover, .GoToBuildAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-build-mo.gif");
+}
+
+.ShowInCiServerAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver.gif");
+}
+
+.ShowInCiServerAction:hover, .ShowInCiServerAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver-mo.gif");
+}
+
+.RefreshNodeAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver.gif");
+}
+
+.RefreshNodeAction:hover, .RefreshNodeAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver-mo.gif");
+}
+
+.SetMasterAction {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver.gif");
+}
+
+.SetMasterAction:hover, .SetMasterAction:focus {
+    background-image: url("images/buttons/toolbox-buttons/BTN-gotobuildserver-mo.gif");
+}
+
+.doc {
+    background-image: url("images/icons/ICN-file.gif");
+}
+
+.folder-compact {
+    background-image: url("images/icons/ICN-folders.gif");
+}
+
+.folder, .parent {
+    background-image: url("images/icons/ICN-folder.gif");
+}
+
+.jar {
+    background-image: url("images/icons/ICN-jar.gif");
+}
+
+.nupkg {
+    background-image: url("images/icons/ICN-nupkg.gif");
+}
+
+.apk {
+    background-image: url("images/icons/ICN-apk.png");
+}
+
+.pom {
+    background-image: url("images/icons/ICN-pom.gif");
+}
+
+.jnlp {
+    background-image: url("images/icons/ICN-jnlp.gif");
+}
+
+.rpm {
+    background-image: url("images/icons/ICN-rpm.png");
+}
+
+.repository-cache {
+    background-image: url("images/icons/ICN-remote.gif");
+}
+
+.repository-virtual {
+    background-image: url("images/icons/ICN-virtual.gif");
+}
+
+.repository {
+    background-image: url("images/icons/ICN-local.gif");
+}
+
+.xml {
+    background-image: url("images/icons/ICN-file.gif");
+}
+
+.tree-search {
+    background-image: url("images/icons/ICN-search.gif");
+}
+
+.gem {
+    background-image: url("images/icons/ICN-gem.gif");
+}
+
+.deb {
+    background-image: url("images/icons/ICN-deb.png");
+}
+
+.box {
+    background-image: url("images/addons/16vagrant.png");
+}
+
+.lfs {
+    background-image: url("images/addons/16gitlfs.png");
+}
+
+.docker-folder {
+    background: url("images/addons/16docker.png");
+}
+
+.jcenterBintrayIcon {
+    background: url("images/jcenter.gif") no-repeat;
+    background-size: 48px 48px;
+    width: 48px;
+    height: 48px;
+    margin: 0px 5px 0 0;
+    display: inline-block;
+    position: relative;
+    float: left;
+}
+
+.bintray-search {
+    display: inline-block;
+    background: url("images/jcenterSmall.gif") no-repeat;
+    background-size: 20px 20px;
+    background-position: 123px 5px;
+}
+
+.menu-items > li.bintray-search.menu-item-selected {
+    background-position: 130px 5px;
+}
+
+/*-- LoginPage -----------------------------------------*/
+
+div.login-panel {
+    width: 400px;
+    margin: 20px auto 0 auto;
+}
+
+.login-panel .field {
+    padding: 3px 0;
+}
+
+.login-panel .text {
+    width: 200px;
+}
+
+.login-panel label {
+    width: 80px;
+    float: left;
+}
+
+.login-panel .outer-border-title, .logout-border .outer-border-title {
+    padding-bottom: 0;
+}
+
+.login-panel .buttons {
+    position: relative;
+}
+
+/*-- LogoutPage --*/
+
+.logout-border {
+    width: 400px;
+    margin: 20px auto;
+}
+
+/*-- ForgotPasswordPage --*/
+
+.forgot-border {
+    width: 300px;
+    margin: 20px auto 0 auto;
+}
+
+/*-- ForgotPasswordPanel --*/
+
+.forgot-label {
+    width: 90px;
+    float: left;
+}
+
+/*-- ResetPasswordPage --*/
+
+.reset-border {
+    width: 330px;
+    margin: 20px auto 0 auto;
+}
+
+/*-- ResetPasswordPanel --*/
+
+.reset-form {
+    width: 290px;
+}
+
+/*-- SimpleRepoBrowserPage --*/
+.ext-link {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("images/icons/new-win-icon.gif") center center no-repeat;
+    position: relative;
+    top: 2px;
+}
+
+.repo-list .icon-link {
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.bread-crumbs a, .bread-crumbs span {
+    float: left;
+}
+
+.bread-crumbs a {
+    text-decoration: none;
+}
+
+.bread-crumbs .sep {
+
+}
+
+.bread-crumbs a:hover, .bread-crumbs a:focus {
+    text-decoration: underline;
+}
+
+.local-repos-list {
+    padding-top: 10px;
+}
+
+.local-repos-list .icon-link {
+    display: inline-block;
+}
+
+/*-- DeletableLabel --*/
+
+.deletable {
+    cursor: default;
+}
+
+.deletable, .deletable td {
+    font-family: verdana, arial, sans-serif;
+    font-size: 9px;
+}
+
+.deletable td.border {
+    background: #78C823 !important;
+    padding: 0;
+}
+
+.deletable td.corner {
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0;
+}
+
+.deletable table {
+    display: inline-block !important;
+    margin: 0 1px !important;
+    border-spacing: 0 !important;
+    color: white;
+}
+
+.IE-678 .deletable table {
+    display: inline !important;
+    margin: 0 2px !important
+}
+
+.deletable td.sep {
+    background: #eeeeee !important;
+    width: 1px;
+    padding: 0;
+}
+
+.deletable td.delete-link {
+    padding: 0 3px;
+}
+
+.deletable td.label-border {
+    padding: 0;
+}
+
+.deletable td.deletable-label {
+    padding: 0 3px;
+}
+
+.deletable .overlabel td.label-border {
+    background: #eeeeee !important;
+}
+
+.deletable .overlink td.link-border {
+    background: #eeeeee !important;
+}
+
+.deletable .overlink td.delete-link {
+    background: #eeeeee !important;
+    color: #769800 !important;
+}
+
+.deletable .overlabel td.deletable-label {
+    background: #eeeeee !important;
+    color: #769800 !important;
+}
+
+.undeletable td.delete-link, .undeletable td.link-border {
+    display: none !important;
+}
+
+.undeletable td.sep {
+    background: #769800 !important;
+}
+
+.undeletable td.sep-border {
+    background: transparent !important;
+    width: 1px;
+    height: 1px;
+}
+
+/*-- FeedbackPanel --*/
+
+.default-feedback {
+    padding-left: 0px;
+}
+
+.aggregate-feedback ul.feedback {
+    margin: 0;
+    padding: 0;
+}
+
+.aggregate-feedback ul.feedback li {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    list-style: none;
+    text-align: center;
+    color: white;
+}
+
+.aggregate-feedback a {
+    text-decoration: underline;
+}
+
+.aggregate-feedback li.feedbackPanelERROR a,
+.aggregate-feedback li.feedbackPanelWARNING a {
+    color: white;
+}
+
+.aggregate-feedback li.feedbackPanelINFO a {
+    color: blue;
+}
+
+.aggregate-feedback li.feedbackPanelERROR,
+.aggregate-feedback div.feedback-title-ERROR {
+    background-color: #EE6C32;
+}
+
+.aggregate-feedback li.feedbackPanelERROR span,
+.aggregate-feedback div.feedback-title-ERROR span {
+    background: url("images/feedback/ICN-red.gif") no-repeat left;
+}
+
+.aggregate-feedback li.feedbackPanelWARNING,
+.aggregate-feedback div.feedback-title-WARNING {
+    background-color: #FFF7A2;
+}
+
+.aggregate-feedback li.feedbackPanelWARNING span,
+.aggregate-feedback div.feedback-title-WARNING span {
+    background: url("images/feedback/ICN-yellow.gif") no-repeat left;
+    color: #cc9900;
+}
+
+.aggregate-feedback li.feedbackPanelINFO,
+.aggregate-feedback div.feedback-title-INFO {
+    background-color: #E5EEC1;
+}
+
+.aggregate-feedback li.feedbackPanelINFO span,
+.aggregate-feedback div.feedback-title-INFO span {
+    background: url("images/feedback/ICN-green.gif") no-repeat left;
+    color: #007700;
+}
+
+/*-- AggregateFeedbackPanel --*/
+
+.aggregate-feedback div.feedback-title {
+    color: white;
+}
+
+.aggregate-feedback div.feedback-title span, .aggregate-feedback ul.feedback li span {
+    font-weight: bold;
+    background-position: 5px 4px;
+    background-repeat: no-repeat;
+    min-height: 20px;
+    padding: 6px 2px 3px 30px;
+    display: -moz-inline-block;
+    display: inline-block;
+    text-align: left;
+}
+
+.IE-6 .aggregate-feedback div.feedback-title span, .IE-6 .aggregate-feedback ul.feedback li span {
+    height: 20px;
+}
+
+.aggregate-feedback ul.aggregate-feedback li span {
+    background-image: url("images/feedback/feedback-bullet.gif") !important;
+    background-position: 2px 15px;
+    padding-left: 12px !important;
+    text-align: left;
+}
+
+.aggregate-feedback div.feedback-title-ERROR {
+    border-bottom: solid 1px #F3A372;
+    text-align: center;
+}
+
+.aggregate-feedback div.feedback-title-ERROR span {
+    margin-left: -141px;
+}
+
+.aggregate-feedback ul.aggregate-feedback li.feedbackPanelERROR {
+    background-color: #F28D57;
+}
+
+.aggregate-feedback div.feedback-title-WARNING {
+    border-bottom: solid 1px white;
+    text-align: center;
+}
+
+.aggregate-feedback div.feedback-title-WARNING span {
+    margin-left: -141px;
+}
+
+.aggregate-feedback ul.aggregate-feedback li.feedbackPanelWARNING {
+    background-color: #FFFBCF;
+}
+
+.aggregate-feedback div.feedback-title-INFO {
+    border-bottom: solid 1px white;
+    text-align: center;
+}
+
+.aggregate-feedback div.feedback-title-INFO span {
+    margin-left: -141px;
+}
+
+.aggregate-feedback ul.aggregate-feedback li.feedbackPanelINFO {
+    background-color: #E9EFD1;
+}
+
+/*-- BooleanColumn --*/
+
+th.BooleanColumn {
+    width: 20px;
+}
+
+/* RTFACT-3014 */
+.IE-7 th.BooleanColumn span.label {
+    position: relative;
+}
+
+td.BooleanColumn span {
+    width: 20px;
+    height: 16px;
+    display: block;
+    margin: 0 auto;
+}
+
+td.BooleanColumn span span {
+    display: none;
+}
+
+td.true span {
+    background-image: url("images/icons/black-tick9.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.required label, .required-message {
+    padding-left: 12px;
+    background: url("images/icons/required.gif") left no-repeat;
+}
+
+.required .value label {
+    padding-left: 0;
+    background: none;
+    font-weight: normal;
+}
+
+/*-- HomePage --*/
+
+.artifacts-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #27356B;
+    width: auto;
+    background: #F3FAEA;
+    margin: 0px;
+    padding: 17px 20px 17px 20px;
+    -webkit-box-shadow: 0 3px 5px 0 #ddd;
+    -moz-box-shadow: 0 3px 5px 0 #ddd;
+    box-shadow: 0 3px 5px 0 #ddd;
+}
+
+.welcome-space {
+    clear: both;
+    height: 20px;
+}
+
+.welcome-border .artifacts-count .value {
+    color: #87B343;
+}
+
+.welcome-border .artifacts-count .value.button:hover {
+    text-decoration: underline;
+}
+
+.welcome-border .value {
+    color: darkblue;
+}
+
+.welcome-border .info, .welcome-border .notice {
+    margin-top: 0px;
+    margin-left: 30px;
+    margin-bottom: 17px;
+    padding-left: 26px;
+}
+
+.field label, .title, .strong {
+    font-weight: bold;
+}
+
+.FF .field label, .Chrome .field label {
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.IE-6 .field label {
+    zoom: 1;
+}
+
+.base-settings-panel {
+    margin-top: 10px;
+}
+
+.status-label {
+    font-size: 11px;
+    color: #888888;
+    min-height: 16px;
+    margin-left: 27px;
+}
+
+/*--MavenSettingsPanel----------------------------------------*/
+
+.Chrome .settings-border .border-content .field-row .field button.styled-checkbox {
+    margin: 0 -3px;
+}
+
+.Chrome .settings-border .border-content .field-row .field .value {
+    margin-top: 2px;
+}
+
+.IE-89 .settings-border .border-content .field-row .field .value {
+    margin-top: 2px;
+}
+
+.Chrome .top-settings-text-field {
+    padding-top: 2px;
+}
+
+.Chrome .bottom-settings-text-field {
+    padding-top: 3px;
+}
+
+.Chrome .settings-checkbox {
+    padding-left: 7px;
+}
+
+.settings-field-group {
+    float: left;
+    width: 205px;
+}
+
+.settings-checkbox {
+    padding-top: 14px;
+}
+
+.Chrome .settings-checkbox {
+    padding-top: 19px;
+}
+
+.IE-8 .settings-checkbox {
+    padding-top: 19px;
+}
+
+/*--IvySettingsPanel-----------------------------------*/
+.ivy-pattern {
+    width: 700px;
+}
+
+/*--SettingsModalPanel-----------------------------------*/
+
+.modal-code {
+    overflow: auto;
+}
+
+textarea.modal-code {
+    width: 100%;
+    height: 500px;
+}
+
+.IE-7 textarea.modal-code {
+    width: 99%;
+}
+
+.modal-code .syntaxhighlighter .lines.no-wrap {
+    overflow-y: auto !important;
+}
+
+.modal-code .syntaxhighlighter .toolbar {
+    right: 20px !important;
+}
+
+.IE-7 .modal-code .syntaxhighlighter .line .content {
+    width: 100% !important;
+}
+
+/*-- DeployArtifactPage --------------------------------------*/
+
+.wupb-container {
+    clear: both;
+}
+
+div.wupb-uploadStatus {
+    margin: 5px;
+    color: #aaa;
+}
+
+div.wupb-progressBar {
+    margin: 5px;
+}
+
+div.wupb-progressBar .wupb-border {
+    background: #eee url("images/progress-remainder.gif") repeat-x;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    margin: 0;
+}
+
+div.wupb-progressBar .wupb-background {
+    background: #507090 url("images/progress-bar.gif") repeat-x;
+    height: 18px;
+    width: 0;
+}
+
+.horizontal-list .item {
+    float: left;
+    padding-right: 10px;
+}
+
+/*-- UsersPanel --*/
+
+.user-filter .fieldset-border-wrapper {
+    margin-right: 25px;
+}
+
+/*-- StorageSummaryPanel --*/
+
+.file-storage-summary .fieldset-border-wrapper {
+    margin-right: 15px;
+}
+
+.storage-table tr {
+    height: 22px;
+}
+
+.storage-table td.first-cell {
+    width: 30px;
+}
+
+.storage-table .icon {
+    padding-left: 24px;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-bottom: 3px;
+}
+
+/*-- CronNextDatePanel --*/
+
+.cron-fields input.text {
+    width: 240px;
+}
+
+/*  Small Text box for hours fields */
+.cron-fields input.indexing-interval-hours, input.retention-period-hours, input.yum-folder-depth {
+    width: 70px;
+}
+
+.cron-date {
+    width: 240px;
+    padding: 2px;
+    display: -moz-inline-block;
+    display: inline-block;
+    background: white;
+    border: solid 1px #666666;
+}
+
+.cron-date a {
+    float: right;
+}
+
+/*-- CheckboxColumn --*/
+
+td.CheckboxColumn {
+    width: 1px;
+    white-space: nowrap;
+}
+
+.data-table th .styled-checkbox {
+    position: relative;
+    top: -2px;
+}
+
+.IE-8 .data-table th .styled-checkbox {
+    top: -1px;
+}
+
+.data-table td.CheckboxColumn {
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+/*-- StyledCheckboxColumn --*/
+
+table.data-table tr.headers button.styled-checkbox .button-center {
+    color: #777777;
+    font-weight: bold;
+}
+
+/*-- ProfilePanel --*/
+
+.unlock-profile-form input.text {
+    width: 200px;
+}
+
+.unlock-profile-form button {
+    position: relative;
+    top: -3px;
+}
+
+.unlock-profile-form .value {
+    margin-top: -5px;
+}
+
+.IE-8 .unlock-profile-form .value {
+    margin-top: -2px;
+}
+
+.Chrome .unlock-profile-form .value {
+    margin-top: -3px;
+}
+
+.IE-7 .unlock-profile-form button {
+    top: 5px;
+    left: 3px;
+}
+
+.IE-7 .unlock-profile-form label {
+    position: relative;
+    top: 5px;
+}
+
+.update-profile-form input.text {
+    width: 200px;
+}
+
+.update-profile-form .textbox-disabled {
+    min-width: 200px;
+    position: relative;
+    z-index: 0;
+
+}
+
+.update-profile-form .value {
+    padding-top: 2px;
+}
+
+.bintray-profile-form input.text {
+    width: 330px;
+}
+
+.bintray-link {
+    background-image: url("images/icons/bintray.png");
+}
+
+.profile-password {
+    position: absolute;
+}
+
+.profile-password .password-strength {
+    position: relative;
+    left: 220px;
+    top: -22px;
+}
+
+/*-- CollapsibleBehavior --*/
+
+.collapsed .border-content, .disabled-collapsible .border-content {
+    display: none;
+}
+
+.collapsible-wrapper {
+    position: relative;
+}
+
+.collapsible-wrapper .border-title, .disabled-collapsible .border-title {
+    padding-left: 25px;
+}
+
+.collapsible-wrapper .border-title button {
+    position: relative;
+}
+
+.IE-7 .collapsible-wrapper {
+    zoom: 1;
+}
+
+.collapsed .border-title, .disabled-collapsible .border-title {
+    min-height: 25px;
+}
+
+.IE-6 .collapsed .border-title, .IE-6 .disabled-collapsible .border-title {
+    height: 25px;
+}
+
+.collapse-link {
+    display: block;
+    width: 95%;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-position: 9px 9px;
+    background-repeat: no-repeat;
+}
+
+.IE-7 .collapse-link {
+    background-position: 9px 12px;
+}
+
+a.collapse-link:hover, a.collapse-link:focus {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.profile-panel .fieldset-border-wrapper {
+    float: none;
+}
+
+.collapsed .collapse-link {
+    background-image: url("images/collapsed.gif");
+}
+
+.expanded .collapse-link {
+    background-image: url("images/expanded.gif");
+}
+
+.collapse-link span {
+    display: none;
+}
+
+.editor-text-area {
+    width: 100%;
+    height: 200px;
+}
+
+.disabled-collapsible .border-title {
+    background: url("images/collapsed.gif") no-repeat 9px 17px;
+}
+
+/*-- LabeledValue --*/
+
+.labeled-value {
+    margin: 4px 0;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/*--IndexerConfigPanel--*/
+
+.cron-fields .field.sep {
+    margin-left: -3px;
+}
+
+.Chrome .cron-fields .field.sep {
+    margin-left: -5px;
+}
+
+/*-- MetadataSearchPanel --*/
+
+.metadata-search-wide-field {
+    width: 30%;
+}
+
+.Safari .x-path .value {
+    margin-top: 1px;
+}
+
+.IE-8 .x-path .value {
+    margin-top: 1px;
+}
+
+.meta-field .button {
+    margin-left: -3px;
+}
+
+.IE-7 .meta-field .button {
+    margin-left: -5px;
+}
+
+.Safari .meta-field .button {
+    margin-top: 2px;
+}
+
+/*--GavcSearchPanel--*/
+
+.IE-8 .classifier .value {
+    margin-top: 1px;
+}
+
+.Safari .classifier .value {
+    margin-top: 1px;
+}
+
+/*-- SaveSearchResultsPanel --*/
+
+.save-results {
+    float: right;
+    position: relative;
+}
+
+.WebKit .build-save-results .small-buttons .button,
+.Moz .build-save-results .small-buttons .button {
+    position: relative;
+    top: 2px;
+}
+
+.IE-7 .save-results {
+    width: 470px;
+}
+
+.save-results .fieldset-border-wrapper {
+    margin-bottom: 5px;
+}
+
+.save-results .value, .build-save-results .value {
+    display: inline;
+}
+
+.save-results .input.text, .build-save-results .input.text {
+    width: 120px;
+}
+
+.save-results .dijitComboBox, .build-save-results .dijitComboBox {
+    width: 180px;
+}
+
+.small-buttons .button {
+    padding: 1px 3px;
+    text-decoration: none;
+    color: #333333;
+    background: url("images/inner-frame/inner-top-center.gif") repeat-x -10px;
+    border: outset 1px;
+    margin: 0 3px;
+}
+
+.info_leftpane .small-buttons .button {
+    border: 1px solid #82909c;
+    background: #9AAFC2;
+    padding: 2px 6px;
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #aaaaaa;
+    -moz-box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #aaaaaa;
+    box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #aaaaaa;
+}
+
+.info_leftpane .small-buttons .button:hover {
+    border: 1px solid #82909c;
+    background: #abc0d4;
+    padding: 2px 6px;
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #ddd;
+    -moz-box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #ddd;
+    box-shadow: inset 1px 1px 0px 0px #b6c8d7, 0px 2px 4px 0px #ddd;
+}
+
+.IE-678 .small-buttons .button {
+    display: inline-block;
+}
+
+.save-results .small-buttons .button {
+    margin: 0 1px;
+    padding: 1px 2px;
+}
+
+.small-buttons .button-disabled {
+    border: solid 1px;
+    color: #999999;
+    cursor: default;
+}
+
+.small-buttons a.button:hover, .small-buttons a.button:focus {
+    border: solid 1px;
+    background: #FAFAF9;
+}
+
+.save-results .completeVersion {
+    margin-top: 6px;
+    margin-left: -2px;
+}
+
+.save-results-form .small-buttons .button {
+    position: relative;
+}
+
+.Moz .save-results-form .small-buttons .button {
+    top: 1px;
+}
+
+.Chrome .save-results-form .small-buttons .button,
+.Safari .save-results-form .small-buttons .button,
+.IE-8 .save-results-form .small-buttons .button {
+    top: 2px;
+}
+
+/*-- ImprovedAutoCompleteTextField --*/
+
+input.autocomplete {
+    background: white url("images/autocomplete.gif") right top no-repeat;
+    padding-right: 16px;
+}
+
+/*-- ComboBoxBehavior --*/
+
+.dijitPopup {
+    z-index: 30001 !important;
+}
+
+/*-- PasswordStrengthComponent --*/
+
+.password-strength {
+    position: relative;
+    left: 2px;
+    width: 150px;
+    clear: both;
+    padding-bottom: 10px;
+}
+
+.title-password-strength {
+    font-weight: bold;
+    font-size: 11px;
+    color: #8f8d92;
+    margin-bottom: 1px;
+}
+
+.week-password-strength, .strong-password-strength {
+    height: 6px;
+}
+
+.week-password-strength {
+    background: url("images/week-password-stregth.gif") repeat-x;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+.strong-password-strength {
+    background: url("images/strong-password-stregth.gif") repeat-x;
+    position: absolute;
+    z-index: 2;
+
+}
+
+/*-- JnlpViewTabPanel --*/
+
+.jnlp-tab a {
+    margin-top: 10px;
+    position: relative;
+    display: block;
+    height: 23px;
+    line-height: 23px;
+    padding-left: 30px;
+}
+
+.webstart-link {
+    background: url("images/icons/webstart.gif") left no-repeat;
+}
+
+.applet-link {
+    background: url("images/icons/applet.gif") left no-repeat;
+}
+
+.jnlp-tab .field {
+    padding: 10px 0 5px 0;
+}
+
+/*-- PropertiesTabPanel --*/
+
+.properties-border {
+    padding-top: 0;
+}
+
+.properties-border table.data-table {
+    margin: 0;
+}
+
+.WebKit .properties-border a.button {
+    position: relative;
+    top: 2px;
+}
+
+.properties-border .fieldset-border-wrapper .field {
+    padding: 7px 15px 0 0;
+}
+
+/*---AddSingleOpenPanel---*/
+
+.IE-678 .property-editor .editor-text-area {
+    overflow-y: hidden;
+}
+
+.property-editor .editor-text-area {
+    width: 99%;
+}
+
+/*--PropertySetCreatePanel---*/
+
+.property .label-sep {
+    padding-bottom: 0;
+}
+
+.Chrome .property .label-sep {
+    padding-bottom: 2px;
+}
+
+/*---ProxyCreateUpdatePanel---*/
+
+div.field.checkbox-field {
+    margin-top: 15px;
+}
+
+/*--MailConfigPanel--*/
+
+.IE-678 .mail-config .artifactory-url {
+    width: 320px;
+}
+
+.mail-config .artifactory-url {
+    width: 323px;
+}
+
+.test-border {
+    width: 329px;
+}
+
+.test-border .field {
+    padding: 0;
+}
+
+/*--GlobalKeyStorePanel--*/
+
+.Chrome .global-key .value {
+    margin-top: 1px;
+}
+
+.Moz .global-key .value {
+    margin-top: 1px;
+}
+
+.Safari .global-key .field-sep {
+    margin-top: 1px;
+}
+
+.Safari .global-key .row-button.right-button {
+    position: inherit;
+}
+
+.global-key .field.field-sep {
+    margin-left: -11px;
+    margin-top: 13px;
+}
+
+.Safari .global-key .field.field-sep {
+    margin-top: 7px;
+}
+
+/*--UploadKeystorePanel--*/
+
+.IE-678 .upload-key .button {
+    padding-left: 5px;
+    top: 5px;
+}
+
+.IE-678 .upload-key .value {
+    margin-top: -15px;
+}
+
+.IE-678 .upload-key .field-sep .value {
+    margin-top: 1px;
+}
+
+/*--RemoveKeyPairPanel--*/
+.remove-key select {
+    min-width: 221px;
+
+}
+
+.IE-678 .remove-key select {
+    width: 221px;
+}
+
+.IE-8 .remove-key select {
+    margin-top: 18px;
+}
+
+.IE-67 .remove-key button {
+    padding-left: 5px;
+    top: 5px;
+}
+
+.IE-8 .remove-key button {
+    padding-left: 3px;
+    top: -1px;
+}
+
+.remove-key .value {
+    margin-top: -6px;
+}
+
+.IE-678 .remove-key .value {
+    margin-top: -15px;
+}
+
+/*--SecurityGeneralConfigPanel---*/
+
+.Chrome .security-general {
+    margin-left: -4px;
+}
+
+/*---ArchiveSearchPanel---*/
+
+.search-form .search-box-checkbox {
+    margin-left: -3px;
+}
+
+.Safari .search-form .search-box-checkbox {
+    margin-left: -5px;
+}
+
+.Safari .search-form button.archive-button {
+    position: relative;
+    top: 2px;
+}
+
+.IE-8 .search-form button.archive-button {
+    position: relative;
+    top: -2px;
+}
+
+/*--PropertySearchPanel--*/
+
+.search-form .search-button {
+    margin-left: -5px;
+}
+
+.Moz .search-form .search-button {
+    margin-left: -2px;
+}
+
+.IE-7 .search-form .search-button {
+    margin-left: -8px;
+}
+
+/*--AddKeyPairPanel--*/
+.IE-8 .uploadKeystoreForm input.sep {
+    margin-top: 16px;
+}
+
+.IE-8 .uploadKeystoreForm .button {
+    top: -1px;
+    left: -3px;
+}
+
+.IE-7 .uploadKeystoreForm .button {
+    top: 8px;
+}
+
+/*--RepositoriesTabPanel--*/
+
+.IE-7 .name-repository-fields {
+    width: 75%;
+}
+
+.IE-7 .name-repository-fields .any-repo-field {
+    position: relative;
+    top: 17px;
+    left: 95px;
+    margin-bottom: 3px;
+}
+
+.IE-7 .name-repository-fields .label-sep {
+    position: relative;
+}
+
+.Moz .name-repository-fields .label-sep {
+    position: relative;
+    top: -2px;
+}
+
+.name-repository-fields .label-sep {
+    width: 100px;
+}
+
+.IE-7 .name-repository-fields {
+    padding-top: 0;
+}
+
+/*--- MoveAndCopyBasePanel --*/
+
+.textbox.dryRunResult {
+    overflow: auto;
+}
+
+/*-- PropertyCreateUpdatePanel --*/
+
+.value-type-field .value {
+    padding: 5px 0 5px 5px;
+}
+
+.value-type-field input {
+    margin-left: 15px;
+    position: relative;
+    top: 1px;
+}
+
+table.data-table td.add-value-row {
+    background: white url("images/table/table-border.gif") top repeat-x;
+    padding: 5px 7px 2px;
+}
+
+.properties-list .table-wrapper, .properties-list .buttons-bottom {
+    height: 200px;
+}
+
+/*-- TextFieldColumn --*/
+
+.TextFieldColumn input {
+    width: 99%;
+}
+
+/*-- AddonsInfoPanel --*/
+
+.addons-enabled {
+    color: green;
+}
+
+.addons-disabled {
+    color: red;
+}
+
+.addons-table table {
+    /*border: solid 1px #7A797A;*/
+    /*border-collapse: collapse;*/
+    /*color: #5D5C5D;*/
+    /*float: left;*/
+    margin-top: 10px;
+    width: 100%;
+}
+
+.addons-table .billing-summary td {
+    border: none;
+    border-top: dotted 1px black;
+}
+
+.addons-table tr td {
+    background: white;
+    border: none;
+    /*border-right: dotted 1px #7A797A;*/
+    line-height: 30px;
+}
+
+.addons-table .even td {
+    background: #F5FAED;
+}
+
+.addons-table .image {
+    width: 50px;
+}
+
+.addons-table .name {
+    width: 185px;
+}
+
+.addons-table .status {
+    width: 100px;
+}
+
+.addons-table .name, .addons-table .status {
+    padding-left: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.addons-table .image div {
+    height: 16px;
+    width: 16px;
+    background-repeat: no-repeat;
+    margin-left: 15px;
+}
+
+.addons-table .notice {
+    margin-top: 10px;
+}
+
+.addons-table .border-content {
+    padding-top: 0;
+}
+
+.addon-build {
+    background: url(images/addons/16build.png) no-repeat left top;
+}
+
+.addon-rest {
+    background: url(images/addons/16rest.png) no-repeat left top;
+}
+
+.addon-license {
+    background: url(images/addons/16licenses.png) no-repeat left top;
+}
+
+.addon-ldap, .addon-ldapgroup {
+    background: url(images/addons/16group.png) no-repeat left top;
+}
+
+.addon-properties {
+    background: url(images/addons/16label.png) no-repeat left top;
+}
+
+.addon-search {
+    background: url(images/addons/16search.png) no-repeat left top;
+}
+
+.addon-sso {
+    background: url(images/addons/16jar.png) no-repeat left top;
+}
+
+.addon-watch {
+    background: url(images/addons/16watch.png) no-repeat left top;
+}
+
+.addon-webstart {
+    background: url(images/addons/16sso.png) no-repeat left top;
+}
+
+.addon-plugins {
+    background: url(images/addons/16plugins.png) no-repeat left top;
+}
+
+.addon-layouts {
+    background: url(images/addons/16layouts.png) no-repeat left top;
+}
+
+.addon-filtered-resources {
+    background: url(images/addons/16filtered-resources.png) no-repeat left top;
+}
+
+.addon-replication {
+    background: url(images/addons/16replication.png) no-repeat left top;
+}
+
+.addon-p2 {
+    background: url(images/addons/16p2.png) no-repeat left top;
+}
+
+.addon-yum {
+    background: url(images/addons/16yum.png) no-repeat left top;
+}
+
+.addon-nuget {
+    background: url(images/addons/16nuget.png) no-repeat left top;
+}
+
+.addon-blackduck {
+    background: url(images/addons/16blackduck.png) no-repeat left top;
+}
+
+.addon-gems {
+    background: url(images/addons/16gems.png) no-repeat left top;
+}
+
+.addon-npm {
+    background: url(images/addons/16npm.png) no-repeat left top;
+}
+
+.addon-bower {
+    background: url(images/addons/16bower.png) no-repeat left top;
+}
+
+.addon-vcs {
+    background: url(images/addons/16vcs.png) no-repeat left top;
+}
+
+.addon-filestore {
+    background: url(images/addons/16filestore.png) no-repeat left top;
+}
+
+.addon-ha {
+    background: url(images/addons/16ha.png) no-repeat left top;
+}
+
+.addon-debian {
+    background: url(images/addons/16debian.png) no-repeat left top;
+}
+
+.addon-docker {
+    background: url(images/addons/16docker.png) no-repeat left top;
+}
+
+.addon-pypi {
+    background: url(images/addons/16pypi.png) no-repeat left top;
+}
+
+.addon-vagrant {
+    background: url(images/addons/16vagrant.png) no-repeat left top;
+}
+
+.addon-git-lfs {
+    background: url(images/addons/16gitlfs.png) no-repeat left top;
+}
+
+/*-- ProfilePanel --*/
+
+.settings-snippet {
+    position: relative;
+}
+
+.settings-snippet .info {
+    position: absolute;
+    top: -20px;
+}
+
+/*-- DisabledAddonBehavior --*/
+
+.disabled-addon .addon-icon {
+    display: inline-block !important;
+    background: url("images/addons/addon.png") no-repeat 0 0 !important;
+    width: 17px !important;
+    height: 17px !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+}
+
+.disabled-addon:hover .addon-icon {
+    background-position: 0 -17px !important;
+}
+
+.border-icon .addon-icon {
+    position: absolute;
+    margin-left: 5px;
+}
+
+.addon-link {
+    padding-left: 20px;
+}
+
+.hide-link {
+    display: block;
+    margin-top: 5px;
+    background: url("images/buttons/checkbox/checkbox-small-off.gif") no-repeat left top;
+    padding-left: 18px;
+    font-size: 11px;
+    height: 14px;
+    padding-top: 2px;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+}
+
+a.hide-link:hover, a.hide-link:focus {
+    background-image: url("images/buttons/checkbox/checkbox-small-over-off.gif");
+}
+
+a.hide-link-checked {
+    background-image: url("images/buttons/checkbox/checkbox-small-on.gif");
+}
+
+a.hide-link-checked:hover, a.hide-link-checked:focus {
+    background-image: url("images/buttons/checkbox/checkbox-small-over-on.gif");
+}
+
+.menu-item .addon-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.tab-row .disabled-addon {
+    position: relative;
+}
+
+.tab-row .addon-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+div.styled-tab-panel div.tab-row li.disabled-addon span {
+    min-width: 70px;
+    padding-right: 30px;
+}
+
+.disabled-addon-last-tab .addon-icon {
+    right: 15px;
+}
+
+.save-results .addon-icon {
+    position: absolute;
+    top: 1px;
+    left: 190px;
+    z-index: 100;
+}
+
+div.styled-tab-panel div.tab-row li.disabled-addon-last-tab span {
+    min-width: 60px;
+    padding-right: 40px;
+}
+
+.disabled-addon .fieldset-border-title {
+    padding-right: 27px;
+}
+
+/*-- ConfirmModalPanel --*/
+
+.confirm-modal-border {
+    text-align: center;
+}
+
+/*-- RepositoryConfigPage --*/
+
+.remote-repos button.new-link {
+    top: 11px;
+}
+
+.remote-repos button.import-link {
+    top: 16px;
+    position: relative;
+    left: 15px;
+}
+
+.IE-7 .remote-repos button.import-link {
+    left: -58px;
+    top: 50px;
+}
+
+.IE-7 .remote-repos button.save-link {
+    top: 94px;
+    left: -132px
+}
+
+.IE-7 .remote-repos button.cancel-link {
+    top: 133px;
+    left: -206px;
+}
+
+.remote-repos .ordered-list, .remote-repos .buttons-bottom {
+    height: 240px;
+}
+
+/*-- ExportResultsPanel --*/
+
+.IE-6 .export-results .fieldset-border-content,
+.IE-7 .export-results .fieldset-border-content {
+    position: relative;
+}
+
+/*---AdvancedSearchPanel---*/
+
+.advanced-search-panel {
+    width: 268px;
+}
+
+.advanced-search-panel .border-title {
+    font-size: 13px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.metadata-panel .search-form .collapsible-wrapper {
+    top: 4px;
+}
+
+.gavc-panel .search-form .collapsible-wrapper {
+    top: 4px;
+}
+
+.search-form .collapsible-wrapper {
+    width: 268px;
+    left: -10px;
+}
+
+.IE-8 .search-form .collapse-link {
+    top: 4px;
+}
+
+.search-form .collapse-link {
+    top: -4px;
+}
+
+.IE-7 .search-form .collapse-link {
+    top: 2px;
+}
+
+/*Customizing Panel*/
+
+.general-settings-panel .logo-file {
+    margin-left: 237px;
+    margin-top: -29px;
+}
+
+.FF .general-settings-panel .upload-form .button {
+    left: 15px;
+}
+
+.general-settings-panel .upload-field {
+    margin-top: -3px;
+    padding-top: 0;
+}
+
+.general-settings-panel .field-row .or-label {
+    position: relative;
+    top: 20px;
+    display: block;
+}
+
+.customize {
+    margin-top: 14px;
+}
+
+.IE-8 .general-settings-panel .customize {
+    margin-top: 18px;
+}
+
+.Safari .general-settings-panel .customize {
+    margin-top: 11px;
+}
+
+.general-settings-panel .customize.reset-field {
+    position: relative;
+    top: -2px;
+    left: 5px;
+}
+
+.Chrome .general-settings-panel .customize.reset-field {
+    left: -10px;
+}
+
+.Safari .general-settings-panel .customize.reset-field {
+    top: 3px;
+    left: -10px;
+}
+
+.IE-678 .general-settings-panel .customize.reset-field {
+    left: -10px;
+}
+
+/*----VirtualRepoBrowserPanel-----*/
+
+.virtual-repo-browser .icon-link {
+    height: auto;
+}
+
+/*---LdapGroupPanel-----*/
+
+.ldap-group-panel-enabled-checkbox {
+
+}
+
+.ldap-group-panel-fulldn-checkbox {
+    position: relative;
+    top: -56px;
+    left: 200px;
+}
+
+.ldap-group-panel-subtree-checkbox {
+    position: relative;
+    top: -56px;
+    left: 200px;
+}
+
+.ldap-group-panel-groupname-textfield {
+    margin-left: 205px;
+    margin-top: -34px;
+}
+
+.ldap-group-panel-description-textfield {
+    margin-left: 205px;
+    margin-top: -68px;
+}
+
+/*--LdapGroupSettingsPanel--*/
+
+.ldap-setting-form .enabled {
+    margin-bottom: 10px;
+    padding-top: 14px;
+}
+
+.ldap-setting-form .strategy {
+    margin-bottom: 15px;
+}
+
+.ldap-setting-form .field-row .field {
+    width: 192px;
+}
+
+.ldap-setting-form div.field.value {
+    margin-top: 4px;
+    margin-left: -3px;
+}
+
+.ldap-setting-form .field-row .value .subtree {
+    margin-top: 10px;
+}
+
+.Chrome .ldap-setting-form div.field.value, .Safari .ldap-setting-form div.field.value {
+    margin-top: 13px;
+    margin-left: -5px;
+}
+
+/*-- BuildBreadCrumbsPanel --*/
+
+.nice-bread-crumbs {
+    padding-left: 10px;
+}
+
+.nice-bread-crumbs .sep {
+    display: inline-block;
+    background: url(images/tree-inspector/triangle-closed.gif) no-repeat center center;
+    height: 16px;
+    width: 12px;
+}
+
+.nice-bread-crumbs a {
+    color: darkblue;
+    font-size: 15px;
+}
+
+.nice-bread-crumbs a:hover {
+    color: blue;
+}
+
+.disabled-panel, .IE-8 .disabled-panel .table-wrapper {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.disabled-panel * {
+    cursor: default !important;
+}
+
+/*-- BuildGeneralInfoTabPanel --*/
+
+.build-save-results {
+    position: relative;
+    float: none;
+}
+
+.build-save-results .addon-icon {
+    left: 16.0em;
+    position: absolute;
+    top: 0.1em;
+    z-index: 1;
+}
+
+.IE-7 .build-save-results {
+    width: auto;
+
+}
+
+/*-- HistoryComboBoxBehavior --*/
+
+.dijitMenu .sep {
+    border-top: solid 1px #999999;
+}
+
+.dijitMenu .clear-history {
+    color: #666666;
+}
+
+.dijitMenu .clear-history:hover {
+    color: white;
+}
+
+/* LdapGroupCreateUpdatePanel*/
+td.WarnColumn, td.WarnColumn span {
+    width: 20px;
+    height: 16px;
+}
+
+td.WarnColumn span {
+    display: block;
+    margin: 0 auto;
+}
+
+td.WarnColumn span span {
+    display: none;
+}
+
+td.warn span {
+    background-image: url("images/icons/warning.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    td.warn span {
+        background-image: url("images/icons/warning_highres.gif");
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+
+    }
+}
+
+/*StaticLdapGroupConfigurationPanel*/
+.ldap-setting-form .subtree-button {
+    padding-top: 13px;
+}
+
+/*-- LdapListPanel --*/
+
+.ldap-list-panel .disabled-panel {
+    position: relative;
+}
+
+.ldap-list-panel .addon-icon {
+    position: absolute;
+    top: 11px;
+    left: 7px;
+}
+
+/*-- ArtifactoryUpdatesPanel --*/
+
+.news-title {
+    margin: 23px 0 0 23px;
+}
+
+.news-title .icon {
+    background: url("images/buttons/artifactory3sprites.png") no-repeat;
+    width: 31px;
+    height: 30px;
+    background-position: -10px -10px;
+    display: inline-block;
+}
+
+.news-title a {
+    padding: 0 14px 0 8px;
+    text-decoration: none;
+    color: #87B343;
+    /*background: url("images/collapsed.gif") right 3px no-repeat;*/
+    position: relative;
+    top: -13px;
+}
+
+.news-title a:hover, .news-title a:focus {
+    text-decoration: underline;
+}
+
+.news-body {
+    display: inline-block;
+    margin: -5px 0 20px 23px;
+    border: solid 1px #666666;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -ms-border-radius: 5px;
+    padding: 7px 15px 7px 15px;
+    background-color: #f5f7f7;
+    -webkit-box-shadow: 0 1px 5px 0 #aaa;
+    -moz-box-shadow: 0 1px 5px 0 #aaa;
+    box-shadow: 0 1px 5px 0 #aaa;
+}
+
+.news-close .news-body {
+    display: none;
+}
+
+.news-unread .news-title {
+    background-position: 0 4px;
+    font-weight: bold;
+}
+
+.news-open .news-title .news-body a {
+    color: #87B343;
+}
+
+.news-open .news-title a {
+    color: #5c5c5c;
+}
+
+.news-open .news-body {
+    color: #858585;
+}
+
+.news-open .news-body a {
+    color: #87b343;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.news-open .news-body a#show {
+    color: #858585;
+}
+
+/*-- RemoteRepoImportPanel --*/
+
+.url-field .text {
+    width: 87%;
+}
+
+/*-- RepoConfigCreateUpdatePanel --*/
+
+.checkbox-row {
+    margin-top: 10px;
+}
+
+.checkbox-row .field {
+    min-width: 210px;
+    padding: 0 10px 0 0;
+}
+
+.repo-config .field-row input.text, .repo-config .field-row textarea {
+    width: 230px;
+}
+
+.repo-config .field-row textarea {
+    height: 32px;
+}
+
+.repo-config .field-row select {
+    width: 235px;
+    height: 20px;
+}
+
+.form-sep {
+    clear: both;
+    padding: 5px;
+}
+
+/* RTFACT-3012 */
+.IE-7 .repo-config {
+    zoom: 1;
+}
+
+.local-repo-config .field-row input.text, .local-repo-config .field-row textarea {
+    width: 260px;
+}
+
+.local-repo-config .field-row select {
+    width: 266px;
+}
+
+.local-repo-config .line-sep {
+    height: 88px;
+}
+
+.advanced-remote-repo .line-sep {
+    height: 88px;
+}
+
+.advanced-remote-repo .fieldset-border-wrapper {
+    margin-bottom: 5px;
+}
+
+.virtual-repo-panel-advanced-settings .line-sep {
+    margin-bottom: 2px;
+}
+
+.resolved-repos {
+    overflow: auto;
+    height: 100px;
+}
+
+.http-advanced-repo-panel .field {
+    min-width: 240px;
+}
+
+.advanced-remote-repo .field-row select {
+    width: 300px;
+}
+
+.advanced-remote-repo .field-row input.text, .advanced-remote-repo .field-row textarea {
+    width: 295px;
+}
+
+#modalScroll {
+    overflow: auto;
+    position: relative;
+}
+
+#repoTableDiv {
+    height: 245px;
+    overflow: auto;
+    position: relative;
+}
+
+#makeCenter {
+
+}
+
+div.styled-tab-panel div.tab-row .wide-tab span {
+    min-width: 120px;
+}
+
+/*-- HighlightedCodeLabel --*/
+
+div.syntaxhighlighter {
+    margin: 0.1em 0 !important;
+}
+
+div.syntaxhighlighter .toolbar a.about {
+    display: none !important;
+}
+
+/*-- ForgotPasswordLink --*/
+
+.forgot-password {
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    color: #00008b;
+}
+
+/*-- MaintenancePage --*/
+
+.IE-7 .storage .help-link {
+    position: relative;
+    top: -10px;
+}
+
+.IE-7 .checkbox-row .help-link {
+    margin-top: -5px;
+}
+
+/*-- BuildInfoJsonTabPanel --*/
+
+.build-json .syntaxhighlighter .lines.no-wrap {
+    overflow: auto !important;
+}
+
+.build-json {
+    width: 200px;
+    margin-bottom: 0;
+}
+
+.build-json .syntaxhighlighter .toolbar {
+    right: 20px !important;
+}
+
+.build-json .border-content {
+    padding: 5px;
+}
+
+.lines {
+    overflow: auto;
+}
+
+.syntaxhighlighter div.lines {
+    min-height: 16px !important;
+}
+
+.syntaxhighlighter div.line {
+    min-height: 0 !important;
+}
+
+.IE-7 .tab-panel .build-json {
+    min-width: 99%;
+}
+
+/*-- BaseModuleDependenciesListPanel --*/
+
+.dependencies-panel .border-content {
+    padding-top: 0;
+}
+
+table.data-table {
+    margin-top: 0;
+}
+
+#sysInfo .lines {
+    overflow-y: auto !important;
+}
+
+/*-- BuildSearchResultsPanel --*/
+
+.build-scopes {
+    padding-left: 24px;
+}
+
+/*EditLicensePanel*/
+
+.edit-license-panel .text-field-width {
+    width: 200px;
+}
+
+/*BuildLicensesPanel*/
+
+.build-licenses-panel .module-table {
+    margin-top: 10px;
+}
+
+.IE-7 .module-table {
+    width: 98%;
+}
+
+/*CrowdConfigPanel*/
+.crowd-fields .text {
+    width: 255px;
+}
+
+/*DependencyDeclarationPanel*/
+.dependency-decleration-content {
+    padding-top: 10px;
+}
+
+table.sep {
+    margin-top: 7px;
+}
+
+/*RemoteRepoBrowserPanel*/
+.local-repos-list .remote-repo-browser-panel {
+    background: url("images/icons/globe.gif") center center no-repeat;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+}
+
+/*RepositoriesListPanel*/
+.repo-list-panel .field-border {
+    margin-bottom: 8px;
+}
+
+/*-- SchemaHelpBubble legend table --*/
+
+.legend-surrownding-text {
+    margin-left: 10px;
+}
+
+table.legend {
+    margin: 5px 5px 10px 10px;
+}
+
+table.legend, table.legend td {
+    border: solid 1px #cccccc;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.legend th {
+    background: #00008b;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.legend .token {
+    background: #ffffe0;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    padding: 1px 5px;
+}
+
+table.legend td, table.legend th {
+    padding: 1px 3px;
+    vertical-align: top;
+}
+
+table.legend .e-value {
+    color: #00008b;
+}
+
+.list-panel-buttons .addon-icon {
+    position: absolute;
+    left: 3px;
+    top: 5px;
+}
+
+.styled-checkbox .addon-icon {
+    position: relative;
+    top: 5px;
+}
+
+.settings-provisioning-deploy-button {
+    top: 12px;
+    position: relative;
+}
+
+.settings-provisioning-target-path {
+    width: 300px;
+}
+
+.filtered-resource-checkbox-help {
+    position: relative;
+    right: 5px;
+}
+
+/* ReleaseHistoryTabPanel */
+
+.release-history-table {
+    width: 100%;
+}
+
+.release-history-entry-border {
+    margin-bottom: 10px;
+}
+
+.release-history-timestamp {
+    font-weight: normal;
+}
+
+.addon-info-link {
+    color: #5D5C5D;
+}
+
+.local-repo-replication-config .field-row input.text {
+    width: 230px;
+}
+
+.local-repo-replication-config .field-row .local-replication-url input.text {
+    width: 481px;
+}
+
+.local-repo-replication-config .field-row select {
+    width: 236px;
+}
+
+/*-- LinkableBehavior --*/
+
+textarea.linkable {
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.missing-checksum-warning {
+    color: black;
+}
+
+.rpm-info-border {
+    margin-bottom: 0;
+}
+
+.rpm-info-list-view {
+    width: 100%;
+}
+
+.license-unapproved {
+    color: red;
+}
+
+.license-neutral {
+    color: gray;
+}
+
+.nupkg-icon {
+    width: 32px;
+    float: right;
+}
+
+.ShowInBlackDuckServer {
+    background-image: url("images/addons/blackduck.png");
+}
+
+.blackduck-logo {
+    background-image: url("images/addons/blackduck-logo.png");
+    background-repeat: no-repeat;
+    width: 143px;
+    height: 32px;
+}
+
+.tb {
+    display: table;
+}
+
+.tr {
+    display: table-row;
+}
+
+.td {
+    display: table-cell;
+    padding-right: 20px;
+    padding-top: 4px;
+}
+
+div.wicket-modal div.w_modal a.w_close {
+    right: 0px;
+}
+
+.border-content .border-wrapper {
+    margin-left: 2px;
+}
+
+.border-content .border-content {
+    padding: 10px;
+}
+
+.w_content_scroll .border-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.outer-border-content .crumb {
+    margin-left: 20px;
+}
+
+.properties-list-wrapper {
+    background: #fff;
+    border-top: 1px solid #b3b3b3;
+    border-left: 1px solid #b3b3b3;
+    border-right: 1px solid #b3b3b3;
+}
+
+.properties-list-wrapper .border-top {
+    border-top: 0px;
+}
+
+.properties-list-wrapper div.list-panel .border-title {
+    padding-left: 7px;
+}
+
+.properties-list-wrapper div.list-panel .border-left {
+    margin-left: -1px;
+}
+
+.properties-list-wrapper div.list-panel .border-right {
+    margin-right: -1px;
+}
+
+.bintray_button.buildsendToBintray {
+    right: 20px;
+}
+
+img.bintrayPkgMsg {
+    float: left;
+    margin-right: 4px;
+}
+
+.w_content_scroll .collapsible-wrapper {
+    background: #fff;
+    margin-top: 5px;
+}
+
+.w_content_scroll .collapsible-wrapper .border-top {
+    border: 0px;
+}
+
+.bintrayDynamicPanelHidden .bintray_info_panel {
+    display: none;
+}
+
+.permissions-tab-panel .selection-list ul {
+    max-height: 300px;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperTbl {
+    display: table;
+    width: 200px;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperRow {
+    display: table-row;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperCell {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperCell img {
+    float: none;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperCell {
+    float: none;
+}
+
+.bintrayPkgMsgWrapper .bintrayPkgMsgWrapperCell .bintrayPkgMsgTxt {
+    white-space: normal;
+    width: 141px;
+}
+
+.bintrayRightInfoPane .bintrayLatestPane {
+    width: 135px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.bintray_package_description_text {
+    word-wrap: break-word;
+    width: 130px;
+    font-size: 11px;
+}
+
+.authedUpdateLayout {
+    position: relative;
+}
+
+.adminAuthOverlay {
+    position: absolute;
+    width: 98%;
+    background: #777;
+    height: 100%;
+    z-index: 2;
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    -webkit-opacity: 0.3;
+    opacity: 0.3;
+    padding-bottom: 7px;
+    left: 17px;
+    right: 20px;
+}
+
+.adminAuthOverlayHide {
+    display: none;
+}
+
+.expandingTextField {
+    -webkit-transition: 150ms linear;
+    -moz-transition: 150ms linear;
+    -o-transition: 150ms linear;
+    -ms-transition: 150ms linear;
+    transition: 150ms linear;
+}
+
+.border-content .labeled-value a.license-neutral {
+    color: #858585;
+}
+
+.newVirtualRepoDND {
+    width: 540px;
+}
+
+.newVirtualRepoDND .sep {
+    margin-left: 26px;
+    margin-right: 28px;
+}
+
+.build-json.fieldset-border-wrapper {
+    margin-top: 2px;
+}
+
+.miniFeedback {
+    display: block;
+    background-color: #EE6C32;
+    min-height: 20px;
+    padding: 6px 2px 3px 30px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.miniFeedback a {
+    color: white;
+}

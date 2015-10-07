@@ -1,0 +1,32 @@
+#jf-viewport {
+  .panel {
+    &.disabled {
+      background: @grayBGLoginLight;
+    }
+  }
+
+  .current-password {
+    padding-left: 0px;
+  }
+  .progress {
+
+    padding: 0 !important;
+    [role="progressbar"] {
+      height: 20px;
+
+      &.danger {
+        background-color: red;
+      }
+
+      &.warning {
+        background-color: yellow;
+      }
+
+      &.success {
+        background-color: @greenFontDark;
+      }
+    }
+
+
+  }
+}

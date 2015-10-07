@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.0.0"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.0.0
+        http://artifactory.jfrog.org/xsd/artifactory-v1_0_0.xsd">
+
+    <anonDownloadsAllowed>false</anonDownloadsAllowed>
+    <!-- Backup every 2 hours-->
+    <backupDir>/backups/artifactory/</backupDir>
+    <backupCronExp>0 0 0 * * ?</backupCronExp>
+
+    <localRepositories>
+        <localRepository>
+            <key>frog-releases</key>
+            <description>IDI Releases Repoitory</description>
+            <includesPattern>com/frog/**,com/myc/**</includesPattern>
+            <useSnapshotUniqueVersions>true</useSnapshotUniqueVersions>
+        </localRepository>
+        <localRepository>
+            <key>frog-snapshots</key>
+            <description>IDI Snapshots Repository</description>
+            <includesPattern>com/frog/**</includesPattern>
+            <useSnapshotUniqueVersions>false</useSnapshotUniqueVersions>
+        </localRepository>
+        <localRepository>
+            <key>3rd-party</key>
+            <description>3rd Party artifacts Repository</description>
+            <excludesPattern>com/frog/**</excludesPattern>
+            <!-- no useSnapshotUniqueVersions element -->
+        </localRepository>
+        <localRepository>
+            <key>plugins-releases</key>
+            <description>Maven Plugins releases</description>
+            <includesPattern>org/jfrog/**,com/frog/**,com/myc/**</includesPattern>
+        </localRepository>
+        <localRepository>
+            <key>plugins-snapshots</key>
+            <description>Maven Plugins Snapshots</description>
+            <includesPattern>org/jfrog/**,com/frog/**,com/myc/**</includesPattern>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>jfrog</key>
+            <includesPattern>org/jfrog/**</includesPattern>
+            <url>http://www.jfrog.org/artifactory/plugins-releases</url>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository>
+        <remoteRepository>
+            <key>repo1</key>
+            <excludesPattern>org/jfrog/**,com/frog/**,com/myc/**</excludesPattern>
+            <url>http://repo1.maven.org/maven2</url>
+            <socketTimeoutMillis>10000</socketTimeoutMillis>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository>
+        <!--remoteRepository>
+            <key>codehaus</key>
+            <excludesPattern>com/frog/**</excludesPattern>
+            <url>http://repository.codehaus.org</url>
+            <socketTimeoutMillis>10000</socketTimeoutMillis>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository-->
+        <remoteRepository>
+            <key>jboss</key>
+            <excludesPattern>org/jfrog/**,com/frog/**,com/myc/**</excludesPattern>
+            <url>http://repository.jboss.com/maven2</url>
+            <socketTimeoutMillis>10000</socketTimeoutMillis>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository>
+        <remoteRepository>
+            <key>spring</key>
+            <excludesPattern>org/jfrog/**,com/frog/**,com/myc/**</excludesPattern>
+            <url>http://spring-rich-c.sourceforge.net/maven2repository</url>
+            <socketTimeoutMillis>10000</socketTimeoutMillis>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository>
+        <remoteRepository>
+            <key>openqa</key>
+            <excludesPattern>org/jfrog/**,com/frog/**,com/myc/**</excludesPattern>
+            <url>http://archiva.openqa.org/repository/releases</url>
+            <socketTimeoutMillis>10000</socketTimeoutMillis>
+            <proxyRef>ntlmaps</proxyRef>
+        </remoteRepository>
+    </remoteRepositories>
+
+    <!--
+            <remoteRepository>
+                <key>repo1</key>
+                <handleReleases>true</handleReleases>
+                <handleSnapshots>false</handleSnapshots>
+                <excludesPattern>org/artifactory/**</excludesPattern>
+                <url>http://repo1.maven.org/maven2</url>
+            </remoteRepository>
+            <remoteRepository>
+                <key>codehaus</key>
+                <handleReleases>true</handleReleases>
+                <handleSnapshots>false</handleSnapshots>
+                <url>http://dist.codehaus.org</url>
+            </remoteRepository>
+            <remoteRepository>
+                <key>codehaus-snapshots</key>
+                <handleReleases>false</handleReleases>
+                <handleSnapshots>true</handleSnapshots>
+                <url>http://snapshots.repository.codehaus.org</url>
+            </remoteRepository>
+            <remoteRepository>
+                <key>ibiblio</key>
+                <excludesPattern>org/artifactory/**</excludesPattern>
+                <url>http://www.ibiblio.org/maven2</url>
+            </remoteRepository>
+            <remoteRepository>
+                <key>apache-m2-snapshots</key>
+                <handleReleases>false</handleReleases>
+                <handleSnapshots>true</handleSnapshots>
+                <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+            </remoteRepository>
+
+            <remoteRepository>
+                <key>java.net</key>
+                <description>java.net repo</description>
+                <blackedOut>true</blackedOut>
+                <includesPattern>*/**</includesPattern>
+                <excludesPattern></excludesPattern>
+                <url>https://maven-repository.dev.java.net/nonav/repository</url>
+                <hardFail>true</hardFail>
+                <storeArtifactsLocally>true</storeArtifactsLocally>
+                <cacheRetrievalFailures>true</cacheRetrievalFailures>
+                <cacheRetrievalMisses>true</cacheRetrievalMisses>
+                <username>un</username>
+                <password>pw</password>
+                <socketTimeoutMillis>2000</socketTimeoutMillis>
+                <proxyRef>proxy1</proxyRef>
+            </remoteRepository>
+        </remoteRepositories>
+    -->
+
+    <proxies>
+        <proxy>
+            <key>ntlmaps</key>
+            <host>myproxy</host>
+            <port>5865</port>
+            <username></username>
+            <password></password>
+            <domain></domain>
+        </proxy>
+    </proxies>
+
+</config>

@@ -1,0 +1,49 @@
+<wicket:head>
+    <style type="text/css">
+        .groupIdField input, .artifactIdField input {
+            width: 200px;
+        }
+    </style>
+</wicket:head>
+<wicket:extend>
+    <div class="field groupIdField">
+        <label>Group ID</label>
+        <span wicket:id="groupIdHelp"></span>
+
+        <div class="value">
+            <input wicket:id="groupIdField" name="search" type="text" class="text" align="right"/>
+        </div>
+    </div>
+
+    <div class="field field-sep artifactIdField">
+        <label>Artifact ID</label>
+        <span wicket:id="artifactIdHelp"></span>
+
+        <div class="value">
+            <input wicket:id="artifactIdField" name="search" class="text" type="text" align="right"/>
+        </div>
+    </div>
+
+    <div class="field field-sep">
+        <label>Version</label>
+        <span wicket:id="versionHelp"></span>
+
+        <div class="value">
+            <input wicket:id="versionField" class="text" name="search" type="text" align="right"/>
+        </div>
+    </div>
+
+    <div class="field field-sep classifier">
+        <label>Classifier</label>
+        <span wicket:id="classifierHelp"></span>
+
+        <div class="value">
+            <input wicket:id="classifierField" class="text" name="search" type="text" align="right"/>
+        </div>
+    </div>
+
+    <div wicket:id="advancedPanel"></div>
+    <div class="field-sep search-button">
+        <button wicket:id="submit" type="submit"></button>
+    </div>
+</wicket:extend>

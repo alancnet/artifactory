@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.0.0"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.0.0
+        http://www.jfrog.org/xsd/artifactory-v1_0_0.xsd">
+    <!-- Backup every 12 hours -->
+    <!--<backupCronExp>0 0 /12 * * ?</backupCronExp>-->
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases</key>
+            <description>Local Repository for Applications Releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>libs-snapshots</key>
+            <description>Local Repository for Applications Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-releases</key>
+            <description>Local Repository for Plugins Releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>plugins-snapshots</key>
+            <description>Local Repository for Plugins Snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>3rdp-releases</key>
+            <description>Local Repository for Third party libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>3rdp-snapshots</key>
+            <description>Local Repository for Third party snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>repo1</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://repo1.maven.org/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>codehaus-snapshots</key>
+            <blackedOut>true</blackedOut>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://snapshots.repository.codehaus.org</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net</key>
+            <description>java.net</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://download.java.net/maven/2</url>
+        </remoteRepository>
+        <!--<remoteRepository>
+            <key>codehaus</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://dist.codehaus.org</url>
+        </remoteRepository>-->
+        <!--<remoteRepository>
+            <key>ibiblio</key>
+            <excludesPattern>org/artifactory/**</excludesPattern>
+            <url>http://www.ibiblio.org/maven2</url>
+        </remoteRepository>-->
+        <!--<remoteRepository>
+            <key>apache-m2-snapshots</key>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+            <proxyRef>unused-proxy</proxyRef>
+        </remoteRepository>-->
+    </remoteRepositories>
+
+    <proxies>
+        <proxy>
+            <key>unused-proxy</key>
+            <host>host</host>
+            <port>8080</port>
+            <username>un</username>
+            <password>pw</password>
+            <domain>domain</domain>
+        </proxy>
+    </proxies>
+
+</config>

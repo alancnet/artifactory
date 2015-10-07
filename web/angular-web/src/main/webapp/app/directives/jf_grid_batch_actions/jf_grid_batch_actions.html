@@ -1,0 +1,12 @@
+<div class="grid-batch-actions text-right">
+    <a ng-class="{disabled: !jfBatchActions.anySelected()}"
+       ng-repeat="action in jfBatchActions.actions"
+       ng-if="!action.visibleWhen || action.visibleWhen()"
+       ng-click="jfBatchActions.perform(action)"
+       class="btn">
+        <img ng-src="images/{{action.icon}}.png"
+                ng-if="action.img"/>
+        <i class="icon icon-{{action.icon}}"
+           ng-if="!action.img"></i> {{ action.name }}
+    </a>
+</div>

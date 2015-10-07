@@ -1,0 +1,85 @@
+<div class="content-layout-container">
+    <h1>Maven Indexer Configuration</h1>
+
+    <div class="content-wrapper">
+        <form name="indexerForm" ng-submit="AdminServicesIndexer.save(AdminServicesIndexer.indexer)">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Maven Indexer Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enabled">
+                                    <input type="checkbox"
+                                           ng-model="AdminServicesIndexer.indexer.enabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="maintenance" autofocus="true" dont-validate-disabled="true">
+                                    <label for="cronExp" class="mandatory">Cron Expression</label>
+                                    <jf-help-tooltip html="AdminServicesIndexer.TOOLTIP.cronExpression"></jf-help-tooltip>
+                                    <input type="text"
+                                           class="input-text"
+                                           name="cronExp"
+                                           id="cronExp"
+                                           required
+                                           jf-validator-cron
+                                           ng-disabled="!AdminServicesIndexer.indexer.enabled"
+                                           ng-model="AdminServicesIndexer.indexer.cronExp"
+                                           ng-model-options="{onBlur: true ,debounce: { 'default': 500 }}"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <jf-field>
+                                    <label for="indexingTime">Next Indexing Time</label>
+                                    <input type="text"
+                                           jf-cron-formatter
+                                           class="input-text"
+                                           id="indexingTime"
+                                           ng-disabled="true"
+                                           ng-model="AdminServicesIndexer.indexer.cronExp">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <button class="btn btn-secondary pull-right"
+                                        name="runIndexingNow"
+                                        type="button"
+                                        ng-disabled="indexerForm.$invalid || !AdminServicesIndexer.indexer.enabled"
+                                        ng-click="AdminServicesIndexer.runIndexer()">Run Indexing Now
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <jf-drag-drop include-list="AdminServicesIndexer.indexer.includedRepos"
+                                              exclude-list="AdminServicesIndexer.indexer.excludedRepos"
+                                              objects-name="Repositories"
+                                              ng-disabled="!AdminServicesIndexer.indexer.enabled"
+                                              headers="{leftTitle:'Excluded Repositories',
+                                  rightTitle:'Included Repositories'}">
+                                </jf-drag-drop>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" ng-click="AdminServicesIndexer.cancel()"
+                            type="button">
+                        Reset
+                    </button>
+                    <button class="btn btn-primary"
+                            type="submit"
+                            ng-disabled="!indexerForm.$valid && AdminServicesIndexer.indexer.enabled">Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<ui-select ng-model="jfUiSelect.jfSelectModel" ng-change="jfUiSelect.jfSelectChange()" ng-disabled="jfUiSelect.jfSelectDisabled">
+    <ui-select-match placeholder="{{ jfUiSelect.jfSelectPlaceholder }}">
+        {{ jfUiSelect.displayLabel($select.selected) }}
+    </ui-select-match>
+    <ui-select-choices
+            repeat="item in jfUiSelect.jfSelectOptions | filter: $select.search track by $index">
+        <div ng-bind-html="jfUiSelect.displayLabel(item) | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>

@@ -1,0 +1,7 @@
+<config version="2">
+    <chain template="s3"/>
+    <provider id="s3" type="s3">
+        <bucketName>bucket</bucketName>
+        <path>test</path>
+    </provider>
+</config>

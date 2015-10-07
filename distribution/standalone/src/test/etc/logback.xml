@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<configuration debug="false">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.artifactory.logging.layout.BackTracePatternLayout">
+                <pattern>%d [%thread] [%-5level] \(%-20c{3}:%L\) %message%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${artifactory.home}/logs/artifactory.log</File>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.artifactory.logging.layout.BackTracePatternLayout">
+                <pattern>%date [%thread] [%-5level] \(%-20c{3}:%L\) %message%n</pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${artifactory.home}/logs/artifactory.%i.log.zip</FileNamePattern>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${artifactory.home}/logs/access.log</File>
+        <encoder>
+            <pattern>%date [%-5level] \(%logger{32}:%line\) %message%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${artifactory.home}/logs/access.%i.log.zip</FileNamePattern>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <appender name="IMPORT.EXPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${artifactory.home}/logs/import.export.log</File>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.artifactory.logging.layout.BackTracePatternLayout">
+                <pattern>%date [%-5level] \(%logger{32}:%line\) %message%n</pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${artifactory.home}/logs/import.export.%i.log.zip</FileNamePattern>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <appender name="TRAFFIC" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${artifactory.home}/logs/traffic</File>
+        <encoder>
+            <pattern>%message%n</pattern>
+        </encoder>
+        <rollingPolicy class="org.artifactory.traffic.policy.TrafficTimeBasedRollingPolicy">
+            <FileNamePattern>${artifactory.home}/logs/traffic.%d{yyyyMMdd}</FileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <appender name="REQUEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${artifactory.home}/logs/request.log</File>
+        <encoder>
+            <pattern>%message%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${artifactory.home}/logs/request.%i.log</FileNamePattern>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <root>
+        <level value="info"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    <logger name="org.artifactory">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.storage.db">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.webapp.servlet.RepoFilter">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.request.ArtifactoryResponseBase">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.webapp.main.StartArtifactoryDev">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.info.InfoWriter">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.artifactory.security.AccessLogger" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="ACCESS"/>
+    </logger>
+    <logger name="org.artifactory.api.common.ImportExportStatusHolder" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="IMPORT.EXPORT"/>
+    </logger>
+    <logger name="org.artifactory.traffic.TrafficLogger" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="TRAFFIC"/>
+    </logger>
+    <logger name="org.artifactory.traffic.RequestLogger" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="REQUEST"/>
+    </logger>
+    <logger name="org.apache.wicket.markup.resolver.BorderBodyResolver">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.wicket.markup.repeater.AbstractRepeater">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.http.impl.client">
+        <level value="info"/>
+    </logger>
+    <logger name="org.apache.http.wire">
+        <level value="info"/>
+    </logger>
+    <logger name="org.apache.wicket">
+        <level value="warn"/>
+    </logger>
+    <logger name="com.sun.jersey">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.springframework">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.quartz">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.eclipse.jetty">
+        <level value="warn"/>
+    </logger>
+    <logger name="org.apache.cxf">
+        <level value="error"/>
+    </logger>
+</configuration>

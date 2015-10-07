@@ -1,0 +1,81 @@
+<wicket:panel>
+    <form wicket:id="form">
+        <div wicket:id="gemsSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="gemsRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableGemsSupport" type="checkbox"/>
+                    <span wicket:id="enableGemsSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="recalculateIndex"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="npmSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="npmRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableNpmSupport" type="checkbox"/>
+                    <span wicket:id="enableNpmSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="recalculateIndex"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="bowerSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="bowerRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableBowerSupport" type="checkbox"/>
+                    <span wicket:id="enableBowerSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="reindexPackages"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="NuGet">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="nuGetRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enableNuGetSupport" type="checkbox"/>
+                    <span wicket:id="enableNuGetSupport.help"></span>
+                </div>
+                <div class="field">
+                    <button type="button" wicket:id="reindexPackages"></button>
+                </div>
+            </div>
+        </div>
+        <div wicket:id="pypiSupportSection">
+            <div class="field-row">
+                <p class="info">
+                    <span wicket:id="pypiRepoUrlLabel"/>
+                </p>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enablePypiSupport" type="checkbox"/>
+                    <span wicket:id="enablePypiSupport.help"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</wicket:panel>

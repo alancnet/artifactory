@@ -1,0 +1,34 @@
+<wicket:extend>
+    <form wicket:id="exportForm" class="import-export-form">
+        <div class="field">
+            <label>Export to Path</label>
+
+            <div class="value">
+                <input wicket:id="exportToPath" type="text" class="path-field text"/>
+                <span wicket:id="browseButton"></span>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <input wicket:id="excludeMetadata" type="checkbox"/>
+            <span wicket:id="excludeMetadataHelp"></span>
+        </div>
+
+        <div class="field field-sep">
+            <input wicket:id="m2Compatible" type="checkbox"/>
+            <span wicket:id="m2CompatibleHelp"></span>
+        </div>
+        <div class="field field-sep">
+            <input wicket:id="createArchive" type="checkbox"/>
+            <span wicket:id="createArchiveHelp"></span>
+        </div>
+        <div class="field field-sep">
+            <input wicket:id="verbose" type="checkbox"/>
+            <span wicket:id="verboseHelp"></span>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="export"></button>
+        </div>
+    </form>
+</wicket:extend>

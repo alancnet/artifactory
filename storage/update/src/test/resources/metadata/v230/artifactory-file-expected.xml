@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<artifactory-file>
+    <repoPath>
+        <repoKey>libs-release-local</repoKey>
+        <path>aspectjweaver/aspectjweaver/1.5.3/aspectjweaver-1.5.3.jar</path>
+    </repoPath>
+    <name>aspectjweaver-1.5.3.jar</name>
+    <created>1316590989115</created>
+    <lastModified>1316591065519</lastModified>
+    <size>0</size>
+    <mimeType>application/java-archive</mimeType>
+    <additionalInfo>
+        <createdBy>admin</createdBy>
+        <modifiedBy>admin</modifiedBy>
+        <lastUpdated>1316591065520</lastUpdated>
+        <checksumsInfo>
+            <checksums>
+                <checksum>
+                    <type>sha1</type>
+                    <actual>da39a3ee5e6b4b0d3255bfef95601890afd80709</actual>
+                </checksum>
+                <checksum>
+                    <type>md5</type>
+                    <actual>d41d8cd98f00b204e9800998ecf8427e</actual>
+                </checksum>
+            </checksums>
+        </checksumsInfo>
+    </additionalInfo>
+</artifactory-file>

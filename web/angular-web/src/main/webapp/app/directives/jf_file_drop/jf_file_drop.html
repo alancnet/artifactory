@@ -1,0 +1,15 @@
+<div class="wrapper-drop-zone">
+    <div class="drop-zone"
+         nv-file-drop uploader="jfFileUploader"
+         nv-file-over over-class="drop-zone-hover"
+         ng-disabled="jfFileDisabled">
+        <input class="select-files-hidden"
+               type="file"
+               nv-file-select
+               uploader="jfFileUploader"
+               ng-disabled="jfFileDisabled"
+               title=" " />
+        <div ng-if="!jfFileUploader.queue.length"><span>Drop file</span> here or <span>Select file</span></div>
+        <div ng-if="jfFileUploader.queue.length">{{jfFileUploader.queue[0].file.name}}</div>
+    </div>
+</div>

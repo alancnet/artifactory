@@ -1,0 +1,33 @@
+<wicket:extend>
+    <p>Please Sign In to Artifactory
+        <span wicket:id="defaultCredentials"/>
+    </p>
+
+    <div class="field required">
+        <label>Username</label>
+
+        <div class="value">
+            <input wicket:id="username" type="text" class="text"/>
+        </div>
+    </div>
+
+    <div class="field required">
+        <label>Password</label>
+
+        <div class="value">
+            <input wicket:id="password" type="password" class="text"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="value">
+            <input wicket:id="rememberMe" type="checkbox" class="checkbox"/>
+        </div>
+    </div>
+    <div class="news">
+        <a wicket:id="ssoLogin">SSO Login</a>
+
+    </div>
+
+
+</wicket:extend>

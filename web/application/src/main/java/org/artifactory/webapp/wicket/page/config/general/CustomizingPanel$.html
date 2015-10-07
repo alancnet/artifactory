@@ -1,0 +1,56 @@
+<wicket:extend>
+    <form wicket:id="logoPath" class="upload-form">
+        <div class="field-row">
+            <div class="field">
+                <label>Logo URL</label>
+                <span wicket:id="logo.help"></span>
+
+                <div class="value">
+                    <input wicket:id="logo" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="or-label value">or</label>
+            </div>
+
+            <div class="field upload-field">
+                <label>Logo File</label>
+                <span wicket:id="logoFile.help"></span>
+
+                <div class="value">
+                    <input wicket:id="fileInput" type="file" class="text text-file"/>
+                </div>
+            </div>
+
+            <div class="field customize">
+                <button type="submit" class="button default-button row-button">
+                    <span class="button-center">
+                        <span class="button-left">
+                            <span class="button-right">Upload!</span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="field customize reset-field">
+                <button wicket:id="reset" type="button"></button>
+            </div>
+        </div>
+
+        <div wicket:id="progress"></div>
+
+        <div wicket:id="logoPreview" class="clear preview-logo">
+            <span>Preview</span>
+        </div>
+    </form>
+
+    <div class="field field-sep clear">
+        <label>Additional Footer Text</label>
+        <span wicket:id="footer.help"></span>
+
+        <div class="value">
+            <input wicket:id="footer" type="text" class="path-field text"/>
+        </div>
+    </div>
+</wicket:extend>

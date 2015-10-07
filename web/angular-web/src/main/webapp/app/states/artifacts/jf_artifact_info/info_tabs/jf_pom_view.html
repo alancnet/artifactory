@@ -1,0 +1,12 @@
+<jf-panel jf-panel-heading="POM Content"
+          ng-if="jfPomView.pomViewData.fileContent">
+
+    <jf-clip-copy text-to-copy="jfPomView.pomViewData.fileContent"
+                  class="code-mirror-copy"
+                  object-name="Content"></jf-clip-copy>
+
+    <jf-code-mirror mime-type="text/xml"
+                    height="500px"
+                    model="jfPomView.pomViewData.fileContent">
+    </jf-code-mirror>
+</jf-panel>

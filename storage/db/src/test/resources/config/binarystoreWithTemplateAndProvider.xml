@@ -1,0 +1,6 @@
+<config version="2">
+    <chain template="file-system"/>
+    <provider id="file-system" type="file-system">
+        <dir>hello</dir>
+    </provider>
+</config>

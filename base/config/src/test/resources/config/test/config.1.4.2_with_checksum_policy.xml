@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.4.2"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.4.2
+        http://www.jfrog.org/xsd/artifactory-v1_4_2.xsd">
+    <!--
+    enable/disable anonymous downloads
+    -->
+    <!-- The interval at which to activate the m2eclipse indexer. -->
+    <indexer>
+        <!-- By Default index every 24 hours -->
+        <indexingIntervalHours>24</indexingIntervalHours>
+    </indexer>
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases-local</key>
+            <description>Local repository for in-house libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>repo1</key>
+            <description>Central Maven 2 repository</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <url>http://repo1.maven.org/maven2</url>
+            <checksumPolicyType>generate-if-absent</checksumPolicyType>
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net.m2</key>
+            <description>java.net Maven2 Format</description>
+            <excludesPattern>commons-*,org/apache/**</excludesPattern>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <url>http://download.java.net/maven/2</url>
+        </remoteRepository>
+    </remoteRepositories>
+
+    <virtualRepositories>
+        <virtualRepository>
+            <key>plugins-snapshots</key>
+            <repositories>
+                <repositoryRef>repo1</repositoryRef>
+            </repositories>
+            <pomRepositoryReferencesCleanupPolicy>discard_active_reference</pomRepositoryReferencesCleanupPolicy>
+        </virtualRepository>
+    </virtualRepositories>
+</config>

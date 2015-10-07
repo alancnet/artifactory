@@ -1,0 +1,20 @@
+<span id="${component.markupId}-widget">
+<wicket:body/>
+<script type="text/javascript">
+    DomUtils.addOnRender(function() {
+        DojoUtils.instantiate('${component.markupId}', function(widget) {
+            // "move" id to consist with Wicket.Form.serializeInput
+            var id = widget.focusNode.id;
+            widget.focusNode.id = '';
+            widget.valueNode.id = id;
+
+            // fix oblur for non-IE browsers
+            if (!dojo.isIE) {
+                widget.focusNode.onblur = function() {
+                    widget._onBlur();
+                };
+            }
+        });
+    });
+</script>
+</span>

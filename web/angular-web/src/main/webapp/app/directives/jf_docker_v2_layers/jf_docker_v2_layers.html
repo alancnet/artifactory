@@ -1,0 +1,21 @@
+<div class="docker-v2-layers-visualization">
+    <div class="layer-details" ng-if="jfDockerV2Layers.selectedLayer">
+        <h3>{{jfDockerV2Layers.selectedLayer.data.shortId}}</h3>
+        <table>
+            <tr ng-repeat="(key,value) in jfDockerV2Layers.selectedLayer.data" ng-if="key !== 'shortId' && key !== 'command'">
+                <td class="icon-cell"><i ng-class="jfDockerV2Layers.KEY_DICTIONARY[key].icon" jf-tooltip="{{jfDockerV2Layers.KEY_DICTIONARY[key].tooltip}}"></i></td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="layers-container">
+        <jf-docker-v2-layer ng-repeat="layer in jfDockerV2Layers.data track by $index"
+                            parent="jfDockerV2Layers"
+                            data="layer"
+                            preselected="$index === 0"
+                            is-base="$index === jfDockerV2Layers.data.length-1"
+                            is-upper="$index === 0">
+        </jf-docker-v2-layer>
+    </div>
+</div>

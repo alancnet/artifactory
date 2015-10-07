@@ -1,0 +1,10 @@
+<div class="card-side-pad">
+    <h2>{{ BuildsHistory.buildTitle }}</h2>
+
+    <jf-grid grid-options="BuildsHistory.buildsHistoryGridOption"
+             filter-field="buildNumber"
+             filter-on-change="true"
+             object-name="build"
+             auto-focus="true">
+    </jf-grid>
+</div>

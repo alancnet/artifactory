@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{property.modalTitle}}</h3>
+</div>
+<div class="modal-body property-modal">
+    <div ng-switch="property.propertyType">
+        <div ng-switch-when="MULTI_SELECT">
+            <jf-drag-drop include-list="property.selectedValues"
+                          exclude-list="property.predefineValues"
+                          headers="{leftTitle:'Available Predefined Values',
+                                    rightTitle:'Selected Predefined Values'}"></jf-drag-drop>
+        </div>
+        <div ng-switch-when="SINGLE_SELECT" class="dropdown-min-height">
+            <selectize config="selectizeConfig"
+                       options="property.predefineValues"
+                       ng-model="property.selectedValues">
+            </selectize>
+        </div>
+        <div ng-switch-when="ANY_VALUE" class="dropdown-min-height">
+            <selectize config="selectizeConfig"
+                       options="property.predefineValues"
+                       ng-model="property.selectedValues">
+            </selectize>
+        </div>
+        <div ng-switch-default>
+            <textarea rows="5"
+                      cols="5"
+                      class="input-text"
+                      ng-model="property.selectedValues">
+            </textarea>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button class="btn btn-default" ng-click="closeModal()">Cancel</button>
+        <button class="btn btn-primary"
+                ng-disabled="property.propertyType==='SINGLE_SELECT' && !property.selectedValues"
+                ng-click="save(property)">Save
+        </button>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="cancel()"><span
+            aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">{{action | splitWords}} {{::node.data.text}}</h4>
+</div>
+<div class="modal-body select-target-path">
+    <form name="selectTargetPath" class="clearfix">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label>
+                    Target Repository
+                </label>
+                <selectize placeholder='Select Repository'
+                           config="{maxItems:1}"
+                           options="target.repoList"
+                           ng-model="target.repoKey"
+                           ng-required="true"></selectize>
+            </div>
+        </div>
+        <div class="form-group" ng-if="action !== 'copyStash' && action !== 'moveStash'">
+            <div class="form-group-cell">
+                <jf-checkbox text="{{action | splitWords}} to a Custom Path">
+                    <input type="checkbox" id="custom-path" ng-model="target.isCustomPath">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div  class="form-group" ng-if="action !== 'copyStash' && action !== 'moveStash'">
+            <div class="form-group-cell">
+            <label for="target-path">Target Path</label>
+            <input type="text"
+                   id="target-path"
+                   class="input-text"
+                   ng-model="target.path"
+                   ng-required="true"
+                   ng-disabled="!target.isCustomPath">
+            </div>
+        </div>
+    </form>
+
+
+    <div class="dry-run-result alert"
+         ng-class="resultError ? 'alert-danger' : 'alert-success'"
+         ng-if="dryRunResults.length">
+        <div ng-repeat="result in dryRunResults" ng-bind="result"></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" ng-disabled="!selectTargetPath.$valid" ng-click="dryRun()">Dry Run
+    </button>
+    <button class="btn btn-primary" ng-disabled="!selectTargetPath.$valid" ng-click="confirm()">{{action | splitWords}}
+    </button>
+</div>

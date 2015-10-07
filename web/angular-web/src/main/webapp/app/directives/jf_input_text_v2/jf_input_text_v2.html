@@ -1,0 +1,19 @@
+<label for="{{jfInputTextV2.name}}" style="font-weight: 100;">{{jfInputTextV2.text}}<span ng-if="jfInputTextV2.ismandatory">*</span></label>
+<div style="position:relative; bottom: 0px; display:inline-block;"><img style="width: 16px;" src="images/tooltip.png" /></div>
+<div class="input-label-top">
+    <input type="{{jfInputTextV2.type}}"
+           class="input-text"
+           name="{{jfInputTextV2.name}}"
+           id="{{jfInputTextV2.name}}"
+           ng-class="{invalid: (jfInputTextV2.form[jfInputTextV2.name].showErrors && !jfInputTextV2.form.$valid),
+                      hascontent:jfInputTextV2.isInputEmpty()}"
+           ng-blur="jfInputTextV2.form[jfInputTextV2.name].showErrors = true"
+           ng-focus="jfInputTextV2.form[jfInputTextV2.name].showErrors = false; jfInputTextV2.form[jfInputTextV2.name].showErrors=false"
+           ui-keyup="{13: 'jfInputTextV2.form = true'}"
+           ng-change="jfInputTextV2.isInputDirty()"
+           autocomplete="{{jfInputTextV2.autocomplete}}"
+           ng-model="jfInputTextV2.model">
+</div>
+<jf-validation field="jfInputTextV2.form[jfInputTextV2.name]"
+               dictionary="jfInputTextV2.dictionary"
+               ng-if="jfInputTextV2.dictionary && (jfInputTextV2.form.showErrors || jfInputTextV2.form[jfInputTextV2.name].showErrors)"></jf-validation>

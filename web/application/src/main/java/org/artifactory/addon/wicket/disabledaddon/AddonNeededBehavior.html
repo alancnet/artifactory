@@ -1,0 +1,18 @@
+<wicket:body/>
+
+<span id="${targetId}_bubble" dojoType="artifactory.Tooltip"
+      connectId="${targetId}" showDelay="0" toggle="fade"
+      toggleDuration="200" style="display: none;">
+    ${message}
+
+    <a id="${targetId}_hide" class="hide-link" href="#"
+       onclick="return DisabledAddon.toogle(this, '${targetId}', '${serverToken}', '${addon.addonName}');">
+        Don't show me again.
+    </a>
+</span>
+
+<script type="text/javascript">
+    DomUtils.addOnRender(function () {
+        DisabledAddon.create('${targetId}', ${position}, '${iconClassName}', '${addon.addonName}', '${serverToken}');
+    });
+</script>

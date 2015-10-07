@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2015 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="securityFactory" class="org.artifactory.ui.rest.service.admin.security.SecurityServiceFactory"/>
+    <bean id="adminConfigFactory" class="org.artifactory.ui.rest.service.admin.configuration.ConfigServiceFactory"/>
+    <bean id="servicesFactory" class="org.artifactory.ui.rest.service.admin.services.ServicesServiceFactory"/>
+    <bean id="browseFactory" class="org.artifactory.ui.rest.service.artifacts.browse.BrowseServiceFactory"/>
+    <bean id="advanceFactory" class="org.artifactory.ui.rest.service.admin.advanced.AdvancedServiceFactory"/>
+    <bean id="utilsFactory" class="org.artifactory.ui.rest.service.utils.UtilsServiceFactory"/>
+    <bean id="searchFactory" class="org.artifactory.ui.rest.service.artifacts.search.SearchServiceFactory"/>
+    <bean id="deployFactory" class="org.artifactory.ui.rest.service.artifacts.deploy.DeployServiceFactory"/>
+    <bean id="importExportFactory" class="org.artifactory.ui.rest.service.admin.importexport.ImportExportServiceFactory"/>
+    <bean id="configFactory"  class="org.artifactory.rest.services.ConfigServiceFactory"/>
+    <bean id="generalFactory" class="org.artifactory.ui.rest.service.general.GeneralServiceFactory"/>
+    <bean id="buildsFactory" class="org.artifactory.ui.rest.service.builds.BuildsServiceFactory"/>
+    <bean class="org.artifactory.ui.rest.service.utils.validation.ValidationsServiceFactory"/>
+</beans>

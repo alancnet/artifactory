@@ -1,0 +1,9 @@
+<ul class="list-group">
+    <li ng-repeat="item in jfList.list track by $index"
+        class="list-group-item"
+        ng-bind="item"
+        ng-class="{'active' : jfList.isSelected(item)}"
+        ng-click="jfList.toggleSelection(item)">
+    </li>
+
+</ul>

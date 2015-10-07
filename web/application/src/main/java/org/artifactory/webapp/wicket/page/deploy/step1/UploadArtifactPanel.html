@@ -1,0 +1,25 @@
+<wicket:extend>
+    <form wicket:id="uploadForm" class="upload-form">
+        <p>
+            <span class="info">Upload a file, edit artifact details and deploy it.</span>
+        </p>
+
+        <div class="field required upload-field float-left">
+            <label>Artifact File</label>
+
+            <span class="value">
+                <input wicket:id="fileInput" type="file" class="text"/>
+            </span>
+        </div>
+
+        <button type="submit" class="button default-button">
+            <span class="button-center">
+                <span class="button-left">
+                    <span class="button-right">Upload!</span>
+                </span>
+            </span>
+        </button>
+
+        <span wicket:id="progress"></span>
+    </form>
+</wicket:extend>

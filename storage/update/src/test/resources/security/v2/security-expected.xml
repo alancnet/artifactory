@@ -1,0 +1,106 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<security>
+    <users>
+        <user>
+            <password>5f4dcc3b5aa765d61d8327deb882cf99</password>
+            <username>admin</username>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>true</admin>
+            <updatableProfile>true</updatableProfile>
+        </user>
+        <user>
+            <password>d41d8cd98f00b204e9800998ecf8427e</password>
+            <username>anonymous</username>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>false</updatableProfile>
+        </user>
+        <user>
+            <password>9891b71c5812781d61403a03a101a854</password>
+            <username>yossis</username>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>true</updatableProfile>
+        </user>
+        <user>
+            <password>06c56a89949d617def52f371c357b6db</password>
+            <username>momo</username>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>true</updatableProfile>
+        </user>
+    </users>
+    <acls>
+        <acl>
+            <permissionTarget>
+                <name>Anything</name>
+                <repoKey>ANY</repoKey>
+                <includes>
+                    <string>**</string>
+                </includes>
+                <excludes/>
+            </permissionTarget>
+            <aces>
+                <ace>
+                    <principal>anonymous</principal>
+                    <group>false</group>
+                    <mask>1</mask>
+                </ace>
+            </aces>
+            <!--<identifier>ANY%3aANY</identifier>-->
+            <updatedBy>unknown</updatedBy>
+        </acl>
+        <acl>
+            <permissionTarget>
+                <name>libs-releases-local:org.art</name>
+                <repoKey>libs-releases-local</repoKey>
+                <includes>
+                    <string>**</string>
+                </includes>
+                <excludes/>
+            </permissionTarget>
+            <aces>
+                <ace>
+                    <principal>momo</principal>
+                    <group>false</group>
+                    <mask>19</mask>
+                </ace>
+                <ace>
+                    <principal>yossis</principal>
+                    <group>false</group>
+                    <mask>3</mask>
+                </ace>
+            </aces>
+            <updatedBy>admin</updatedBy>
+        </acl>
+    </acls>
+</security>

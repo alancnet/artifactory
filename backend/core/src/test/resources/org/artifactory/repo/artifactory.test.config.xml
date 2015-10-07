@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ns2:config xmlns:ns2="http://artifactory.jfrog.org/xsd/1.3.1">
+    <ns2:adminCredential>test</ns2:adminCredential>
+    <!--<localRepositoriesDir>repos</localRepositoriesDir>
+    <localRepositories>
+        <localRepository>
+            <key>local-repo</key>
+            <description>local repoitory</description>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>ibiblio</key>
+            <url>http://www.ibiblio.org/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>codehaus</key>
+            <url>http://dist.codehaus.org</url>
+        </remoteRepository>
+    </remoteRepositories>-->
+</ns2:config>

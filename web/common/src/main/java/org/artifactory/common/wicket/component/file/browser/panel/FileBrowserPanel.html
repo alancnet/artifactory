@@ -1,0 +1,31 @@
+<wicket:extend>
+    <div wicket:id="border">
+        <div class="lookIn">
+            <span><wicket:message key="file.browser.breadCrumbs"/>:</span>
+            <select class="roots" wicket:id="roots"></select>
+            <select class="breadcrumbs" wicket:id="breadcrumbs"></select>
+            <input class="gotoParentButton" type="button" wicket:id="gotoParentButton" value=""/>
+        </div>
+        <div class="files" onselectstart="return false;" onmouseup="FileBrowser.get().cancelTextSelection();">
+            <ul>
+                <li wicket:id="filesList">
+                    <a wicket:id="fileNameLabel"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="selectedFile">
+            <span><wicket:message key="file.browser.name"/>:</span>
+            <input type="text" wicket:id="fileAutocomplete"/>
+        </div>
+    </div>
+    <div class="buttons">
+
+        <div class=buttons>
+            <button wicket:id="ok"></button>
+            <button wicket:id="cancel"></button>
+        </div>
+    </div>
+
+    <script wicket:id="initScript" type="text/javascript"></script>
+</wicket:extend>

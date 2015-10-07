@@ -1,0 +1,150 @@
+{
+  "results" : [ {
+    "build.created" : "2012-10-12T02:00:00.000+02:00",
+    "build.created_by" : "me",
+    "build.modified" : "2012-10-12T02:00:00.001+02:00",
+    "build.modified_by" : "not-me",
+    "build.name" : "ba",
+    "build.number" : "1",
+    "modules" : [ {
+      "dependencies" : [ {
+        "items" : [ {
+          "repo" : "repo-copy",
+          "path" : "org/yossis/tools",
+          "name" : "file3.bin",
+          "type" : "file",
+          "size" : 43434,
+          "created" : "2012-10-12T02:00:00.000+02:00",
+          "created_by" : "me",
+          "modified" : "2012-10-12T02:00:00.001+02:00",
+          "modified_by" : "not-me",
+          "updated" : "2012-06-21T15:53:24.448+03:00",
+          "depth" : 4,
+          "actual_md5" : "502a360ecad98a34b59863c1e65bcf71",
+          "actual_sha1" : "dddd88fc2a043c2479a6de676a2f8179e9eadddd",
+          "original_md5" : "502a360ecad98a34b59863c1e65bcf71",
+          "original_sha1" : "ccab88fc2a043c2479a6de676a2f8179e9ea2167"
+        } ]
+      }, {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:00:00.000+02:00",
+          "created_by" : "me",
+          "modified" : "2012-10-12T02:00:00.001+02:00",
+          "modified_by" : "not-me",
+          "depth" : 0
+        } ]
+      } ]
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:16:40.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "bb",
+    "build.number" : "1",
+    "build.url" : "http://myserver/jenkins/bb/1",
+    "modules" : [ {
+      "dependencies" : [ {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:16:40.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      } ]
+    }, {
+      "dependencies" : [ {
+        "items" : [ {
+          "repo" : "repo1",
+          "path" : "ant/ant/1.5",
+          "name" : "ant-1.5.jar",
+          "type" : "file",
+          "size" : 716139,
+          "created" : "2012-10-12T02:16:40.000+02:00",
+          "created_by" : "me",
+          "updated" : "2012-06-21T15:53:24.448+03:00",
+          "depth" : 4,
+          "actual_md5" : "902a360ecad98a34b59863c1e65bcf71",
+          "actual_sha1" : "dcab88fc2a043c2479a6de676a2f8179e9ea2167",
+          "original_md5" : "902a360ecad98a34b59863c1e65bcf71",
+          "original_sha1" : "dcab88fc2a043c2479a6de676a2f8179e9ea2167",
+          "properties" : [ {
+            "key" : "string",
+            "value" : "this is string"
+          } ]
+        } ]
+      }, {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:16:40.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      }, {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:16:40.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      } ]
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:33:20.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "ba",
+    "build.number" : "2",
+    "modules" : [ {
+      "dependencies" : [ {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:33:20.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      } ]
+    } ]
+  },{
+    "build.created" : "2012-10-12T02:50:00.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "bb",
+    "build.number" : "2",
+    "build.url" : "http://myserver/jenkins/bb/2",
+    "modules" : [ {
+      "dependencies" : [ {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T02:50:00.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      } ]
+    } ]
+  },{
+    "build.created" : "2012-10-12T03:06:40.000+02:00",
+    "build.created_by" : "me",
+    "build.name" : "ba",
+    "build.number" : "3",
+    "modules" : [ {
+      "dependencies" : [ {
+        "items" : [ {
+          "type" : "folder",
+          "size" : 0,
+          "created" : "2012-10-12T03:06:40.000+02:00",
+          "created_by" : "me",
+          "depth" : 0
+        } ]
+      } ]
+    } ]
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 5,
+    "total" : 5
+  }
+}

@@ -1,0 +1,19 @@
+<div ng-if="jfNpmInfo.npmData">
+    <jf-panel jf-panel-heading="Package Info">
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfNpmInfo.npmData.npmInfo">
+                <td>{{jfNpmInfo.DICTIONARY[key]}}:</td>
+                <td>
+                    <span ng-if="key != 'repository'">{{value}}</span>
+                    <span ng-if="key === 'repository'"><a target="_blank" ng-href="{{value}}">{{value}}</a></span>
+                </td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Dependencies"
+              ng-if="jfNpmInfo.npmData.npmDependencies.length">
+
+        <jf-grid grid-options="jfNpmInfo.npmGridOptions"></jf-grid>
+    </jf-panel>
+</div>

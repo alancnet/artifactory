@@ -1,0 +1,97 @@
+<div ng-if="!jfStashInfo.currentNode.data.info.artifactCount">
+    <div class="alert alert-warning">
+        You currently do not have any saved search results.
+        You can save new search results after <a href="" ng-click="jfStashInfo.gotoSearch()">searching artifacts</a>.
+    </div>
+</div>
+
+<jf-panel jf-panel-heading="Info" ng-if="jfStashInfo.currentNode.data.info.artifactCount">
+    <table class="jf-data-table">
+        <tr>
+            <td>Artifact Count:</td>
+            <td>{{jfStashInfo.currentNode.data.info.artifactCount}}</td>
+        </tr>
+    </table>
+</jf-panel>
+
+<jf-panel jf-panel-heading="Export Stashed Results" ng-if="jfStashInfo.currentNode.data.info.artifactCount && jfStashInfo.allowExport">
+    <form class="form" name="exportForm" novalidate>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="common">
+                    <label for="export-path">Export Path on Server*</label>
+                    <input type="text"
+                           class="input-text"
+                           required
+                           id="export-path"
+                           name="path"
+                           ng-model="jfStashInfo.exportOptions.path"
+                           ng-focus="jfStashInfo.clearValidations()"/>
+                </jf-field>
+            </div>
+            <div class="form-group-cell form-button">
+                <jf-browse-files browser-resource="jfStashInfo.browseFilesDao"
+                                 start-folder="jfStashInfo.exportOptions.path"
+                                 browser-update-folder="jfStashInfo.updateExportFolderPath(directory)"
+                                 browser-options="jfStashInfo.exportFileBrowserOptions">
+                </jf-browse-files>
+            </div>
+        </div>
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox text="Exclude Metadata">
+                    <input type="checkbox"
+                           id="exportExcludeMetadata"
+                           ng-model="jfStashInfo.exportOptions.excludeMetadata"
+                           name="excludeMetadata">
+                </jf-checkbox>
+
+            </div>
+        </div>
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox text="Create .m2 Compatible Export">
+                    <input type="checkbox"
+                           id="exportCreateM2CompatibleExport"
+                           ng-model="jfStashInfo.exportOptions.m2"
+                           name="createM2CompatibleExport">
+                </jf-checkbox>
+                <jf-help-tooltip html="jfStashInfo.TOOLTIP.createM2CompatibleExport"></jf-help-tooltip>
+
+            </div>
+        </div>
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox text="Create a Zip Archive (Slow and CPU Intensive!)">
+                    <input
+                            type="checkbox"
+                            id="createArchive"
+                            ng-model="jfStashInfo.exportOptions.createArchive"
+                            name="createArchive">
+                </jf-checkbox>
+                <jf-help-tooltip html="jfStashInfo.TOOLTIP.createArchive"></jf-help-tooltip>
+
+            </div>
+        </div>
+        <div class="form-group form-checkbox">
+            <div class="form-group-cell">
+                <jf-checkbox text="Output Verbose Log">
+                    <input
+                            type="checkbox"
+                            id="exportOutputVerboseLog"
+                            ng-model="jfStashInfo.exportOptions.verbose"
+                            name="outputVerboseLog">
+                </jf-checkbox>
+                <jf-help-tooltip html="jfStashInfo.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+
+            </div>
+        </div>
+        <div class="pull-right admin-actions">
+            <button type="button" class="btn btn-primary"
+                    ng-disabled="!jfStashInfo.exportOptions.path"
+                    ng-click="jfStashInfo.export(exportForm)">
+                Export
+            </button>
+        </div>
+    </form>
+</jf-panel>

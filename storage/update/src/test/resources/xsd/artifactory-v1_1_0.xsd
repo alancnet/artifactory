@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+           targetNamespace="http://artifactory.jfrog.org/xsd/1.1.0"
+           xmlns="http://artifactory.jfrog.org/xsd/1.1.0"
+           elementFormDefault="qualified">
+
+    <xs:element name="config" type="CentralConfigType"/>
+
+    <xs:complexType name="CentralConfigType">
+        <xs:sequence>
+            <xs:element name="serverName" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        <![CDATA[
+                        A name uniquely identifying this artifactory server instance accross the
+                        network.
+                        ]]>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="anonDownloadsAllowed" type="xs:boolean" minOccurs="0" default="true">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Determines whether anonymous downloads are permitted.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="fileUploadMaxSizeMb" type="xs:int" default="100" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        The maximun size in megabytes for uploaded artifact files.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dateFormat" type="xs:string" default="dd-MM-yy HH:mm:ssZ"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        The format used for displaying dates.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="backup" type="BackupType" minOccurs="0"/>
+            <xs:element name="localRepositories" type="LocalRepositoriesType">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of locally installed repositories.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="remoteRepositories" type="RemoteRepositoriesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of remote proxied (normally cached) repositories.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="virtualRepositories" type="VirtualRepositoriesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of virtual repositories wrapping regular local and remote
+                        repositories.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="proxies" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of reusable proxy definitions.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="proxy" type="ProxyType" maxOccurs="unbounded"
+                                    minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LocalRepositoriesType">
+        <xs:sequence>
+            <xs:element name="localRepository" type="LocalRepoType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LocalRepoType">
+        <xs:complexContent>
+            <xs:extension base="RepoType">
+                <xs:sequence>
+                    <xs:element name="snapshotVersionBehavior" default="nonunique" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                Whether to use time-based version numbers for the name of SNAPSHOTs,
+                                or to use a non-unique, self-overridding naming pattern of
+                                artifactId-version-SNAPSHOT.type (the default), or to respect the
+                                deployer settings coming from the Maven client.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="deployer"/>
+                                <xs:enumeration value="nonunique"/>
+                                <xs:enumeration value="unique"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RepoType" abstract="true">
+        <xs:sequence>
+            <xs:element name="key" type="xs:ID">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Repository unique id.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" default="default description"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Textual description of the repository.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="blackedOut" type="xs:boolean" default="false" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Whether the repository is blacked-out. A blacked-out repository does not
+                        participate in artifact resolution, nor dies its local cache.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="handleReleases" type="xs:boolean" default="true" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Whether the repository handle release artifacts.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="handleSnapshots" type="xs:boolean" default="true" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Whether the repository handle snapshot artifacts.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="maxUniqueSnapshots" type="xs:int" default="0" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        The maximun number unique snapshots (of the same artifact) to store.
+                        Any number of sanpshots above the max will be automatically removed by age.
+                        A value of 0 (the default) means no limits on unique snapshots number (thus
+                        no automatic cleanup).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="includesPattern" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A comma-separated list of artifact patterns to include when evaluating
+                        artifact requests, in the form of x/y/**/z/*. When used, only requests
+                        matching one the include patterns will be served.
+                        By default all artifacts are included (**/*).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="excludesPattern" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A comma-separated list of artifact patterns to exclude when evaluating
+                        artifact requests, in the form of x/y/**/z/*.
+                        By default no artifacts are excluded.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RemoteRepositoriesType">
+        <xs:sequence>
+            <xs:element name="remoteRepository" type="RemoteRepoType"
+                        minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RepoType">
+        <xs:complexContent>
+            <xs:extension base="RemoteRepoBaseType">
+                <xs:sequence>
+                    <xs:element name="username" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                HTTP authentication username.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="password" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                HTTP authentication password.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="socketTimeoutMillis" type="xs:int" default="5000"
+                                minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                Network timeout in milliseconds to use both for connection
+                                establishment and for unanswered requests.
+                                Timing out on a network operation is considered as a retrieval
+                                failure.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="proxyRef" type="xs:IDREF" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                Network proxy reference.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RemoteRepoBaseType" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="RepoType">
+                <xs:sequence>
+                    <xs:element name="type" default="maven2" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                The repository-type of the remote repository, which normally also
+                                reflects on its layout and behavior.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="maven2"/>
+                                <xs:enumeration value="maven1"/>
+                                <xs:enumeration value="obr"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="url" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                The url for the remote repository. Currently only HTTP urls are
+                                supported.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="offline" type="xs:boolean" default="false" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                When set to true only already-cached artifacts will be retrieved and
+                                fetching remote artifacts will not be attempted.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="hardFail" type="xs:boolean" default="false" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                Whether failing to communicate with this repository will return an
+                                error to the client that will fail the build.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="storeArtifactsLocally" type="xs:boolean" default="true"
+                                minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                Whether the repository should cache artifacts locally. Leave as
+                                'true', as direct-to-client streaming has not been thoroughly tested
+                                yet.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="retrievalCachePeriodSecs" type="xs:long" default="43200"
+                                minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                The number of seconds to cache artifact lookup results.
+                                A value of 0 means no caching.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+
+                    <xs:element name="failedRetrievalCachePeriodSecs" type="xs:long" default="30"
+                                minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                The number of seconds to cache artifact retrieval failures
+                                (resulting in comm. errors).
+                                A value of 0 means no caching.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="missedRetrievalCachePeriodSecs" type="xs:long" default="43200"
+                                minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation source="description">
+                                The number of seconds to cache artifact retrieval misses (artifact
+                                not found).
+                                A value of 0 means no caching.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="VirtualRepositoriesType">
+        <xs:sequence>
+            <xs:element name="virtualRepository" type="VirtualRepoType"
+                        minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="VirtualRepoType">
+        <xs:sequence>
+            <xs:element name="key" type="xs:ID">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Virtual repository unique id.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="repositories" type="RepositoryRefsType" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of local and remote repository references to include in a virtual
+                        repository.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RepositoryRefsType">
+        <xs:sequence>
+            <xs:element name="repositoryRef" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Local or remote repository reference (key).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ProxyType">
+        <xs:sequence>
+            <xs:element name="key" type="xs:ID">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy unique id.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="host" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy host.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="port" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy port number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="username" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy username.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="password" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy password.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="domain" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        Proxy domain/realm name.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BackupType">
+        <xs:sequence>
+            <xs:element name="dir" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        <![CDATA[
+                        The directory to which backup local repository data as files.
+                        ]]>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="cronExp" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        <![CDATA[
+                        The cron expression by which backup frequency is determined.
+                        ]]>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="retentionPeriodHours" type="xs:int" default="168" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        The maximun number of hours to keep old backups in the destination dir.
+                        A value of 0 means no cleanup of old backups will be perfromed.
+                        The default is 168 hours = 7 days.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="excludedRepositories" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation source="description">
+                        A set of repository references to exclude from backup.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="repositoryRef" type="xs:IDREF" minOccurs="0"
+                                    maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation source="description">
+                                    Local or remote repository reference (key).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

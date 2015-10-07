@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.4.1"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.4.1
+        http://www.jfrog.org/xsd/artifactory-v1_4_1.xsd">
+    <!--
+    enable/disable anonymous downloads
+    -->
+    <security>
+        <anonAccessEnabled>true</anonAccessEnabled>
+        <!--<ldapSettings>
+            <ldapSetting>
+                <key>ldap1</key>
+                <enabled>true</enabled>
+                <ldapUrl>ldap://mydomain:389/dc=mycompany,dc=com</ldapUrl>
+                <userDnPattern>uid={0}, ou=People</userDnPattern>
+            </ldapSetting>
+        </ldapSettings>-->
+    </security>
+    <backups>
+        <backup>
+            <key>backup1</key>
+            <!--
+            alternative backup dir
+            -->
+            <!--<dir></dir>-->
+            <!--
+            backup every 12 hours
+            -->
+            <cronExp>0 0 /12 * * ?</cronExp>
+            <!--
+            keep backups for a week.
+            Set to 0 in order to always backup to a "current" dir (useful for incremental FS backups).
+            -->
+            <retentionPeriodHours>168</retentionPeriodHours>
+            <!--
+            exclude certain repositories from being backed up
+            -->
+        </backup>
+    </backups>
+    <!-- The interval at which to activate the m2eclipse indexer. -->
+    <indexer>
+        <!-- By Default index every 24 hours -->
+        <indexingIntervalHours>24</indexingIntervalHours>
+    </indexer>
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases-local</key>
+            <description>Local repository for in-house libraries</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+        <localRepository>
+            <key>libs-snapshots-local</key>
+            <description>Local repository for in-house snapshots</description>
+            <handleReleases>false</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <includesPattern>org/jfrog/**</includesPattern>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>java.net.m2</key>
+            <description>java.net Maven2 Format</description>
+            <type>maven2</type>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <excludesPattern>commons-*,org/apache/**</excludesPattern>
+            <url>http://download.java.net/maven/2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net.m1</key>
+            <type>maven1</type>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <url>http://download.java.net/maven/1</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>jfrog-libs</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <excludesPattern>org/apache/maven/**</excludesPattern>
+            <url>http://repo.jfrog.org/artifactory/libs-releases-local</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>jfrog-plugins</key>
+            <description>JFrog plugins releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/jfrog/**</includesPattern>
+            <url>http://repo.jfrog.org/artifactory/plugins-releases-local</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>jboss</key>
+            <description>JBoss Maven2 releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/jboss/**,org/hibernate/**,org/richfaces/**,org/drools/**</includesPattern>
+            <url>http://repository.jboss.com/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>codehaus</key>
+            <description>Codehaus Maven2 releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/**,com/**,net/**</includesPattern>
+            <excludesPattern>org/apache/**,commons-*,org/artifactory/**,org/jfrog/**</excludesPattern>
+            <url>http://repository.codehaus.org</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>spring-bundles-milestone</key>
+            <description>SpringSource bundles in milestone version</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/springframework/**</includesPattern>
+            <url>http://repository.springsource.com/maven/bundles/milestone</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>spring-bundles-snapshots</key>
+            <description>SpringSource bundles in snapshot stage</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <includesPattern>org/springframework/**</includesPattern>
+            <url>http://repository.springsource.com/maven/bundles/snapshot</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>spring-bundles</key>
+            <description>SpringSource bundles releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/springframework/**</includesPattern>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>spring-bundles-external</key>
+            <description>External artifacts needed by SpringSource bundles</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>**/com.springsource*/**</includesPattern>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>open-qa</key>
+            <description>OpenQA (Selenium) releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/openqa/**,org/seleniumhq/**</includesPattern>
+            <url>http://nexus.openqa.org/content/repositories/releases</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>terracotta</key>
+            <description>Terracotta releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/terracotta/**,net/sf/ehcache/**</includesPattern>
+            <url>http://repo.terracotta.org/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>google-code</key>
+            <description>Google's open source releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>com/google/**</includesPattern>
+            <url>http://google-maven-repository.googlecode.com/svn/repository</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>scala-tools</key>
+            <description>Scala-Tools.org releases</description>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>org/scala*/**</includesPattern>
+            <url>http://scala-tools.org/repo</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>atlassian</key>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <includesPattern>atlassian*/**,seraph/**,com/atlassian/**,com/adaptavist/**</includesPattern>
+            <url>http://maven.atlassian.com/repository/public</url>
+        </remoteRepository>
+
+    </remoteRepositories>
+
+    <virtualRepositories>
+        <virtualRepository>
+            <key>remote-repos</key>
+            <artifactoryRequestsCanRetrieveRemoteArtifacts>true</artifactoryRequestsCanRetrieveRemoteArtifacts>
+            <repositories>
+                <repositoryRef>codehaus</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>libs-releases</key>
+            <repositories>
+                <repositoryRef>libs-releases-local</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>plugins-releases</key>
+            <repositories>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>libs-snapshots</key>
+            <repositories>
+                <repositoryRef>libs-snapshots-local</repositoryRef>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+        <virtualRepository>
+            <key>plugins-snapshots</key>
+            <repositories>
+                <repositoryRef>remote-repos</repositoryRef>
+            </repositories>
+        </virtualRepository>
+    </virtualRepositories>
+</config>

@@ -1,0 +1,47 @@
+<div id="smart-remote-repository">
+    <div class="modal-header">
+        <h3 class="modal-title">Artifactory Remote Repository Detected</h3>
+    </div>
+    <div class="modal-body">
+        <p>Since the remote repository at the URL you specified is hosted by another instance of Artifactory, you may configure some additional capabilities for your repository:</p>
+<!--
+        <div class="sync-checkbox">
+            <jf-checkbox text="Sync Statistics">
+                <input type="checkbox"
+                       ng-model="smartRepo.statistics.enabled">
+            </jf-checkbox>
+            <p>
+                If set, download statistics for the artifact at the remote Artifactory instance will be updated each time a cached item is downloaded from your repository.
+            </p>
+        </div>
+-->
+        <div class="sync-checkbox">
+            <jf-checkbox text="Sync Properties">
+                <input type="checkbox"
+                       ng-model="smartRepo.properties.enabled">
+            </jf-checkbox>
+            <p>
+                If set, properties for artifacts that have been cached in this repository will be updated if they are modified in the artifact hosted at the remote Artifactory instance.
+            </p>
+        </div>
+        <div class="sync-checkbox">
+            <jf-checkbox text="List Remote Folder Items">
+                <input type="checkbox"
+                       ng-model="smartRepo.typeSpecific.listRemoteFolderItems">
+            </jf-checkbox>
+            <p>
+                If set, Artifactory lets you navigate the contents of the repository at the remote Artifactory instance, for all package types, even if the artifacts have not been cached in this repository.
+            </p>
+        </div>
+        <ul>
+            <li>
+                Delete Detection:<br>
+                When viewing a cached item in this repository, you will see an indication if it has been  deleted from the repository at the remote Artifactory instance.
+            </li>
+        </ul>
+        <p>These settings are also available in the Edit Repository screen.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="closeModal()">OK</button>
+    </div>
+</div>

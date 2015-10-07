@@ -1,0 +1,36 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<artifactory-file>
+    <repoPath>
+        <repoKey>repo1-cache</repoKey>
+        <path>junit/junit/3.8.1/junit-3.8.1.jar</path>
+    </repoPath>
+    <name>junit-3.8.1.jar</name>
+    <created>1228036457953</created>
+    <lastModified>1122889368000</lastModified>
+    <size>121070</size>
+    <mimeType>application/zip</mimeType>
+    <extension>
+        <createdBy>anonymous</createdBy>
+        <modifiedBy>anonymous</modifiedBy>
+        <lastUpdated>1228036459703</lastUpdated>
+        <sha1>99129f16442844f6a4a11ae22fbbee40b14d774f</sha1>
+        <md5>1f40fb782a4f2cf78f161d32670f7a3a</md5>
+    </extension>
+</artifactory-file>

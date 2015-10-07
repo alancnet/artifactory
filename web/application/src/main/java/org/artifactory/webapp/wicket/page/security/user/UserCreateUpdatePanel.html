@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<body>
+<wicket:extend>
+    <form wicket:id="form">
+        <div wicket:id="border">
+
+            <div class="field-row">
+                <div class="field required">
+                    <label>User Name</label>
+
+                    <div class="value">
+                        <input autocomplete="off" wicket:id="username" type="text" class="text" maxlength="100"/>
+                    </div>
+                </div>
+
+                <div class="field required">
+                    <label>Email Address</label>
+
+                    <div class="value">
+                        <input wicket:id="email" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="field-row">
+                <div class="field required">
+                    <div class="label-sep">
+                        <label>Password</label>
+                    </div>
+                    <div class="value">
+                        <input wicket:id="password" type="password" class="text" autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="field required">
+                    <div class="label-sep">
+                        <label>Retype Password</label>
+                    </div>
+                    <div class="value">
+                        <input wicket:id="retypedPassword" type="password" class="text" autocomplete="off"/>
+                    </div>
+                </div>
+            </div>
+
+            <div wicket:id="strengthPanel"></div>
+
+            <div class="field field-sep">
+                <input wicket:id="updatableProfile" type="checkbox"/>
+                <input wicket:id="admin" type="checkbox"/>
+                <input wicket:id="disableInternalPassword" type="checkbox"/>
+                <span wicket:id="disableInternalPasswordHelp"></span>
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="field">
+                <label wicket:id="groupsLabel"></label>
+
+                <div class="value">
+                    <div wicket:id="groups"></div>
+                </div>
+            </div>
+
+            <div class="form-sep"></div>
+
+            <div class="info status-label">
+                <div wicket:id="lastLogin"></div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="submit" type="submit"></button>
+            <button wicket:id="cancel" type="button"></button>
+        </div>
+    </form>
+</wicket:extend>
+</body>
+</html>

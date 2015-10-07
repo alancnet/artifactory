@@ -1,0 +1,68 @@
+<div class="content-layout-container">
+    <h1 id="repository-header">{{RepositoryForm.title}}</h1>
+
+    <div class="content-wrapper">
+        <form name="repositoriesForm" ng-submit="RepositoryForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <div class="wizard-container">
+                        <ul class="wizard-tabs">
+                            <li ng-click="RepositoryForm.setCurrentTab('basic')"
+                                ng-class="{active:RepositoryForm.isCurrentTab('basic')}" id="repository-basic-tab">Basic
+                            </li>
+                            <li ng-click="RepositoryForm.setCurrentTab('advanced')"
+                                ng-class="{active:RepositoryForm.isCurrentTab('advanced')}" id="repository-advanced-tab">Advanced
+                            </li>
+                            <li ng-click="RepositoryForm.setCurrentTab('replications')"
+                                ng-class="{active:RepositoryForm.isCurrentTab('replications')}"
+                                jf-disable-feature="replications"
+                                ng-if="!RepositoryForm.isCurrentRepoType('virtual')" id="repository-replications-tab">Replications
+                                <span ng-if="RepositoryForm.features.isDisabled('replications')"
+                                      class="license-required"></span>
+                            </li>
+                        </ul>
+                        <ng-include ng-if="RepositoryForm.repoInfo"
+                                    src="'states/admin/repositories/' + RepositoryForm.repoType + '_repository_form.html'">
+
+                        </ng-include>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                           ng-click="RepositoryForm.cancel()" id="repository-cancel-button">Cancel
+                    </button>
+                    <div class="wizard-pager">
+                        <a href=""
+                           ng-disabled="RepositoryForm.currentTab == 'basic'"
+                           ng-click="RepositoryForm.prevStep()" id="repository-back-button">
+                            &lt; Back
+                        </a>
+                        <a href=""
+                           ng-disabled="!RepositoryForm.showNextButton()"
+                           ng-click="RepositoryForm.fwdStep()" id="repository-next-button">
+                            Next &gt;
+                        </a>
+                    </div>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            ng-disabled="!repositoriesForm.$valid"
+                            ng-if="RepositoryForm.isCurrentRepoType('local')" id="repository-save-button">Save & Finish
+                    </button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            ng-if="RepositoryForm.isCurrentRepoType('remote')"
+                            ng-disabled="!repositoriesForm.$valid" id="repository-save-button">Save & Finish
+                    </button>
+                    <button type="submit"
+                            class="btn  btn-primary"
+                            ng-if="RepositoryForm.isCurrentRepoType('virtual')"
+                            ng-disabled="!repositoriesForm.$valid" id="repository-save-button">Save & Finish
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

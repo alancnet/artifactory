@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<project name="Standalone">
+    <skin>
+        <groupId>org.jfrog.maven.skins</groupId>
+        <artifactId>jfrog-sf</artifactId>
+        <version>1.1.0</version>
+    </skin>
+    <body>
+        <breadcrumbs>
+            <item href="http://www.jfrog.org/sites/artifactory/1.3/artifactory-standalone"
+                  name="Artifactory Standalone"/>
+        </breadcrumbs>
+
+        <menu name="Overview">
+            <item name="Introduction" href="../introduction.html"/>
+            <item name="Configuration Help" href="../configuration.html"/>
+        </menu>
+        <menu name="Modules">
+            <item name="Artifactory Core" href="../artifactory-core/index.html"/>
+            <item name="Artifactory Webapp" href="../artifactory-webapp/index.html"/>
+            <item name="Artifactory Standalone" href="../artifactory-standalone/index.html"/>
+            <!--<item name="Artifactory Wagon" href="../artifactory-wagon/index.html"/>-->
+        </menu>
+        ${reports}
+    </body>
+</project>

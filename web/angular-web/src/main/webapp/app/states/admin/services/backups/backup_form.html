@@ -1,0 +1,179 @@
+<div class="content-layout-container">
+    <h1>{{ BackupForm.formTitle }}</h1>
+
+    <div class="content-wrapper">
+        <form novalidate name="BackupForm.backupEditForm" ng-submit="BackupForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Backup Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Enabled">
+                                    <input type="checkbox" ng-model="BackupForm.backup.enabled">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminBackup" autofocus="true">
+                                    <label for="backupKey" class="mandatory">Backup Key</label>
+                                    <input name="licenseName"
+                                           ng-disabled="!BackupForm.isNew"
+                                           jf-validator-unique-id
+                                           jf-validator-name
+                                           jf-validator-xml-name
+                                           required
+                                           type="text"
+                                           ng-model="BackupForm.backup.key"
+                                           ng-model-options="{ debounce: 1000 }"
+                                           class="input-text"
+                                           id="backupKey"/>
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminBackup">
+                                    <label for="cronExp" class="mandatory">Cron Expression</label>
+                                    <jf-help-tooltip html="BackupForm.TOOLTIP.cronExpression"></jf-help-tooltip>
+                                    <input type="text"
+                                           class="input-text"
+                                           name="cronExp"
+                                           id="cronExp"
+                                           required
+                                           jf-validator-cron
+                                           ng-model="BackupForm.backup.cronExp"
+                                           ng-model-options="{debounce: { 'default': 500 } }"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell">
+                                <label>Next Backup Time</label>
+                                <input type="text"
+                                       placeholder="N/A"
+                                       jf-cron-formatter
+                                       class="input-text not-disabled-style"
+                                       disabled="disabled"
+                                       ng-model="BackupForm.backup.cronExp" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminBackup">
+                                    <label for="directory">Server Path For Backup</label>
+                                    <jf-help-tooltip html="BackupForm.TOOLTIP.serverPathForBackup"></jf-help-tooltip>
+                                    <input name="directory"
+                                           type="text"
+                                           ng-model="BackupForm.backup.dir"
+                                           class="input-text"
+                                           id="directory"/>
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <jf-browse-files browser-resource="BackupForm.browseFilesDao"
+                                                 browser-options="BackupForm.fileBrowserOptions"
+                                                 start-folder="BackupForm.backup.dir"
+                                                 browser-update-folder="BackupForm.updateFolderPath(directory)">
+                                </jf-browse-files>
+                            </div>
+                        </div>
+                    </jf-panel>
+
+                    <jf-panel jf-panel-heading="Advanced">
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Send Mail to Admins if there are Backup Errors">
+                                    <input type="checkbox"
+                                           ng-model="BackupForm.backup.sendMailOnError">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="BackupForm.TOOLTIP.sendMailToAdminsIfThereAreBackupErrors"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Exclude Builds">
+                                    <input type="checkbox"
+                                           ng-model="BackupForm.backup.excludeBuilds">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group form-checkbox">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Exclude new Repositories">
+                                    <input type="checkbox"
+                                           ng-model="BackupForm.backup.excludeNewRepositories">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminBackup">
+                                    <label for="retentionPeriodHours">Retention Period Hours</label>
+                                    <jf-help-tooltip html="BackupForm.TOOLTIP.retentionPeriod"></jf-help-tooltip>
+                                    <input name="directory"
+                                           type="number"
+                                           min="0"
+                                           ng-model="BackupForm.backup.retentionPeriodHours"
+                                           class="input-text"
+                                           id="retentionPeriodHours"
+                                           ng-disabled="BackupForm.backup.incremental"/>
+
+                                </jf-field>
+                            </div>
+                            <div class="form-group-cell form-button">
+                                <jf-checkbox text="Incremental">
+                                    <input type="checkbox"
+                                           ng-click="BackupForm.onClickIncremental()"
+                                           ng-disabled="BackupForm.backup.createArchive"
+                                           ng-model="BackupForm.backup.incremental">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <jf-drag-drop include-list="BackupForm.backup.includeRepos"
+                                              exclude-list="BackupForm.backup.excludeRepos"
+                                              objects-name="Repositories"
+                                              headers="{leftTitle:'Excluded Repositories',
+                                              rightTitle:'Included Repositories'}"></jf-drag-drop>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Back up to a Zip Archive (Slow and CPU Intensive)">
+                                    <input type="checkbox"
+                                           ng-model="BackupForm.backup.createArchive"
+                                           ng-disabled="BackupForm.backup.incremental"
+                                           ng-click="BackupForm.onClickZip()">
+                                </jf-checkbox>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="BackupForm.cancel()">
+                        Cancel
+                    </button>
+                    <button
+                            type="submit"
+                            class="btn btn-primary"
+                            ng-disabled="!BackupForm.backupEditForm.$valid">
+                        {{ BackupForm.isNew && 'Create' || 'Save' }}
+                    </button>
+                    <button
+                            type="button"
+                            class="btn btn-primary"
+                            ng-click="BackupForm.runNow()"
+                            ng-disabled="!BackupForm.backupEditForm.$valid">
+                        Run Now
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

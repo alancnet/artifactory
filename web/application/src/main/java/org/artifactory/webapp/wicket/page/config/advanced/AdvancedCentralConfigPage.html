@@ -1,0 +1,16 @@
+<wicket:extend>
+    <form wicket:id="centralForm">
+        <div class="advanced-editor-text-area">
+            <div wicket:id="centralPanel"></div>
+        </div>
+        <div class="buttons">
+            <button type="submit" wicket:id="centralSave"></button>
+            <button type="button" wicket:id="centralCancel"></button>
+        </div>
+    </form>
+    <script type="text/javascript">
+        DomUtils.bindHeight(document.getElementsByTagName('textarea')[0], function(docHeight) {
+            return Math.max(200, docHeight - 290);
+        }, true);
+    </script>
+</wicket:extend>

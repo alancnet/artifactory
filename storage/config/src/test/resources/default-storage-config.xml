@@ -1,0 +1,51 @@
+<!--Default chains-->
+<config version="v1">
+    <!--S3 default chain-->
+    <chain template="file-system">
+        <provider id="file-system" type="file-system"/>
+    </chain>
+    <chain template="s3">
+        <provider id="cache-fs" type="cache-fs">
+            <provider id="eventual" type="eventual">
+                <provider id="retry" type="retry">
+                    <provider id="s3" type="s3"/>
+                </provider>
+            </provider>
+        </provider>
+    </chain>
+
+    <chain template="cache-fs">
+        <provider id="cache-fs" type="cache">
+            <provider id="file-system" type="file-system"/>
+        </provider>
+    </chain>
+    <!--Full-db default chain-->
+    <chain template="full-db">
+        <provider id="cache-fs" type="cache">
+            <provider id="blob" type="blob"/>
+        </provider>
+    </chain>
+    <chain template="full-db-direct">
+        <provider id="blob" type="blob"/>
+    </chain>
+    <chain template="double">
+        <provider id="double" type="double">
+            <sub-provider id="dynamic1" type="dynamic"/>
+            <sub-provider id="dynamic2" type="dynamic"/>
+        </provider>
+    </chain>
+
+    <provider id="dynamic1" type="dynamic">
+        <dir>filestore</dir>
+        <period>60000</period>
+    </provider>
+
+    <provider id="dynamic2" type="dynamic">
+        <dir>second-filestore</dir>
+        <period>60000</period>
+    </provider>
+
+    <provider id="cache-fs" type="cache-fs">
+        <dir>cache</dir>
+    </provider>
+</config>

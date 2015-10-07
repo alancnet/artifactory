@@ -1,0 +1,12 @@
+<div class="center-login">
+    <form name="oauth-login" class="jumbotron login-form" novalidate>
+        <a class="pull-right close-button" ui-sref="home">&#10005;</a>
+        <div class="login-inner">
+            <h3>OAuth2 Login</h3>
+        </div>
+        <div class="login-button-bar oauth-login-links-container">
+            <a ng-repeat="(name, url) in LoginRequest.links" ng-href="{{url}}"
+                    class="btn btn-primary oauth-login-link"><span>{{name}}</span></a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+<wicket:extend>
+    <div class="unlock-profile-form">
+        <div class="field">
+            <label>
+                <wicket:message key="currentPassword"/>
+            </label>
+            <span wicket:id="currentPassword.help"/>
+
+            <div class="value">
+                <input wicket:id="currentPassword" type="password" class="text"/>
+                <button wicket:id="unlock" type="submit"/>
+                <div wicket:id="unlockNotificationMessage" class="info"/>
+            </div>
+        </div>
+    </div>
+</wicket:extend>

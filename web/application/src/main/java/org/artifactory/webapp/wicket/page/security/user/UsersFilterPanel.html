@@ -1,0 +1,27 @@
+<wicket:extend>
+    <form wicket:id="usersFilterForm">
+        <div class="float-left">
+            <div class="field">
+                <label>User Name</label>
+
+                <div class="value">
+                    <input type="text" wicket:id="usernameFilter" class="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="group-field">
+            <div class="field">
+                <label class="field">Group</label>
+
+                <div class="value">
+                    <select wicket:id="groupFilter"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field field-sep submit-user-field small-buttons">
+            <a wicket:id="filter"></a>
+        </div>
+    </form>
+</wicket:extend>

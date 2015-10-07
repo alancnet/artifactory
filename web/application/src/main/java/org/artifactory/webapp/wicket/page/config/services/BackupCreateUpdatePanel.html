@@ -1,0 +1,132 @@
+<wicket:extend xmlns:wicket="http://www.w3.org/1999/XSL/Transform">
+    <form wicket:id="form" class="backup-form">
+
+        <div id="modalScroll">
+            <div wicket:id="simple" class="cron-fields">
+                <div class="field float-right">
+                    <div class="value">
+                        <input wicket:id="enabled" type="checkbox"/>
+                    </div>
+                </div>
+
+                <div class="field required field-key">
+                    <label>
+                        <wicket:message key="key"/>
+                        <span wicket:id="key.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="key" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required field-sep">
+                    <label>
+                        <wicket:message key="cronExp"/>
+                        <span wicket:id="cronExp.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="cronExp" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <label>Next Backup Time</label>
+
+                    <div class="value">
+                        <span wicket:id="cronNextDatePanel"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep field-path">
+                    <label>
+                        <wicket:message key="dir"/>
+                        <span wicket:id="dir.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="dir" type="text" class="text"/>
+                        <span wicket:id="browseButton"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div wicket:id="advanced">
+                <div class="field">
+                    <div class="value float-left sep">
+                        <input wicket:id="sendMailOnError" type="checkbox"/>
+                        <span wicket:id="sendMailOnError.help"/>
+                    </div>
+                </div>
+
+                <div class="field field-row">
+                    <div class="value">
+
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="value float-left sep">
+                        <input wicket:id="excludeBuilds" type="checkbox"/>
+                        <span wicket:id="excludeBuilds.help"/>
+                    </div>
+                </div>
+
+                <div class="field field-row">
+                    <div class="value">
+
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="value float-left sep">
+                        <input wicket:id="excludeNewRepositories" type="checkbox"/>
+                        <span wicket:id="excludeNewRepositories.help"/>
+                    </div>
+                </div>
+
+                <div class="field field-row">
+                    <div class="value">
+
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <div class="value">
+
+                        <wicket:message key="retentionPeriodHours"/>
+
+                        <input wicket:id="retentionPeriodHours" type="text" class="text retention-period-hours"/>
+                        <input wicket:id="createIncrementalBackup" type="checkbox"/>
+                        <span wicket:id="retentionPeriodHours.help"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep excluded-repos-field">
+                    <label>
+                        Excluded Repositories
+                        <span wicket:id="excludedRepositories.help"/>
+                    </label>
+
+                    <div class="value">
+                        <div wicket:id="excludedRepositories" class="list"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <div class="value float-left sep">
+                        <input wicket:id="createArchive" type="checkbox"/>
+                        <span wicket:id="createArchive.help"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="runNow" type="submit"></button>
+            <button wicket:id="submit" type="submit"></button>
+            <button wicket:id="cancel" type="button"></button>
+        </div>
+    </form>
+</wicket:extend>

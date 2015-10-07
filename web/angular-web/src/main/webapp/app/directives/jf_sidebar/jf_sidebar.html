@@ -1,0 +1,57 @@
+<div id="sidebar-wrapper" class="sidebar-wrapper no-animate" ng-class="{overflown : jfSidebar.isAdminOpen}">
+    <div class="mp-pusher mp-pushed" id="mp-pusher">
+
+        <!-- mp-menu -->
+        <nav id="mp-menu" class="mp-menu">
+            <div class="mp-level mp-level-open">
+                <ul class="nav-pills nav-stacked sidebar-list">
+                    <li ng-repeat="item in jfSidebar.menuItems"
+                        class="icon icon-arrow-left"
+                        ng-click="jfSidebar.setCurrentTab(item)"
+                        ng-class="{disabled: item.isDisabled, active: (item.stateParent | includedByState), 'icon-arrow-left':item.children }">
+
+                        <a ng-if="item.isDisabled"
+                           disabled="true"
+                           ng-class="item.icon"
+                           id="{{item.id}}">{{item.label}}</a>
+                        <a ng-click="jfSidebar.goToState(item)"
+                           ng-class="item.icon"
+                           id="{{item.id}}"
+                           href=""
+                           ng-if="!item.isDisabled">{{item.label}}</a>
+
+                        <div class="mp-level" ng-class="{'mp-level-open': jfSidebar.isAdminOpen}"
+                             ng-if="item.children && !item.isDisabled">
+                            <div class="header-subitem" ng-click="jfSidebar.goBack()">
+                                <a>{{item.label}}</a>
+                            </div>
+                            <div class="header-subitem back-button">
+                                <a class="mp-back" ng-click="jfSidebar.goBack()">Back to Main</a>
+                            </div>
+                            <jf-accordion items="jfSidebar.adminMenuItems"></jf-accordion>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+
+    <div id="jf-footer"
+         ng-if="!jfSidebar.isAdminOpen">
+        <div class="text-center">
+            <div class="icon-jfrog-logo"></div>
+        </div>
+        <div class="wrapper-footer-data">
+            <div class="footer-version">
+                {{jfSidebar.footerData.versionInfo}}
+                <div> {{jfSidebar.footerData.buildNumber}}</div>
+            </div>
+            <div class="footer-licenses">{{jfSidebar.footerData.licenseInfo}}</div>
+            <div class="footer-copyright">{{jfSidebar.footerData.copyRights}}</div>
+        </div>
+    </div>
+
+</div>
+
+

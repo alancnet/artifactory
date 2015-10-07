@@ -1,0 +1,30 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<artifactory.file>
+    <repoKey>repo1-cache</repoKey>
+    <relPath>commons-lang/commons-lang/2.1/commons-lang-2.1.pom</relPath>
+    <created>0</created>
+    <modifiedBy>anonymous</modifiedBy>
+    <lastUpdated>1228118176359</lastUpdated>
+    <lastModified>1132809621000</lastModified>
+    <size>9928</size>
+    <mimeType>text/xml</mimeType>
+    <sha1>a34d992202615804c534953aba402de55d8ee47c</sha1>
+    <md5>8e41bacdd69de9373c20326d231c8a5d</md5>
+</artifactory.file>

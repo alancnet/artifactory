@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is used as logback configuration for the low level database tests -->
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-30(%d{HH:mm:ss.SSS} [%thread]) [%-5p] \(%-20c{3}:%L\) - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="warn"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <logger name="org.artifactory">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.test">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.storage.db">
+        <level value="info"/>
+    </logger>
+    <logger name="org.springframework.jdbc">
+        <level value="info"/>
+    </logger>
+    <logger name="org.springframework.transaction">
+        <level value="info"/>
+    </logger>
+    <logger name="org.artifactory.info.InfoWriter">
+        <level value="warn"/>
+    </logger>
+</configuration>

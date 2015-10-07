@@ -1,0 +1,36 @@
+<wicket:extend>
+    <div class="tb">
+        <div class="labeled-value tr">
+            <span class="label td" style="width: 150px;">Storage Type: </span>
+            <span wicket:id="storageType" class="label td"/>
+            <span wicket:id="storageType.help"/>
+        </div>
+        <div class="labeled-value tr">
+            <span class="label td">Storage Directory: </span>
+            <span wicket:id="storageDirectory" class="label td"/>
+            <span wicket:id="storageDirectory.help"/>
+        </div>
+        <wicket:enclosure child="cacheSize">
+            <div class="labeled-value tr">
+                <span class="label td">Cache Size: </span>
+                <span wicket:id="cacheSize" class="label td"/>
+                <span wicket:id="cacheSize.help"/>
+            </div>
+        </wicket:enclosure>
+        <div class="labeled-value tr">
+            <span class="label td">Total Space: </span>
+            <span wicket:id="totalSpace" class="label td"/>
+            <span wicket:id="totalSpace.help"/>
+        </div>
+        <div class="labeled-value tr">
+            <span class="label td">Used Space: </span>
+            <span wicket:id="usedSpace" class="label td"/>
+            <span wicket:id="usedSpace.help"/>
+        </div>
+        <div class="labeled-value tr">
+            <span class="label td">Free Space: </span>
+            <span wicket:id="freeSpace" class="label td"/>
+            <span wicket:id="freeSpace.help"/>
+        </div>
+    </div>
+</wicket:extend>

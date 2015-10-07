@@ -1,0 +1,136 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="closeModal()"><span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<form name="replicationForm" ng-submit="addReplication(replication)">
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-checkbox text="Enabled">
+                    <input type="checkbox"
+                           id="enableActiveReplication"
+                           ng-model="replication.enabled">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="repositories" autofocus="true">
+                    <label for="path" class="mandatory">Url</label>
+                    <input type="url"
+                           id="path"
+                           name="path"
+                           class="input-text"
+                           required
+                           ng-model="replication.url"/>
+                </jf-field>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="repositories">
+                    <label for="username" class="mandatory">Username</label>
+                    <input type="text"
+                           class="input-text"
+                           id="username"
+                           name="username"
+                           required
+                           ng-model="replication.username"/>
+                </jf-field>
+            </div>
+            <!-- prevent auto complete -->
+            <input type="text" class="hidden"/>
+            <input type="password" class="hidden"/>
+
+            <div class="form-group-cell">
+                <jf-field validations="repositories">
+                    <label for="password">Password</label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="input-text"
+                           ng-model="replication.password"/>
+                </jf-field>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="repositories">
+                    <label>Network Proxy Reference</label>
+
+                    <ui-select ng-model="replication.proxy">
+                        <ui-select-match placeholder="Select Proxy">
+                            {{ $select.selected }}
+                        </ui-select-match>
+                        <ui-select-choices
+                                repeat="item in replication.proxies | filter: $select.search track by $index">
+                            <div ng-bind-html="item | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </jf-field>
+            </div>
+            <div class="form-group-cell">
+                <jf-field validations="repositories">
+                    <label for="timeOut" class="mandatory">Socket Timeout</label>
+                    <input type="number"
+                           min="0"
+                           id="timeOut"
+                           name="timeOut"
+                           class="input-text"
+                           required
+                           ng-model="replication.socketTimeout"/>
+                </jf-field>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-checkbox text="Sync Deleted">
+                    <input type="checkbox"
+                           id="syncDeleted"
+                           ng-model="replication.syncDeletes">
+                </jf-checkbox>
+            </div>
+            <div class="form-group-cell">
+                <jf-checkbox text="Sync Properties">
+                    <input type="checkbox"
+                           id="syncProperties"
+                           ng-model="replication.syncProperties">
+                </jf-checkbox>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-field validations="repositories">
+                    <label for="pathPrefix">Path Prefix</label>
+                    <input type="text"
+                           id="pathPrefix"
+                           name="pathPrefix"
+                           class="input-text"
+                           ng-model="replication.pathPrefix"/>
+                </jf-field>
+            </div>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-secondary"
+                    type="button"
+                    ng-disabled="!replication.url"
+                    ng-click="testLocalReplicationUrl(replication.url)">Test
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="pull-right">
+            <button class="btn btn-default"
+                    jf-clear-errors
+                    type="button"
+                    ng-click="closeModal()">Cancel</button>
+            <button class="btn btn-primary"
+                    type="submit"
+                    ng-disabled="!(replicationForm.timeOut.$valid && replicationForm.path.$valid &&
+                    replicationForm.username.$valid && replicationForm.password.$valid)">Save
+            </button>
+        </div>
+    </div>
+</form>

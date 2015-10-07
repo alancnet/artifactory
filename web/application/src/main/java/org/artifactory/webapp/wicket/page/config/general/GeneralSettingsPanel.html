@@ -1,0 +1,47 @@
+<wicket:extend>
+    <div class="general-settings-panel">
+
+        <div class="field">
+            <label>Server Name</label>
+            <span wicket:id="serverName.help"></span>
+
+            <div class="value">
+                <input wicket:id="serverName" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <label wicket:id="urlBaseLabel"></label>
+            <span wicket:id="urlBase.help"></span>
+
+            <div class="value">
+                <input wicket:id="urlBase" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep required">
+            <label>File Upload Max Size</label>
+            <span wicket:id="fileUploadMaxSizeMb.help"></span>
+
+            <div class="value">
+                <input wicket:id="fileUploadMaxSizeMb" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field required field-sep">
+            <label>Date Format</label>
+            <span wicket:id="dateFormat.help"></span>
+
+            <div class="value">
+                <input wicket:id="dateFormat" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <div class="value">
+                <input wicket:id="offlineMode" type="checkbox"/>
+                <span wicket:id="offlineMode.help"></span>
+            </div>
+        </div>
+    </div>
+</wicket:extend>

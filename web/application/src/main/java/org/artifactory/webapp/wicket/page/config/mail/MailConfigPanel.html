@@ -1,0 +1,116 @@
+<wicket:extend>
+    <form wicket:id="form">
+        <div class="border-content mail-config">
+
+            <div class="field-row">
+                <div class="field">
+                    <div class="value">
+                        <input wicket:id="enabled" type="checkbox"/>
+                        <span wicket:id="enabled.help"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field required">
+                    <label>Host</label>
+                    <span wicket:id="host.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="host" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field required">
+                    <label>Port</label>
+                    <span wicket:id="port.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="port" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Username</label>
+                    <span wicket:id="username.help"></span>
+
+                    <div class="value">
+                        <input autocomplete="off" wicket:id="username" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <span wicket:id="password.help"></span>
+
+                    <div class="value">
+                        <input autocomplete="off" wicket:id="password" type="password" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>From</label>
+                    <span wicket:id="from.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="from" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Subject Prefix</label>
+                    <span wicket:id="subjectPrefix.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="subjectPrefix" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Artifactory URL</label>
+                    <span wicket:id="artifactoryUrl.help"></span>
+
+                    <div class="artifactory-url value">
+                        <input wicket:id="artifactoryUrl" type="text" class="artifactory-url text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <div class="value">
+                        <input wicket:id="tls" type="checkbox"/>
+                        <span wicket:id="tls.help"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <div class="value">
+                        <input wicket:id="ssl" type="checkbox"/>
+                        <span wicket:id="ssl.help"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field-row">
+                <div wicket:id="testBorder" class="test-border">
+                    <div class="field required">
+                        <label>Test Message Recipient</label>
+
+                        <div class="value small-buttons">
+                            <input wicket:id="testRecipient" type="text" class="text" style="width: 180px"/>
+                            <a wicket:id="sendTest" style="position:relative; top: -1px;"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</wicket:extend>

@@ -1,0 +1,188 @@
+<div class="content-layout-container">
+    <h1>{{ 'Repositories Import & Export' | replaceStringForAol }}</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <form class="form" name="exportForm" novalidate>
+                <jf-panel jf-hide-for-aol jf-panel-heading="Export Repository to Path">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <label class="label-wight">Target Local Repository*</label>
+                            <jf-ui-select jf-select-model="Repositories.exportOptions.repository"
+                                          jf-select-options="Repositories.reposList"></jf-ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="common" autofocus="true">
+                                <label for="export-path">Export Path on Server*</label>
+                                <input type="text"
+                                       class="input-text"
+                                       required
+                                       id="export-path"
+                                       name="path"
+                                       ng-model="Repositories.exportOptions.path"
+                                       ng-focus="Repositories.clearValidations()"/>
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell form-button">
+                            <jf-browse-files browser-resource="Repositories.browseFilesDao"
+                                             uploader="Repositories.uploader"
+                                             start-folder="Repositories.exportOptions.path"
+                                             browser-update-folder="Repositories.updateExportFolderPath(directory)"
+                                             browser-options="Repositories.exportFileBrowserOptions">
+                            </jf-browse-files>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Metadata">
+                                <input type="checkbox"
+                                       id="exportExcludeMetadata"
+                                       ng-model="Repositories.exportOptions.excludeMetadata"
+                                       name="excludeMetadata">
+                            </jf-checkbox>
+
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Create .m2 Compatible Export">
+                                <input type="checkbox"
+                                       id="exportCreateM2CompatibleExport"
+                                       ng-model="Repositories.exportOptions.m2"
+                                       name="createM2CompatibleExport">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="Repositories.TOOLTIP.createM2CompatibleExport"></jf-help-tooltip>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Output Verbose Log">
+                                <input
+                                        type="checkbox"
+                                        id="exportOutputVerboseLog"
+                                        ng-model="Repositories.exportOptions.verbose"
+                                        name="outputVerboseLog">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="Repositories.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+
+                        </div>
+                    </div>
+                    <div class="pull-right admin-actions">
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="!Repositories.exportOptions.path"
+                                ng-click="Repositories.export(exportForm)">
+                            Export
+                        </button>
+                    </div>
+                </jf-panel>
+            </form>
+
+            <form class="form margin-top-20" name="importForm" novalidate>
+                <jf-panel jf-hide-for-aol jf-panel-heading="Import Repository from Path">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <label class="label-wight">Target Local Repository*</label>
+                            <jf-ui-select jf-select-model="Repositories.importOptions.repository"
+                                          jf-select-options="Repositories.reposList"></jf-ui-select>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="common">
+                                <label for="import-path">Import Path on Server*</label>
+                                <input type="text"
+                                       class="input-text"
+                                       required
+                                       id="import-path"
+                                       name="path"
+                                       ng-model="Repositories.importOptions.path"
+                                       ng-focus="Repositories.clearValidations()"/>
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell form-button">
+                            <jf-browse-files browser-resource="Repositories.browseFilesDao"
+                                             browser-update-folder="Repositories.updateImportFolderPath(directory)"
+                                             start-folder="Repositories.importOptions.path"
+                                             browser-options="Repositories.importFileBrowserOptions">
+                            </jf-browse-files>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Exclude Metadata">
+                                <input type="checkbox"
+                                       id="importExcludeMetadata"
+                                       ng-model="Repositories.importOptions.excludeMetadata"
+                                       name="excludeMetadata">
+                            </jf-checkbox>
+                        </div>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <div class="form-group-cell">
+                            <jf-checkbox text="Output Verbose Log">
+                                <input
+                                        type="checkbox"
+                                        id="importOutputVerboseLog"
+                                        ng-model="Repositories.importOptions.verbose"
+                                        name="outputVerboseLog">
+                            </jf-checkbox>
+                            <jf-help-tooltip html="Repositories.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+                        </div>
+                    </div>
+                    <div class="pull-right admin-actions">
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="!Repositories.importOptions.path"
+                                ng-click="Repositories.import(importForm)">
+                            Import
+                        </button>
+                    </div>
+                </jf-panel>
+            </form>
+            <form class="form margin-top-20" name="zipForm">
+                <jf-panel jf-panel-heading="Import Repository from Zip">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <label class="label-wight">Target Local Repository*</label>
+                            <jf-help-tooltip html="Repositories.TOOLTIP.repositoryZipFile"></jf-help-tooltip>
+                            <jf-ui-select jf-select-model="Repositories.zipOptions.repository"
+                                          jf-select-options="Repositories.reposList"></jf-ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <label class="label-wight">Repository Zip File</label>
+                            <jf-file-drop jf-file-uploader="Repositories.uploader"></jf-file-drop>
+                        </div>
+                        <div class="form-group-cell form-button">
+                            <button type="button" class="btn btn-secondary"
+                                    ng-click="Repositories.upload()">
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <jf-checkbox text="Output Verbose Log">
+                            <input type="checkbox"
+                                   id="zipOptionOutputVerboseLog"
+                                   ng-model="Repositories.zipOptions.verbose"
+                                   name="outputVerboseLog">
+                        </jf-checkbox>
+                        <jf-help-tooltip html="Repositories.TOOLTIP.outputVerboseLog"></jf-help-tooltip>
+                    </div>
+                    <div class="pull-right admin-actions">
+                        <button type="button" class="btn btn-primary"
+                                ng-disabled="!Repositories.uploadSuccess"
+                                ng-click="Repositories.importUploadZip()">
+                            Import
+                        </button>
+                    </div>
+                </jf-panel>
+            </form>
+        </div>
+    </div>
+</div>

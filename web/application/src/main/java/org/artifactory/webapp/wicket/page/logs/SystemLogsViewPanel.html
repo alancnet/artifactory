@@ -1,0 +1,58 @@
+<wicket:head>
+    <script type="text/javascript">
+        var ArtifactoryLog = {
+            log: function(logDivId, message, clean) {
+                var logDiv = document.getElementById(logDivId);
+                if (clean) {
+                    while (logDiv.firstChild) {
+                        logDiv.removeChild(logDiv.firstChild);
+                    }
+                }
+                if (message == '') {
+                    return;
+                }
+                var shouldScroll = logDiv.scrollTop + logDiv.offsetHeight >=
+                        logDiv.scrollHeight - 10;
+                var newLog = document.createElement('span');
+                newLog.innerHTML = message;
+                logDiv.appendChild(newLog);
+                if (shouldScroll) {
+                    logDiv.scrollTop = logDiv.scrollHeight;
+                }
+            }
+        };
+    </script>
+</wicket:head>
+
+<wicket:panel>
+    <p>
+        <select wicket:id="logs">
+            <option>log 1</option>
+            <option>log 2</option>
+        </select>
+    </p>
+
+    <p>
+        <span wicket:id="lastUpdate"></span>
+    </p>
+
+    <p>
+        <a wicket:id="systemLogsLink"><span wicket:id="linkLabel"></span></a>
+        <span wicket:id="systemLogsSize"></span>
+    </p>
+
+    <div wicket:id="systemLogsContent" class="log textbox"></div>
+    <script wicket:id="initScript" type="text/javascript">
+        (function() {
+            var logDiv = document.getElementById('${logDivId}');
+            setTimeout(function() {
+                logDiv.scrollTop = logDiv.scrollHeight;
+            }, 100);
+
+            DomUtils.bindHeight(logDiv, function(docHeight) {
+                logDiv.style.width = document.documentElement.clientWidth - 230 + 'px';
+                return Math.max(200, docHeight - 270);
+            }, true);
+        })();
+    </script>
+</wicket:panel>

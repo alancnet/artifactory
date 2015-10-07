@@ -1,0 +1,62 @@
+<div class="content-layout-container home-page">
+    <div class="home-page-head">
+        <div class="home-page-intro">
+            <div class="jfrog-news" ng-show="Home.showNews">
+                <div class="headline">
+                    JFrog News<i class="icon icon-megaphone-on"></i>
+
+                    <div class="twitter-follow"><a href="https://twitter.com/jfrog" class="twitter-follow-button" data-show-count="false"></a></div>
+                </div>
+                <div class="news-content" ng-bind-html="Home.updateHTML"></div>
+            </div>
+
+            <h3>JFrog Artifactory is happily serving <span class="number-artifacts">{{Home.homepageData.artifacts | number}}</span> artifacts</h3>
+            <p jf-hide-for-aol class="artifactory-version">
+                You are running Artifactory version {{Home.homepageData.version}} <a ng-if="Home.homepageData.latestRelease" target="_blank" ng-href="{{Home.homepageData.latestReleaseLink}}">(latest release is
+                {{Home.homepageData.latestRelease}})</a>
+            </p>
+
+            <p jf-hide-for-aol class="artifactory-version">
+                Uptime is {{Home.homepageData.upTime}}
+            </p>
+            <p ng-if="Home.homepageData.displayAccountManagementLink" class="artifactory-version">
+                <a target="_blank" ng-href="{{Home.homepageData.accountManagementLink}}">
+                    <i class="icon icon-padlock"></i>Log in to account management
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="card stretch">
+            <div class="text-center">
+                <jf-switch ng-model="Home.currentType"
+                           options="Home.tabOptions"
+                           ng-change="Home.sortByCurrentType()"></jf-switch>
+            </div>
+
+            <ul class="addon-list">
+                <li ng-class="{'license-required': addon.status != 'Available'}"
+                    ng-repeat="addon in Home.addons track by $index"
+                    ng-mouseleave="addon.mouseover = false"
+                    class="addon-container">
+                    <div class="addon-icon iconrepo iconrepo-{{addon.name}}"></div>
+                    <div class="addon-name">{{addon.displayName}}</div>
+                    <div class="addon-status" ng-class="{available: addon.status == 'Available'}">{{addon.status}}</div>
+                    <div class="addon-links">
+                        <a ng-href="{{addon.learnMoreUrl}}" target="_blank">More Info</a>
+                        <span>&middot;</span>
+                        <a ng-href="{{addon.configurationUrl}}" target="_blank">User Guide</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="home-disclaimer">
+    Other than JFrog's trademarks, marks and logos, all other trademarks displayed in this application are owned
+    by their respective holders. JFrog is not sponsored by, endorsed by or affiliated with the holders of these
+    trademarks. More info here - <a target=_blank" href="http://www.jfrog.com/artifactory/artifactory-cloud">Terms of Use</a>,
+    <a target=_blank" href="http://www.jfrog.com/artifactory/artifactory-pro/">EULA</a>.
+</div>

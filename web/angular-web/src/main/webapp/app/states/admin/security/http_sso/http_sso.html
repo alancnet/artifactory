@@ -1,0 +1,60 @@
+<div class="content-layout-container">
+    <h1>HTTP SSO Configuration</h1>
+
+    <div class="content-wrapper">
+        <form class="form" name="adminSsoForm"
+              ng-submit="AdminSecurityHttpSSo.save(AdminSecurityHttpSSo.sso)" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="HTTP SSO Settings">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Artifactory is Proxied by a Secure HTTP Server">
+                                    <input type="checkbox"
+                                           id="enabled"
+                                           ng-model="AdminSecurityHttpSSo.sso.httpSsoProxied">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="AdminSecurityHttpSSo.TOOLTIP.artifactoryIsProxiedByASecureHTTPServer"></jf-help-tooltip>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="adminSso" autofocus="true">
+                                    <label for="remote">Remote User Request Variable</label>
+                                    <jf-help-tooltip html="AdminSecurityHttpSSo.TOOLTIP.remoteUserRequestVariable"></jf-help-tooltip>
+                                    <input name="remote"
+                                           id="remote"
+                                           type="text"
+                                           ng-disabled="!AdminSecurityHttpSSo.sso.httpSsoProxied"
+                                           ng-model="AdminSecurityHttpSSo.sso.remoteUserRequestVariable"
+                                           class="input-text">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-checkbox text="Auto Create Artifactory Users">
+                                    <input type="checkbox"
+                                           id="noAutoUserCreation"
+                                           ng-disabled="!AdminSecurityHttpSSo.sso.httpSsoProxied"
+                                           ng-model="AdminSecurityHttpSSo.sso.noAutoUserCreation">
+                                </jf-checkbox>
+                                <jf-help-tooltip html="AdminSecurityHttpSSo.TOOLTIP.autoCreateArtifactoryUsers"></jf-help-tooltip>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ng-click="AdminSecurityHttpSSo.getSsoData()">
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" ng-disabled="!adminSsoForm.$valid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

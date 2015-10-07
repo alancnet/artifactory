@@ -1,0 +1,657 @@
+.btn-test-fix {
+  padding-top: 25px;
+}
+
+.scroll-auto {
+  overflow: auto;
+}
+
+.admin-wrapper {
+  height: 100%;
+  overflow: auto;
+
+  .admin-panel {
+    padding: 10px 28px;
+    .glow(8px);
+    background: #fff;
+
+    .form-group {
+      padding-left: 23px;
+      padding-right: 15px;
+      margin-bottom: 27px;
+    }
+
+    .input-text {
+      width: 380px;
+      //margin-right: 19px;
+    }
+
+    .admin-actions {
+      margin-right: 5px;
+      margin-top: 0;
+    }
+
+    .label-wight {
+      font-weight: 100;
+    }
+  }
+
+}
+
+.mail-experiment {
+  .form-group {
+    margin-bottom: 15px !important;
+  }
+
+}
+
+.filter-group {
+  .btn {
+    margin-left: 5px;
+  }
+}
+
+.ldap-settings {
+  .ldap-buttons {
+    margin-top: 40px;
+  }
+
+}
+
+.ldap-groups-modal {
+  .selectize-dropdown-content {
+    .option {
+      height: 30px;
+      line-height: 26px;
+    }
+  }
+}
+
+//----------signing keys--------------//
+.signing-keys {
+  .default-link {
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+    left: 6px;
+  }
+}
+
+.general-conf {
+  .artifactory-logo {
+    padding-bottom: 10px;
+    background-color: @greenBGDark;
+    font-size: 0;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 30px;
+
+    img {
+      max-height: 50px;
+    }
+  }
+}
+
+//-----------------descriptors-----------------------------//
+body.admin-advanced-config_descriptor, body.admin-advanced-security_descriptor {
+  .content-wrapper {
+    top: 88px;
+  }
+
+  .field-bottom-remark {
+    margin: -5px 0 0 38px;
+
+    i {
+      margin-top: 1px;
+      font-size: 16px;
+    }
+  }
+}
+
+//-----------------permissions-----------------------------//
+.slice {
+  display: inline-block;
+  .permission-tabs {
+    //  border: solid 1px #eee;
+    //  width: 18%;
+    //  padding: 8px;
+
+    display: inline-block;
+    background-color: #999;
+    padding: 0 8px 0 8px;
+    color: #fff;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: top;
+    float: left;
+
+    &.active {
+      background: @greenBGSmall;
+    }
+  }
+
+  .tab-head-first {
+    border: 1px solid #eee;
+    border-bottom: 0px;
+    border-left: 0;
+    height: 30px;
+    width: 30px;
+  }
+  .tab-head {
+    display: inline-block;
+    border: 15px solid transparent;
+    border-left-width: 15px;
+    border-right-width: 0px;
+    z-index: 10;
+    position: relative;
+    border-left-color: #999;
+    vertical-align: top;
+    float: left;
+  }
+}
+
+//
+//.tab-head {
+//  border: 1px solid #eee;
+//  border-bottom: 0;
+//  border-left: 0;
+//  height: 30px;
+//  width: 30px;
+//  position: absolute;
+//  display: inline-block;
+//
+//  transform: rotate(45deg);
+//  &.first {
+//    margin-left: 130px;
+//  }
+//
+//  &.second {
+//    margin-left: 150px;
+//  }
+//  &.third {
+//    margin-left: 180px;
+//  }
+//}
+.text-area-permissions {
+  height: 67px;
+}
+
+//.list-groups-item-permissions {
+//  position: relative;
+//  display: block;
+//  padding: 10px 15px;
+//  margin-bottom: -1px;
+//  background-color: #fff;
+//}
+
+.logo-type-title {
+  color: @grayFontDarker;
+}
+
+.logo-type-selection {
+  color: @grayFontLighter;
+  padding: 0 10px;
+
+  &.active {
+    color: @greenBGDark;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.group-list-wrapper {
+  border: 1px solid @grayBorderLighter;
+  margin: 10px 0 10px;
+
+  .permissions-form & {
+    overflow: auto;
+    height: 276px;
+  }
+}
+
+.group-list {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .group-list-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+
+    &:nth-child(odd) {
+      background-color: @grayGridRow;
+    }
+    &:nth-child(even) {
+      background-color: @white;
+    }
+    .permissions-form &:hover {
+      background-color: @grayGridRowHover;
+    }
+  }
+}
+
+// ------------------------ Wizard ------------------------- //
+.wizard-container {
+  border: 1px solid #ccc;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 15px;
+  bottom: 15px;
+
+  .wizard-content {
+    padding: 20px 30px;
+    position: absolute;
+    top: 38px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+
+    .smart-repo-ind {
+      margin: 80px 0 0 80px;
+    }
+  }
+
+  .wizard-tabs {
+    border-bottom: 1px solid #ccc;
+
+    li {
+      position: relative;
+      display: inline-block;
+      font-size: 20px;
+      line-height: 37px;
+      padding: 0;
+      margin: 0 -3px 0 0;
+      width: 250px;
+      text-align: center;
+      cursor: pointer;
+
+      &.active {
+        background-color: @grayBGLight;
+        color: @greenFontHeader;
+
+        &:after {
+          border-left-color: @grayBGLight;
+        }
+      }
+
+      &:after, &:before {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      &:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-left-color: #fff;
+        border-width: 19px;
+        margin-top: -19px;
+        border-left-width: 8px;
+        margin-left: -1px;
+      }
+      &:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-left-color: #ccc;
+        border-width: 20px;
+        margin-top: -20px;
+        border-left-width: 8px;
+      }
+
+      .license-required {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  .grid-container {
+    margin-top: 0;
+  }
+}
+
+.wizard-pager {
+  display: inline-block;
+  margin-right: 20px;
+
+  a {
+    color: @grayFontGeneral;
+    margin-right: 10px;
+
+    &:hover {
+      color: @greenFontHeader;
+    }
+
+    &[disabled] {
+      pointer-events: none;
+      color: @grayFontLighter;
+      cursor: default;
+    }
+  }
+}
+
+// ------------------------------------------------------ //
+
+.slice {
+  display: inline-block;
+  width: 18%;
+
+}
+
+.slice .head {
+  display: inline-block;
+  border: 20px solid transparent;
+  border-left-width: 8px;
+  border-right-width: 0px;
+  z-index: 10;
+  position: relative;
+  border-left-color: #999;
+  vertical-align: top;
+  float: left;
+
+  &.active {
+    border-left-color: @greenBGDark;
+  }
+}
+
+.slice .body {
+  display: inline-block;
+  background-color: #999;
+  padding: 0 8px 0 8px;
+  color: #fff;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: top;
+  width: 89%;
+  float: left;
+
+  &.active {
+    background: @greenBGDark;
+  }
+}
+
+.slice .tail {
+  display: inline-block;
+  background-color: #999;
+  border: 20px solid transparent;
+  border-left-width: 15px;
+  border-right-width: 0px;
+  border-left-color: #fff;
+  vertical-align: top;
+  float: left;
+  margin-left: -15px;
+
+  &.active {
+    background: @greenBGDark;
+  }
+}
+
+.slice.tail-head {
+  margin-left: -15px;
+}
+
+//**************repository wizard **************//
+.label-type-box {
+}
+
+.type-box {
+  height: 100px;
+  width: 100px;
+  background: #EEEEEE;
+  line-height: 80px;
+  text-align: center;
+  color: @grayPlaceholderLight;
+  cursor: pointer;
+  margin-top: 10px;
+
+  span {
+    display: inline-block;
+  }
+
+  &.typeValidation {
+    border: 1px solid #d7593f;
+  }
+}
+
+.cron-wrapper {
+  width: 400px !important;
+}
+
+.refresh-cron {
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.property-set-advanced {
+  .clear-all-btn {
+    display: none;
+  }
+}
+
+.admin-grid-buttons {
+  margin-right: 10px;
+
+  a {
+    float: left;
+    color: @grayFontGeneral;
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+      color: @greenFontHeader;
+    }
+
+    .grid-button-icon {
+      float: left;
+      font-size: 18px;
+      margin: 1px 8px 0 0;
+    }
+
+    &[disabled] {
+      &, & .grid-button-icon:before {
+        cursor: default;
+        color: @grayFontLighter;
+      }
+    }
+  }
+}
+
+.monospaced {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.system-logs {
+  #textarea {
+    background-color: #fff;
+  }
+
+  .fill-screen {
+    background-color: #b4a;
+    position: absolute;
+    top: 160px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    textarea {
+      height: 100%;
+    }
+  }
+
+  .icon-hourglass {
+    margin-top: 10px;
+  }
+}
+
+.card .row, .modal-body {
+  .form-group-cell, .grid-filter .input-text {
+    @media screen and (min-width: 1900px) {
+      width: 368px !important;
+    }
+    @media screen and (min-width: 1680px) and (max-width: 1900px) {
+      width: 280px !important;
+    }
+    @media screen and (max-width: 1679px) {
+      margin-bottom: 27px;
+    }
+  }
+
+  .form-group {
+    @media screen and (max-width: 1679px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-group-cell {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.radio-select-list {
+  list-style-type: none;
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  input {
+    float: left;
+    margin: 4px 8px 0 0;
+  }
+}
+
+#package-description {
+  min-height: 20px;
+}
+
+.package-type {
+  position: relative;
+  color: @grayFontLighter;
+  background: @grayBGLight;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition: 0.5s all;
+
+  .repotitle {
+    position: absolute;
+    width: 100%;
+    bottom: 7px;
+  }
+
+  span {
+    line-height: 100px;
+  }
+
+  .wizard-content & {
+    margin: 0;
+  }
+
+  .modal-content &:hover {
+    box-shadow: 0 1px 6px 1px rgba(0, 0, 0, 0.17);
+  }
+
+  &.not-clickable {
+    cursor: default;
+  }
+
+  &.license-required::after {
+    top: 2px;
+  }
+}
+
+.repotype.iconrepo {
+  width: 70px;
+  height: 70px;
+  background-position: center center;
+  background-size: auto 75%;
+
+  .package-type & {
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    top: 5px;
+  }
+}
+
+.repository-error {
+  color: #d7593f;
+}
+
+.repo-layout-form {
+  .repo-association {
+    i {
+      margin: 0px 10px;
+    }
+    margin: 0px 15px;
+  }
+}
+
+.grid-container .item.noreplication {
+  border: 1px #eee solid !important;
+  cursor: auto;
+}
+
+.permissions-form {
+  .wizard-container {
+    top: 100px;
+  }
+}
+
+.jf-reveal-input {
+  cursor: pointer;
+}
+
+.text-button {
+  font-size: 16px;
+  color: @greenFontHeader;
+  cursor: pointer;
+  padding: 4px 0;
+
+  span {
+    position: relative;
+    top: 6px;
+    margin-right: 8px;
+    font-size: 24px;
+  }
+
+  &:hover {
+    color: #327535;
+  }
+}
+
+/******************** High Availability ***********************/
+.ha-heartbeat-stale {
+  color: @redError;
+
+  .icon {
+    font-size: 18px;
+    float: left;
+    top: 4px;
+    margin: 2px 5px 0 0;
+  }
+}

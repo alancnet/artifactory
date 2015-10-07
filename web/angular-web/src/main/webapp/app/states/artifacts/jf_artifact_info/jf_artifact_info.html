@@ -1,0 +1,72 @@
+<div ng-if="jfArtifactInfo.currentNode">
+
+    <jf-tabs tabs="jfArtifactInfo.infoTabs"
+             dictionary="jfArtifactInfo.DICTIONARY"
+             tab-width="165"
+             container-margin="35"
+             >
+        <div class="main-view">
+            <jf-tab name="General">
+                <jf-general current-node="jfArtifactInfo.currentNode"></jf-general>
+            </jf-tab>
+            <jf-tab name="EffectivePermission">
+                <jf-effective-permissions current-node="jfArtifactInfo.currentNode"></jf-effective-permissions>
+            </jf-tab>
+            <jf-tab name="Builds">
+                <jf-builds current-node="jfArtifactInfo.currentNode"></jf-builds>
+            </jf-tab>
+            <jf-tab name="Watch" feature="watchers">
+                <jf-watchers current-node="jfArtifactInfo.currentNode"></jf-watchers>
+            </jf-tab>
+            <jf-tab name="BlackDuck">
+                <jf-governance current-node="jfArtifactInfo.currentNode"></jf-governance>
+            </jf-tab>
+            <jf-tab name="Properties">
+                <jf-properties current-node="jfArtifactInfo.currentNode"></jf-properties>
+            </jf-tab>
+            <jf-tab name="ViewSource">
+                <jf-view-source current-node="jfArtifactInfo.currentNode"></jf-view-source>
+            </jf-tab>
+            <jf-tab name="PomView">
+                <jf-pom-view current-node="jfArtifactInfo.currentNode"></jf-pom-view>
+            </jf-tab>
+            <jf-tab name="IVYXml">
+                <jf-ivy-view current-node="jfArtifactInfo.currentNode"></jf-ivy-view>
+            </jf-tab>
+            <jf-tab name="GeneralXml">
+                <jf-xml-view current-node="jfArtifactInfo.currentNode"></jf-xml-view>
+            </jf-tab>
+            <jf-tab name="NuPkgInfo">
+                <jf-nuget current-node="jfArtifactInfo.currentNode"></jf-nuget>
+            </jf-tab>
+            <jf-tab name="PyPIInfo">
+                <jf-py-pi current-node="jfArtifactInfo.currentNode"></jf-py-pi>
+            </jf-tab>
+            <jf-tab name="BowerInfo">
+                <jf-bower current-node="jfArtifactInfo.currentNode"></jf-bower>
+            </jf-tab>
+            <jf-tab name="DockerInfo">
+                <jf-docker current-node="jfArtifactInfo.currentNode"></jf-docker>
+            </jf-tab>
+            <jf-tab name="DockerAncestryInfo">
+                <jf-docker-ancestry current-node="jfArtifactInfo.currentNode"></jf-docker-ancestry>
+            </jf-tab>
+            <jf-tab name="DockerV2Info">
+                <jf-docker-v2 current-node="jfArtifactInfo.currentNode"></jf-docker-v2>
+            </jf-tab>
+            <jf-tab name="RubyGems">
+                <jf-ruby-gems current-node="jfArtifactInfo.currentNode"></jf-ruby-gems>
+            </jf-tab>
+            <jf-tab name="NpmInfo">
+                <jf-npm-info current-node="jfArtifactInfo.currentNode"></jf-npm-info>
+            </jf-tab>
+            <jf-tab name="Rpm">
+                <jf-rpm current-node="jfArtifactInfo.currentNode"></jf-rpm>
+            </jf-tab>
+            <jf-tab name="StashInfo">
+                <jf-stash-info current-node="jfArtifactInfo.currentNode"
+                               allow-export="jfArtifactInfo.user.currentUser.isAdmin()"></jf-stash-info>
+            </jf-tab>
+        </div>
+    </jf-tabs>
+</div>

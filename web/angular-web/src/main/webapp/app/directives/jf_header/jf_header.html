@@ -1,0 +1,35 @@
+<nav id="jf-header">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="home">
+            <img class="logo-picture" ng-src="{{jfHeader.logoUrl}}" alt="Artifactory"/>
+        </a>
+    </div>
+
+    <div class="navbar-right">
+        <div class="pull-right header-section header-help dropdown" dropdown ng-disabled="jfHeader.helpLinks.length == 0" ng-if="jfHeader.helpLinksEnabled">
+            <a class="dropdown-toggle help-menu" dropdown-toggle ng-disabled="jfHeader.helpLinks.length == 0">Help</a>
+            <ul class="dropdown-menu dropdown-menu-right text-left">
+                <li ng-repeat="helpLink in jfHeader.helpLinks | orderBy:'priority'">
+                    <a href="{{helpLink.link}}"
+                       target="_blank">{{helpLink.title}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="pull-right header-section">
+            <div ng-if="!jfHeader.currentUser.isGuest()">Welcome,
+                <a href ui-sref="user_profile" class="navbar-link username-header">{{jfHeader.currentUser.name}}</a>
+                <a href=""
+                   class="navbar-link"
+                   ng-click="jfHeader.logout()">
+                    <span class="log-out">( Log Out )</span>
+                </a>
+            </div>
+            <div ng-if="jfHeader.currentUser.isGuest()">
+                <a href ui-sref="login">Log In</a>
+            </div>
+        </div>
+
+        <jf-header-search ng-if="!jfHeader.hideSearch"></jf-header-search>
+        <span class="pull-left navbar-separator"></span>
+    </div>
+</nav>

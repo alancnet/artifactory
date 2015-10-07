@@ -1,0 +1,386 @@
+<div class="modal-header deploy">
+    <button type="button"
+            class="close"
+            data-dismiss="close"
+            aria-label="Close"
+            ng-click="close()"><span
+            aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body clearfix set-me-up-modal">
+    <div class="form-group">
+        <div class="form-group-cell">
+            <label>Tool</label>
+            <ui-select ng-model="selection.repoType" ng-change="filterByType()">
+                <ui-select-match placeholder="Select Package Type...">
+                    <i ng-if="$select.selected.icon" class="select-repo-icon icon icon-{{$select.selected.icon}}"></i>{{$select.selected.text}}
+                </ui-select-match>
+                <ui-select-choices repeat="property in repoTypes | filter: $select.search track by $index">
+                    <i ng-if="property.icon" class="select-repo-icon icon icon-{{property.icon}}"></i>
+                    <span ng-bind-html="property.text | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group-cell form-button form-link" ng-if="showSettings">
+            <a href="" ng-if="!generateSettings" ng-click="getGeneratorRepos(showSettings)">Generate {{showSettings}} Settings</a>
+            <a href="" ng-if="generateSettings" ng-click="filterByType()">Back to Set Me Up</a>
+        </div>
+    </div>
+
+    <!-- Maven Build Settings -->
+    <div ng-if="generate.maven">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label>Releases</label>
+                <jf-help-tooltip>The chosen releases repository.</jf-help-tooltip>
+                <ui-select ng-model="selection.maven.releases">
+                    <ui-select-match placeholder="Releases">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.maven.releases">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Snapshots</label>
+                <jf-help-tooltip>The chosen snapshots repository.</jf-help-tooltip>
+                <ui-select ng-model="selection.maven.snapshots">
+                    <ui-select-match placeholder="Snapshots">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.maven.snapshots">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label>Plugin Releases</label>
+                <jf-help-tooltip>The chosen plugins releases repository.</jf-help-tooltip>
+                <ui-select ng-model="selection.maven.pluginReleases">
+                    <ui-select-match placeholder="Plugin Releases">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.maven.pluginReleases">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Plugin Snapshots</label>
+                <jf-help-tooltip>The chosen plugins snapshots repository.</jf-help-tooltip>
+                <ui-select ng-model="selection.maven.pluginSnapshots">
+                    <ui-select-match placeholder="Plugin Snapshots">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.maven.pluginSnapshots">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label><input type="checkbox" ng-model="selection.maven.mirror" /> Mirror Any</label>
+                <jf-help-tooltip>Check if you want to mirror a repository.</jf-help-tooltip>
+                <ui-select ng-model="selection.maven.mirrorAny" ng-disabled="!selection.maven.mirror">
+                    <ui-select-match placeholder="Plugin Releases">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.maven.anyMirror">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gradle Build Settings -->
+    <div ng-if="generate.gradle">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <div class="generate-title-label">Plugin Resolver</div>
+                <label>Repository Key</label>
+                <jf-help-tooltip>Repository to use for resolution.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.pluginResolver">
+                    <ui-select-match placeholder="Select Repository Key">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.pluginResolver">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="form-group-cell">
+                <div class="generate-title-label">Libs Resolver</div>
+                <label>Repository Key</label>
+                <jf-help-tooltip>Repository to use for resolution.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.libsResolver">
+                    <ui-select-match placeholder="Select Repository Key">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.libsResolver">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="form-group-cell">
+                <div class="generate-title-label">Libs Publisher</div>
+                <label>Repository Key</label>
+                <jf-help-tooltip>Repository to use for resolution.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.libsPublisher">
+                    <ui-select-match placeholder="Select Repository Key">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.libsPublisher">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <div>
+                    <jf-checkbox text="Use Maven">
+                        <input type="checkbox" ng-model="selection.gradle.pluginUseMaven" ng-change="checkLayoutSettings('plugin','maven')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Maven pattern.</jf-help-tooltip>
+                </div>
+                <div>
+                    <jf-checkbox text="Use Ivy">
+                        <input type="checkbox" ng-model="selection.gradle.pluginUseIvy" ng-change="checkLayoutSettings('plugin','ivy')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Ivy pattern.</jf-help-tooltip>
+                </div>
+            </div>
+            <div class="form-group-cell">
+                <div>
+                    <jf-checkbox text="Use Maven">
+                        <input type="checkbox" ng-model="selection.gradle.libsUseMaven" ng-change="checkLayoutSettings('libs','maven')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Maven pattern.</jf-help-tooltip>
+                </div>
+                <div>
+                    <jf-checkbox text="Use Ivy">
+                        <input type="checkbox" ng-model="selection.gradle.libsUseIvy" ng-change="checkLayoutSettings('libs','ivy')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Ivy pattern.</jf-help-tooltip>
+                </div>
+            </div>
+            <div class="form-group-cell">
+                <div>
+                    <jf-checkbox text="Use Maven">
+                        <input type="checkbox" ng-model="selection.gradle.publishUseMaven" ng-change="checkLayoutSettings('publish','maven')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Maven pattern.</jf-help-tooltip>
+                </div>
+                <div>
+                    <jf-checkbox text="Use Ivy">
+                        <input type="checkbox" ng-model="selection.gradle.publishUseIvy" ng-change="checkLayoutSettings('publish','ivy')" />
+                    </jf-checkbox>
+                    <jf-help-tooltip>Mark to use Ivy pattern.</jf-help-tooltip>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label>Repository Layout</label>
+                <jf-help-tooltip>Repository layout to build the artifact and Maven/Ivy patterns from.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.pluginLayout" ng-disabled="selection.gradle.pluginUseMaven && !selection.gradle.pluginUseIvy">
+                    <ui-select-match placeholder="Select Repository Layout">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.layouts">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Repository Layout</label>
+                <jf-help-tooltip>Repository layout to build the artifact and Maven/Ivy patterns from.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.libsLayout" ng-disabled="selection.gradle.libsUseMaven && !selection.gradle.libsUseIvy">
+                    <ui-select-match placeholder="Select Repository Layout">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.layouts">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Repository Layout</label>
+                <jf-help-tooltip>Repository layout to build the artifact and Maven/Ivy patterns from.</jf-help-tooltip>
+                <ui-select ng-model="selection.gradle.publishLayout" ng-disabled="selection.gradle.publishUseMaven && !selection.gradle.publishUseIvy">
+                    <ui-select-match placeholder="Select Repository Layout">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.gradle.layouts">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ivy Build Settings -->
+    <div ng-if="generate.ivy">
+        <div class="form-group">
+            <div class="form-group-cell">
+                <label>Libs Repository</label>
+                <jf-help-tooltip>Repository to use for resolution.</jf-help-tooltip>
+                <ui-select ng-model="selection.ivy.libsRepository">
+                    <ui-select-match placeholder="Plugin Releases">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.ivy.libsRepository">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Libs Repository Layout</label>
+                <jf-help-tooltip>Repository Layout to build the artifact and Ivy patterns from.</jf-help-tooltip>
+                <ui-select ng-model="selection.ivy.libsRepositoryLayout">
+                    <ui-select-match placeholder="Plugin Releases">
+                        {{$select.selected}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="property in settings.ivy.libsRepositoryLayout">
+                        <div ng-bind-html="property"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group-cell">
+                <label>Libs Resolver Name</label>
+                <jf-help-tooltip>An optional name for the generated resolver.</jf-help-tooltip>
+                <input type="text"
+                       ng-model="selection.ivy.libsResolverName"
+                       class="input-text"
+                       id="user" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-checkbox text="Use Ibiblio Resolver">
+                    <input type="checkbox" ng-model="selection.ivy.ibiblio" />
+                </jf-checkbox>
+                <jf-help-tooltip>Check if the resolver should use Ivy's ibiblio.</jf-help-tooltip>
+            </div>
+            <div class="form-group-cell">
+                <jf-checkbox text="Maven 2 Compatible">
+                    <input type="checkbox" ng-model="selection.ivy.maven2" ng-checked="selection.ivy.maven2 || selection.ivy.ibiblio" ng-disabled="selection.ivy.ibiblio" />
+                </jf-checkbox>
+                <jf-help-tooltip>Check if the resolver should use a Maven 2 compatible pattern.</jf-help-tooltip>
+            </div>
+        </div>
+    </div>
+
+    <div class="set-me-up-actions" ng-if="generateSettings">
+        <button class="btn btn-secondary" ng-click="generateBuildSettings()">Generate Settings</button>
+        <div class="pull-right">
+            <form ng-if="generate.maven && snippet" class="inline" method="post" action="../ui/setMeUp/downloadBuildMaven?downloadScript=true">
+                <input name="data" type="hidden" ng-value="getMavenProps()">
+                <input type="submit" class="btn btn-secondary" value="Download Snippet" />
+            </form>
+            <form ng-if="generate.gradle && snippet" class="inline" method="post" action="../ui/setMeUp/downloadBuildGradle?downloadScript=true">
+                <input name="data" type="hidden" ng-value="getGradleProps()">
+                <input type="submit" class="btn btn-secondary" value="Download Snippet" />
+            </form>
+            <form ng-if="generate.gradle && snippet" class="inline" method="post" action="../ui/setMeUp/downloadBuildGradle?gradleProps=true">
+                <input name="data" type="hidden" ng-value="getGradleProps()">
+                <input type="submit" class="btn btn-secondary" value="Download gradle.properties" />
+            </form>
+            <form ng-if="generate.ivy && snippet" class="inline" method="post" action="../ui/setMeUp/downloadBuildIvy?downloadScript=true">
+                <input name="data" type="hidden" ng-value="getIvyProps()">
+                <input type="submit" class="btn btn-secondary" value="Download Snippet" />
+            </form>
+        </div>
+    </div>
+
+    <!-- Repo selection -->
+    <div class="form-group deploy" ng-if="(selection.repoType.value !== 'ivy' && selection.repoType.value !== 'gradle')
+    && (!generateSettings || !showSettings)">
+        <div class="form-group-cell">
+            <label>Repository</label>
+            <ui-select ng-model="selection.repo" ng-change="resolveSnippet()"
+                       ng-disabled="shownRepos.length == 0">
+                <ui-select-match placeholder="Select Repository">
+                    {{$select.selected.text}}
+                </ui-select-match>
+                <ui-select-choices repeat="property in shownRepos | filter: $select.search track by $index">
+                    <div ng-bind-html="property.text | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="alert alert-warning" ng-if="shownRepos.length == 0">
+            No repositories match the selected tool
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- Build Snippet -->
+    <div ng-if="shownRepos.length > 0">
+        <div class="settings-view" ng-if="snippet">
+            <div class="clearfix"></div>
+            <jf-clip-copy text-to-copy="snippet"
+                          class="code-mirror-copy"
+                          object-name="Snippet"></jf-clip-copy>
+            <jf-code-mirror mime-type="text/xml"
+                            model="snippet">
+            </jf-code-mirror>
+        </div>
+
+        <!-- General Snippet -->
+        <div class="settings-view" ng-if="generalSnippets && generalSnippets.length > 0 && !settingPage">
+            <label class="snippet">General</label>
+            <div ng-repeat="snip in generalSnippets">
+                <p ng-if="snip.title" ng-bind-html="snip.title"><p>
+                <p ng-if="snip.before" ng-bind-html="snip.before"></p>
+                <jf-clip-copy ng-if="snip.snippet"
+                              text-to-copy="snip.snippet"
+                              class="code-mirror-copy"
+                              object-name="Snippet"></jf-clip-copy>
+                <jf-code-mirror ng-if="snip.snippet" mime-type="text/xml"
+                                model="snip.snippet">
+                </jf-code-mirror>
+                <p ng-if="snip.after" ng-bind-html="snip.after"></p>
+            </div>
+        </div>
+
+        <!-- Deploy Snippet -->
+        <div class="settings-view" ng-if="deploySnippets && deploySnippets.length > 0 && !settingPage">
+            <label class="snippet">Deploy</label>
+            <div ng-repeat="snip in deploySnippets">
+                <p ng-if="snip.before" ng-bind-html="snip.before"></p>
+                <jf-clip-copy text-to-copy="snip.snippet"
+                              class="code-mirror-copy"
+                              object-name="Snippet"></jf-clip-copy>
+                <jf-code-mirror mime-type="text/xml"
+                                model="snip.snippet">
+                </jf-code-mirror>
+                <p ng-if="snip.after" ng-bind-html="snip.after"></p>
+            </div>
+        </div>
+
+        <!-- Resolve Snippet -->
+        <div class="settings-view" ng-if="readSnippets && readSnippets.length > 0 && !settingPage">
+            <label class="snippet">Resolve</label>
+            <div ng-repeat="snip in readSnippets">
+                <p ng-if="snip.before" ng-bind-html="snip.before"></p>
+                <jf-clip-copy text-to-copy="snip.snippet"
+                              class="code-mirror-copy"
+                              object-name="Snippet"></jf-clip-copy>
+                <jf-code-mirror mime-type="text/xml"
+                                model="snip.snippet">
+                </jf-code-mirror>
+                <p ng-if="snip.after" ng-bind-html="snip.after"></p>
+            </div>
+        </div>
+    </div>
+</div>

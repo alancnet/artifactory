@@ -1,0 +1,67 @@
+<div class="center-login">
+    <form name="Login.loginForm" class="jumbotron login-form" ng-submit="Login.login()" novalidate id="login-form">
+        <a ng-if="Login.canExit" class="pull-right close-button" ui-sref="home">&#10005;</a>
+        <div class="login-inner">
+            <h3>Welcome to JFrog Artifactory!</h3>
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <jf-field validations="users" autofocus="true">
+                        <input name="user"
+                               type="text"
+                               ng-model="Login.user.user"
+                               class="input-text"
+                               placeholder="Username*"
+                               ng-change="Login.userPasswordChanged()"
+                               required
+                               id="user">
+                    </jf-field>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <jf-field validations="users">
+                        <input type="password"
+                               name="password"
+                               ng-model="Login.user.password"
+                               class="input-text"
+                               placeholder="Password*"
+                               ng-change="Login.userPasswordChanged()"
+                               id="password"
+                               required>
+                    </jf-field>
+                </div>
+            </div>
+            <div class="form-group form-checkbox">
+                <div class="form-group-cell">
+                    <jf-checkbox text="Remember me">
+                        <input type="checkbox" id="remember-me" ng-model="Login.rememberMe">
+                    </jf-checkbox>
+                </div>
+            </div>
+            <div class="form-group form-checkbox" ng-if="Login.oauthProviderLink || Login.ssoProviderLink">
+                <div class="form-group-cell" ng-if="Login.oauthProviderLink">
+                    <a href
+                       ng-mousedown="Login.oauthLogin()"
+                       target="_blank">OAuth2 Login</a>
+                </div>
+                <div class="form-group-cell" ng-if="Login.ssoProviderLink">
+                    <a href
+                       ng-click="Login.ssoLogin()"
+                       jf-clear-errors
+                       target="_blank"
+                       id="sso-login">SSO Login</a>
+                </div>
+            </div>
+            <div class="jf-form-errors" ng-if="Login.errorMessage" ng-bind="Login.errorMessage"></div>
+        </div>
+
+        <div class="login-button-bar">
+            <div class="pull-left margin-top-10">
+                <a href ng-click="Login.gotoForgotPwd()" jf-clear-errors ng-if="Login.canResetPassword" id="forgot-password">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right" ng-disabled="!Login.loginForm.$valid" id="login">
+                Log In
+            </button>
+        </div>
+    </form>
+</div>

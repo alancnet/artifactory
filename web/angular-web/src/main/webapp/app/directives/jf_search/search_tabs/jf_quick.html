@@ -1,0 +1,24 @@
+<div class="search-wrapper">
+    <form novalidate>
+        <div class="form-group no-margin-bottom">
+            <div class="form-group-cell">
+                <jf-field  autofocus="true">
+                    <input type="text"
+                           class="input-text"
+                           id="quick"
+                           name="query"
+                           placeholder="Enter Value *"
+                           ng-model="jfQuick.query.query"/>
+                </jf-field>
+                <div class="field-bottom-remark"><i class="icon icon-info"></i>Search is case sensitive &amp; supports *, ?</div>
+            </div>
+            <div class="form-group-cell">
+                <button type="submit"
+                        class="btn btn-primary"
+                        ng-disabled="!jfQuick.query.query"
+                        ng-click="jfQuick.search()">Search
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

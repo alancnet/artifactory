@@ -1,0 +1,103 @@
+<div class="push-to-bintray">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="cancel()"><span
+                aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Push To Bintray</h3>
+    </div>
+    <form name="pushToBintrayForm">
+        <div class="modal-body">
+            <div class="bintray-info-container">
+                <span ng-if="pushType==='build'">
+                    Distribute this build's artifacts to users by uploading them to
+                </span>
+                <span ng-if="pushType==='artifact'">
+                    Distribute this artifact to users by uploading it to
+                </span>
+                <a href="https://bintray.com" target="blank"> Bintray</a><br>
+                <span class="bintray-info">Bintray is a public online service through which you can share your release binaries with the world. <br>Note that once artifacts are pushed, you need to publish them in Bintray in order to make them world-visible.</span>
+            </div>
+
+
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <label>Bintray Repository*</label>
+                    <selectize config="selectizeConfig"
+                               options="data.bintrayRepos"
+                               ng-change="onRepoSelect()"
+                               ng-disabled="selection.useSpecificProperties"
+                               ng-model="selection.bintrayRepo">
+                    </selectize>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <label>Bintray Package Name*</label>
+                    <jf-help-tooltip html="tooltip.bintrayPackageName"></jf-help-tooltip>
+                    <selectize config="selectizeConfig"
+                               options="data.bintrayPackages"
+                               ng-change="onPackageSelect()"
+                               ng-disabled="selection.useSpecificProperties"
+                               ng-model="selection.bintrayPackageName">
+                    </selectize>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group-cell">
+                    <label>Bintray Package Version*</label>
+                    <jf-help-tooltip html="tooltip.bintrayPackageVersion"></jf-help-tooltip>
+                    <selectize config="selectizeConfig"
+                               options="data.bintrayPackageVersions"
+                               ng-disabled="selection.useSpecificProperties"
+                               ng-model="selection.bintrayPackageVersion">
+                    </selectize>
+                </div>
+            </div>
+            <div class="form-group" ng-if="pushType==='artifact'">
+                <div class="form-group-cell">
+                    <label>File Path*</label>
+                    <jf-field validations="common">
+                        <input id="filePath"
+                               type="text"
+                               ng-model="selection.filePath"
+                               name="filePath"
+                               class="input-text">
+                    </jf-field>
+                </div>
+            </div>
+            <div ng-if="pushType==='build'">
+                <div class="form-group form-checkbox">
+                    <div class="form-group-cell">
+                        <jf-checkbox text="Use Bintray-Specific Artifact Properties">
+                            <input id="useSpecificProperties"
+                                   type="checkbox"
+                                   ng-model="selection.useSpecificProperties"
+                                   name="useSpecificProperties">
+                        </jf-checkbox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group-cell">
+                        <jf-checkbox text="Send Email Notification">
+                            <input id="sendEmail"
+                                   type="checkbox"
+                                   ng-model="selection.sendEmail"
+                                   name="sendEmail">
+                        </jf-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary"
+                    ng-disabled="(!selection.bintrayRepo || !selection.bintrayPackageName || !selection.bintrayPackageVersion || (pushType==='artifact' && !selection.filePath)) && !selection.useSpecificProperties"
+                    ng-click="push()">Push
+            </button>
+            <button ng-if="pushType==='build'"
+                    ng-disabled="(!selection.bintrayRepo || !selection.bintrayPackageName || !selection.bintrayPackageVersion) && !selection.useSpecificProperties"
+                    class="btn btn-primary"
+                    ng-click="backgroundPush()">Background Push
+            </button>
+        </div>
+    </form>
+</div>

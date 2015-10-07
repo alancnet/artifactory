@@ -1,0 +1,25 @@
+<div class="repository-type-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="close" aria-label="Close" ng-click="$close()"
+                id="repository-select-package-type-close"><span
+                aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Select Package Type</h3>
+    </div>
+    <div class="modal-body">
+        <ul class="list-unstyled">
+            <li ng-repeat="type in packageTypes"
+                class="inline-block package-type"
+                jf-disable-feature="{{ type.value }}"
+                ng-click="selectRepoType(type)"
+                id="repository-select-package-type-{{ type.value }}"
+                ng-mouseover="RepositoryForm.currentDesc = type.description">
+                <div class="repotype iconrepo iconrepo-{{type.value}}"></div>
+                <div class="repotitle">{{ type.text }}</div>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <div id="package-description" class="text-left">{{RepositoryForm.currentDesc}}</div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="builds-tab">
+    <div class="row builds-tab-tabs-row">
+        <span class="build-tab-title">View:</span>
+        <a class="builds-mode"
+           href=""
+           ng-click="jfBuilds.setMode('ProducedBy')"
+           ng-class="{active:jfBuilds.isSelected('ProducedBy')}">Produced By <span ng-if="jfBuilds.producedByGridOptions.data.length">({{jfBuilds.builds.producedBy.length}})</span></a>
+        <a class="builds-mode"
+           href=""
+           ng-click="jfBuilds.setMode('UsedBy')"
+           ng-class="{active:jfBuilds.isSelected('UsedBy')}">Used By <span ng-if="jfBuilds.usedByGridOptions.data.length">({{jfBuilds.builds.usedBy.length}})</span></a>
+    </div>
+
+    <div ng-if="jfBuilds.isSelected('ProducedBy')">
+        <h5>Produced By</h5>
+        <jf-grid grid-options="jfBuilds.producedByGridOptions"
+                 filter-field="name"
+                 filter-field2="number"
+                 filter-on-change="true">
+        </jf-grid>
+    </div>
+
+    <div ng-if="jfBuilds.isSelected('UsedBy')">
+        <h5>Used By</h5>
+        <jf-grid grid-options="jfBuilds.usedByGridOptions"
+                 filter-field="name"
+                 filter-field2="number"
+                 filter-on-change="true">
+        </jf-grid>
+    </div>
+</div>

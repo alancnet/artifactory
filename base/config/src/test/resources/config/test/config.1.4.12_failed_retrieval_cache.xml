@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://artifactory.jfrog.org/xsd/1.4.12"
+        xsi:schemaLocation="http://artifactory.jfrog.org/xsd/1.4.12
+        http://www.jfrog.org/xsd/artifactory-v1_4_12.xsd">
+
+    <security>
+        <anonAccessEnabled>true</anonAccessEnabled>
+    </security>
+
+    <localRepositories>
+        <localRepository>
+            <key>libs-release-local</key>
+            <description>Local repository for in-house libraries</description>
+            <repoLayoutRef>maven-2-default</repoLayoutRef>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+        </localRepository>
+    </localRepositories>
+
+    <remoteRepositories>
+        <remoteRepository>
+            <key>repo1</key>
+            <description>Central Maven 2 repository</description>
+            <repoLayoutRef>maven-2-default</repoLayoutRef>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <url>http://repo1.maven.org/maven2</url>
+        </remoteRepository>
+        <remoteRepository>
+            <key>java.net.m2</key>
+            <description>java.net Maven2 Format</description>
+            <excludesPattern>commons-*,org/apache/**</excludesPattern>
+            <repoLayoutRef>maven-2-default</repoLayoutRef>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>true</handleSnapshots>
+            <url>http://download.java.net/maven/2</url>
+            <failedRetrievalCachePeriodSecs>45</failedRetrievalCachePeriodSecs>
+        </remoteRepository>
+    </remoteRepositories>
+
+    <repoLayouts>
+        <repoLayout>
+            <name>maven-2-default</name>
+            <artifactPathPattern>
+                [orgPath]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]
+            </artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>
+                [orgPath]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).pom
+            </descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>SNAPSHOT</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>SNAPSHOT|(?:(?:[0-9]{8}.[0-9]{6})-(?:[0-9]+))</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>ivy-default</name>
+            <artifactPathPattern>
+                [org]/[module]/[baseRev](-[folderItegRev])/[type]s/[module](-[classifier])-[baseRev](-[fileItegRev]).[ext]
+            </artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>
+                [org]/[module]/[baseRev](-[folderItegRev])/[type]s/ivy-[baseRev](-[fileItegRev]).xml
+            </descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>\d{14}</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>\d{14}</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>gradle-default</name>
+            <artifactPathPattern>
+                [org]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]
+            </artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[org]/[module]/ivy-[baseRev](-[fileItegRev]).xml</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>\d{14}</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>\d{14}</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>maven-1-default</name>
+            <artifactPathPattern>[org]/[type]s/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]
+            </artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[org]/[type]s/[module]-[baseRev](-[fileItegRev]).pom</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>.+</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>.+</fileIntegrationRevisionRegExp>
+        </repoLayout>
+    </repoLayouts>
+    <gcConfig>
+        <cronExp>0 0 /4 * * ?</cronExp>
+    </gcConfig>
+</config>

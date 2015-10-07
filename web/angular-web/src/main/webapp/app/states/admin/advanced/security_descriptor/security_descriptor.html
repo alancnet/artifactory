@@ -1,0 +1,36 @@
+<div class="content-layout-container">
+    <h1>Security Descriptor <jf-clip-copy text-to-copy="SecurityDescriptorController.securityDescriptor"
+                                          object-name="XML"></jf-clip-copy>
+    </h1>
+    <div class="field-bottom-remark">
+        <i class="icon icon-notif-warning"></i>Warning: Updating the configuration through direct manipulation of the XML descriptors can be harmful.
+    </div>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <jf-code-mirror
+                        ng-if="SecurityDescriptorController.securityDescriptor"
+                        mime-type="xml"
+                        allow-edit="true"
+                        height="flexible"
+                        autofocus="true"
+                        model="SecurityDescriptorController.securityDescriptor"
+                        api-access="SecurityDescriptorController.apiAccess">
+                </jf-code-mirror>
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="pull-right">
+                <button class="btn btn-default" type="button"
+                        ng-click="SecurityDescriptorController.cancel()">Reset
+                </button>
+                <button class="btn btn-primary"
+                        ng-click="SecurityDescriptorController.save(SecurityDescriptorController.securityDescriptor)">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

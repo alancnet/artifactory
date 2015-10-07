@@ -1,0 +1,42 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<wicket:extend>
+    <div>
+        <div wicket:id="licenseDetails" class="license-border">
+            <div class="labeled-value">
+                <span class="label">Licensed to: <span wicket:id="subject" class="labeled-value"></span></span>
+            </div>
+            <div class="labeled-value">
+                <span class="label">Valid Through: <span wicket:id="expiry" class="labeled-value"></span></span>
+            </div>
+            <div class="labeled-value">
+                <span class="label">License Type: <span wicket:id="type" class="labeled-value"></span></span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="field field-sep" style="padding-left: 10px; padding-bottom: 10px;">
+            <span wicket:id="licenseKeyLabel" class="label-gray"></span>
+            <span wicket:id="licenseKey.help"></span>
+
+            <div class="value">
+                <textarea wicket:id="licenseKey" class="license-key-text-area" cols="80" rows="11"></textarea>
+            </div>
+        </div>
+    </div>
+</wicket:extend>

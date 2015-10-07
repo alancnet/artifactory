@@ -1,0 +1,136 @@
+<wicket:extend>
+    <form wicket:id="form" class="ldap">
+        <div wicket:id="border">
+            <div class="field float-right">
+                <div class="value">
+                    <input wicket:id="enabled" type="checkbox"/>
+                </div>
+            </div>
+
+            <div class="field required">
+                <label>Settings Name</label>
+                <span wicket:id="key.help"></span>
+
+                <div class="value">
+                    <input wicket:id="key" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field required field-100 field-sep">
+                <label>LDAP URL</label>
+                <span wicket:id="ldapUrl.help"></span>
+
+                <div class="value">
+                    <input wicket:id="ldapUrl" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+
+        <div wicket:id="borderDn" class="ldap-dn-fields">
+            <div class="field-row">
+                <div class="field">
+                    <label>User DN Pattern</label>
+                    <span wicket:id="userDnPattern.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="userDnPattern" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="checkbox-field user-auto-create-checkbox">
+                    <div class="value">
+                        <input wicket:id="autoCreateUser" type="checkbox"/>
+                        <span wicket:id="autoCreateUser.help"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Email Attribute</label>
+                    <span wicket:id="emailAttribute.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="emailAttribute" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Search Filter</label>
+                    <span wicket:id="searchFilter.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="searchFilter" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Search Base</label>
+                    <span wicket:id="searchBase.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="searchBase" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Manager DN</label>
+                    <span wicket:id="managerDn.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="managerDn" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Manager Password</label>
+                    <span wicket:id="managerPassword.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="managerPassword" type="password" class="text" autocomplete="off"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="field clear field-sep">
+                <div class="value">
+                    <input wicket:id="searchSubTree" type="checkbox"/>
+                    <span wicket:id="searchSubTree.help"></span>
+                </div>
+            </div>
+        </div>
+
+        <div wicket:id="borderTest" class="ldap-test-fields small-buttons">
+            <div class="field float-left">
+                <label>Test Username</label>
+                <span wicket:id="testUsername.help"></span>
+
+                <div class="value">
+                    <input wicket:id="testUsername" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field password-field">
+                <label>Test Password</label>
+                <span wicket:id="testPassword.help"></span>
+
+                <div class="value">
+                    <input wicket:id="testPassword" type="password" class="text" autocomplete="off"/>
+                </div>
+            </div>
+
+            <a wicket:id="testLdap"></a>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="submit" type="submit"/>
+            <button wicket:id="cancel" type="button"/>
+        </div>
+
+    </form>
+</wicket:extend>

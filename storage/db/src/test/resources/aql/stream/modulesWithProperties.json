@@ -1,0 +1,38 @@
+
+{
+  "results" : [ {
+    "module.name" : "ba:moda1",
+    "module.properties" : [ {
+      "module.property.key" : "start",
+      "module.property.value" : "0"
+    }, {
+      "module.property.key" : "status",
+      "module.property.value" : "bad"
+    } ]
+  },{
+    "module.name" : "bb:modb1",
+    "module.properties" : [ {
+      "module.property.key" : "start",
+      "module.property.value" : "1"
+    }, {
+      "module.property.key" : "status",
+      "module.property.value" : "not-too-bad"
+    } ]
+  },{
+    "module.name" : "bb:modb2"
+  },{
+    "module.name" : "ba:moda1",
+    "module.properties" : [ {
+      "module.property.key" : "start",
+      "module.property.value" : "4"
+    }, {
+      "module.property.key" : "status",
+      "module.property.value" : "good"
+    } ]
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 4,
+    "total" : 4
+  }
+}

@@ -1,0 +1,26 @@
+<wicket:extend>
+    <form wicket:id="loadForm">
+        <div wicket:id="loadBorder">
+            <div class="field url-field">
+                <label>URL</label>
+                <span wicket:id="urlHelp"></span>
+
+                <div class="value">
+                    <input wicket:id="url" type="text" class="text"/>
+                    <button wicket:id="load" type="submit"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form wicket:id="listForm">
+        <div wicket:id="listBorder">
+            <table wicket:id="repoTable"></table>
+        </div>
+    </form>
+
+    <div class="buttons">
+        <button type="submit" wicket:id="import"></button>
+        <button type="button" wicket:id="cancel"></button>
+    </div>
+</wicket:extend>

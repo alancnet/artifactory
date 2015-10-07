@@ -1,0 +1,37 @@
+<div class="bower">
+    <jf-panel jf-panel-heading="Package Info"
+              ng-if="jfBower.bowerData.bowerPkgInfo">
+
+        <div ng-repeat="(key,value) in jfBower.bowerData.bowerPkgInfo"
+             class="artifact-file-icon"
+             ng-if="key == 'iconUrl'">
+            <img ng-src="{{value}}" alt="logo"/>
+        </div>
+
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfBower.bowerData.bowerPkgInfo" ng-if="key != 'iconUrl'">
+                <td>{{jfBower.DICTIONARY[key]}}:</td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+    </jf-panel>
+    <jf-panel jf-panel-heading="Dependencies"
+              ng-if="jfBower.bowerData.bowerDependencies">
+        <jf-grid grid-options="jfBower.gridDependenciesOptions"
+                no-pagination="true"></jf-grid>
+    </jf-panel>
+    <jf-panel jf-panel-heading="Main Files"
+              ng-if="jfBower.bowerData.mainFiles.length">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="mainFile in jfBower.bowerData.mainFiles">{{mainFile}}</li>
+        </ul>
+    </jf-panel>
+    <jf-panel jf-panel-heading="Ignored Files"
+              ng-if="jfBower.bowerData.ignoredFiles.length">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="ignoredFile in jfBower.bowerData.ignoredFiles">
+                {{ignoredFile}}
+            </li>
+        </ul>
+    </jf-panel>
+</div>

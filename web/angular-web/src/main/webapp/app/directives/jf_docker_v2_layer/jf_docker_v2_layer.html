@@ -1,0 +1,20 @@
+<div class="docker-v2-layer-container"
+     ng-class="{'first-layer': jfDockerV2Layer.isUpper}">
+
+    <div class="hider" ng-if="jfDockerV2Layer.isBase || jfDockerV2Layer.isUpper"></div>
+    <div class="dot"
+         ng-class="{'dot-full': jfDockerV2Layer.isSelected()}"
+         ng-click="jfDockerV2Layer.setSelected(true)"></div>
+    <div class="left-view"></div>
+    <div class="layer-id"
+         ng-class="{'selected':jfDockerV2Layer.isSelected()}">
+        <div class="layer-id-display" ng-click="jfDockerV2Layer.setSelected(true)">{{jfDockerV2Layer.data.shortId}}</div>
+        <div class="current-node-name" ng-if="jfDockerV2Layer.isUpper">{{jfDockerV2Layer.parent.currentPath.substr(jfDockerV2Layer.parent.currentPath.lastIndexOf('/') + 1)}}</div>
+    </div>
+    <div class="cmd"
+         ng-click="jfDockerV2Layer.setSelected(true)">
+        <div class="cmd-color-bar"
+             ng-style="{backgroundColor: jfDockerV2Layer.COLOR_MAP[jfDockerV2Layer.data.command]}"></div>
+        {{jfDockerV2Layer.data.command}}
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<wicket:panel>
+    <div class="tab-panel-top">
+        <div class="tab-panel-bottom">
+            <div class="tab-panel-left">
+                <div class="tab-panel-right">
+                    <div class="tab-panel-top-right">
+                        <div class="tab-panel-top-left">
+                            <div class="tab-panel-bottom-right">
+                                <div class="tab-panel-bottom-left">
+
+                                    <a wicket:id="moveLeft" class="move-left"></a>
+                                    <a wicket:id="moveRight" class="move-right"></a>
+
+                                    <div wicket:id="tabs-container" class="tab-row">
+                                        <ul>
+                                            <li wicket:id="tabs" onmouseover="DomUtils.addHoverStyle(this);"
+                                                onmouseout="DomUtils.removeHoverStyle(this);">
+                                                <a href="#" wicket:id="link"><span
+                                                        wicket:id="title">[[tab title]]</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div wicket:id="panel" class="tab-panel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script wicket:id="initScript" type="text/javascript">
+        StyledTabbedPanel.init('${tabsContainerId}', '${moveLeftId}', '${moveRightId}');
+    </script>
+</wicket:panel>

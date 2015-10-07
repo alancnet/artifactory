@@ -1,0 +1,56 @@
+<div class="content-layout-container">
+    <h1 ng-if="PropertySetForm.isNew">New Property Set</h1>
+    <h1 ng-if="!PropertySetForm.isNew">Edit {{ PropertySetForm.propertySet.name }} Property Set</h1>
+
+    <div class="content-wrapper">
+        <form name="propertySetForm" ng-submit="PropertySetForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel jf-panel-heading="Property Set Details">
+                        <div class="form-group">
+                            <div class="form-group-cell">
+                                <jf-field validations="propertySet" autofocus="true">
+                                    <label for="propertySetName" class="mandatory">Property Set Name</label>
+                                    <input
+                                            id="propertySetName"
+                                            jf-validator-name
+                                            jf-validator-xml-name
+                                            jf-validator-unique-id
+                                            ng-model-options="{debounce: { 'default': 500 } }"
+                                            class="input-text"
+                                            name="propertySetName"
+                                            ng-disabled="!PropertySetForm.isNew"
+                                            autofocus
+                                            required
+                                            type="text"
+                                            ng-model="PropertySetForm.propertySet.name">
+                                </jf-field>
+                            </div>
+                        </div>
+                        <div class="pull-right admin-grid-buttons">
+                            <a ng-click="PropertySetForm.newProperty($event)">
+                                <i class="grid-button-icon icon icon-new"></i>New
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <jf-grid grid-options="PropertySetForm.gridOptions"
+                                 filter-field="name"
+                                 filter-on-change="true">
+                        </jf-grid>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" ng-click="PropertySetForm.cancel()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!propertySetForm.$valid">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

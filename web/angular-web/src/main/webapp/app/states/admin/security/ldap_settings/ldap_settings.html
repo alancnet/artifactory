@@ -1,0 +1,35 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1>LDAP Configuration</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <jf-panel jf-panel-heading="LDAP Settings">
+                <div class="pull-right admin-grid-buttons">
+                    <a ui-sref="^.ldap_settings.new">
+                        <i class="grid-button-icon icon icon-new"></i>New
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+                <jf-grid grid-options="Ldap.settingsGridOption"
+                         filter-field="key"
+                         filter-on-change="true"
+                         object-name="Setting">
+                </jf-grid>
+            </jf-panel>
+            <jf-panel jf-panel-heading="LDAP Groups"
+                      jf-disable-feature="ldap">
+                <div class="pull-right admin-grid-buttons">
+                    <a ui-sref="^.ldap_settings.new_ldap_group">
+                        <i class="grid-button-icon icon icon-new"></i>New
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+                <jf-grid grid-options="Ldap.groupsGridOption"
+                         filter-field="name"
+                         filter-on-change="true"
+                         object-name="Group">
+                </jf-grid>
+            </jf-panel>
+        </div>
+    </div>
+</div>

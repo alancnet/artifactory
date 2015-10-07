@@ -1,0 +1,21 @@
+<div class="content-layout-container">
+    <h1 id="repositories-header">{{ Repositories.currentRepoType | capitalize }} Repositories</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ng-click="Repositories.createNewRepo()" id="repositories-new">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+            <jf-grid
+                    grid-options="Repositories.gridOption"
+                    filter-field="repoKey"
+                    filter-field2="repoType"
+                    filter-on-change="true"
+                    object-name="repository/repositories"
+                    auto-focus="true">
+            </jf-grid>
+        </div>
+    </div>
+</div>

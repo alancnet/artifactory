@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://artifactory.jfrog.org/xsd/1.5.13" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <offlineMode>false</offlineMode>
+    <fileUploadMaxSizeMb>100</fileUploadMaxSizeMb>
+    <dateFormat>dd-MM-yy HH:mm:ss z</dateFormat>
+    <addons>
+        <showAddonsInfo>true</showAddonsInfo>
+        <showAddonsInfoCookie>1434884306580</showAddonsInfoCookie>
+    </addons>
+    <security>
+        <anonAccessEnabled>true</anonAccessEnabled>
+        <anonAccessToBuildInfosDisabled>false</anonAccessToBuildInfosDisabled>
+        <hideUnauthorizedResources>false</hideUnauthorizedResources>
+        <passwordSettings>
+            <encryptionPolicy>supported</encryptionPolicy>
+        </passwordSettings>
+        <ldapSettings/>
+        <ldapGroupSettings/>
+    </security>
+    <backups>
+        <backup>
+            <key>backup1</key>
+            <enabled>false</enabled>
+            <cronExp>0 0 /12 * * ?</cronExp>
+            <retentionPeriodHours>0</retentionPeriodHours>
+            <createArchive>false</createArchive>
+            <excludedRepositories/>
+            <sendMailOnError>true</sendMailOnError>
+            <excludeBuilds>false</excludeBuilds>
+            <excludeNewRepositories>false</excludeNewRepositories>
+        </backup>
+    </backups>
+    <localRepositories>
+        <localRepository>
+            <key>libs-releases-local</key>
+            <description>Local repository for in-house libraries</description>
+            <includesPattern>**/*</includesPattern>
+            <repoLayoutRef>maven-2-default</repoLayoutRef>
+            <blackedOut>false</blackedOut>
+            <handleReleases>true</handleReleases>
+            <handleSnapshots>false</handleSnapshots>
+            <maxUniqueSnapshots>0</maxUniqueSnapshots>
+            <suppressPomConsistencyChecks>true</suppressPomConsistencyChecks>
+            <archiveBrowsingEnabled>false</archiveBrowsingEnabled>
+            <snapshotVersionBehavior>non-unique</snapshotVersionBehavior>
+            <localRepoChecksumPolicyType>client-checksums</localRepoChecksumPolicyType>
+            <calculateYumMetadata>false</calculateYumMetadata>
+            <yumRootDepth>0</yumRootDepth>
+        </localRepository>
+    </localRepositories>
+    <remoteRepositories/>
+    <virtualRepositories/>
+    <proxies/>
+    <propertySets/>
+    <repoLayouts>
+        <repoLayout>
+            <name>maven-2-default</name>
+            <artifactPathPattern>[orgPath]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]</artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[orgPath]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).pom</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>SNAPSHOT</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>SNAPSHOT|(?:(?:[0-9]{8}.[0-9]{6})-(?:[0-9]+))</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>ivy-default</name>
+            <artifactPathPattern>[org]/[module]/[baseRev](-[folderItegRev])/[type]s/[module](-[classifier])-[baseRev](-[fileItegRev]).[ext]</artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[org]/[module]/[baseRev](-[folderItegRev])/[type]s/ivy-[baseRev](-[fileItegRev]).xml</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>\d{14}</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>\d{14}</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>gradle-default</name>
+            <artifactPathPattern>[org]/[module]/[baseRev](-[folderItegRev])/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]</artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[org]/[module]/ivy-[baseRev](-[fileItegRev]).xml</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>\d{14}</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>\d{14}</fileIntegrationRevisionRegExp>
+        </repoLayout>
+        <repoLayout>
+            <name>maven-1-default</name>
+            <artifactPathPattern>[org]/[type]s/[module]-[baseRev](-[fileItegRev])(-[classifier]).[ext]</artifactPathPattern>
+            <distinctiveDescriptorPathPattern>true</distinctiveDescriptorPathPattern>
+            <descriptorPathPattern>[org]/[type]s/[module]-[baseRev](-[fileItegRev]).pom</descriptorPathPattern>
+            <folderIntegrationRevisionRegExp>.+</folderIntegrationRevisionRegExp>
+            <fileIntegrationRevisionRegExp>.+</fileIntegrationRevisionRegExp>
+        </repoLayout>
+    </repoLayouts>
+    <remoteReplications/>
+    <localReplications/>
+    <gcConfig>
+        <cronExp>0 0 /4 * * ?</cronExp>
+    </gcConfig>
+    <cleanupConfig>
+        <cronExp>0 12 5 * * ?</cronExp>
+    </cleanupConfig>
+    <virtualCacheCleanupConfig>
+        <cronExp>0 12 5 * * ?</cronExp>
+    </virtualCacheCleanupConfig>
+</config>

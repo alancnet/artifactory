@@ -1,0 +1,17 @@
+<div class="content-layout-container">
+    <h1>Configure Property Sets</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.property_sets.new">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+            <jf-grid grid-options="PropertySets.gridOptions"
+                     filter-field="name"
+                     object-name="property set"
+                     auto-focus="true"></jf-grid>
+        </div>
+    </div>
+</div>

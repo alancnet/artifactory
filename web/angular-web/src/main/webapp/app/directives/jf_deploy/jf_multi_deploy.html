@@ -1,0 +1,49 @@
+<div class="form-group">
+    <div class="form-group-cell">
+        <div class="drop-zone-wrapper">
+            <div class="drop-zone"
+                 nv-file-drop uploader="jfMultiDeploy.deployMultiUploader.getUploader()"
+                 nv-file-over over-class="drop-zone-hover">
+
+                <span class="icon icon-upload"></span>
+                <span class="icon icon-upload-hover"></span>
+                <br>
+                <input class="select-files-hidden"
+                       type="file"
+                       nv-file-select
+                       uploader="jfMultiDeploy.deployMultiUploader.getUploader()"
+                       title=" "
+                       multiple/>
+                <span>Drop files</span> here or <span>Select files</span>
+            </div>
+            <div class="upload-files-frame">
+                <ul>
+                    <li ng-repeat="item in jfMultiDeploy.deployMultiUploader.getUploader().queue" class="upload-item">
+                        <span class="file-name-deploy-multi" jf-tooltip="{{ item.file.originalName }}">{{ item.file.originalName }}</span>
+                        <a href=""
+                           ng-click="item.remove(); jfMultiDeploy.multiUploadItemRemoved()"
+                           jf-tooltip="Remove"
+                           class="icon icon-clear pull-right"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form name="targetPath">
+    <div class="form-group">
+        <div class="form-group-cell">
+            <jf-field>
+                <label for="target-file">Target Path
+                </label>
+                <jf-help-tooltip
+                        html="jfMultiDeploy.TOOLTIP.targetPath"></jf-help-tooltip>
+                <input type="text"
+                       class="input-text"
+                       id="target-file"
+                       ng-model="jfMultiDeploy.deployFile.targetPath">
+            </jf-field>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="artifactory.ui">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"/>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/vendorStyles.css"/>
+    <link rel="stylesheet" href="css/application.css"/>
+
+    <title></title>
+</head>
+
+<body jf-body-class ng-class="{'load-complete':jfBodyClass.isLoadCompleted()}">
+<jf-spinner domain="body"></jf-spinner>
+<toaster-container></toaster-container>
+
+<ui-view></ui-view>
+
+<!-- Javascript -->
+<script type="text/javascript" src="vendorScripts.js"></script>
+<script type="text/javascript" src="templates.js"></script>
+
+<!-- Application code -->
+<script src="artifactory_core.js"></script>
+<script src="artifactory_services.js"></script>
+<script src="artifactory_dao.js"></script>
+
+<script src="artifactory_ui.js"></script>
+<script src="artifactory_ui_components.js"></script>
+<script src="artifactory_directives.js"></script>
+<script src="artifactory_filters.js"></script>
+
+<script src="artifactory_views.js"></script>
+<script src="artifactory_states.js"></script>
+<script src="artifactory_main.js"></script>
+
+</body>
+</html>

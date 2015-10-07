@@ -1,0 +1,174 @@
+<div class="content-layout-container permissions-form">
+    <h1>{{PermissionForm.title}}</h1>
+
+    <div class="content-wrapper">
+        <form name="PermissionForm.form" ng-submit="PermissionForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="common" autofocus="true">
+                                <label class="mandatory">Name</label>
+
+                                <input type="text"
+                                       class="input-text"
+                                       name="name"
+                                       ng-disabled="!PermissionForm.newPermission"
+                                       ng-model="PermissionForm.permission.name" required/>
+                            </jf-field>
+                        </div>
+                    </div>
+
+                    <div class="wizard-container">
+                        <ul class="wizard-tabs">
+                            <li ng-click="PermissionForm.setCurrentTab('repo')"
+                                ng-class="{active:PermissionForm.isCurrentTab('repo')}">Repositories</li>
+                            <li ng-click="PermissionForm.setCurrentTab('groups')"
+                                ng-class="{active:PermissionForm.isCurrentTab('groups')}">Groups</li>
+                            <li ng-click="PermissionForm.setCurrentTab('users')"
+                                ng-class="{active:PermissionForm.isCurrentTab('users')}">Users</li>
+                        </ul>
+
+                        <div class="wizard-content" ng-switch="PermissionForm.currentTab">
+                            <div ng-switch-when="repo">
+                                <div class="form-group">
+                                    <div class="form-group-cell">
+                                        <label class="input-label-weight">Include Pattern</label>
+                                        <jf-help-tooltip html="PermissionForm.TOOLTIP.includePatterns"></jf-help-tooltip>
+                                        <textarea class="input-text text-area-permissions"
+                                                  ng-disabled="PermissionForm.isDisableRepositories()"
+                                                  ng-model="PermissionForm.permission.includePattern"
+                                                  rows="3">
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group-cell">
+                                        <label class="input-label-weight">Exclude Pattern</label>
+                                        <jf-help-tooltip html="PermissionForm.TOOLTIP.excludePatterns"></jf-help-tooltip>
+                                        <textarea class="input-text text-area-permissions"
+                                                  rows="3"
+                                                  ng-disabled="PermissionForm.isDisableRepositories()"
+                                                  ng-model="PermissionForm.permission.excludePattern">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group-cell double">
+                                        <jf-drag-drop include-list="PermissionForm.permission.repoKeys"
+                                                      exclude-list="PermissionForm.permission.availableRepoKeys"
+                                                      ng-disabled="PermissionForm.isDisableRepositories()"
+                                                      include-display-field = "repoKey"
+                                                      exclude-display-field = "repoKey"
+                                                      objects-name="Repositories"
+                                                      headers="{leftTitle:'Available Repositories', rightTitle:'Selected Repositories'}"></jf-drag-drop>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group-cell double">
+                                        <jf-checkbox text="Any Local Repository">
+                                            <input type="checkbox"
+                                                   id="anyLocal"
+                                                   ng-disabled="PermissionForm.isDisableRepositories()"
+                                                   ng-model="PermissionForm.permission.anyLocal"
+                                                   ng-change="PermissionForm.setAnyLocalRepo()">
+                                        </jf-checkbox>
+                                        <jf-checkbox text="Any Remote Repository">
+                                            <input type="checkbox"
+                                                   id="anyRemote"
+                                                   ng-disabled="PermissionForm.isDisableRepositories()"
+                                                   ng-model="PermissionForm.permission.anyRemote"
+                                                   ng-change="PermissionForm.setAnyRemoteRepo()">
+                                        </jf-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-switch-when="groups">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <input type="text"
+                                               ng-model="PermissionForm.filterList"
+                                               placeholder="Filter..."
+                                               class="input-text dnd-filter">
+                                        <div class="group-list-wrapper">
+                                            <ul class="group-list">
+                                                <li class="group-list-item"
+                                                    ng-repeat="group in PermissionForm.availableGroups | filter:PermissionForm.filterList track by $index"
+                                                    ng-click="PermissionForm.toggleSelection(group)"
+                                                    ng-dblclick="PermissionForm.addGroup(group)"
+                                                    ng-class="{active:PermissionForm.isSelected(group)}">
+                                                    {{group}}
+                                                    <i class="icon icon-arrow pull-right cursor-pointer" ng-click="PermissionForm.addGroup(group)"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <p class="info-bar"><i class="icon icon-info"></i>Double click to add group</p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <jf-grid grid-options="PermissionForm.groupsGridOption"
+                                                 filter-field="principal"
+                                                 filter-on-change="true">
+                                        </jf-grid>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-switch-when="users">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <input type="text"
+                                               ng-model="PermissionForm.filterList"
+                                               placeholder="Filter..."
+                                               class="input-text dnd-filter">
+                                        <div class="group-list-wrapper">
+                                            <ul class="group-list">
+                                                <li class="group-list-item"
+                                                    ng-repeat="user in PermissionForm.availableUsers | filter:PermissionForm.filterList track by $index"
+                                                    ng-click="PermissionForm.toggleSelection(user)"
+                                                    ng-dblclick="PermissionForm.addUser(user)"
+                                                    ng-class="{active:PermissionForm.isSelected(user)}">
+                                                    {{user}}
+                                                    <i class="icon icon-arrow pull-right cursor-pointer" ng-click="PermissionForm.addUser(user)"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <p class="info-bar"><i class="icon icon-info"></i>Double click to add user</p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <jf-grid grid-options="PermissionForm.usersGridOption"
+                                                 filter-field="principal"
+                                                 filter-on-change="true">
+                                        </jf-grid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button"
+                            ui-sref="^.permissions">Cancel
+                    </button>
+
+                    <div class="wizard-pager">
+                        <a href=""
+                           ng-disabled="PermissionForm.currentTab == 'repo'"
+                           ng-click="PermissionForm.prevStep()">
+                            &lt; Back
+                        </a>
+                        <a href=""
+                           ng-disabled="PermissionForm.currentTab == 'users'"
+                           ng-click="PermissionForm.fwdStep()">
+                            Next &gt;
+                        </a>
+                    </div>
+                    <button type="submit"
+                            class="btn  btn-primary"
+                            ng-disabled="PermissionForm.form.$invalid || !PermissionForm.permission.repoKeys.length">
+                        Save & Finish
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

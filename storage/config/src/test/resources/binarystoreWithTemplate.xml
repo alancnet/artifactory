@@ -1,0 +1,3 @@
+<config version="2">
+    <chain template="s3"/>
+</config>

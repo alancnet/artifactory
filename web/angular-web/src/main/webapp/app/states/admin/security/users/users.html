@@ -1,0 +1,22 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1>Users Management</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.users.new">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+            <jf-grid
+                grid-options="AdminSecurityUser.gridOption"
+                filter-field="name"
+                filter-field2="email"
+                object-name="user"
+                auto-focus="true">
+            </jf-grid>
+                                
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,36 @@
+<div class="content-layout-container">
+    <h1>Config Descriptor <jf-clip-copy text-to-copy="ConfigDescriptorController.configDescriptor"
+                                        object-name="XML"></jf-clip-copy>
+    </h1>
+    <div class="field-bottom-remark">
+        <i class="icon icon-notif-warning"></i>Warning: Updating the configuration through direct manipulation of the XML descriptors can be harmful.
+    </div>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="content-with-footer">
+                <jf-code-mirror
+                        ng-if="ConfigDescriptorController.configDescriptor"
+                        mime-type="xml"
+                        allow-edit="true"
+                        height="flexible"
+                        model="ConfigDescriptorController.configDescriptor"
+                        autofocus="true"
+                        api-access="ConfigDescriptorController.apiAccess">
+                </jf-code-mirror>
+            </div>
+        </div>
+
+        <div class="content-footer">
+            <div class="pull-right">
+                <button class="btn btn-default"
+                        type="button"
+                        ng-click="ConfigDescriptorController.cancel()">Reset
+                </button>
+                <button class="btn btn-primary"
+                        ng-click="ConfigDescriptorController.save(ConfigDescriptorController.configDescriptor)">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,235 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<security>
+    <users>
+        <org.artifactory.security.SimpleUser>
+            <password>f71dbe52628a3f83a77ab494817525c6</password>
+            <username>toto</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl>
+                    <role>user</role>
+                </org.springframework.security.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>true</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <password>1b3231655cebb7a1f783eddf27d254ca</password>
+            <username>super</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl>
+                    <role>admin</role>
+                </org.springframework.security.GrantedAuthorityImpl>
+                <org.springframework.security.GrantedAuthorityImpl>
+                    <role>user</role>
+                </org.springframework.security.GrantedAuthorityImpl>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>true</admin>
+            <updatableProfile>true</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <password>bdb8c008fa551ba75f8481963f2201da</password>
+            <username>tutu</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl
+                        reference="../../../org.artifactory.security.SimpleUser/authorities/org.springframework.security.GrantedAuthorityImpl"/>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>true</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <password>570a90bfbf8c7eab5dc5d4e26832d5b1</password>
+            <username>fred</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl
+                        reference="../../../org.artifactory.security.SimpleUser/authorities/org.springframework.security.GrantedAuthorityImpl"/>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>true</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <password>5f4dcc3b5aa765d61d8327deb882cf99</password>
+            <username>admin</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl
+                        reference="../../../org.artifactory.security.SimpleUser[2]/authorities/org.springframework.security.GrantedAuthorityImpl"/>
+                <org.springframework.security.GrantedAuthorityImpl
+                        reference="../../../org.artifactory.security.SimpleUser[2]/authorities/org.springframework.security.GrantedAuthorityImpl[2]"/>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>true</admin>
+            <updatableProfile>true</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+        <org.artifactory.security.SimpleUser>
+            <password>d41d8cd98f00b204e9800998ecf8427e</password>
+            <username>anonymous</username>
+            <authorities>
+                <org.springframework.security.GrantedAuthorityImpl
+                        reference="../../../org.artifactory.security.SimpleUser/authorities/org.springframework.security.GrantedAuthorityImpl"/>
+            </authorities>
+            <accountNonExpired>true</accountNonExpired>
+            <accountNonLocked>true</accountNonLocked>
+            <credentialsNonExpired>true</credentialsNonExpired>
+            <enabled>true</enabled>
+            <admin>false</admin>
+            <updatableProfile>false</updatableProfile>
+        </org.artifactory.security.SimpleUser>
+    </users>
+    <acls>
+        <org.artifactory.security.RepoPathAcl>
+            <aces class="org.apache.jackrabbit.ocm.manager.collectionconverter.impl.ManageableArrayList"
+                  serialization="custom">
+                <unserializable-parents/>
+                <list>
+                    <default>
+                        <size>2</size>
+                    </default>
+                    <int>10</int>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>3</mask>
+                        <principal>fred</principal>
+                    </org.artifactory.security.RepoPathAce>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>3</mask>
+                        <principal>toto</principal>
+                    </org.artifactory.security.RepoPathAce>
+                </list>
+            </aces>
+            <identifier>ext-snapshots-local%3aANY</identifier>
+            <updatedBy>admin</updatedBy>
+        </org.artifactory.security.RepoPathAcl>
+        <org.artifactory.security.RepoPathAcl>
+            <aces class="org.apache.jackrabbit.ocm.manager.collectionconverter.impl.ManageableArrayList"
+                  serialization="custom">
+                <unserializable-parents/>
+                <list>
+                    <default>
+                        <size>1</size>
+                    </default>
+                    <int>10</int>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>19</mask>
+                        <principal>tutu</principal>
+                    </org.artifactory.security.RepoPathAce>
+                </list>
+            </aces>
+            <identifier>plugins-releases-local%3aorg.apache</identifier>
+            <updatedBy>admin</updatedBy>
+        </org.artifactory.security.RepoPathAcl>
+        <org.artifactory.security.RepoPathAcl>
+            <aces class="org.apache.jackrabbit.ocm.manager.collectionconverter.impl.ManageableArrayList"
+                  serialization="custom">
+                <unserializable-parents/>
+                <list>
+                    <default>
+                        <size>1</size>
+                    </default>
+                    <int>10</int>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>19</mask>
+                        <principal>toto</principal>
+                    </org.artifactory.security.RepoPathAce>
+                </list>
+            </aces>
+            <identifier>libs-releases-local%3aANY</identifier>
+            <updatedBy>admin</updatedBy>
+        </org.artifactory.security.RepoPathAcl>
+        <org.artifactory.security.RepoPathAcl>
+            <aces class="org.apache.jackrabbit.ocm.manager.collectionconverter.impl.ManageableArrayList"
+                  serialization="custom">
+                <unserializable-parents/>
+                <list>
+                    <default>
+                        <size>2</size>
+                    </default>
+                    <int>10</int>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>3</mask>
+                        <principal>tutu</principal>
+                    </org.artifactory.security.RepoPathAce>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>19</mask>
+                        <principal>fred</principal>
+                    </org.artifactory.security.RepoPathAce>
+                </list>
+            </aces>
+            <identifier>ANY%3aorg.jfrog</identifier>
+            <updatedBy>admin</updatedBy>
+        </org.artifactory.security.RepoPathAcl>
+        <org.artifactory.security.RepoPathAcl>
+            <aces class="org.apache.jackrabbit.ocm.manager.collectionconverter.impl.ManageableArrayList"
+                  serialization="custom">
+                <unserializable-parents/>
+                <list>
+                    <default>
+                        <size>4</size>
+                    </default>
+                    <int>10</int>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>1</mask>
+                        <principal>anonymous</principal>
+                    </org.artifactory.security.RepoPathAce>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>1</mask>
+                        <principal>fred</principal>
+                    </org.artifactory.security.RepoPathAce>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>1</mask>
+                        <principal>toto</principal>
+                    </org.artifactory.security.RepoPathAce>
+                    <org.artifactory.security.RepoPathAce>
+                        <parentAcl reference="../../../.."/>
+                        <mask>1</mask>
+                        <principal>tutu</principal>
+                    </org.artifactory.security.RepoPathAce>
+                </list>
+            </aces>
+            <identifier>ANY%3aANY</identifier>
+            <updatedBy>unknown</updatedBy>
+        </org.artifactory.security.RepoPathAcl>
+    </acls>
+</security>

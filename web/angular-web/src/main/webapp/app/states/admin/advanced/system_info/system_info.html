@@ -1,0 +1,22 @@
+<div class="content-layout-container">
+    <h1>System Info <jf-clip-copy text-to-copy="SystemInfoController.systemInfoJoined"
+                                  object-name="Data"></jf-clip-copy>
+    </h1>
+
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <table class="jf-data-table">
+                <tbody ng-repeat="(key, value) in SystemInfoController.systemInfo">
+                    <tr><td colspan="3"><h5>{{key}}:</h5></td></tr>
+                    <tr ng-repeat="(_key, _value) in value">
+                        <td></td>
+                        <td>{{_key}}:</td>
+                        <td ng-bind-html="SystemInfoController.replaceNewLines(_value)"></td>
+                    </tr>
+                    <tr><td colspan="3">&nbsp;</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

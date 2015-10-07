@@ -1,0 +1,11 @@
+<wicket:extend>
+    <div class="win_security" wicket:id="permissionTargetList"></div>
+    <script type="text/javascript">
+        DomUtils.bindHeight(dojo.query('.table-wrapper')[0], function(docHeight) {
+            return Math.max(200, docHeight - 220);
+        }, true);
+        DomUtils.bindHeight(dojo.query('.buttons-bottom')[0], function(docHeight) {
+            return Math.max(200, docHeight - 220);
+        }, true);
+    </script>
+</wicket:extend>

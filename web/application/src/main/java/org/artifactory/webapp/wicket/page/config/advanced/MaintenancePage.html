@@ -1,0 +1,131 @@
+<wicket:extend>
+    <form wicket:id="form">
+        <div wicket:id="gcBorder" class="cronField storage">
+            <div class="field-row">
+                <div class="field required field-sep" style="margin-left: 2px;">
+                    <label>
+                        <wicket:message key="cronExp"/>
+                        <span wicket:id="cronExp.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="cronExp" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <label>Next Garbage Collection Time</label>
+
+                    <div class="value">
+                        <span wicket:id="cronNextDatePanel"/>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button wicket:id="collect"></button>
+                    <span wicket:id="gcHelp"></span>
+                </div>
+            </div>
+        </div>
+
+        <div wicket:id="quotaBorder" class="cron-fields">
+            <div class="field-row">
+                <div class="field">
+                    <input wicket:id="enabled" type="checkbox"/>
+                    <span wicket:id="enabled.help"></span>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field field-sep">
+                    <label>Storage Space Limit (Percentage)</label>
+                    <span wicket:id="diskSpaceLimitPercentage.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="diskSpaceLimitPercentage" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <label>Storage Space Warning (Percentage)</label>
+                    <span wicket:id="diskSpaceWarningPercentage.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="diskSpaceWarningPercentage" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div wicket:id="cleanupBorder" class="cron-fields">
+            <div class="field-row">
+                <div class="field required field-sep" style="margin-left: 2px;">
+                    <label>
+                        <wicket:message key="cronExp"/>
+                        <span wicket:id="cronExp.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="cronExp" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <label>Next Cached Artifacts Cleanup Time</label>
+
+                    <div class="value">
+                        <span wicket:id="cronNextDatePanel"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button wicket:id="cleanup"></button>
+                <span wicket:id="cleanupHelp"></span>
+            </div>
+        </div>
+
+        <div wicket:id="virtualCleanupBorder" class="cron-fields">
+            <div class="field-row">
+                <div class="field required field-sep" style="margin-left: 2px;">
+                    <label>
+                        <wicket:message key="cronExp"/>
+                        <span wicket:id="virtualCronExp.help"/>
+                    </label>
+
+                    <div class="value">
+                        <input wicket:id="cronExp" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <label>Next Virtual Repositories Cleanup Time</label>
+
+                    <div class="value">
+                        <span wicket:id="virtualCronNextDatePanel"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button wicket:id="virtualCleanup"></button>
+                <span wicket:id="virtualCleanupHelp"></span>
+            </div>
+        </div>
+    </form>
+
+    <div wicket:id="storage" class="storage">
+        <div class="buttons">
+            <button wicket:id="compress"></button>
+            <span wicket:id="compressHelp"></span>
+        </div>
+        <div class="buttons">
+            <button wicket:id="prune"></button>
+            <span wicket:id="pruneHelp"></span>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="default-button" wicket:id="saveButton"></button>
+        <button wicket:id="cancel"></button>
+    </div>
+</wicket:extend>

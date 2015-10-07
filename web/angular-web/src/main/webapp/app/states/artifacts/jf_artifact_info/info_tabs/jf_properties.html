@@ -1,0 +1,100 @@
+<div class="properties">
+    <div ng-if="jfProperties.canAnnotate">
+        <jf-switch jf-switch-title="Add:" ng-model="jfProperties.propertyType" options="['Property', 'Property Set']"></jf-switch>
+        <div ng-switch="jfProperties.propertyType">
+            <div ng-switch-when="Property">
+                <form name="propertyForm">
+                    <div class="form-group">
+                        <div class="form-group-cell">
+                            <jf-field validations="properties" autofocus="true">
+                                <input type="text" class="input-text" placeholder="Name *"
+                                       name="propertyName"
+                                       ng-model="jfProperties.repoPropertySelected.name"
+                                       jf-special-chars/>
+                            </jf-field>
+                        </div>
+                        <div class="form-group-cell">
+                            <input type="text" class="input-text" placeholder="Value"
+                                   ng-model="jfProperties.repoPropertySelected.value"/>
+                        </div>
+                        <div class="form-group-cell auto-width">
+                            <button class="btn btn-primary"
+                                    ng-click="jfProperties.addProperty()"
+                                    ng-disabled="!jfProperties.repoPropertySelected.name || !propertyForm.$valid">Add
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div ng-switch-when="Property Set">
+                <div class="form-group">
+                    <div class="form-group-cell">
+                        <ui-select ng-model="jfProperties.repoPropertySetSelected"
+                                   ng-change="jfProperties.getPropertySetValues()">
+                            <ui-select-match placeholder="Property Name">
+                                {{$select.selected.parent.name}}.{{$select.selected.property.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="property in jfProperties.propertiesOptions | filter: $select.search track by $index">
+                                <div ng-bind-html="property.parent.name+'.'+property.property.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group-cell">
+                        <selectize placeholder='Select Value...'
+                                   config="jfProperties.propertySetMultiValuesConfig"
+                                   options="jfProperties.propertyValuesOptions"
+                                   ng-model="jfProperties.repoPropertySetSelected.value"
+                                   ng-if="jfProperties.isCurrentPropertyType('MULTI_SELECT')">
+                        </selectize>
+                        <selectize placeholder='Select Value...'
+                                   config="jfProperties.propertySetSingleValueConfig"
+                                   options="jfProperties.propertyValuesOptions"
+                                   ng-model="jfProperties.repoPropertySetSelected.value"
+                                   ng-if="jfProperties.isCurrentPropertyType('SINGLE_SELECT')">
+                        </selectize>
+
+                        <selectize placeholder='Select Value...'
+                                   config="jfProperties.propertySetAnyValueConfig"
+                                   options="jfProperties.propertyValuesOptions"
+                                   ng-model="jfProperties.repoPropertySetSelected.value"
+                                   ng-if="jfProperties.isCurrentPropertyType('ANY_VALUE')">
+                        </selectize>
+<!--
+                        <input type="text"
+                               ng-model="jfProperties.repoPropertySetSelected.value"
+                               typeahead="state.property.name for state in jfProperties.propertyValuesOptions | filter:$viewValue | limitTo:8"
+                               class="input-text any-property"
+                               ng-disabled="!jfProperties.repoPropertySetSelected"
+                               placeholder='Select Value...'
+                               ng-if="jfProperties.isCurrentPropertyType('ANY_VALUE')">
+-->
+                    </div>
+                    <div class="form-group-cell auto-width">
+                        <button class="btn btn-primary"
+                                ng-click="jfProperties.addPropertySet()"
+                                ng-disabled="!jfProperties.propertySetMultiValuesConfig || !jfProperties.repoPropertySetSelected.propertyType
+                                    || !jfProperties.repoPropertySetSelected.property || !jfProperties.repoPropertySetSelected.value.length">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-checkbox text="Recursive">
+                    <input type="checkbox" id="inlineCheckbox1" ng-model="jfProperties.repoPropertyRecursive.recursive">
+
+                </jf-checkbox>
+                <jf-help-tooltip
+                        html="jfProperties.TOOLTIP.recursive"></jf-help-tooltip>
+            </div>
+        </div>
+    </div>
+    <jf-grid grid-options="jfProperties.propertyGridOption"
+             filter-field="name"
+             filter-on-change="true"
+             object-name="property/properties">
+    </jf-grid>
+</div>

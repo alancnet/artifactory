@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of Artifactory.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.sourceforge.net/">
+
+<head>
+    <wicket:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+        <title wicket:id="pageTitle"></title>
+        <meta wicket:id="revision" name="revision" content="#"/>
+    </wicket:head>
+</head>
+
+<body class="tundra">
+
+<table cellpadding="0" cellspacing="0" class="page">
+    <tr>
+        <td class="main">
+            <div class="header">
+                <div class="spacer">
+                    <div wicket:id="logo"></div>
+
+                    <div class="top-menu">
+                        <ul>
+                            <li wicket:id="menuItem"></li>
+                        </ul>
+                    </div>
+
+                    <div class="quick-search-box">
+                        <form wicket:id="searchForm">
+                            <span class="search-box">
+                                <input wicket:id="query" type="text"/>
+                            </span>
+
+                            <button wicket:id="searchButton" type="submit"></button>
+                        </form>
+                    </div>
+
+                    <div class="user-info">
+                        <span wicket:id="loggedInLabel"></span>
+                        <a wicket:id="profilePage" class="profileLink"></a>
+                        <span>&nbsp;|&nbsp;</span>
+                        <a wicket:id="logoutPage"></a>
+                        <a wicket:id="loginPage"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div wicket:id="baseFloatingMessage" class="floating-message">
+                <div wicket:id="offlineMessage"/>
+                <div wicket:id="noBaseUrlMessage"/>
+                <div wicket:id="quotaMessage"/>
+            </div>
+
+            <div wicket:id="defaultFeedback"></div>
+
+            <div class="main">
+                <wicket:child/>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="footer">
+            <div wicket:id="licenseFooter" class="no-license"></div>
+            <div class="footer">
+                <span class="copywrites">
+                    <span>© Copyright 2015</span><a target="_blank" href="http://www.jfrog.org">JFrog Ltd.</a>
+                    <span wicket:id="footer" name="footer"></span>
+                </span>
+                <span wicket:id="license" class="license"></span>
+                <span wicket:id="version" class="version">Artifactory version</span>
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div wicket:id="modal"></div>
+
+<div wicket:id="feedbackDistributer"></div>
+
+<div id="ajaxIndicatorContainer" class="ajax-indicator">
+    <div wicket:id="blocker"></div>
+
+    <div id="ajaxIndicator">
+        <div class="ajax-indicator-bg"></div>
+        <div id="ajaxIndicatorMessage" class="ajax-indicator-message">
+            <span>Loading...</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

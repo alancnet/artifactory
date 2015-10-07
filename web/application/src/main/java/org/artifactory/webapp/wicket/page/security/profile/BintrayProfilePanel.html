@@ -1,0 +1,29 @@
+<wicket:extend>
+    <div class="bintray-profile-form">
+        <div class="field">
+            <label>Bintray Username</label>
+            <span wicket:id="bintrayUsername.help"></span>
+
+            <div class="value">
+                <input wicket:id="bintrayUsername" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <label>Bintray API Key</label>
+            <span wicket:id="bintrayApiKey.help"></span>
+
+            <div class="value">
+                <input autocomplete="off" wicket:id="bintrayApiKey"  type="password" class="text"/>
+            </div>
+        </div>
+
+        <div class="field field-sep">
+            <a wicket:id="bintrayLink" class="icon-link" target="_blank"></a>
+        </div>
+
+        <div class="field-sep">
+            <button wicket:id="test" type="submit"></button>
+        </div>
+    </div>
+</wicket:extend>

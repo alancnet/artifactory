@@ -1,0 +1,7 @@
+<div
+	class="jf-tree-search-container"
+	ng-class="{'jf-tree-search-active': TreeSearch.showSearch}">
+	<input type="search"
+	       class="jf-tree-search"	       
+	       ng-model="TreeSearch.term" ng-model-options="{debounce: 500}" ng-keydown="TreeSearch.onKeydown($event)" ng-change="TreeSearch.onChange()"/>
+</div>

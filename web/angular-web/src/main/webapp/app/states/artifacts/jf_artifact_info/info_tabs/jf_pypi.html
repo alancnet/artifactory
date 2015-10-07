@@ -1,0 +1,21 @@
+<div class="pypi">
+    <jf-panel jf-panel-heading="Package Info"
+              ng-if="jfPyPi.pyPiData.pypiPkgInfo">
+        <table class="jf-data-table">
+            <tr ng-repeat="(key,value) in jfPyPi.pyPiData.pypiPkgInfo"
+                 class="padded-row-1x">
+                <td ng-if="(key!='license' && key!='homepage') || !jfPyPi.isValidUrl(value)">{{jfPyPi.DICTIONARY[key]}}:</td>
+                <td ng-if="(key!='license' && key!='homepage') || !jfPyPi.isValidUrl(value)">{{value}}</td>
+
+                <td ng-if="(key==='license' || key==='homepage') && jfPyPi.isValidUrl(value)">{{jfPyPi.DICTIONARY[key]}}:</td>
+                <td ng-if="(key==='license' || key==='homepage') && jfPyPi.isValidUrl(value)"><a ng-href="{{value}}" target="_blank">{{value}}</a></td>
+            </tr>
+        </table>
+    </jf-panel>
+
+    <jf-panel jf-panel-heading="Categories"
+              ng-if="jfPyPi.pyPiData.categories.length">
+
+        <jf-grid grid-options="jfPyPi.categoriesGridOptions"></jf-grid>
+    </jf-panel>
+</div>

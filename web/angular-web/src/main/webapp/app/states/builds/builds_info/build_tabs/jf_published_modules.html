@@ -1,0 +1,44 @@
+<div class="builds-published-modules" jf-disable-feature="publishedmodule">
+<!--    <h4 ng-if="!jfPublishedModules.selectedModule"><span>{{jfPublishedModules.modulesCount}} matches found</span></h4>-->
+    <div class="pull-right back-to-modules" ng-if="jfPublishedModules.selectedModule">
+        <a href=""
+           ng-click="jfPublishedModules.backToModules()"><span class="back-link-icon">&lsaquo;</span>Back To All Modules
+        </a>
+    </div>
+    <div class="clearfix"></div>
+    <jf-grid ng-if="!jfPublishedModules.selectedModule"
+             grid-options="jfPublishedModules.modulesGridOptions"
+             filter-field="moduleId"
+             object-name="module"
+             auto-focus="true"></jf-grid>
+
+    <jf-panel jf-panel-heading="Module Details: {{ jfPublishedModules.selectedModule }}"
+              ng-if="jfPublishedModules.selectedModule">
+
+        <div class="form-group">
+            <div class="form-group-cell">
+                <jf-checkbox text="Compare With Previous Build">
+                    <input type="checkbox"
+                           ng-model="jfPublishedModules.compare"
+                           ng-change="jfPublishedModules.onCompareChanged()"
+                           name="compare">
+                </jf-checkbox>
+
+                <label ng-if="jfPublishedModules.compare">: </label>
+                <select ng-model="jfPublishedModules.selectedBuildNumber"
+                        ng-change="jfPublishedModules.getSubData()"
+                        ng-if="jfPublishedModules.compare"
+                        ng-options="data.buildNumber for data in jfPublishedModules.comparableBuildNumbers"></select>
+            </div>
+        </div>
+
+        <jf-panel jf-panel-heading="Artifacts ({{jfPublishedModules.artifactsCount}} matches found)">
+            <jf-grid grid-options="jfPublishedModules.artifactsGridOptions" filter-field="name" no-count></jf-grid>
+        </jf-panel>
+
+        <jf-panel jf-panel-heading="Dependencies ({{jfPublishedModules.dependenciesCount}} matches found)">
+            <jf-grid grid-options="jfPublishedModules.dependenciesGridOptions" filter-field="name" no-count></jf-grid>
+        </jf-panel>
+    </jf-panel>
+</div>
+

@@ -1,0 +1,77 @@
+<div class="content-layout-container"> <!-- classes: with-head-bar -->
+    <h1>{{GroupForm.title}}</h1>
+
+    <div class="content-wrapper">
+        <form name="GroupForm.groupForm" ng-submit="GroupForm.save()">
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <div ng-if="(GroupForm.mode === 'edit' && GroupForm.groupdata) || GroupForm.mode === 'create'">
+                        <jf-panel jf-panel-heading="Group Settings">
+                            <div class="form-group">
+                                <div class="form-group-cell">
+                                    <jf-field validations="common" autofocus="true">
+                                        <label for="groupName" class="mandatory">Group Name</label>
+                                        <input name="groupName"
+                                               type="text"
+                                               jf-validator-name
+                                               ng-model-options="{debounce: { 'default': 500 } }"
+                                               ng-model="GroupForm.groupdata.name"
+                                               class="input-text"
+                                               ng-disabled="GroupForm.mode==='edit'"
+                                               id="groupName"
+                                               required>
+                                    </jf-field>
+                                </div>
+                                <div class="form-group-cell">
+                                    <jf-field>
+                                        <label for="description">Description</label>
+                                        <input name="description"
+                                               type="text"
+                                               ng-model="GroupForm.groupdata.description"
+                                               class="input-text"
+                                               id="description">
+                                    </jf-field>
+                                </div>
+                            </div>
+                            <div class="form-group no-margin-bottom">
+                                <div class="form-group-cell">
+                                    <jf-checkbox class="display-block" text="Automatically Join New Users to this Group">
+                                        <input type="checkbox"
+                                               ng-model="GroupForm.groupdata.newUserDefault">
+                                    </jf-checkbox>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="Users">
+                            <div class="form-group">
+                                <div class="form-group-cell double">
+                                    <jf-drag-drop
+                                            ng-if="GroupForm.usersList"
+                                            exclude-list="GroupForm.usersList"
+                                            include-list="GroupForm.groupdata.usersInGroup"
+                                            objects-name="Users">
+                                    </jf-drag-drop>
+                                </div>
+                            </div>
+                        </jf-panel>
+                        <jf-panel jf-panel-heading="Group Permissions" ng-if="GroupForm.mode==='edit'">
+                            <jf-grid grid-options="GroupForm.permissionsGridOptions"
+                                     filter-field="permissionName"
+                                     filter-on-change="true">
+                            </jf-grid>
+                        </jf-panel>
+                    </div>
+                </div>
+            </div>
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" type="button" ng-click="GroupForm.cancel()">Cancel</button>
+                    <button class="btn btn-primary"
+                            type="submit"
+                            ng-disabled="GroupForm.isSaveDisabled()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

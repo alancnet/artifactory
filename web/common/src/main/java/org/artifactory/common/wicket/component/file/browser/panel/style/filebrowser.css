@@ -1,0 +1,138 @@
+/*
+ * Artifactory is a binaries repository manager.
+ * Copyright (C) 2012 JFrog Ltd.
+ *
+ * Artifactory is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Artifactory is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.fileBrowser {
+    text-align: left;
+    direction: ltr;
+
+    width: 550px;
+}
+
+.fileBrowser .lookIn {
+    padding: 5px 3px 3px 20px;
+}
+
+.fileBrowser .lookIn span {
+    padding-right: 10px;
+}
+
+.fileBrowser .files {
+    background: white;
+    border: solid 1px #aaaaaa;
+    height: 200px;
+    overflow: auto;
+    margin: 5px;
+    padding: 2px;
+}
+
+.fileBrowser .files ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fileBrowser .buttons {
+    float: right;
+    width: 150px;
+    margin-top: 5px;
+}
+
+.fileBrowser .buttons input {
+    width: 60px;
+}
+
+.fileBrowser .selectedFile span {
+    padding-right: 10px;
+}
+
+.fileBrowser .selectedFile {
+    padding-left: 5px;
+}
+
+.fileBrowser input.pathAutoComplete {
+    width: 420px;
+    padding: 1px 20px 1px 3px;
+    text-align: left;
+    direction: ltr;
+}
+
+div.pathAutoComplete_menu, div.pathAutoComplete_menu li {
+    direction: ltr;
+    text-align: left;
+    z-index: 30000 !important;
+}
+
+.fileBrowser .files a {
+    padding: 0 3px;
+    cursor: pointer;
+}
+
+.fileBrowser .files .file {
+    background: url("images/file.gif") no-repeat left;
+    padding-left: 18px;
+}
+
+.fileBrowser .files .folder, .fileBrowser option {
+    background: url("images/folder.gif") no-repeat left;
+    padding-left: 18px;
+}
+
+.fileBrowser option {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.fileBrowser .files a.selected {
+    background-color: #0000ff;
+    color: #ffffff;
+}
+
+.modalFileBrowser .w_top_1, .modalFileBrowser .w_bottom_1 {
+    display: none;
+}
+
+div.wicket-modal .modalFileBrowser div.w_right_1, div.wicket-modal .modalFileBrowser div.w_content_1 {
+    margin: 0;
+}
+
+.modalFileBrowser .fileBrowser {
+    border: none;
+    width: 499px;
+}
+
+div.wicket-modal .modalFileBrowser div.w_content_3 {
+    border: none;
+}
+
+div.wicket-modal .modalFileBrowser div.w_content_2 {
+    padding: 0;
+}
+
+div.wicket-modal .modalFileBrowser a.w_close, div.wicket-modal .modalFileBrowser a.w_close:hover {
+    background: url("images/close.png") no-repeat;
+    height: 16px;
+    width: 16px;
+}
+
+div.wicket-modal div.w_caption {
+    cursor: move !important;
+}
+
+.wicket-file-browser {
+
+}

@@ -1,0 +1,138 @@
+
+{
+  "results" : [ {
+    "repo" : "repo1",
+    "path" : "ant/ant/1.5",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00",
+    "properties" : [ {
+      "key" : "string",
+      "value" : "this is string"
+    } ]
+  },{
+    "repo" : "repo1",
+    "path" : "org/yossis/tools",
+    "name" : "test.bin",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00",
+    "properties" : [ {
+      "key" : "yossis",
+      "value" : "pdf"
+    } ]
+  },{
+    "repo" : "repo1",
+    "path" : "org/yossis/tools",
+    "name" : "file2.bin",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo1",
+    "path" : "org/yossis/tools",
+    "name" : "file3.bin",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo-copy",
+    "path" : "org/yossis/tools",
+    "name" : "file3.bin",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo-copy",
+    "path" : "org/shayy/trustme",
+    "name" : "trustme.jar",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.447+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo-copy",
+    "path" : "org/shayy/badmd5",
+    "name" : "badmd5.jar",
+    "type" : "file",
+    "size" : 43434,
+    "created" : "2012-06-21T15:53:24.447+03:00",
+    "created_by" : "yossis-1",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-1",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo2",
+    "path" : "a",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo2",
+    "path" : "a/b",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo2",
+    "path" : "aa",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  },{
+    "repo" : "repo2",
+    "path" : "aa/b",
+    "name" : "ant-1.5.jar",
+    "type" : "file",
+    "size" : 716139,
+    "created" : "2012-06-21T15:53:24.448+03:00",
+    "created_by" : "yossis-2201",
+    "modified" : "2012-06-21T15:53:24.448+03:00",
+    "modified_by" : "yossis-3274",
+    "updated" : "2012-06-21T15:53:24.448+03:00"
+  } ],
+  "range" : {
+    "start_pos" : 0,
+    "end_pos" : 11,
+    "total" : 11
+  }
+}

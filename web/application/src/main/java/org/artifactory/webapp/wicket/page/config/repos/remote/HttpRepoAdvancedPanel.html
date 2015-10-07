@@ -1,0 +1,216 @@
+<!--
+  ~ Artifactory is a binaries repository manager.
+  ~ Copyright (C) 2012 JFrog Ltd.
+  ~
+  ~ Artifactory is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Lesser General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Artifactory is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with Artifactory.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<wicket:panel>
+    <div wicket:id="layoutBorder">
+        <div class="field-row">
+            <div class="field">
+                <label>Repository Layout</label>
+                <span wicket:id="repoLayout.help"></span>
+
+                <div class="value">
+                    <select wicket:id="repoLayout"/>
+                </div>
+            </div>
+
+            <div class="field repo-field field-right">
+                <label>Remote Layout Mapping</label>
+                <span wicket:id="remoteRepoLayout.help"></span>
+
+                <div class="value">
+                    <select wicket:id="remoteRepoLayout"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="field">
+                <div class="info">
+                    <span wicket:id="incompatibleLayoutLabel"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="field">
+                <input wicket:id="suppressPomConsistencyChecks" type="checkbox"/>
+                <span wicket:id="suppressPomConsistencyChecks.help"></span>
+            </div>
+        </div>
+    </div>
+
+    <div wicket:id="networkBorder">
+        <div class="field-row">
+            <div class="field">
+                <label>Proxy</label>
+                <span wicket:id="proxy.help"></span>
+
+                <div class="value">
+                    <select wicket:id="proxy"></select>
+                </div>
+            </div>
+
+            <div class="field repo-field field-right">
+                <label>Local Address</label>
+                <span wicket:id="localAddress.help"></span>
+
+                <div class="value">
+                    <input wicket:id="localAddress" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-row">
+            <div class="field">
+                <label>Username</label>
+                <span wicket:id="username.help"></span>
+
+                <div class="value">
+                    <input wicket:id="username" type="text" class="text" autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="field repo-field field-right">
+                <label>Password</label>
+                <span wicket:id="password.help"></span>
+
+                <div class="value">
+                    <input wicket:id="password" type="password" class="text" autocomplete="off"/>
+                </div>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label>Socket Timeout</label>
+                <span wicket:id="socketTimeoutMillis.help"></span>
+
+                <div class="value">
+                    <input wicket:id="socketTimeoutMillis" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <input wicket:id="allowAnyHostAuth" type="checkbox"/>
+                <span wicket:id="allowAnyHostAuth.help"></span>
+            </div>
+        </div>
+        <div class="field">
+            <input wicket:id="enableCookieManagement" type="checkbox"/>
+            <span wicket:id="enableCookieManagement.help"></span>
+        </div>
+    </div>
+
+    <div wicket:id="cacheBorder">
+        <div class="field-row">
+            <div class="field">
+                <label>Keep Unused Artifacts (Hours)</label>
+                <span wicket:id="unusedArtifactsCleanupPeriodHours.help"></span>
+
+                <div class="value">
+                    <input wicket:id="unusedArtifactsCleanupPeriodHours" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field repo-field field-right">
+                <label>Retrieval Cache Period (Secs)</label>
+                <span wicket:id="retrievalCachePeriodSecs.help"></span>
+
+                <div class="value">
+                    <input wicket:id="retrievalCachePeriodSecs" type="text" class="text"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="field-row">
+            <div class="field">
+                <label>Assumed Offline Limit (Secs)</label>
+                <span wicket:id="assumedOfflinePeriodSecs.help"></span>
+
+                <div class="value">
+                    <input wicket:id="assumedOfflinePeriodSecs" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field repo-field field-right">
+                <label>Missed Retrieval Cache Period (Secs)</label>
+                <span wicket:id="missedRetrievalCachePeriodSecs.help"></span>
+
+                <div class="value">
+                    <input wicket:id="missedRetrievalCachePeriodSecs" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div wicket:id="otherBorder">
+        <div class="field-row">
+            <div class="field">
+                <label>Query Params</label>
+                <span wicket:id="queryParams.help"></span>
+
+                <div class="value">
+                    <input wicket:id="queryParams" type="text" class="text"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-row checkbox-row line-sep http-advanced-repo-panel">
+        <div class="field">
+            <input wicket:id="fetchJarsEagerly" type="checkbox"/>
+            <span wicket:id="fetchJarsEagerly.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="fetchSourcesEagerly" type="checkbox"/>
+            <span wicket:id="fetchSourcesEagerly.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="hardFail" type="checkbox"/>
+            <span wicket:id="hardFail.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="storeArtifactsLocally" type="checkbox"/>
+            <span wicket:id="storeArtifactsLocally.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="listRemoteFolderItems" type="checkbox"/>
+            <span wicket:id="listRemoteFolderItems.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="synchronizeProperties" type="checkbox"/>
+            <span wicket:id="synchronizeProperties.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="archiveBrowsingEnabled" type="checkbox"/>
+            <span wicket:id="archiveBrowsingEnabled.help"></span>
+        </div>
+
+        <div class="field">
+            <input wicket:id="rejectInvalidJars" type="checkbox"/>
+            <span wicket:id="rejectInvalidJars.help"></span>
+        </div>
+    </div>
+</wicket:panel>

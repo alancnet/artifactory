@@ -1,0 +1,4 @@
+ivy {
+${gradle.build.3tabs}url '${plugins.repository.url}'
+${gradle.build.3tabs}${repo.creds}
+${gradle.build.2tabs}}

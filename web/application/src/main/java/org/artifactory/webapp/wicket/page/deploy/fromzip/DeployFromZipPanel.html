@@ -1,0 +1,39 @@
+<wicket:panel>
+    <div wicket:id="uploadBorder">
+        <form wicket:id="deployForm" class="upload-zip-form">
+            <p>
+                <span class="info">  Deploy an archive containing multiple artifacts.</span>
+                <span wicket:id="supportedArchiveExtensions.help"></span>
+            </p>
+
+            <div class="field upload-field">
+
+                <span class="required">
+                    <label>Archive file</label>
+                </span>
+
+                <span class="value">
+                    <input wicket:id="fileInput" type="file" class="text"/>
+                </span>
+
+                <span wicket:id="deployHelp"></span>
+            </div>
+            <div class="field field-sep float-left">
+                <label>Target Local Repository</label>
+
+                <select wicket:id="targetRepo"></select>
+            </div>
+            <div>
+                <button type="submit" class="button default-button">
+                    <span class="button-center">
+                        <span class="button-left">
+                            <span class="button-right">Deploy!</span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+            <div class="clear"></div>
+            <span wicket:id="progress"></span>
+        </form>
+    </div>
+</wicket:panel>

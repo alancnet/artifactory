@@ -1,0 +1,42 @@
+<div class="content-layout-container">
+    <h1>Storage Summary</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="row">
+                <div class="col-lg-4">
+                    <jf-panel jf-panel-heading="Binaries">
+                        <table class="jf-data-table">
+                            <tr ng-repeat="(key,value) in StorageSummaryController.storageSummary.binariesSummary">
+                                <td>
+                                    {{key | splitWords}}:
+                                    <jf-help-tooltip ng-if="StorageSummaryController.TOOLTIP[key]" html="StorageSummaryController.TOOLTIP[key]"></jf-help-tooltip>
+                                </td>
+                                <td>{{value}}</td>
+                            </tr>
+                        </table>
+                    </jf-panel>
+                </div>
+                <div class="col-lg-8">
+                    <jf-panel jf-hide-for-aol jf-panel-heading="File Store">
+                        <table class="jf-data-table">
+                            <tr ng-repeat="(key,value) in StorageSummaryController.storageSummary.fileStoreSummary">
+                                <td>
+                                    {{key | splitWords}}:
+                                    <jf-help-tooltip ng-if="StorageSummaryController.TOOLTIP[key]" html="StorageSummaryController.TOOLTIP[key]"></jf-help-tooltip>
+                                </td>
+                                <td>{{value}}</td>
+                            </tr>
+                        </table>
+                    </jf-panel>
+                </div>
+            </div>
+            <jf-grid grid-options="StorageSummaryController.gridOption"
+                     filter-field="repoKey"
+                     filter-on-change="true"
+                     auto-focus="true"
+                     object-name="Repository/Repositories">
+            </jf-grid>
+        </div>
+    </div>
+</div>

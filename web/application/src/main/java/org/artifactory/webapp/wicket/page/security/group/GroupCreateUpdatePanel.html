@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<body>
+<wicket:extend>
+    <form wicket:id="form" class="">
+        <div wicket:id="border">
+            <div class="field required">
+                <div class="label-sep">
+                    <label>Group Name</label>
+                </div>
+                <div class="value">
+                    <input wicket:id="groupName" type="text" class="text" maxlength="100"/>
+                </div>
+            </div>
+
+            <div class="field field-sep">
+                <div class="label-sep">
+                    <label>Description</label>
+                </div>
+                <div class="value">
+                    <textarea rows="2" cols="40" wicket:id="description">[description]</textarea>
+                </div>
+            </div>
+
+            <div class="field field-sep">
+                <div class="value">
+                    <input wicket:id="newUserDefault" type="checkbox"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button wicket:id="submit" type="submit"/>
+            <button wicket:id="cancel" type="button"/>
+        </div>
+    </form>
+</wicket:extend>
+</body>
+</html>

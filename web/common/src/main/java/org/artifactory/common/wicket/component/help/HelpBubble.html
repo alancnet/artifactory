@@ -1,0 +1,22 @@
+<button id="${id}_button" type="button" class="help-link"
+        tabindex="-1" hidefocus="true" onclick="return false;"></button>
+
+<span id="${id}_bubble" dojoType="artifactory.Tooltip"
+      connectId="${id}_button" showDelay="0" toggle="fade"
+      toggleDuration="200" style="display: none;">
+    ${message}
+</span>
+
+<script type="text/javascript">
+    DomUtils.addOnRender(function () {
+        var bubble = dijit.byId('${id}_bubble');
+        if (bubble) {
+            bubble.destroy();
+        }
+        if (${enabled}) {
+            dojo.parser.instantiate([dojo.byId('${id}_bubble')]);
+        } else {
+            dojo.byId('${id}_button').disabled = true;
+        }
+    });
+</script>

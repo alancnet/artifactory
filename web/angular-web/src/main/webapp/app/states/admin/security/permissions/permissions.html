@@ -1,0 +1,20 @@
+<div class="content-layout-container">
+    <h1>Permissions Management</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.permissions.new"
+                        ng-if="Permissions.showNew()">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+            <jf-grid grid-options="Permissions.gridOption"
+                     filter-field="name"
+                     filter-field2="repoKeysView"
+                     object-name="permission"
+                     auto-focus="true">
+            </jf-grid>
+        </div>
+    </div>
+</div>

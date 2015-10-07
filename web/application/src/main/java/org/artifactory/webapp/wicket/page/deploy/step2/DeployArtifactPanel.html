@@ -1,0 +1,94 @@
+<wicket:extend>
+    <form wicket:id="form" class="artifact-form">
+        <div class="field">
+            <label>Uploaded File</label>
+
+            <div class="value">
+                <span wicket:id="file.name"></span>
+            </div>
+        </div>
+
+        <div class="field required field-sep long">
+            <label>
+                Target Repository
+                <span wicket:id=targetRepo.help></span>
+            </label>
+
+            <div class="value">
+                <select wicket:id="targetRepo"></select>
+            </div>
+        </div>
+
+        <div class="field required field-sep long">
+            <label>
+                Target Path
+                <span wicket:id=targetPath.help></span>
+            </label>
+
+            <div class="value">
+                <input wicket:id="targetPath" type="text" class="text"/>
+            </div>
+        </div>
+
+        <div class="field required field-sep autoCalculatePath">
+            <div class="value">
+                <input wicket:id="isMavenArtifact" type="checkbox"/>
+                <span wicket:id=isMavenArtifact.help></span>
+            </div>
+        </div>
+
+        <div wicket:id="artifactInfo">
+            <div class="field required field-sep">
+                <label>GroupId</label>
+
+                <div class="value">
+                    <input wicket:id="artifactInfo.groupId" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field required field-sep">
+                <label>ArtifactId</label>
+
+                <div class="value">
+                    <input wicket:id="artifactInfo.artifactId" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field required field-sep">
+                <label>Version</label>
+
+                <div class="value">
+                    <input wicket:id="artifactInfo.version" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field field-sep">
+                <label>Classifier</label>
+
+                <div class="value">
+                    <input wicket:id="artifactInfo.classifier" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div class="field required field-sep short">
+                <label>Type</label>
+
+                <div class="value">
+                    <input wicket:id="artifactInfo.type" type="text" class="text"/>
+                </div>
+            </div>
+
+            <div wicket:id="pomEditContainer">
+                <div class="field field-sep">
+                    <div class="value">
+                        <input wicket:id="deployPom" type="checkbox" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field field-sep">
+                    <div wicket:id="pomEditPanel"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</wicket:extend>

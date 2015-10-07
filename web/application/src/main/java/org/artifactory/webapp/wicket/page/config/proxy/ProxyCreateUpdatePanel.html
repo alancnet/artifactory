@@ -1,0 +1,97 @@
+<wicket:extend>
+    <form wicket:id="form">
+        <div wicket:id="border" class="proxy">
+            <div class="field-row">
+                <div class="field required">
+                    <div class="label-sep">
+                        <label>Proxy Key</label>
+                        <span wicket:id="key.help"></span>
+                    </div>
+                    <div class="value">
+                        <input wicket:id="key" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field checkbox-field">
+                    <input wicket:id="sysCheckbox" type="checkbox" class="text"/>
+                    <span wicket:id="defaultProxy.help"></span>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field required">
+                    <label>Host</label>
+                    <span wicket:id="host.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="host" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Port</label>
+                    <span wicket:id="port.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="port" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>Username</label>
+                    <span wicket:id="username.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="username" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <span wicket:id="password.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="password" type="password" class="text" autocomplete="off"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label>NT Host</label>
+                    <span wicket:id="ntHost.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="ntHost" type="text" class="text"/>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>NT Domain</label>
+                    <span wicket:id="domain.help"></span>
+
+                    <div class="value">
+                        <input wicket:id="domain" type="text" class="text"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-row">
+                <div class="field field-sep">
+                    <label>Redirecting Proxy Target Hosts</label>
+                    <span wicket:id="redirectedToHosts.help"></span>
+
+                    <div class="value">
+                        <textarea style="width: 324px" wicket:id="redirectedToHosts"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit" wicket:id="submit"></button>
+            <button type="button" wicket:id="cancel"></button>
+        </div>
+    </form>
+</wicket:extend>

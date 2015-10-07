@@ -1,0 +1,19 @@
+<div class="content-layout-container">
+    <h1>Proxies</h1>
+
+    <div class="content-wrapper">
+        <div class="card stretch card-pole-pad card-side-pad">
+            <div class="pull-right admin-grid-buttons">
+                <a ui-sref="^.proxies.new">
+                    <i class="grid-button-icon icon icon-new"></i>New
+                </a>
+            </div>
+            <jf-grid grid-options="AdminConfigurationProxies.gridOptions"
+                     filter-field="key"
+                     filter-on-change="true"
+                     object-name="proxy/proxies"
+                     auto-focus="true">
+            </jf-grid>
+        </div>
+    </div>
+</div>

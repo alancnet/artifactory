@@ -1,0 +1,53 @@
+<div class="content-layout-container">
+    <h1>Artifactory License</h1>
+
+    <div class="content-wrapper">
+        <form class="form" ng-submit="AdminConfigurationRegister.save(AdminConfigurationRegister.registerDetails)" novalidate>
+            <div class="card stretch card-pole-pad card-side-pad">
+                <div class="content-with-footer">
+                    <jf-panel ng-if="!AdminConfigurationRegister.User.currentUser.isProWithoutLicense()" jf-panel-heading="License Details">
+                        <table class="jf-data-table">
+                            <tr>
+                                <td>Licensed to:</td>
+                                <td>{{AdminConfigurationRegister.registerDetails.licenseTo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Valid Through:</td>
+                                <td>{{AdminConfigurationRegister.registerDetails.validThough}}</td>
+                            </tr>
+                            <tr>
+                                <td>License Type:</td>
+                                <td>{{AdminConfigurationRegister.registerDetails.licenseType}}</td>
+                            </tr>
+                        </table>
+                    </jf-panel>
+                    <jf-panel jf-panel-heading="License Key">
+                        <div class="form-group">
+                            <div class="form-group-cell double">
+                                <jf-field autofocus="true">
+                                    <label>* The license key is required for using Artifactory Add-ons.</label><br><br>
+                                    <textarea name="key" class="input-text monospaced"
+                                              id="key"
+                                              rows="11"
+                                              cols="9"
+                                              ng-model="AdminConfigurationRegister.registerDetails.key"></textarea>
+                                </jf-field>
+                            </div>
+                        </div>
+                    </jf-panel>
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <div class="pull-right">
+                    <button class="btn btn-default" ng-click="AdminConfigurationRegister.getData()" type="button">
+                        Reset
+                    </button>
+                    <button class="btn btn-primary" ng-disabled="!AdminConfigurationRegister.registerDetails.key"
+                            type="submit">Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

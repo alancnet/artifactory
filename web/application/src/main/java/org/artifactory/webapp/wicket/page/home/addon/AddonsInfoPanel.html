@@ -1,0 +1,22 @@
+<wicket:extend>
+    <div class="notice" wicket:id="addonsDisabled"></div>
+    <div class="notice" wicket:id="noAddons"></div>
+    <div class="notice" wicket:id="noLicenseKey"></div>
+
+    <table wicket:id="addonTable" style="table-layout: fixed">
+        <tbody>
+        <tr wicket:id="addonItem" class="item-name" >
+            <td class="image">
+                <div wicket:id="image"></div>
+            </td>
+            <td class="name" >
+                <a wicket:id="name" target="_blank" class="addon-info-link"></a>
+            </td>
+            <td class="status">
+                <div wicket:id="status"></div>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</wicket:extend>
